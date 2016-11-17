@@ -1,0 +1,64 @@
+.tf-flex {
+    display: flex;
+}
+
+.tf-flex-direction--row {
+    flex-direction: row;
+}
+
+.tf-flex-direction--column {
+    flex-direction: column;
+}
+
+.tf-flex-flow-row-wrap {
+    flex-flow: row wrap;
+}
+
+.tf-display--none {
+    display: none;
+}
+
+.tf-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to bottom, #3093C7, #1C5A85);
+    border-radius: 5px;
+    border: none;
+    color: whitesmoke;
+    padding: 5px 10px;
+}
+
+.field-with-btn {
+    border: 2px solid black;
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px 5px 5px 5px;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+}
+
+.field-with-btn input[type="text"] {
+    width: 100%;
+    outline: 0px;
+    border: 0px;
+    border-radius: 5px 0px 0px 5px;
+}
+
+.field-with-btn button {
+    background-image: url("Caution.png");
+    width: 14px;
+    height: 14px;
+    background-size: 14px 14px;
+    border: none;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    margin-right: 2px;
+}
+
+.abc {
+    width: 250px;
+    height: 200px;
+    border: 1px solid black;
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="TFStyle.css">
+</head>
+<body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="TFIterator.js"></script>
+<script src="TFForm.js"></script>
+<script src="TFContainer.js"></script>
+<script src="TFCheckbox.js"></script>
+<script src="TFSharedMethods.js"></script>
+<script src="TFTextArea.js"></script>
+<script src="TFTextField.js"></script>
+<script src="TFForm.js"></script>
+<script src="TFRadio.js"></script>
+<script src="TFButton.js"></script>
+<script src="TFEvents.js"></script>
+<script>
+(function(){
+	/*itemsOrder = ['mytextbox', 'mytextbox2','mytextbox3','button', 'SenderID' , 'MobileNumber'];
+
+	headerItems = ['SenderID','MobileNumber'];
+
+	taborder = ['mytextbox','mytextbox3','button'];
+
+	function setRequired('mytextbox2', true, 'this field is required') {
+		// body...
+		if true
+		call mytextbox2.setRequired();
+		else
+			mytextbox2.removeRequired();
+	}
+	function setLable('textfield', 'first name') {
+		// body...
+	}
+function setRegularExpression('textfield', 'regX' 'first name') {
+		// body...
+	}
+function showControl('textfield') {
+		// body...
+	}
+function hideControl('textfield') {
+		// body...
+	}
+	function showError('textfield', 'error message') {
+		// body...
+	}*/
+	var mytextbox =TFTextField.call({
+				type : 'textfield',
+				fieldType : 'column',
+				fieldCls : 'abcd',
+				fieldLabel : 'Name',
+				id: 'senderid',
+				displayLabel : 'none',
+				tabindex : '2',
+				compClass : ["compClass1", "compClass2"],
+				labelClass : ['labelClass1','labelClass2'],
+				btnClass : ['btnClass1','btnClass2'],
+				controlClass : ['contriolClass1', 'contriolClass2'],
+				id :'textfield-name',
+				required : true,
+				value : 'Shivam',
+				iconClass : ['icon1']
+			});
+		
+	
+	var mytextbox2 = TFTextField.call({
+				type : 'textfield',
+				fieldType : 'column',
+				fieldCls : 'abcd',
+				fieldLabel : 'Name',
+				id: 'sendername',
+				displayLabel : 'none',
+				tabindex : '1',
+				compClass : ["compClass1", "compClass2"],
+				labelClass : ['labelClass1','labelClass2'],
+				btnClass : ['btnClass1','btnClass2'],
+				controlClass : ['contriolClass1', 'contriolClass2'],
+				id :'textfield-name',
+				required : true,
+				value : 'Gupta',
+				iconClass : ['icon1','icon2','icon3']
+			});
+	var button = TFButton.call({
+			btnText : 'Click Me',
+			tabindex : '3',
+			listeners : {
+				onclick : function (argument) {
+					console.log("clicked");
+				}
+			}
+	});
+	var block1 = Iterator({
+		type : 'form',
+		layout : 'row',
+		containerClass : 'abc',
+		items : [mytextbox,mytextbox2, button]
+
+	});
+})();
+</script>
+</body>
+</html>
