@@ -22,10 +22,7 @@
 <script src="TFForm.js"></script>
 <script src="TFRadio.js"></script>
 <script src="TFButton.js"></script>
-<<<<<<< HEAD
 <script src="TFValidations.js"></script>
-=======
->>>>>>> 523a185a004b7234544b8f6653d842f619014da8
 <script src="TFEvents.js"></script>
 <script>
 (function(){
@@ -61,7 +58,6 @@
 					required : true,
 					flex : 2,
 					validations : {
-<<<<<<< HEAD
 						'required' : {value : true , errmsg : 'This field is required'},
 						'number' : {value: true , errmsg : 'Numbers'}
 					},
@@ -87,12 +83,6 @@
 							}
 						}
 					}], 
-=======
-						'isRequired' : {value : true, message: "This filed is required"}
-						'isN'
-					},
-					iconClass : ['abc','agd'],
->>>>>>> 523a185a004b7234544b8f6653d842f619014da8
 					listeners : {
 						blur : function(e, val){
 							this.$innerComp.parentNode.parentNode.style.flex = 1;
@@ -110,10 +100,6 @@
 									blur : function(e, val){
 										var ele = document.getElementById('invoiceNumber');
 										this.$innerComp.parentNode.parentNode.parentNode.removeChild(ele);
-<<<<<<< HEAD
-=======
-										debugger;
->>>>>>> 523a185a004b7234544b8f6653d842f619014da8
 										this.parent.$innerComp.removeEventListener('blur',this.parent.listeners);
 									}
 								}

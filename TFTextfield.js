@@ -11,15 +11,11 @@ var TFTextField = function($fieldset){
 				this._bindEvents();
 				this._attachProperties();
 				this._render();
-<<<<<<< HEAD
 				
 				//sharing methods
 				this.$childTemplate[0].shared = this.scope;	
 				
 				//return el
-=======
-				this.$childTemplate[0].shared = this.scope;	
->>>>>>> 523a185a004b7234544b8f6653d842f619014da8
 				return this.$childTemplate[0];
 			},
 			 /** @access private */
@@ -28,13 +24,10 @@ var TFTextField = function($fieldset){
 				 
 				this.dynamicId = me.id || "textfield-"+getRandomInt(1, 10000);
 				
-<<<<<<< HEAD
 				//config
 				this.buttons = me.buttons || [];
 				this.validations = me.validations || '';
 				
-=======
->>>>>>> 523a185a004b7234544b8f6653d842f619014da8
 				//style
 				this.fieldLabel = me.fieldLabel || '';
 				this.flex = me.flex || false;
@@ -77,11 +70,7 @@ var TFTextField = function($fieldset){
 							'<label class="'+(this.labelClass ? this.labelClass : '')+'">'+(this.fieldLabel ? this.fieldLabel : '')+'</label>',
 							''+(this.required ? '<span style="color:red;">*</span>' : '')+'',
 						'</div>',
-<<<<<<< HEAD
 						'<div control-type="textfield" class="field-with-btn '+(this.controlClass ? this.controlClass : '')+'">',
-=======
-						'<div class="field-with-btn '+(this.controlClass ? this.controlClass : '')+'">',
->>>>>>> 523a185a004b7234544b8f6653d842f619014da8
 							'<input',
 								'type="text"',
 								''+(this.name ? 'name="'+this.name+'"' : '')+'',
@@ -93,19 +82,12 @@ var TFTextField = function($fieldset){
 								''+this.readOnly+'',
 								''+this.required+'',
 								'/>',
-<<<<<<< HEAD
-=======
-							''+((this.iconClass && this.iconClass.length > 0) ? '<button class="'+this.iconClass.shift()+'"></button>' : '' )+'',
-							''+((this.iconClass && this.iconClass.length > 0) ? '<button class="'+this.iconClass.shift()+'"></button>' : '')+'',
-							''+((this.iconClass && this.iconClass.length > 0) ? '<button class="'+this.iconClass.shift()+'"></button>' : '')+'',
->>>>>>> 523a185a004b7234544b8f6653d842f619014da8
 						'</div>',
 					'</div>'
 				].join('\n');
 				
 				this.$childTemplate = $(el);
 				
-<<<<<<< HEAD
 				//cache DOM
 				this.$innerComp = this.$childTemplate.find("input")[0];
 				this.$outerComp = this.$childTemplate[0];
@@ -116,11 +98,6 @@ var TFTextField = function($fieldset){
 				    this.$controlComp.append(TFButton.call(val));
 				}, this);
 				
-=======
-				this.$innerComp = this.$childTemplate.find("input")[0];
-				this.$outerComp = this.$childTemplate[0];
-
->>>>>>> 523a185a004b7234544b8f6653d842f619014da8
 				//apply styles 
 				if(this.flex) this.$outerComp.style.flex = this.flex;
 
@@ -128,7 +105,6 @@ var TFTextField = function($fieldset){
 			 /** @access private */
 			_bindEvents : function(){
 				var me = this.scope;
-<<<<<<< HEAD
 
 				//private listeners
 				if(this.validations != ''){
@@ -152,17 +128,11 @@ var TFTextField = function($fieldset){
 				}
 
 				//public listeners
-=======
->>>>>>> 523a185a004b7234544b8f6653d842f619014da8
 				if(this.listeners != ''){
 					for(var listener in this.listeners){
 												
 						/*var eventNamespace = 'tf-'+listener+getRandomInt(1, 10000);*/
-<<<<<<< HEAD
 						this.$innerComp.addEventListener( listener , this.listeners[listener].bind(me));
-=======
-						this.$innerComp.addEventListener( listener , this.listeners[listener].bind(this.scope));
->>>>>>> 523a185a004b7234544b8f6653d842f619014da8
 						
 						/*this.$innerComp[listener] = this._handleEventsBefore.bind(this, eventNamespace);*/
 					}
@@ -172,10 +142,7 @@ var TFTextField = function($fieldset){
 			_render : function(){
 
 				if(this.render != ''){
-<<<<<<< HEAD
 				
-=======
->>>>>>> 523a185a004b7234544b8f6653d842f619014da8
 					this.render();
 				}
 			},
