@@ -15,11 +15,15 @@ var TFButton = function(){
 
 				//  variables
 				this.dynamicId = me.id || "tfbtn-"+getRandomInt(1, 10000);
+<<<<<<< HEAD
 				
 				//class
 				this.btnClass = (me.btnClass ? (me.btnClass.constructor === Array ? me.btnClass : [me.btnClass]) : false);
 				
 				//inner HTML or text
+=======
+				this.containerClass = (me.containerClass ? (me.containerClass.constructor === Array ? me.containerClass.join(' ') : me.containerClass) : false);
+>>>>>>> 523a185a004b7234544b8f6653d842f619014da8
 				this.btnText = me.btnText || '';
 								
 				//  methods
@@ -28,6 +32,7 @@ var TFButton = function(){
 
 			},
 			_generateTemplate : function(){
+<<<<<<< HEAD
 				
 				var el  =[
 					'<button control-type="tf-btn"',
@@ -44,12 +49,28 @@ var TFButton = function(){
 				if(this.btnText) this.$innerComp.innerHTML = this.btnText;
 				if(this.btnClass) this.$innerComp.classList.add.apply(this.$innerComp.classList , this.btnClass);
 
+=======
+				var el  =[
+					'<button control-type="tf-btn"',
+						'id="'+this.dynamicId+'"',
+						'class="tf-button '+(this.containerClass ? this.containerClass : '')+'"',
+					'>',
+					''+(this.btnText)+'',
+					'</button>'
+				].join('\n');
+				this.$childTemplate = $(el);
+				this.$innerComp = this.$childTemplate[0];
+>>>>>>> 523a185a004b7234544b8f6653d842f619014da8
 				
 			},
 			_render : function(){
 				var me = this.scope;
 				if(this.render != ''){
+<<<<<<< HEAD
 					me.render();
+=======
+					me.render( 5 , 6);
+>>>>>>> 523a185a004b7234544b8f6653d842f619014da8
 				}
 			},
 			_bindEvents : function(){
@@ -57,9 +78,15 @@ var TFButton = function(){
 				if(this.listeners != ''){
 					for(var listener in this.listeners){
 
+<<<<<<< HEAD
 						/*var eventNamespace = 'fCompEvent-'+getRandomInt(1, 10000);	*/					
 						this.$innerComp.addEventListener(listener , this.listeners[listener].bind(this.scope));
 						/*this.$innerComp[listener] = this._handleEventsBefore.bind(this, eventNamespace);*/
+=======
+						var eventNamespace = 'fCompEvent-'+getRandomInt(1, 10000);						
+						$(this.$innerComp).on(eventNamespace , this.listeners[listener].bind(this.scope));
+						this.$innerComp[listener] = this._handleEventsBefore.bind(this, eventNamespace);
+>>>>>>> 523a185a004b7234544b8f6653d842f619014da8
 					}
 				}
 			},
@@ -71,11 +98,19 @@ var TFButton = function(){
 							
 				//methods
 				//sharedMethods.call(me);
+<<<<<<< HEAD
 			}/*,
 			_handleEventsBefore : function(a,b){
 				
 				$(this.$innerComp).trigger(a , b.target.value);
 			}*/
+=======
+			},
+			_handleEventsBefore : function(a,b){
+				
+				$(this.$innerComp).trigger(a , b.target.value);
+			}
+>>>>>>> 523a185a004b7234544b8f6653d842f619014da8
 		};
 		
 				
