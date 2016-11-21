@@ -14,7 +14,7 @@ var TFButton = function(){
 				var me = this.scope;
 
 				//  variables
-				this.dynamicId = me.id || "tfcontainer-"+getRandomInt(1, 10000);
+				this.dynamicId = me.id || "tfbtn-"+getRandomInt(1, 10000);
 				this.containerClass = (me.containerClass ? (me.containerClass.constructor === Array ? me.containerClass.join(' ') : me.containerClass) : false);
 				this.btnText = me.btnText || '';
 								
@@ -47,7 +47,7 @@ var TFButton = function(){
 				if(this.listeners != ''){
 					for(var listener in this.listeners){
 
-						var eventNamespace = 'fCompEvent.'+getRandomInt(1, 10000);						
+						var eventNamespace = 'fCompEvent-'+getRandomInt(1, 10000);						
 						$(this.$innerComp).on(eventNamespace , this.listeners[listener].bind(this.scope));
 						this.$innerComp[listener] = this._handleEventsBefore.bind(this, eventNamespace);
 					}
@@ -76,5 +76,4 @@ var TFButton = function(){
 		}
 		
 	return button._init();
-	
 };

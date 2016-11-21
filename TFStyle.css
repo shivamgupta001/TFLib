@@ -30,7 +30,7 @@
 }
 
 .field-with-btn {
-    border: 2px solid black;
+    border: 1px solid grey;
     display: flex;
     flex-direction: row;
     border-radius: 5px 5px 5px 5px;
@@ -58,7 +58,7 @@
 }
 
 .abc {
-    width: 250px;
-    height: 200px;
-    border: 1px solid black;
+    width: 500px;
+    height: 400px;
+    
 }

@@ -4,11 +4,14 @@ var Iterator = function(config){
 	var el = iterateStructure(config, document.createElement('template'));
 
 	function iterateStructure(config){
+		
 		if(config.initEvents){
 			config.initEvents.call(config);
 		}
+		
 		var el = iterateItems(config);
 		if(config.items  && config.items.length > 0){
+			
 			config.items.forEach(function(item , index){
 				if(item.ATTRIBUTE_NODE){
 					el.appendChild(item);
@@ -17,6 +20,7 @@ var Iterator = function(config){
 					el.appendChild(childEl);		
 				}
 			});
+
 		}else { return el;} 
 
 		return el;
@@ -26,7 +30,7 @@ var Iterator = function(config){
 		var el; 
 		switch(item.type){
 			
-			case 'textfield' 	: el = TFTextfield.call(item);
+			case 'textfield' 	: el = TFTextField.call(item);
 									break;
 			case 'textarea' 	: el = TFTextArea.call(item);
 									break;
@@ -46,8 +50,8 @@ var Iterator = function(config){
 		if(el)
 			return el;
 	}
-	
-	document.body.appendChild(el);
+	return el;
+/*	document.body.appendChild(el);*/
 	
 	/*	
 	function iterateStructure(fStructure,flex , formLayout, $template){

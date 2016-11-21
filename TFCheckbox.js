@@ -40,17 +40,16 @@ var TFCheckbox = function($fieldset){
 				//  methods
 				this.render = me.render || '';
 				this.listeners = me.listeners || '';
-
 			},
 			_generateTemplate : function(){
 				var el = [
 					'<div id="'+this.dynamicId+'"', 
-						'class="tf-flex '+((this.fieldLayout === 'row')? 'tf-flex-direction--row' : 'tf-flex-direction--column')+(this.compClass ? this.compClass : '')+'">',
+						'class="tf-flex '+((this.fieldLayout === 'row')? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+(this.compClass ? this.compClass : '')+'">',
 				        '<div class="'+((this.displayLabel === "none")? 'display--none':'')+'">',
 				            '<label>'+(this.fieldLabel ? this.fieldLabel : '')+'</label>',
 				            ''+(this.required ? '<span>*</span>' : '')+'',
 				        '</div>',
-				        '<div class="tf-flex '+((this.groupLayout === 'row') ? 'tf-flex-direction--row' : 'tf-flex-direction--column')+'" control-type="tf-checkbox">',
+				        '<div class="tf-flex '+((this.groupLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'" control-type="tf-checkbox">',
 				         	// checkbox list  
 				        '</div>',
 				    '</div>'

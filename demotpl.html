@@ -1,69 +1,98 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title></title>
     <style type="text/css">
-    	.tf-field{
-    		display: flex;
-    		flex-direction : column;
-    	}
-    	.field-with-btn{
-    		border : 2px solid black;
-    		display: flex;
-    		flex-direction: row;
-    		border-radius: 5px 5px 5px 5px;
-    		justify-content: center;
-    		align-items: center;
-    		padding: 2px;
-    	}
-    	.field-with-btn input[type="text"]{
-    		width : 100%;
-    		outline: 0px;
-    		border : 0px;
-    		border-radius: 5px 0px 0px 5px;
-    	}
-    	.field-with-btn button{
-    		background-image: url("Caution.png");
-    		width : 15px;
-    		height : 15px;
-    		background-size: 15px 15px;
-    		border: none;
-    		background-color: transparent;
-    		background-repeat: no-repeat;
-    		margin-right: 2px; 
+    body{
+        display: flex;
+        justify-content: center;
+        align-items : center;
+        position: absolute;
+        top : 0px;
+        left : 0px;
+        right : 0px;
+        bottom : 0px;
+        flex-direction : column;
+    }
+    .comp{
+             
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction : column;
+        background-color: red;
+        box-shadow: 5px 5px 5px #888888;
+        border-radius : 5px;
+        padding : 5px;
+        color: whitesmoke;
+        max-width: 200px;
+        display : none;
+    }
+    .arrow{
+        border-top : 10px solid transparent;
+        border-right : 10px solid transparent;
+        border-left : 10px solid transparent;
+        border-bottom : 10px solid transparent;
+        position: absolute;
+    }
+    .arrow-up{
+        border-bottom : 10px solid red;
+        top : -20px;
+    }
+    .arrow-down{
+        border-top : 10px solid red;
+        bottom : -20px;   
+    }
+    .arrow-left{
+        border-right : 10px solid red;
+        left : -20px;      
+    }
+    .arrow-right{
+        border-left : 10px solid red;
+        right : -20px;         
+    }
+   
 
-    	}
-        .tf-button{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: yellow;
-            background-image: linear-gradient(to bottom, #3093C7, #1C5A85);
-            border-radius: 5px;
-            border : none;
-            color : whitesmoke;
-            padding: 5px 10px;
-        }
+    
     </style>
 </head>
-
 <body>
-    
-    <ul>
-        <li><a href='#'>A</a></li>
-        <li><a href='#'>B</a></li>
-        <li><a href='#'>C</a></li>
-        <li><a href='#'>D</a></li>
-        <li><a href='#'>E</a></li>
-    </ul>
-    <script>
-        
-        document.body.addEventListener('keypress',function(e){
-            debugger;
-            console.log(this.target);
-        })
-    </script>
-</body>
+   
+        First Name: <input type="text" name="test" id='senderId'>
+        Last Name: <input type="text" name="test" id='senderId'>
+        <div id="pop" class="comp">
+            <div class="arrow arrow-up"></div>
+            Valid Characters are 0-9 , a-z, A-Z 
+        </div>  
+        <div id="pop" class="comp">
+            <div class="arrow arrow-down"></div>
+            Valid Characters are 0-9 , a-z, A-Z  Valid Characters are 0-9 , a-z, A-Z  Valid Characters are 0-9 , a-z, A-Z  
+            Valid Characters are 0-9 , a-z, A-Z  Valid Characters are 0-9 , a-z, A-Z  Valid Characters are 0-9 , a-z, A-Z  
+        </div>
+        <!-- <div id="pop" class="comp">
+            <div class="arrow arrow-left"></div>
+            Valid Characters are 0-9 , a-z, A-Z 
+        </div>
+        <div id="pop" class="comp">
+            <div class="arrow arrow-right"></div>
+            Valid Characters are 0-9 , a-z, A-Z 
+        </div> -->
 
+        
+        <script>
+            var input = document.getElementById('senderId');
+            input.addEventListener('blur', function(e){
+                var pop = document.getElementById('pop');
+                pop.style.display = "flex";
+                pop.style.position = 'absolute';
+                pop.style.left = e.target.offsetLeft + 'px';
+                pop.style.top = e.target.offsetTop - e.target.clientHeight - pop.clientHeight + 'px';
+            });
+            input.addEventListener('focus', function(e){
+                var pop = document.getElementById('pop');
+                pop.style.display = "none";
+            });
+        </script>
+</body>
 </html>

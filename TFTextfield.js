@@ -17,7 +17,6 @@ var TFTextField = function($fieldset){
 			 /** @access private */
 			_initialize : function(){
 				var me = this.scope;
-
 				 
 				this.dynamicId = me.id || "textfield-"+getRandomInt(1, 10000);
 				
@@ -61,7 +60,7 @@ var TFTextField = function($fieldset){
 						'class="tf-flex '+((this.fieldType === 'row') ? 'tf-flex-direction--row ':'tf-flex-direction--column ')+(this.compClass ? this.compClass : '')+'">',
 						'<div class="tf-flex '+(this.displayLabel ? 'tf-display--none': '')+'"">',
 							'<label class="'+(this.labelClass ? this.labelClass : '')+'">'+(this.fieldLabel ? this.fieldLabel : '')+'</label>',
-							''+(this.required ? '<span>*</span>' : '')+'',
+							''+(this.required ? '<span style="color:red;">*</span>' : '')+'',
 						'</div>',
 						'<div class="field-with-btn '+(this.controlClass ? this.controlClass : '')+'">',
 							'<input',
@@ -83,33 +82,13 @@ var TFTextField = function($fieldset){
 				].join('\n');
 				
 				this.$childTemplate = $(el);
-				/*this.$childTemplate = $(`<div class="formComp-field" `+ (this.flex? 'style="flex:'+this.flex+'"' : '')+`> 
-											`+(this.labelAreaDisplay ? "<span class='formComp-field-label "+(this.labelClass ? this.labelClass:'' )+" '>"+(this.label ? '<label for="'+this.dynamicId+'">'+this.fieldLabel+'</label>' : '')+"</span>" : '')+`
-											<span 
-												class="formComp-field-control `+ (this.required === 'required' ? ' formComp-field-req formComp-field-err':' formComp-field-blank')+``+(this.compClass ? this.compClass : '' )+`">
-													<input 
-														type="text" 
-														id="`+this.dynamicId+`" 
-														value="`+this.value+`"
-														placeholder="`+this.placeHolder+`" 
-														pattern = "`+this.pattern+`"
-														maxlength = "`+this.maxlength+`" 
-														`+this.required+` 
-														`+this.readOnly+`> 
-											</span>
-											`+(this.btnAreaDisplay ? "<span class='formComp-field-btn "+(this.btnClass ? this.btnClass:'' )+" '>"+(this.btn ? '<button>Click</button>' : '')+"</span>" : '')+`
-											</div>`);
-				this.$childTemplate = $('<div class="field"> \
-											<div> \
-												<label>Name</label> \
-												<span>*</span> \
-											</div> \
-											<div> \
-												<input type="text" name="name"/> \
-												<button>Search</button> \
-											</div> \
-										</div>');*/
+				
 				this.$innerComp = this.$childTemplate.find("input")[0];
+				this.$outerComp = this.$childTemplate[0];
+
+				//apply styles 
+				if(this.flex) this.$outerComp.style.flex = this.flex;
+
 			},
 			 /** @access private */
 			_bindEvents : function(){
@@ -117,10 +96,10 @@ var TFTextField = function($fieldset){
 				if(this.listeners != ''){
 					for(var listener in this.listeners){
 												
-						$(this.$innerComp).on(eventNamespace , this.listeners[listener].bind(this.scope));
+						/*var eventNamespace = 'tf-'+listener+getRandomInt(1, 10000);*/
+						this.$innerComp.addEventListener( listener , this.listeners[listener].bind(this.scope));
 						
-						var eventNamespace = 'fCompEvent.'+getRandomInt(1, 10000);
-						this.$innerComp[listener] = this._handleEventsBefore.bind(this, eventNamespace);
+						/*this.$innerComp[listener] = this._handleEventsBefore.bind(this, eventNamespace);*/
 					}
 				}
 			},
@@ -143,10 +122,10 @@ var TFTextField = function($fieldset){
 				sharedMethods.call(me);
 			},
 			 /** @access private */
-			_handleEventsBefore : function(a,b){
+			/*_handleEventsBefore : function(a,b){
 				
 				$(this.$innerComp).trigger(a , b.target.value);
-			}
+			}*/
 		};
 		
 				
