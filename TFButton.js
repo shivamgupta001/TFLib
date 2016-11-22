@@ -5,8 +5,9 @@ var TFButton = function(){
 				
 				this._initialize();
 				this._generateTemplate();
-				this._bindEvents();
+				this._cacheDom();
 				this._applyProperty();
+				this._bindEvents();
 				this._attachProperties();
 				this._render();		
 				return this.$childTemplate[0];
@@ -40,11 +41,12 @@ var TFButton = function(){
 						'class="tf-button"',
 					'></button>'
 				].join('\n');
-				
-				//cache DOM
+
 				this.$childTemplate = $(el);
+			},
+			_cacheDom : function(){
+				//cache DOM
 				this.$innerComp = this.$childTemplate[0];
-			
 			},
 			_applyProperty : function(){
 				//apply styles
@@ -70,7 +72,6 @@ var TFButton = function(){
 				var me = this.scope;
 				if(this.listeners != ''){
 					for(var listener in this.listeners){
-
 						this.$innerComp.addEventListener(listener , this.listeners[listener].bind(this.scope));
 					}
 				}
@@ -83,11 +84,7 @@ var TFButton = function(){
 							
 				//methods
 				//sharedMethods.call(me);
-			}/*,
-			_handleEventsBefore : function(a,b){
-				
-				$(this.$innerComp).trigger(a , b.target.value);
-			}*/
+			}
 		};
 		
 				

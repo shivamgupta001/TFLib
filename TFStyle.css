@@ -20,6 +20,10 @@
 .tf-err-border--red{
     border-color: red !important;
 }
+.tf-required--red{
+    color : red;
+}
+
 .tf-button {
     display: flex;
     justify-content: center;

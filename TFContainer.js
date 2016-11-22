@@ -5,6 +5,8 @@ var TFContainer = function(){
 				
 				this._initialize();
 				this._generateTemplate();
+				this._cacheDom();
+				this._applyStyles();
 				this._attachProperties();
 				this._render();	
 				return this.$childTemplate[0];
@@ -14,17 +16,16 @@ var TFContainer = function(){
 
 				//  variables
 				this.dynamicId = me.id || "tfcontainer-"+getRandomInt(1, 10000);
-				this.containerClass = (me.containerClass ? (me.containerClass.constructor === Array ? me.containerClass.join(' ') : me.containerClass) : false);
+				this.containerClass = (me.containerClass ? (me.containerClass.constructor === Array ? me.containerClass : [me.containerClass]) : false);
 				this.layout = me.layout;
 				
 				//styles
-				this.flex = me.flex || false;
-				this.height = me.height || false;
-				this.innerText = me.innerText || false;
-				this.justifyContent = me.justifyContent || false;
-				this.alignItems = me.alignItems || false;
+				this.styles = me.styles || '';
+				this.flex = me.flex || '';
+				
+				// inner HTML or Text
 				this.innerHTML = me.innerHTML || false;
-				this.color = me.color || false;				
+				this.innerText = me.innerText || false;				
 				
 				//  methods
 				this.render = me.render || '';
@@ -35,25 +36,36 @@ var TFContainer = function(){
 				var el  =[
 					'<div',
 						'id="'+this.dynamicId+'"',
-						'class="tf-flex '+((this.layout === "row") ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+(this.containerClass ? this.containerClass : '')+'"',
+						'class="tf-flex '+((this.layout === "row") ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'"',
 						'>',
 					'</div>'
 				].join('\n');
 				
 				this.$childTemplate = $(el);
+			},
+			_cacheDom : function(){
+				// cache Dom
 				this.$innerComp = this.$childTemplate[0];
+				this.$outerComp = this.$childTemplate[0];
+			},
+			_applyStyles : function(){
 
-				// applying styles
-				if(this.height) this.$innerComp.style.height = this.height;
+				//apply styles
+				if(this.styles != ''){
+					Object.keys(this.styles).forEach(function(style){
+						this.$outerComp.style[style] = this.styles[style];
+					}, this);
+				}
+
+				// apply flex
 				if(this.flex) this.$innerComp.style.flex = this.flex;
-				if(this.justifyContent) this.$innerComp.style.justifyContent = this.justifyContent;
-				if(this.alignItems) this.$innerComp.style.alignItems = this.alignItems;
-				if(this.color) this.$innerComp.style.color = this.color;
+
+				//apply class
+				if(this.containerClass) this.$innerComp.classList.add.apply(this.$innerComp.classList , this.containerClass);
 
 				// inner text or html
 				if(this.innerText) this.$innerComp.innerText = this.innerText;
 				if(this.innerHTML) this.$innerComp.innerHTML = this.innerHTML;
-
 			},
 			_render : function(){
 				var me = this.scope;

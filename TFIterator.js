@@ -2,9 +2,7 @@
 /** This is a description of the Iterator Module. */
 var Iterator = function(config){
 
-	iterateStructure.idList = [];
-	var el = iterateStructure(config, document.createElement('template'));
-	
+	// iterates object passed to iterator
 	function iterateStructure(config){
 		if(config.initEvents){
 			config.initEvents.call(config);
@@ -41,6 +39,10 @@ var Iterator = function(config){
 		return el;
 	}
 
+	// static variable to identify duplicate ids
+	iterateStructure.idList = [];
+
+	// register new componenet module here
 	function iterateItems(item){
 		var el; 
 		switch(item.type){
@@ -67,5 +69,5 @@ var Iterator = function(config){
 	}
 
 	// return iterated code block
-	return el;
+	return  iterateStructure(config, document.createElement('template'));
 }

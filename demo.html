@@ -38,13 +38,16 @@
 		containerClass : 'abc',
 		items : [{
 			type: 'container',
-			containerClass : 'bg-col--blue',
-			height : '20px',
+			containerClass : ['bg-col--blue','abcdef'],
+			styles : {
+				height : '20px',
+				justifyContent : 'center',
+				alignItems : 'center',
+				color : 'whitesmoke'
+			},
 			layout : 'row',
-			justifyContent : 'center',
-			alignItems : 'center',
-			innerHTML : 'Step1: <b>SENDER INFORMATION</b>',
-			color : 'whitesmoke' 
+			innerHTML : 'Step1: <b>SENDER INFORMATION</b>'
+			
 		},{
 			type: 'container',
 			flex : 1,
@@ -63,10 +66,10 @@
 					required : true,
 					flex : 2,
 					validations : {
-						'required' : {value : false , errmsg : 'This field is required.'}
-						/*'number' : {value: true , errmsg : 'Numbers'}*/
+						/*'isRequired' : {value : true , errmsg : 'This field is required.'}*/
+						/*'onlyNumber' : {value: true , errmsg : 'Numbers'}*/
 						/*'onlyText' : {value : true, errmsg : 'Text'}*/
-						/*'regex' : { value:'abc' , errmsg : 'Only Valid Characters are 0-9'}*/
+						'regex' : { value:'abc' , errmsg : 'Only Valid Characters are 0-9'}
 					},
 					buttons : [{
 						id : 'btn1',
@@ -145,7 +148,7 @@
 					type : 'textfield',
 					fieldType : 'column',
 					fieldLabel : 'Country',
-					id: 'invoiceName',
+					id: 'invoiceCountry',
 					tabindex : '5',
 					required : true,
 					compClass : 'padding--five',
