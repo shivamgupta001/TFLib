@@ -1,24 +1,39 @@
 
 /** This is a description of the Iterator Module. */
 var Iterator = function(config){
-	var el = iterateStructure(config, document.createElement('template'));
 
+	iterateStructure.idList = [];
+	var el = iterateStructure(config, document.createElement('template'));
+	
 	function iterateStructure(config){
-		
 		if(config.initEvents){
 			config.initEvents.call(config);
 		}
 		
+		//first item
 		var el = iterateItems(config);
+		
+		//iterate internal structure
 		if(config.items  && config.items.length > 0){
-			
 			config.items.forEach(function(item , index){
-				if(item.ATTRIBUTE_NODE){
-					el.appendChild(item);
+				if(item.id){
+					if(iterateStructure.idList.indexOf(item.id) == -1){
+						iterateStructure.idList.push(item.id);			
+						if(item.ATTRIBUTE_NODE){
+							el.appendChild(item);
+						}else{
+							var childEl = iterateStructure(item);
+							el.appendChild(childEl);		
+						}	
+					}else throw "Duplicate id : "+item.id;
 				}else{
-					var childEl = iterateStructure(item);
-					el.appendChild(childEl);		
-				}
+					if(item.ATTRIBUTE_NODE){
+						el.appendChild(item);
+					}else{
+						var childEl = iterateStructure(item);
+						el.appendChild(childEl);		
+					}
+				} 
 			});
 
 		}else { return el;} 
@@ -50,26 +65,7 @@ var Iterator = function(config){
 		if(el)
 			return el;
 	}
+
+	// return iterated code block
 	return el;
-/*	document.body.appendChild(el);*/
-	
-	/*	
-	function iterateStructure(fStructure,flex , formLayout, $template){
-		
-		var $fieldset;
-		if(fStructure.length > 0){
-
-			if(formLayout === 'row') $fieldset = $('<div class="formComp-fieldset-row">');
-			else $fieldset = $('<div class="formComp-fieldset-col">');
-						
-			fStructure.forEach(function(item , index){
-				
-				if(item.formItems && item.formItems.length > 0) iterateStructure(item.formItems,item.flex, item.formLayout, $fieldset);
-				else iterateItems(item , $fieldset);
-			});
-			if(flex) $fieldset.attr("style","flex:"+flex);	
-			$template.append($fieldset);
-		}
-	}*/
-
 }

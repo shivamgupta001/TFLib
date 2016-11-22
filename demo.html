@@ -27,6 +27,11 @@
 <script>
 (function(){
 
+	/*window.Current.Invoice.SenderFields =[];
+	var FirstNamev = {};
+	 var Mobile = {};
+	window.Current.Invoice.SenderFields = [FirstNamev,Mobile];*/
+	 
 	var block1 = Iterator({
 		type : 'container',
 		layout : 'column',
@@ -58,24 +63,29 @@
 					required : true,
 					flex : 2,
 					validations : {
-						'required' : {value : true , errmsg : 'This field is required'},
-						'number' : {value: true , errmsg : 'Numbers'}
+						'required' : {value : false , errmsg : 'This field is required.'}
+						/*'number' : {value: true , errmsg : 'Numbers'}*/
+						/*'onlyText' : {value : true, errmsg : 'Text'}*/
+						/*'regex' : { value:'abc' , errmsg : 'Only Valid Characters are 0-9'}*/
 					},
 					buttons : [{
-						btnClass : 'abc',
+						id : 'btn1',
+						btnClass : 'btn-OtherLanguage',
 						listeners : {
 							click : function(e , val){
 								console.log('btn1');
 							}
 						}
 					},{
-						btnClass : 'cba',
+						id : 'btn1',
+						btnClass : 'btn-Search',
 						listeners : {
 							click : function(e , val){
 								console.log('btn2');
 							}
 						}
 					},{
+						id : 'btn3',
 						btnClass : ['dbc', 'bg-col--blue'],
 						listeners : {
 							click : function(e , val){
@@ -85,33 +95,14 @@
 					}], 
 					listeners : {
 						blur : function(e, val){
-							this.$innerComp.parentNode.parentNode.style.flex = 1;
-							var newItem = TFTextField.call({
-								parent : this,
-								type : 'textfield',
-								fieldType : 'column',
-								fieldLabel : 'Number',
-								id: 'invoiceNumber',
-								tabindex : '3',
-								compClass : 'padding--five',
-								required : true,
-								flex : 1,
-								listeners : {
-									blur : function(e, val){
-										var ele = document.getElementById('invoiceNumber');
-										this.$innerComp.parentNode.parentNode.parentNode.removeChild(ele);
-										this.parent.$innerComp.removeEventListener('blur',this.parent.listeners);
-									}
-								}
-							});
-							this.$innerComp.parentNode.parentNode.parentNode.appendChild(newItem);
+							
 						}
 					}
 				},{
 					type : 'textfield',
 					fieldType : 'column',
 					fieldLabel : 'Mobile',
-					id: 'invoiceMobile',
+					id: 'invoiceName1',
 					tabindex : '2',
 					required : true,
 					compClass : 'padding--five',
@@ -130,7 +121,12 @@
 					tabindex : '4',
 					required : true,
 					compClass : 'padding--five',
-					flex : 2
+					flex : 2,
+					styles : {
+						width : '50px',
+						height : '50px',
+						paddingLeft : '20px'
+					}
 				},{
 					type : 'textfield',
 					fieldType : 'column',
@@ -149,7 +145,7 @@
 					type : 'textfield',
 					fieldType : 'column',
 					fieldLabel : 'Country',
-					id: 'invoiceCountry',
+					id: 'invoiceName',
 					tabindex : '5',
 					required : true,
 					compClass : 'padding--five',
@@ -276,6 +272,23 @@
 						display : 'Company'
 					}]
 				}]
+			},{
+				type : 'container',
+				flex : 1,
+				layout : 'row',
+				items : [{
+					type : 'button',
+					btnClass : 'abcdef',
+					id : 'randomBtn',
+					btnText : 'Click Me',
+					styles : {
+						width : '100px',
+						height : '10px',
+						paddingLeft : '20px'
+					}
+				}]
+				
+
 			}]
 		}]
 
@@ -287,9 +300,6 @@
 
 
 </script>
-<a href='#' data-tooltip='i am here' class="tooltip-right">Click</a>
-
-
 
 </body>
 </html>

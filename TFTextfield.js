@@ -9,6 +9,7 @@ var TFTextField = function($fieldset){
 				this._initialize();
 				this._generateTemplate();
 				this._bindEvents();
+				this._applyProperty();
 				this._attachProperties();
 				this._render();
 				
@@ -32,6 +33,8 @@ var TFTextField = function($fieldset){
 				this.fieldLabel = me.fieldLabel || '';
 				this.flex = me.flex || false;
 				this.fieldType = me.fieldType || 'row';
+
+				this.styles = me.styles || '';
 
 				//class
 				this.labelClass = (me.labelClass ? (me.labelClass.constructor === Array ? me.labelClass.join(' ') : me.labelClass) : false);
@@ -91,20 +94,28 @@ var TFTextField = function($fieldset){
 				//cache DOM
 				this.$innerComp = this.$childTemplate.find("input")[0];
 				this.$outerComp = this.$childTemplate[0];
-				this.$controlComp = this.$childTemplate.find("[control-type='textfield']");
+				this.$controlComp = this.$childTemplate.find("[control-type='textfield']")[0];
 
 				// handling buttons
 				this.buttons.forEach(function(val){
 				    this.$controlComp.append(TFButton.call(val));
 				}, this);
 				
-				//apply styles 
-				if(this.flex) this.$outerComp.style.flex = this.flex;
-
+			},
+			_applyProperty : function(){
+				//apply styles
+				if(this.styles != ''){
+					Object.keys(this.styles).forEach(function(style){
+						this.$outerComp.style[style] = this.styles[style];
+					}, this);
+				}
 			},
 			 /** @access private */
 			_bindEvents : function(){
 				var me = this.scope;
+
+				//private listeners used for parent styling
+
 
 				//private listeners
 				if(this.validations != ''){
@@ -113,16 +124,22 @@ var TFTextField = function($fieldset){
 					TFValidations.call(me);
 					
 					Object.keys(this.validations).forEach(function(val){
-						
+
 						switch(val){
-							case 'required' : this.$innerComp.addEventListener('blur', this.scope.isRequired.bind(this.scope));
+							case 'required' : 	this.$innerComp.addEventListener('blur', this.scope.isRequired.bind(this.scope));
+											  	this.$innerComp.addEventListener('input', this.scope.isRequired.bind(this.scope));
 												break;
-							case 'number' 	: this.$innerComp.addEventListener('keydown', this.scope.isNumber);
+
+							case 'number' 	: 	this.$innerComp.addEventListener('keydown', this.scope.isNumber);
 												break;
-							case 'regex'	: this.$innerComp.addEventListener('blur', this.scope.isRegEx);
+
+							case 'regex'	: 	this.$innerComp.addEventListener('blur', this.scope.isRegEx.bind(this.scope));
+												this.$innerComp.addEventListener('input', this.scope.isRegEx.bind(this.scope));
 												break;
-							case 'onlyText'	: this.$innerComp.addEventListener('blur', this.scope.isOnlyText);
-												break;
+
+							case 'onlyText'	: 	this.$innerComp.addEventListener('keydown', this.scope.isOnlyText);
+											  	break;
+
 						}
 					}, this);
 				}
@@ -153,6 +170,7 @@ var TFTextField = function($fieldset){
 				//properties
 				me.$childTemplate = this.$childTemplate;
 				me.$innerComp = this.$innerComp;
+				me.$controlComp = this.$controlComp;
 				
 				//methods
 				sharedMethods.call(me);

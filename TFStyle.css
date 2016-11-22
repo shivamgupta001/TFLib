@@ -17,7 +17,9 @@
 .tf-display--none {
     display: none;
 }
-
+.tf-err-border--red{
+    border-color: red !important;
+}
 .tf-button {
     display: flex;
     justify-content: center;

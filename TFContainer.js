@@ -5,7 +5,6 @@ var TFContainer = function(){
 				
 				this._initialize();
 				this._generateTemplate();
-		//		this._bindEvents();
 				this._attachProperties();
 				this._render();	
 				return this.$childTemplate[0];

@@ -6,9 +6,11 @@ var TFButton = function(){
 				this._initialize();
 				this._generateTemplate();
 				this._bindEvents();
+				this._applyProperty();
 				this._attachProperties();
-				this._render();	
+				this._render();		
 				return this.$childTemplate[0];
+				
 			},
 			_initialize : function(){
 				var me = this.scope;
@@ -18,6 +20,9 @@ var TFButton = function(){
 				
 				//class
 				this.btnClass = (me.btnClass ? (me.btnClass.constructor === Array ? me.btnClass : [me.btnClass]) : false);
+
+				//styles
+				this.styles = me.styles || '';
 				
 				//inner HTML or text
 				this.btnText = me.btnText || '';
@@ -39,12 +44,21 @@ var TFButton = function(){
 				//cache DOM
 				this.$childTemplate = $(el);
 				this.$innerComp = this.$childTemplate[0];
+			
+			},
+			_applyProperty : function(){
+				//apply styles
+				if(this.styles != ''){
+					Object.keys(this.styles).forEach(function(style){
+						this.$innerComp.style[style] = this.styles[style];
+					}, this);
+				}
 
 				//apply inner text
 				if(this.btnText) this.$innerComp.innerHTML = this.btnText;
-				if(this.btnClass) this.$innerComp.classList.add.apply(this.$innerComp.classList , this.btnClass);
-
 				
+				//apply class
+				if(this.btnClass) this.$innerComp.classList.add.apply(this.$innerComp.classList , this.btnClass);
 			},
 			_render : function(){
 				var me = this.scope;
@@ -57,9 +71,7 @@ var TFButton = function(){
 				if(this.listeners != ''){
 					for(var listener in this.listeners){
 
-						/*var eventNamespace = 'fCompEvent-'+getRandomInt(1, 10000);	*/					
 						this.$innerComp.addEventListener(listener , this.listeners[listener].bind(this.scope));
-						/*this.$innerComp[listener] = this._handleEventsBefore.bind(this, eventNamespace);*/
 					}
 				}
 			},
