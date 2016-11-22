@@ -47,6 +47,7 @@ var TFButton = function(){
 			_cacheDom : function(){
 				//cache DOM
 				this.$innerComp = this.$childTemplate[0];
+				
 			},
 			_applyProperty : function(){
 				//apply styles

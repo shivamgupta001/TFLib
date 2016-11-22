@@ -103,7 +103,7 @@ var TFTextField = function($fieldset){
 				}
 
 				//applying classes
-				if(this.controlClass) this.$innerComp.classList.add.apply(this.$innerComp.classList , this.controlClass);
+				if(this.controlClass) this.$controlComp.classList.add.apply(this.$controlComp.classList , this.controlClass);
 				if(this.compClass) this.$outerComp.classList.add.apply(this.$outerComp.classList , this.compClass);
 				if(this.labelClass) this.$labelComp.classList.add.apply(this.$labelComp.classList, this.labelClass);
 

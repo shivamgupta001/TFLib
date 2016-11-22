@@ -7,17 +7,20 @@ var TFCheckbox = function($fieldset){
 				
 				this._initialize();
 				this._generateTemplate();
+				this._cacheDom();
+				this._applyProperty();
 				this._bindEvents();
 				this._attachProperties();
 				this._render();
-				return this.$childTemplate[0];	
+				return this.$childTemplate[0];
+					
 			},
 			_initialize : function(){
 				var me = this.scope;
 
 				//  variables
 				this.dynamicId = me.id || "checkbox-"+getRandomInt(1, 10000);
-				this.required = me.required || false;
+				this.markRequired = me.markRequired || false;
 				this.fieldLayout = me.fieldLayout || 'row';
 				
 				// innerHTML configs
@@ -26,16 +29,11 @@ var TFCheckbox = function($fieldset){
 				this.fieldGroup = me.fieldGroup || [];
 				this.groupLayout = me.groupLayout || 'column';
 				
-				//atrributes
-				this.btn = (me.btn === false) ? false : true;
-				this.label = (me.label === false) ? false : true;
-				this.labelAreaDisplay = (me.labelDisplayArea === false)  ? false : true;
-				this.btnAreaDisplay = (me.btnAreaDisplay === false) ? false : true;
-				
+							
 				//class
-				this.labelClass = me.labelClass || false;
-				this.compClass = me.compClass || false;
-				this.btnClass = me.btnClass||false;
+				this.labelClass = (me.labelClass ? (me.labelClass.constructor === Array ? me.labelClass : [me.labelClass]) : false);
+				this.compClass = (me.compClass ? (me.compClass.constructor === Array ? me.compClass : [me.compClass]) : false); 
+				
 				
 				//  methods
 				this.render = me.render || '';
@@ -45,9 +43,9 @@ var TFCheckbox = function($fieldset){
 				var el = [
 					'<div id="'+this.dynamicId+'"', 
 						'class="tf-flex '+((this.fieldLayout === 'row')? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+(this.compClass ? this.compClass : '')+'">',
-				        '<div class="'+((this.displayLabel === "none")? 'display--none':'')+'">',
+				        '<div class="'+((this.displayLabel === "none")? 'tf-display--none':'')+'">',
 				            '<label>'+(this.fieldLabel ? this.fieldLabel : '')+'</label>',
-				            ''+(this.required ? '<span>*</span>' : '')+'',
+				            '<span class="tf-required--red '+(this.markRequired ? 'tf-display--none':'')+'">*</span>',
 				        '</div>',
 				        '<div class="tf-flex '+((this.groupLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'" control-type="tf-checkbox">',
 				         	// checkbox list  
@@ -56,9 +54,22 @@ var TFCheckbox = function($fieldset){
 				].join('\n');
 
 				this.$childTemplate = $(el);
-				
+			},
+			_cacheDom : function(){
+
+				//cache Dom
+				this.$outerComp = this.$childTemplate[0];
 				this.$innerComp = this.$childTemplate.find('div[control-type="tf-checkbox"]')[0];
+				this.$labelComp = this.$childTemplate.find('label');	
 				
+			},
+			_applyProperty : function(){
+
+				//apply classes
+				if(this.compClass) this.$outerComp.classList.add.apply(this.$outerComp.classList , this.compClass);
+				if(this.labelClass) this.$labelComp.classList.add.apply(this.$labelComp.classList, this.labelClass);
+
+				// add check boxes to template
 				this.fieldGroup.forEach(function(val , index){
 
 					var dynamicId = 'checkbox'+getRandomInt(1,10000);
@@ -67,16 +78,14 @@ var TFCheckbox = function($fieldset){
 	   					$('<label>', { for: dynamicId, text: val.display})
 	   				).appendTo(this.$innerComp);
 				},this);
-				
 			},
 			_bindEvents : function(){
+				
 				var me = this.scope;
+
 				if(this.listeners != ''){
 					for(var listener in this.listeners){
-			
-						var eventNamespace = 'fComp.'+getRandomInt(1, 10000);
-						$(this.$innerComp).on(eventNamespace , this.listeners[listener].bind(this.scope));
-						this.$innerComp[listener] = this._handleEventsBefore.bind(this, eventNamespace);
+						this.$innerComp.addEventListener(listener , this.listeners[listener].bind(me));
 					}
 				}
 			},
@@ -95,10 +104,6 @@ var TFCheckbox = function($fieldset){
 				
 				//methods
 				//sharedMethods.call(me);
-			},
-			_handleEventsBefore : function(a,b){
-				
-				$(this.$innerComp).trigger(a , b.target.value);
 			}
 
 		};
