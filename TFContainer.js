@@ -7,6 +7,7 @@ var TFContainer = function(){
 				this._generateTemplate();
 				this._cacheDom();
 				this._applyStyles();
+				this._bindEvents();
 				this._attachProperties();
 				this._render();	
 				return this.$childTemplate[0];
@@ -21,6 +22,7 @@ var TFContainer = function(){
 				
 				//styles
 				this.styles = me.styles || '';
+				this.attributes = me.attributes || '';
 				this.flex = me.flex || '';
 				
 				// inner HTML or Text
@@ -34,7 +36,7 @@ var TFContainer = function(){
 			},
 			_generateTemplate : function(){
 				var el  =[
-					'<div',
+					'<div control-type="tf-container" ',
 						'id="'+this.dynamicId+'"',
 						'class="tf-flex '+((this.layout === "row") ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'"',
 						'>',
@@ -46,16 +48,23 @@ var TFContainer = function(){
 			_cacheDom : function(){
 				// cache Dom
 				this.$innerComp = this.$childTemplate[0];
-				this.$outerComp = this.$childTemplate[0];
+				
 			},
 			_applyStyles : function(){
 
 				//apply styles
 				if(this.styles != ''){
 					Object.keys(this.styles).forEach(function(style){
-						this.$outerComp.style[style] = this.styles[style];
+						this.$innerComp.style[style] = this.styles[style];
 					}, this);
 				}
+
+				//apply attributes
+				if(this.attributes != ''){
+					Object.keys(this.attributes).forEach(function(attribute){
+						this.$innerComp.setAttribute(attribute , this.attributes[attribute]);
+					}, this);	
+				}				
 
 				// apply flex
 				if(this.flex) this.$innerComp.style.flex = this.flex;
@@ -66,6 +75,14 @@ var TFContainer = function(){
 				// inner text or html
 				if(this.innerText) this.$innerComp.innerText = this.innerText;
 				if(this.innerHTML) this.$innerComp.innerHTML = this.innerHTML;
+			},
+			_bindEvents : function(){
+				var me = this.scope;
+				if(this.listeners != ''){
+					for(var listener in this.listeners){
+						this.$innerComp.addEventListener(listener , this.listeners[listener].bind(this.scope));
+					}
+				}
 			},
 			_render : function(){
 				var me = this.scope;
@@ -78,9 +95,10 @@ var TFContainer = function(){
 
 				//properties
 				me.$childTemplate = this.$childTemplate;
+				me.$innerComp = this.$innerComp; 
 							
 				//methods
-				//sharedMethods.call(me);
+				TFContainerMethods.call(me);
 			}
 		};
 		

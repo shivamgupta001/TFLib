@@ -52,7 +52,7 @@ var TFTextField = function($fieldset){
 				this.readOnly = (me.readOnly === true) ? 'readonly' : '';
 				this.maxlength = me.maxlength || '';
 				this.tabindex = me.tabindex || '';
-				this.markRequired = me.markRequired || '';
+				this.markRequired = me.markRequired || false;
 
 				 /** @access private */
 				this.render = me.render || '';
@@ -65,11 +65,11 @@ var TFTextField = function($fieldset){
 					'<div',
 						'id="'+this.dynamicId+'"',
 						'class="tf-flex '+((this.fieldType === 'row') ? 'tf-flex-direction--row ':'tf-flex-direction--column ')+'">',
-						'<div class="tf-flex '+(this.displayLabel ? 'tf-display--none': '')+'"">',
+						'<div control-type="tf-label" class="tf-flex '+(this.displayLabel ? 'tf-display--none': '')+'">',
 							'<label>'+(this.fieldLabel ? this.fieldLabel : '')+'</label>',
-							'<span class="tf-required--red">*</span>',
+							'<span class="tf-required--red '+(this.markRequired ? '' : 'tf-display--none')+'">*</span>',
 						'</div>',
-						'<div control-type="textfield" class="field-with-btn">',
+						'<div control-type="tf-textfield" class="field-with-btn">',
 							'<input',
 								'type="text"',
 								''+(this.name ? 'name="'+this.name+'"' : '')+'',
@@ -88,11 +88,12 @@ var TFTextField = function($fieldset){
 				this.$childTemplate = $(el);
 			},
 			_cacheDom : function(){
+
 				//cache DOM
 				this.$innerComp = this.$childTemplate.find("input")[0];
 				this.$outerComp = this.$childTemplate[0];
-				this.$controlComp = this.$childTemplate.find("[control-type='textfield']")[0];
-				this.$labelComp = this.$childTemplate.find('label')[0];
+				this.$controlComp = this.$childTemplate.find("[control-type='tf-textfield']")[0];
+				this.$labelComp = this.$childTemplate.find("[control-type='tf-label']")[0];
 			},
 			_applyProperty : function(){
 				//apply styles
@@ -167,18 +168,14 @@ var TFTextField = function($fieldset){
 				var me = this.scope;
 
 				//properties
-				me.$childTemplate = this.$childTemplate;
+				me.$outerComp = this.$outerComp;
 				me.$innerComp = this.$innerComp;
 				me.$controlComp = this.$controlComp;
-				
+				me.$labelComp = this.$labelComp;
+					
 				//methods
-				sharedMethods.call(me);
-			},
-			 /** @access private */
-			/*_handleEventsBefore : function(a,b){
-				
-				$(this.$innerComp).trigger(a , b.target.value);
-			}*/
+				TFTextFieldMethods.call(me);
+			}
 		};
 		
 				

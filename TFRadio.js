@@ -29,7 +29,7 @@ var TFRadio = function($fieldset){
 				this.groupLayout = me.groupLayout || 'column';
 				
 				//class
-				this.labelClass = (me.labelClass : (me.labelClass.constructor === Array ? me.labelClass : [me.labelClass]): false);
+				this.labelClass = (me.labelClass ? (me.labelClass.constructor === Array ? me.labelClass : [me.labelClass]) : false);
 				this.compClass = (me.compClass ? (me.compClass.constructor === Array ? me.compClass : [me.compClass]) : false);
 								
 				//  methods

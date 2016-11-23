@@ -10,12 +10,14 @@ var TFButton = function(){
 				this._bindEvents();
 				this._attachProperties();
 				this._render();		
+				
+				this.$childTemplate[0].shared = this.scope;
 				return this.$childTemplate[0];
 				
 			},
 			_initialize : function(){
 				var me = this.scope;
-
+				
 				//  variables
 				this.dynamicId = me.id || "tfbtn-"+getRandomInt(1, 10000);
 				
@@ -24,6 +26,7 @@ var TFButton = function(){
 
 				//styles
 				this.styles = me.styles || '';
+				this.attributes = me.attributes || '';
 				
 				//inner HTML or text
 				this.btnText = me.btnText || '';
@@ -45,6 +48,7 @@ var TFButton = function(){
 				this.$childTemplate = $(el);
 			},
 			_cacheDom : function(){
+
 				//cache DOM
 				this.$innerComp = this.$childTemplate[0];
 				
@@ -55,6 +59,13 @@ var TFButton = function(){
 					Object.keys(this.styles).forEach(function(style){
 						this.$innerComp.style[style] = this.styles[style];
 					}, this);
+				}
+
+				//apply attributes
+				if(this.attributes != ''){
+					Object.keys(this.attributes).forEach(function(attribute){
+						this.$innerComp.setAttribute(attribute , this.attributes[attribute]);
+					}, this);	
 				}
 
 				//apply inner text
@@ -82,9 +93,11 @@ var TFButton = function(){
 
 				//properties
 				me.$childTemplate = this.$childTemplate;
-							
+				me.$innerComp = this.$innerComp;
+				
+						
 				//methods
-				//sharedMethods.call(me);
+				TFButtonMethods.call(me);
 			}
 		};
 		

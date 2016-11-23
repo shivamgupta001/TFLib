@@ -12,11 +12,15 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script src="TFButtonMethods.js"></script>
+<script src="TFContainerMethods.js"></script>
+<script src="TFTextFieldMethods.js"></script>
+
 <script src="TFIterator.js"></script>
 <script src="TFForm.js"></script>
 <script src="TFContainer.js"></script>
 <script src="TFCheckbox.js"></script>
-<script src="TFSharedMethods.js"></script>
 <script src="TFTextArea.js"></script>
 <script src="TFTextfield.js"></script>
 <script src="TFForm.js"></script>
@@ -31,7 +35,10 @@
 	var FirstNamev = {};
 	 var Mobile = {};
 	window.Current.Invoice.SenderFields = [FirstNamev,Mobile];*/
-	 
+	var btn = TFButton.call({
+			btnText : 'Hello'
+		});
+
 	var block1 = Iterator({
 		type : 'container',
 		layout : 'column',
@@ -46,7 +53,13 @@
 				color : 'whitesmoke'
 			},
 			layout : 'row',
-			innerHTML : 'Step1: <b>SENDER INFORMATION</b>'
+			innerHTML : 'Step1: <b>SENDER INFORMATION</b>',
+			listeners : {
+				click : function(){
+					
+
+				}
+			}
 			
 		},{
 			type: 'container',
@@ -63,14 +76,14 @@
 					id: 'invoiceName',
 					compClass : 'padding--five',
 					tabindex : '1',
-					required : true,
+					markRequired : true,
 					flex : 2,
-					validations : {
-						/*'isRequired' : {value : true , errmsg : 'This field is required.'}*/
-						/*'onlyNumber' : {value: true , errmsg : 'Numbers'}*/
-						/*'onlyText' : {value : true, errmsg : 'Text'}*/
+					/*validations : {
+						'isRequired' : {value : true , errmsg : 'This field is required.'}
+						'onlyNumber' : {value: true , errmsg : 'Numbers'}
+						'onlyText' : {value : true, errmsg : 'Text'}
 						'regex' : { value:'abc' , errmsg : 'Only Valid Characters are 0-9'}
-					},
+					},*/
 					buttons : [{
 						id : 'btn1',
 						btnClass : 'btn-OtherLanguage',
@@ -97,7 +110,8 @@
 						}
 					}], 
 					listeners : {
-						blur : function(e, val){
+						input : function(e, val){
+							this.setError();
 							
 						}
 					}
@@ -279,6 +293,7 @@
 				type : 'container',
 				flex : 1,
 				layout : 'row',
+
 				items : [{
 					type : 'button',
 					btnClass : 'abcdef',
@@ -286,8 +301,16 @@
 					btnText : 'Click Me',
 					styles : {
 						width : '100px',
-						height : '10px',
+						height : '25px',
 						paddingLeft : '20px'
+					},
+					attributes : {
+						
+					},
+					listeners : {
+						click : function(e){
+
+						}
 					}
 				}]
 				

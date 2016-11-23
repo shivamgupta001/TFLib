@@ -2,7 +2,7 @@
 
 var sharedMethods = function(){
 	
-	
+	debugger;
 	
 	this.hidef = function(){
 		this.$childTemplate.css("visibility","hidden");
