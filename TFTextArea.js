@@ -86,10 +86,10 @@ var TFTextArea = function(){
 			_cacheDom : function(){
 
 				//cache Dom
-				this.$innerComp = this.$childTemplate.find("textarea")[0];
-				this.$outerComp = this.$childTemplate[0];
-				this.$labelComp = this.$childTemplate.find('div[control-type="tf-label"]')[0];
-				this.$controlComp = this.$childTemplate.find('div[control-type="tf-textarea"]')[0];
+				this.innerComp = this.$childTemplate.find("textarea")[0];
+				this.outerComp = this.$childTemplate[0];
+				this.labelComp = this.$childTemplate.find('div[control-type="tf-label"]')[0];
+				this.controlComp = this.$childTemplate.find('div[control-type="tf-textarea"]')[0];
 			 
 			},
 			_applyProperty : function(){
@@ -97,21 +97,21 @@ var TFTextArea = function(){
 				//apply styles
 				if(this.styles != ''){
 					Object.keys(this.styles).forEach(function(style){
-						this.$outerComp.style[style] = this.styles[style];
+						this.outerComp.style[style] = this.styles[style];
 					}, this);
 				}
 
 				//apply attributes
 				if(this.attributes != ''){
 					Object.keys(this.attributes).forEach(function(attribute){
-						this.$innerComp.setAttribute(attribute , this.attributes[attribute]);
+						this.innerComp.setAttribute(attribute , this.attributes[attribute]);
 					}, this);	
 				}
 
 				// apply class
-				if(this.controlClass) this.$controlComp.classList.add.apply(this.$controlComp.classList , this.controlClass);
-				if(this.labelClass) this.$labelComp.classList.add.apply(this.$labelComp.classList , this.labelClass);
-				if(this.compClass) this.$outerComp.classList.add.apply(this.$outerComp.classList, this.compClass);
+				if(this.controlClass) this.controlComp.classList.add.apply(this.controlComp.classList , this.controlClass);
+				if(this.labelClass) this.labelComp.classList.add.apply(this.labelComp.classList , this.labelClass);
+				if(this.compClass) this.outerComp.classList.add.apply(this.outerComp.classList, this.compClass);
 
 				
 			},
@@ -120,7 +120,7 @@ var TFTextArea = function(){
 				var me = this.scope;
 				if(this.listeners != ''){
 					for(var listener in this.listeners){
-						this.$innerComp.addEventListener(listener , this.listeners[listener].bind(me));
+						this.innerComp.addEventListener(listener , this.listeners[listener].bind(me));
 					}
 				}
 			},
@@ -136,15 +136,15 @@ var TFTextArea = function(){
 				var me = this.scope;
 
 				//properties
-				me.$innerComp = this.$innerComp;
-				me.$labelComp = this.$labelComp;
-				me.$outerComp = this.$outerComp;
-				me.$controlComp = this.$controlComp;
+				me.innerComp = this.innerComp;
+				me.labelComp = this.labelComp;
+				me.outerComp = this.outerComp;
+				me.controlComp = this.controlComp;
 				
 				//methods
 				TFTextFieldMethods.call(me);
 
-				this.$outerComp.shared = me;
+				this.outerComp.shared = me;
 			}
 		};
 						

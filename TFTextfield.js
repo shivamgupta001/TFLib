@@ -15,7 +15,7 @@ var TFTextField = function($fieldset){
 				this._render();
 								
 				//return el
-				return this.$outerComp;
+				return this.$childTemplate[0];
 			},
 			 /** @access private */
 			_initialize : function(){
@@ -88,35 +88,35 @@ var TFTextField = function($fieldset){
 			_cacheDom : function(){
 
 				//cache DOM
-				this.$innerComp = this.$childTemplate.find("input")[0];
-				this.$outerComp = this.$childTemplate[0];
-				this.$controlComp = this.$childTemplate.find("[control-type='tf-textfield']")[0];
-				this.$labelComp = this.$childTemplate.find("[control-type='tf-label']")[0];
+				this.innerComp = this.$childTemplate.find("input")[0];
+				this.outerComp = this.$childTemplate[0];
+				this.controlComp = this.$childTemplate.find("[control-type='tf-textfield']")[0];
+				this.labelComp = this.$childTemplate.find("[control-type='tf-label']")[0];
 			},
 			_applyProperty : function(){
 				
 				//apply styles
 				if(this.styles != ''){
 					Object.keys(this.styles).forEach(function(style){
-						this.$outerComp.style[style] = this.styles[style];
+						this.outerComp.style[style] = this.styles[style];
 					}, this);
 				}
 
 				//apply attributes
 				if(this.attributes != ''){
 					Object.keys(this.attributes).forEach(function(attribute){
-						this.$innerComp.setAttribute(attribute , this.attributes[attribute]);
+						this.innerComp.setAttribute(attribute , this.attributes[attribute]);
 					}, this);	
 				}
 				
 				//applying classes
-				if(this.controlClass) this.$controlComp.classList.add.apply(this.$controlComp.classList , this.controlClass);
-				if(this.compClass) this.$outerComp.classList.add.apply(this.$outerComp.classList , this.compClass);
-				if(this.labelClass) this.$labelComp.classList.add.apply(this.$labelComp.classList, this.labelClass);
+				if(this.controlClass) this.controlComp.classList.add.apply(this.controlComp.classList , this.controlClass);
+				if(this.compClass) this.outerComp.classList.add.apply(this.outerComp.classList , this.compClass);
+				if(this.labelClass) this.labelComp.classList.add.apply(this.labelComp.classList, this.labelClass);
 
 				// handling buttons
 				this.buttons.forEach(function(val){
-				    this.$controlComp.append(TFButton.call(val));
+				    this.controlComp.append(TFButton.call(val));
 				}, this);
 			},
 			 /** @access private */
@@ -132,18 +132,18 @@ var TFTextField = function($fieldset){
 					Object.keys(this.validations).forEach(function(val){
 
 						switch(val){
-							case 'isRequired' : this.$innerComp.addEventListener('blur', this.scope.isRequired.bind(this.scope));
-											  	this.$innerComp.addEventListener('input', this.scope.isRequired.bind(this.scope));
+							case 'isRequired' : this.innerComp.addEventListener('blur', this.scope.isRequired.bind(this.scope));
+											  	this.innerComp.addEventListener('input', this.scope.isRequired.bind(this.scope));
 												break;
 
-							case 'onlyNumber' : this.$innerComp.addEventListener('keydown', this.scope.isNumber);
+							case 'onlyNumber' : this.innerComp.addEventListener('keydown', this.scope.isNumber);
 												break;
 
-							case 'regex'	: 	this.$innerComp.addEventListener('blur', this.scope.isRegEx.bind(this.scope));
-												this.$innerComp.addEventListener('input', this.scope.isRegEx.bind(this.scope));
+							case 'regex'	: 	this.innerComp.addEventListener('blur', this.scope.isRegEx.bind(this.scope));
+												this.innerComp.addEventListener('input', this.scope.isRegEx.bind(this.scope));
 												break;
 
-							case 'onlyText'	: 	this.$innerComp.addEventListener('keydown', this.scope.isOnlyText);
+							case 'onlyText'	: 	this.innerComp.addEventListener('keydown', this.scope.isOnlyText);
 											  	break;
 
 						}
@@ -153,7 +153,7 @@ var TFTextField = function($fieldset){
 				//public listeners
 				if(this.listeners != ''){
 					for(var listener in this.listeners){
-						this.$innerComp.addEventListener( listener , this.listeners[listener].bind(me));
+						this.innerComp.addEventListener( listener , this.listeners[listener].bind(me));
 					}
 				}
 			},
@@ -169,19 +169,16 @@ var TFTextField = function($fieldset){
 			_attachProperties : function(){
 				var me = this.scope;
 
-				
-
 				//properties
-				me.$outerComp = this.$outerComp;
-				me.$innerComp = this.$innerComp;
-				me.$controlComp = this.$controlComp;
-				me.$labelComp = this.$labelComp;
-
+				me.outerComp = this.outerComp;
+				me.innerComp = this.innerComp;
+				me.controlComp = this.controlComp;
+				me.labelComp = this.labelComp;
 					
 				//methods
 				TFTextFieldMethods.call(me);
 
-				this.$outerComp.shared = me;
+				this.outerComp.shared = me;
 			}
 		};
 		

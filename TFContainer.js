@@ -10,9 +10,12 @@ var TFContainer = function(){
 				this._bindEvents();
 				this._attachProperties();
 				this._render();	
+				
+				// return el
 				return this.$childTemplate[0];
 			},
 			_initialize : function(){
+				
 				var me = this.scope;
 
 				//  variables
@@ -36,7 +39,7 @@ var TFContainer = function(){
 			},
 			_generateTemplate : function(){
 				var el  =[
-					'<div control-type="tf-container" ',
+					'<div control-type="tf-container"',
 						'id="'+this.dynamicId+'"',
 						'class="tf-flex '+((this.layout === "row") ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'"',
 						'>',
@@ -47,7 +50,7 @@ var TFContainer = function(){
 			},
 			_cacheDom : function(){
 				// cache Dom
-				this.$innerComp = this.$childTemplate[0];
+				this.innerComp = this.$childTemplate[0];
 				
 			},
 			_applyStyles : function(){
@@ -55,32 +58,32 @@ var TFContainer = function(){
 				//apply styles
 				if(this.styles != ''){
 					Object.keys(this.styles).forEach(function(style){
-						this.$innerComp.style[style] = this.styles[style];
+						this.innerComp.style[style] = this.styles[style];
 					}, this);
 				}
 
 				//apply attributes
 				if(this.attributes != ''){
 					Object.keys(this.attributes).forEach(function(attribute){
-						this.$innerComp.setAttribute(attribute , this.attributes[attribute]);
+						this.innerComp.setAttribute(attribute , this.attributes[attribute]);
 					}, this);	
 				}				
 
 				// apply flex
-				if(this.flex) this.$innerComp.style.flex = this.flex;
+				if(this.flex) this.innerComp.style.flex = this.flex;
 
 				//apply class
-				if(this.containerClass) this.$innerComp.classList.add.apply(this.$innerComp.classList , this.containerClass);
+				if(this.containerClass) this.innerComp.classList.add.apply(this.innerComp.classList , this.containerClass);
 
 				// inner text or html
-				if(this.innerText) this.$innerComp.innerText = this.innerText;
-				if(this.innerHTML) this.$innerComp.innerHTML = this.innerHTML;
+				if(this.innerText) this.innerComp.innerText = this.innerText;
+				if(this.innerHTML) this.innerComp.innerHTML = this.innerHTML;
 			},
 			_bindEvents : function(){
 				var me = this.scope;
 				if(this.listeners != ''){
 					for(var listener in this.listeners){
-						this.$innerComp.addEventListener(listener , this.listeners[listener].bind(this.scope));
+						this.innerComp.addEventListener(listener , this.listeners[listener].bind(this.scope));
 					}
 				}
 			},
@@ -94,11 +97,12 @@ var TFContainer = function(){
 				var me = this.scope;
 
 				//properties
-				me.$childTemplate = this.$childTemplate;
-				me.$innerComp = this.$innerComp; 
-							
+				me.innerComp = this.innerComp;
+
 				//methods
 				TFContainerMethods.call(me);
+
+				me.innerComp.shared = me;
 			}
 		};
 		

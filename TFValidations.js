@@ -23,8 +23,8 @@ var TFValidations = function(){
 	// required validation
 	this.isRequired = function(e){
 
-		var control = this.$controlComp;
-		var inputControl = this.$innerComp;
+		var control = this.controlComp;
+		var inputControl = this.innerComp;
 		if(e.type === 'blur'){
 			if(e.target.value === ''){
 				control.classList.add('tooltip', 'tf-err-border--red');
@@ -69,8 +69,8 @@ var TFValidations = function(){
 	// regEx validation
 	this.isRegEx = function(e){
 
-		var control = this.$controlComp;
-		var inputControl = this.$innerComp;
+		var control = this.controlComp;
+		var inputControl = this.innerComp;
 		if(this.validations.regex.value){
 
 			var regex = new RegExp(this.validations.regex.value);

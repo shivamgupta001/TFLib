@@ -1,5 +1,5 @@
 /** This is a description of the Checkbox Module. */
-var TFCheckbox = function($fieldset){
+var TFCheckbox = function(){
 		
 		var checkbox = {
 			scope : this,
@@ -62,9 +62,9 @@ var TFCheckbox = function($fieldset){
 			_cacheDom : function(){
 
 				//cache Dom
-				this.$outerComp = this.$childTemplate[0];
-				this.$controlComp = this.$childTemplate.find('div[control-type="tf-checkbox"]')[0];
-				this.$labelComp = this.$childTemplate.find('div[control-type="tf-label"]')[0];
+				this.outerComp = this.$childTemplate[0];
+				this.controlComp = this.$childTemplate.find('div[control-type="tf-checkbox"]')[0];
+				this.labelComp = this.$childTemplate.find('div[control-type="tf-label"]')[0];
 				
 			},
 			_applyProperty : function(){
@@ -72,13 +72,13 @@ var TFCheckbox = function($fieldset){
 				//apply styles
 				if(this.styles != ''){
 					Object.keys(this.styles).forEach(function(style){
-						this.$outerComp.style[style] = this.styles[style];
+						this.outerComp.style[style] = this.styles[style];
 					}, this);
 				}
 				
 				//apply classes
-				if(this.compClass) this.$outerComp.classList.add.apply(this.$outerComp.classList , this.compClass);
-				if(this.labelClass) this.$labelComp.classList.add.apply(this.$labelComp.classList, this.labelClass);
+				if(this.compClass) this.outerComp.classList.add.apply(this.outerComp.classList , this.compClass);
+				if(this.labelClass) this.labelComp.classList.add.apply(this.labelComp.classList, this.labelClass);
 
 				// add check boxes to template
 				this.fieldGroup.forEach(function(val , index){
@@ -88,7 +88,7 @@ var TFCheckbox = function($fieldset){
 	   					$('<input />', { type: 'checkbox', id:dynamicId , value: val.value, name : val.name})
 	   						.attr((val.attributes ? val.attributes : {})),
 	   					$('<label>', { for: dynamicId, text: val.display})
-	   				).appendTo(this.$controlComp);
+	   				).appendTo(this.controlComp);
 
 				},this);
 			},
@@ -98,7 +98,7 @@ var TFCheckbox = function($fieldset){
 
 				if(this.listeners != ''){
 					for(var listener in this.listeners){
-						this.$controlComp.addEventListener(listener , this.listeners[listener].bind(me));
+						this.controlComp.addEventListener(listener , this.listeners[listener].bind(me));
 					}
 				}
 			},
@@ -111,15 +111,14 @@ var TFCheckbox = function($fieldset){
 				var me = this.scope;
 
 				//properties
-				me.$childTemplate = this.$childTemplate;
-				me.$controlComp = this.$controlComp;
-				me.$outerComp = this.$outerComp;
-				me.$labelComp = this.$labelComp;
+				me.controlComp = this.controlComp;
+				me.outerComp = this.outerComp;
+				me.labelComp = this.labelComp;
 
 				//methods
-				TFCheckBoxMethods.call(me);
+				TFCheckboxMethods.call(me);
 
-				me.$outerComp.shared = me;
+				me.outerComp.shared = me;
 			}
 
 		};

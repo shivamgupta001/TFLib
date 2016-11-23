@@ -1,13 +1,18 @@
 var TFForm = function(){
+	
 		var form = {
 			scope : this,
 			_init : function(){
 				
 				this._initialize();
 				this._generateTemplate();
-		//		this._bindEvents();
+				this._cacheDom();
+				this._applyProperty();
+				this._bindEvents();
 				this._attachProperties();
-				this._render();	
+				this._render();
+
+				// return el	
 				return this.$childTemplate[0];
 			},
 			_initialize : function(){
@@ -16,7 +21,7 @@ var TFForm = function(){
 				//  variables
 				this.dynamicId = me.id || "tfcontainer-"+getRandomInt(1, 10000);
 				this.flex = me.flex || false;
-				this.containerClass = (me.containerClass ? (me.containerClass.constructor === Array ? me.containerClass.join(' ') : me.containerClass) : false);
+				this.compClass = (me.compClass ? (me.compClass.constructor === Array ? me.compClass.join(' ') : me.compClass) : false);
 				this.layout = me.layout;
 				
 				//attributes
@@ -33,9 +38,9 @@ var TFForm = function(){
 			},
 			_generateTemplate : function(){
 				var el  =[
-					'<form ', 
+					'<form control-type="tf-form" ', 
 						'id="'+this.dynamicId+'"',
-						'class="tf-flex '+((this.layout === "row") ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+(this.containerClass ? this.containerClass : '')+'"',
+						'class="tf-flex '+((this.layout === "row") ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'"',
 						''+(this.action? ' action="'+this.action+'"' : '')+'',
 						''+(this.method? ' action="'+this.method+'"' : '')+'',
 						''+(this.name? ' action="'+this.name+'"' : '')+'',
@@ -48,6 +53,22 @@ var TFForm = function(){
 				this.$childTemplate = $(el);
 				
 			},
+			_cacheDom : function(){
+
+				this.innerComp = this.$childTemplate[0];
+			},
+			_applyProperty : function(){
+				
+				this.innerComp.classList.add.apply(this.innerComp.classList , this.compClass);	
+			},
+			_bindEvents : function(){
+				var me = this.scope;
+				if(this.listeners != ''){
+					for(var listener in this.listeners){
+						this.innerComp.addEventListener(listener , this.listeners[listener].bind(this.scope));
+					}
+				}
+			},
 			_render : function(){
 				var me = this.scope;
 				if(this.render != ''){
@@ -58,7 +79,7 @@ var TFForm = function(){
 				var me = this.scope;
 
 				//properties
-				me.$childTemplate = this.$childTemplate;
+				me.$innerComp = this.$innerComp;
 							
 				//methods
 				//sharedMethods.call(me);

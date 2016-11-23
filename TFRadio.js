@@ -59,22 +59,22 @@ var TFRadio = function($fieldset){
 			_cacheDom : function(){
 
 				//cache Dom
-				this.$outerComp = this.$childTemplate[0];
-				this.$controlComp = this.$childTemplate.find('div[control-type="tf-radio"]')[0];
-				this.$labelComp = this.$childTemplate.find('div[control-type="tf-label"]')[0];
+				this.outerComp = this.$childTemplate[0];
+				this.controlComp = this.$childTemplate.find('div[control-type="tf-radio"]')[0];
+				this.labelComp = this.$childTemplate.find('div[control-type="tf-label"]')[0];
 			},
 			_applyProperty : function(){
 				
 				//apply styles
 				if(this.styles != ''){
 					Object.keys(this.styles).forEach(function(style){
-						this.$outerComp.style[style] = this.styles[style];
+						this.outerComp.style[style] = this.styles[style];
 					}, this);
 				}
 
 				//apply classes
-				if(this.compClass) this.$outerComp.classList.add.apply(this.$outerComp.classList , this.compClass);
-				if(this.labelClass) this.$labelComp.classList.add.apply(this.$labelComp.classList, this.labelClass);
+				if(this.compClass) this.outerComp.classList.add.apply(this.outerComp.classList , this.compClass);
+				if(this.labelClass) this.labelComp.classList.add.apply(this.labelComp.classList, this.labelClass);
 
 				// add check boxes to template
 				this.fieldGroup.forEach(function(val , index){
@@ -84,14 +84,14 @@ var TFRadio = function($fieldset){
 	   					$('<input />', { type: 'radio', id:dynamicId , value: val.value, name : val.name})
 	   						.attr((val.attributes ? val.attributes : {})),
 	   					$('<label>', { for: dynamicId, text: val.display})
-	   				).appendTo(this.$controlComp);
+	   				).appendTo(this.controlComp);
 				},this);
 			},
 			_bindEvents : function(){
 				var me = this.scope;
 				if(this.listeners != ''){
 					for(var listener in this.listeners){
-						this.$controlComp.addEventListener(listener , this.listeners[listener].bind(me));
+						this.controlComp.addEventListener(listener , this.listeners[listener].bind(me));
 					}
 				}
 			},
@@ -105,14 +105,14 @@ var TFRadio = function($fieldset){
 				var me = this.scope;
 
 				//properties
-				me.$controlComp = this.$controlComp;
-				me.$outerComp = this.$outerComp;
-				me.$labelComp = this.$labelComp;
+				me.controlComp = this.controlComp;
+				me.outerComp = this.outerComp;
+				me.labelComp = this.labelComp;
 				
 				//methods
-				TFCheckBoxMethods.call(me);
+				TFCheckboxMethods.call(me);
 
-				me.$outerComp.shared = me;
+				me.outerComp.shared = me;
 			}
 
 		};

@@ -11,7 +11,7 @@ var TFButton = function(){
 				this._attachProperties();
 				this._render();		
 				
-				this.$childTemplate[0].shared = this.scope;
+				// return el
 				return this.$childTemplate[0];
 				
 			},
@@ -50,29 +50,29 @@ var TFButton = function(){
 			_cacheDom : function(){
 
 				//cache DOM
-				this.$innerComp = this.$childTemplate[0];
+				this.innerComp = this.$childTemplate[0];
 				
 			},
 			_applyProperty : function(){
 				//apply styles
 				if(this.styles != ''){
 					Object.keys(this.styles).forEach(function(style){
-						this.$innerComp.style[style] = this.styles[style];
+						this.innerComp.style[style] = this.styles[style];
 					}, this);
 				}
 
 				//apply attributes
 				if(this.attributes != ''){
 					Object.keys(this.attributes).forEach(function(attribute){
-						this.$innerComp.setAttribute(attribute , this.attributes[attribute]);
+						this.innerComp.setAttribute(attribute , this.attributes[attribute]);
 					}, this);	
 				}
 
 				//apply inner text
-				if(this.btnText) this.$innerComp.innerHTML = this.btnText;
+				if(this.btnText) this.innerComp.innerHTML = this.btnText;
 				
 				//apply class
-				if(this.btnClass) this.$innerComp.classList.add.apply(this.$innerComp.classList , this.btnClass);
+				if(this.btnClass) this.innerComp.classList.add.apply(this.innerComp.classList , this.btnClass);
 			},
 			_render : function(){
 				var me = this.scope;
@@ -84,7 +84,7 @@ var TFButton = function(){
 				var me = this.scope;
 				if(this.listeners != ''){
 					for(var listener in this.listeners){
-						this.$innerComp.addEventListener(listener , this.listeners[listener].bind(this.scope));
+						this.innerComp.addEventListener(listener , this.listeners[listener].bind(this.scope));
 					}
 				}
 			},
@@ -92,12 +92,12 @@ var TFButton = function(){
 				var me = this.scope;
 
 				//properties
-				me.$childTemplate = this.$childTemplate;
-				me.$innerComp = this.$innerComp;
-				
-						
+				me.innerComp = this.innerComp;
+										
 				//methods
 				TFButtonMethods.call(me);
+
+				me.innerComp.shared = me;
 			}
 		};
 		

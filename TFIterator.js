@@ -69,5 +69,5 @@ var Iterator = function(config){
 	}
 
 	// return iterated code block
-	return  iterateStructure(config, document.createElement('template'));
+	return  iterateStructure(config);
 }
