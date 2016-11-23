@@ -22,6 +22,8 @@ var TFCheckbox = function($fieldset){
 				this.dynamicId = me.id || "checkbox-"+getRandomInt(1, 10000);
 				this.markRequired = me.markRequired || false;
 				this.fieldLayout = me.fieldLayout || 'row';
+				this.styles = me.styles || '';
+				
 				
 				// innerHTML configs
 				this.fieldLabel = me.fieldLabel || '';
@@ -42,12 +44,12 @@ var TFCheckbox = function($fieldset){
 			_generateTemplate : function(){
 				var el = [
 					'<div id="'+this.dynamicId+'"', 
-						'class="tf-flex '+((this.fieldLayout === 'row')? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+(this.compClass ? this.compClass : '')+'">',
-				        '<div class="'+((this.displayLabel === "none")? 'tf-display--none':'')+'">',
+						'class="tf-flex '+((this.fieldLayout === 'row')? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
+				        '<div control-type="tf-label" class="'+((this.displayLabel === "none")? 'tf-display--none':'')+'">',
 				            '<label>'+(this.fieldLabel ? this.fieldLabel : '')+'</label>',
 				            '<span class="tf-required--red '+(this.markRequired ? 'tf-display--none':'')+'">*</span>',
 				        '</div>',
-				        '<div class="tf-flex '+((this.groupLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'" control-type="tf-checkbox">',
+				        '<div control-type="tf-checkbox" class="tf-flex '+((this.groupLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
 				         	// checkbox list  
 				        '</div>',
 				    '</div>'
@@ -59,12 +61,19 @@ var TFCheckbox = function($fieldset){
 
 				//cache Dom
 				this.$outerComp = this.$childTemplate[0];
-				this.$innerComp = this.$childTemplate.find('div[control-type="tf-checkbox"]')[0];
-				this.$labelComp = this.$childTemplate.find('label');	
+				this.$controlComp = this.$childTemplate.find('div[control-type="tf-checkbox"]')[0];
+				this.$labelComp = this.$childTemplate.find('div[control-type="tf-label"]')[0];
 				
 			},
 			_applyProperty : function(){
 
+				//apply styles
+				if(this.styles != ''){
+					Object.keys(this.styles).forEach(function(style){
+						this.$outerComp.style[style] = this.styles[style];
+					}, this);
+				}
+				
 				//apply classes
 				if(this.compClass) this.$outerComp.classList.add.apply(this.$outerComp.classList , this.compClass);
 				if(this.labelClass) this.$labelComp.classList.add.apply(this.$labelComp.classList, this.labelClass);
@@ -74,9 +83,10 @@ var TFCheckbox = function($fieldset){
 
 					var dynamicId = 'checkbox'+getRandomInt(1,10000);
 					$('<div>').append(
-	   					$('<input />', { type: 'checkbox', id:dynamicId , value: val.value, name : val.name}),
+	   					$('<input />', { type: 'checkbox', id:dynamicId , value: val.value, name : val.name}).attr(val.attributes),
 	   					$('<label>', { for: dynamicId, text: val.display})
-	   				).appendTo(this.$innerComp);
+	   				).appendTo(this.$controlComp);
+
 				},this);
 			},
 			_bindEvents : function(){
@@ -85,7 +95,7 @@ var TFCheckbox = function($fieldset){
 
 				if(this.listeners != ''){
 					for(var listener in this.listeners){
-						this.$innerComp.addEventListener(listener , this.listeners[listener].bind(me));
+						this.$controlComp.addEventListener(listener , this.listeners[listener].bind(me));
 					}
 				}
 			},
@@ -100,10 +110,12 @@ var TFCheckbox = function($fieldset){
 
 				//properties
 				me.$childTemplate = this.$childTemplate;
-				me.$innerComp = this.$innerComp;
-				
+				me.$controlComp = this.$controlComp;
+				me.$outerComp = this.$outerComp;
+				me.$labelComp = this.$labelComp;
+
 				//methods
-				//sharedMethods.call(me);
+				TFCheckBoxMethods.call(me);
 			}
 
 		};

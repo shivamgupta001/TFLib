@@ -36,6 +36,7 @@ var TFTextField = function($fieldset){
 				this.fieldType = me.fieldType || 'row';
 
 				this.styles = me.styles || '';
+				this.attributes = me.attributes || '';
 
 				//class
 				this.labelClass = (me.labelClass ? (me.labelClass.constructor === Array ? me.labelClass : [me.labelClass]) : false);
@@ -103,6 +104,13 @@ var TFTextField = function($fieldset){
 					}, this);
 				}
 
+				//apply attributes
+				if(this.attributes != ''){
+					Object.keys(this.attributes).forEach(function(attribute){
+						this.$innerComp.setAttribute(attribute , this.attributes[attribute]);
+					}, this);	
+				}
+				
 				//applying classes
 				if(this.controlClass) this.$controlComp.classList.add.apply(this.$controlComp.classList , this.controlClass);
 				if(this.compClass) this.$outerComp.classList.add.apply(this.$outerComp.classList , this.compClass);
@@ -147,11 +155,7 @@ var TFTextField = function($fieldset){
 				//public listeners
 				if(this.listeners != ''){
 					for(var listener in this.listeners){
-												
-						/*var eventNamespace = 'tf-'+listener+getRandomInt(1, 10000);*/
 						this.$innerComp.addEventListener( listener , this.listeners[listener].bind(me));
-						
-						/*this.$innerComp[listener] = this._handleEventsBefore.bind(this, eventNamespace);*/
 					}
 				}
 			},

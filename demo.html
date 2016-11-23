@@ -16,6 +16,7 @@
 <script src="TFButtonMethods.js"></script>
 <script src="TFContainerMethods.js"></script>
 <script src="TFTextFieldMethods.js"></script>
+<script src="TFCheckboxMethods.js"></script>
 
 <script src="TFIterator.js"></script>
 <script src="TFForm.js"></script>
@@ -282,11 +283,31 @@
 					compClass : 'padding--five',
 					flex : 1,
 					groupLayout : 'row',
+					listeners : {
+						change : function(e){
+							
+							
+						}
+					},
 					fieldGroup : [{
 						display : 'Individual',
-						value : ''
+						styles : {
+							paddingLeft : '10px',
+							margin : '2px'
+						},
+						attributes : {
+							id : 'shivamCheck',
+							display : 'shivam',
+							name : 'shiavm',
+							value : 'shivam'
+						}
 					},{
-						display : 'Company'
+						display : 'Company',
+						attributes : {
+							display : 'shivam',
+							name : 'shiavm',
+							value : 'shivam'
+						}
 					}]
 				}]
 			},{
