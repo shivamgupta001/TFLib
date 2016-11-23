@@ -112,7 +112,7 @@
 					}], 
 					listeners : {
 						input : function(e, val){
-							this.setError();
+							debugger;
 							
 						}
 					}
@@ -276,7 +276,7 @@
 					tabindex : '15',
 					flex : 1
 				},{
-					type : 'checkbox',
+					type : 'radio',
 					fieldLabel : 'Entity Type',
 					fieldLayout : 'column',
 					id: 'invoiceEntity',
@@ -285,16 +285,14 @@
 					groupLayout : 'row',
 					listeners : {
 						change : function(e){
-							
+							this.displayHide();
+							debugger;
+							this.displayShow();
 							
 						}
 					},
 					fieldGroup : [{
 						display : 'Individual',
-						styles : {
-							paddingLeft : '10px',
-							margin : '2px'
-						},
 						attributes : {
 							id : 'shivamCheck',
 							display : 'shivam',

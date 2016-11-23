@@ -12,6 +12,8 @@ var TFCheckbox = function($fieldset){
 				this._bindEvents();
 				this._attachProperties();
 				this._render();
+
+				// return el
 				return this.$childTemplate[0];
 					
 			},
@@ -83,7 +85,8 @@ var TFCheckbox = function($fieldset){
 
 					var dynamicId = 'checkbox'+getRandomInt(1,10000);
 					$('<div>').append(
-	   					$('<input />', { type: 'checkbox', id:dynamicId , value: val.value, name : val.name}).attr(val.attributes),
+	   					$('<input />', { type: 'checkbox', id:dynamicId , value: val.value, name : val.name})
+	   						.attr((val.attributes ? val.attributes : {})),
 	   					$('<label>', { for: dynamicId, text: val.display})
 	   				).appendTo(this.$controlComp);
 
@@ -100,7 +103,6 @@ var TFCheckbox = function($fieldset){
 				}
 			},
 			_render : function(){
-				
 				if(this.render != ''){
 					this.render();
 				}
@@ -116,6 +118,8 @@ var TFCheckbox = function($fieldset){
 
 				//methods
 				TFCheckBoxMethods.call(me);
+
+				me.$outerComp.shared = me;
 			}
 
 		};

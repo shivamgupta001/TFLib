@@ -1,5 +1,5 @@
 /** This is a description of the Textfield Module. */
-var TFTextArea = function($fieldset){
+var TFTextArea = function(){
 		
 		var textarea = {
 			scope : this,
@@ -13,6 +13,8 @@ var TFTextArea = function($fieldset){
 				this._bindEvents();
 				this._attachProperties();
 				this._render();	
+
+				//return el
 				return this.$childTemplate[0];
 			},
 			 /** @access private */
@@ -22,7 +24,8 @@ var TFTextArea = function($fieldset){
 				this.dynamicId = me.id || "tf-textarea-"+getRandomInt(1, 10000);
 				
 				//config
-				this.styles = this.styles || '';
+				this.styles = me.styles || '';
+				this.attributes = me.attributes || '';
 				this.displayLabel = me.displayLabel || false;
 
 				//style
@@ -42,6 +45,7 @@ var TFTextArea = function($fieldset){
 				this.value = me.value || '';
 				this.readOnly = (me.readOnly === true) ? 'readonly' : '';
 				this.maxlength = me.maxlength || '';
+				this.markRequired = me.markRequired || '';
 
 				 /** @access private */
 				this.render = me.render || '';
@@ -54,13 +58,12 @@ var TFTextArea = function($fieldset){
 					'<div',
 						'id="'+this.dynamicId+'"',
 						'class="tf-flex '+((this.fieldType === 'row') ? 'tf-flex-direction--row ':'tf-flex-direction--column ')+'">',
-						'<div class="tf-flex" '+(this.displayLabel ? 'tf-display--none': '')+'>',
+						'<div control-type="tf-label" class="tf-flex" '+(this.displayLabel ? 'tf-display--none': '')+'>',
 							'<label>'+(this.fieldLabel ? this.fieldLabel : '')+'</label>',
-							''+(this.required ? '<span>*</span>' : '')+'',
+							'<span class="tf-required--red '+(this.markRequired ? '' : 'tf-display--none')+'">*</span>',
 						'</div>',
 						'<div control-type="tf-textarea" class="field-with-btn ">',
 							'<textarea',
-								
 								''+(this.name ? 'name="'+this.name+'"' : '')+'',
 								''+(this.placeholder ? 'placeholder="'+this.placeholder+'"' : '')+'',
 								''+(this.cols ? 'cols="'+this.cols+'"' : '')+'',
@@ -85,23 +88,32 @@ var TFTextArea = function($fieldset){
 				//cache Dom
 				this.$innerComp = this.$childTemplate.find("textarea")[0];
 				this.$outerComp = this.$childTemplate[0];
-				this.$labelComp = this.$childTemplate.find('label')[0];
-				this.$controlComp = this.$childTemplate.find('control-type=["tf-textarea"]');
+				this.$labelComp = this.$childTemplate.find('div[control-type="tf-label"]')[0];
+				this.$controlComp = this.$childTemplate.find('div[control-type="tf-textarea"]')[0];
 			 
 			},
 			_applyProperty : function(){
+				
+				//apply styles
+				if(this.styles != ''){
+					Object.keys(this.styles).forEach(function(style){
+						this.$outerComp.style[style] = this.styles[style];
+					}, this);
+				}
+
+				//apply attributes
+				if(this.attributes != ''){
+					Object.keys(this.attributes).forEach(function(attribute){
+						this.$innerComp.setAttribute(attribute , this.attributes[attribute]);
+					}, this);	
+				}
 
 				// apply class
 				if(this.controlClass) this.$controlComp.classList.add.apply(this.$controlComp.classList , this.controlClass);
 				if(this.labelClass) this.$labelComp.classList.add.apply(this.$labelComp.classList , this.labelClass);
 				if(this.compClass) this.$outerComp.classList.add.apply(this.$outerComp.classList, this.compClass);
 
-				//apply style
-				if(this.styles != ''){
-					Object.keys(this.styles).forEach(function(style){
-						this.$outerComp.style[style] = this.styles[style];
-					}, this);
-				}
+				
 			},
 			_bindEvents : function(){
 				
@@ -124,15 +136,18 @@ var TFTextArea = function($fieldset){
 				var me = this.scope;
 
 				//properties
-				me.$childTemplate = this.$childTemplate;
 				me.$innerComp = this.$innerComp;
+				me.$labelComp = this.$labelComp;
+				me.$outerComp = this.$outerComp;
+				me.$controlComp = this.$controlComp;
 				
 				//methods
-				//sharedMethods.call(me);
+				TFTextFieldMethods.call(me);
+
+				this.$outerComp.shared = me;
 			}
 		};
-		
-				
+						
 		function getRandomInt(min, max){
 			min = Math.ceil(min);
 			max = Math.floor(max);

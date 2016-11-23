@@ -13,12 +13,9 @@ var TFTextField = function($fieldset){
 				this._bindEvents();
 				this._attachProperties();
 				this._render();
-				
-				//sharing methods
-				this.$childTemplate[0].shared = this.scope;	
-				
+								
 				//return el
-				return this.$childTemplate[0];
+				return this.$outerComp;
 			},
 			 /** @access private */
 			_initialize : function(){
@@ -97,6 +94,7 @@ var TFTextField = function($fieldset){
 				this.$labelComp = this.$childTemplate.find("[control-type='tf-label']")[0];
 			},
 			_applyProperty : function(){
+				
 				//apply styles
 				if(this.styles != ''){
 					Object.keys(this.styles).forEach(function(style){
@@ -171,14 +169,19 @@ var TFTextField = function($fieldset){
 			_attachProperties : function(){
 				var me = this.scope;
 
+				
+
 				//properties
 				me.$outerComp = this.$outerComp;
 				me.$innerComp = this.$innerComp;
 				me.$controlComp = this.$controlComp;
 				me.$labelComp = this.$labelComp;
+
 					
 				//methods
 				TFTextFieldMethods.call(me);
+
+				this.$outerComp.shared = me;
 			}
 		};
 		
