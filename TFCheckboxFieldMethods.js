@@ -1,4 +1,4 @@
-var TFCheckboxMethods = function(){
+var TFCheckboxFieldMethods = function(){
 
 	//display property handler
 	this.displayHide = function(){

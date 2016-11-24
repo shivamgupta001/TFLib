@@ -44,7 +44,7 @@ var TFCheckbox = function(){
 				var el = [
 					'<div class="tf-flex '+((this.layout === "row") ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
 						'<input control-type="tf-checkbox" id="'+this.dynamicId+'" type="checkbox">',
-						'<label control-type="tf-label" for="'+this.dynamicId+'">"'+this.fieldLabel+'"</label>',
+						'<label control-type="tf-label" for="'+this.dynamicId+'">'+this.fieldLabel+'</label>',
 					'</div>'
 				].join('\n');
 

@@ -44,7 +44,7 @@ var TFRadio = function(){
 				var el = [
 					'<div class="tf-flex '+((this.layout === "row") ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
 						'<input control-type="tf-radio" id="'+this.dynamicId+'" type="radio"/>',
-						'<label control-type="tf-label" for="'+this.dynamicId+'">"'+this.fieldLabel+'"</label>',
+						'<label control-type="tf-label" for="'+this.dynamicId+'">'+this.fieldLabel+'</label>',
 					'</div>'
 				].join('\n');
 
