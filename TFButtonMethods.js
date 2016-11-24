@@ -39,4 +39,11 @@ var TFButtonMethods = function(){
 		this.innerComp.removeAttribute('disabled');
 	};
 
+	// add remove attribute
+	this.setAttribute = function( attrName , attrVal){
+		this.innerComp.setAttribute(attrName , attrVal);
+	};
+	this.removeAttribute = function(attrName){
+		this.innerComp.removeAttribute(attrName);
+	};
 };

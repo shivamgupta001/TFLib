@@ -51,6 +51,10 @@ var Iterator = function(config){
 									break;
 			case 'textarea' 	: el = TFTextArea.call(item);
 									break;
+			case 'checkboxfield': el = TFCheckboxField.call(item);
+									break;
+			case 'radiofield'	: el = TFRadioField.call(item);
+									break;
 			case 'checkbox'		: el = TFCheckbox.call(item);
 									break;
 			case 'radio'		: el = TFRadio.call(item);

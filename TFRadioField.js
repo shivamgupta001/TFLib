@@ -1,7 +1,7 @@
-/** This is a description of the Radio Module. */
-var TFRadio = function(){
+/** This is a description of the RadioField Module. */
+var TFRadioField = function($fieldset){
 		
-		var radio = {
+		var radiofield = {
 			scope : this,
 			_init : function(){
 				
@@ -13,39 +13,45 @@ var TFRadio = function(){
 				this._attachProperties();
 				this._render();
 
-				// return el
-				return this.$childTemplate[0];
-					
+				// retrun el
+				return this.$childTemplate[0];	
 			},
 			_initialize : function(){
 				var me = this.scope;
 
 				//  variables
 				this.dynamicId = me.id || "tf-radio-"+getRandomInt(1, 10000);
-				this.layout = me.layout || 'row';
+				this.markRequired = me.markRequired || false;
+				this.fieldLayout = me.fieldLayout || 'row';
 				this.styles = me.styles || '';
-				this.attributes = me.attributes || '';
-				
 				
 				// innerHTML configs
 				this.fieldLabel = me.fieldLabel || '';
+				this.value = me.value || '';
+				this.fieldGroup = me.fieldGroup || [];
+				this.groupLayout = me.groupLayout || 'column';
 				
-											
 				//class
 				this.labelClass = (me.labelClass ? (me.labelClass.constructor === Array ? me.labelClass : [me.labelClass]) : false);
-				this.compClass = (me.compClass ? (me.compClass.constructor === Array ? me.compClass : [me.compClass]) : false); 
-				
-				
+				this.compClass = (me.compClass ? (me.compClass.constructor === Array ? me.compClass : [me.compClass]) : false);
+								
 				//  methods
 				this.render = me.render || '';
 				this.listeners = me.listeners || '';
+
 			},
 			_generateTemplate : function(){
 				var el = [
-					'<div class="tf-flex '+((this.layout === "row") ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
-						'<input control-type="tf-radio" id="'+this.dynamicId+'" type="radio"/>',
-						'<label control-type="tf-label" for="'+this.dynamicId+'">"'+this.fieldLabel+'"</label>',
-					'</div>'
+					'<div id="'+this.dynamicId+'"', 
+						'class="tf-flex '+((this.fieldLayout === 'row')? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
+				        '<div control-type="tf-label" class="'+((this.displayLabel === "none")? 'tf-display--none':'')+'">',
+				            '<label>'+(this.fieldLabel ? this.fieldLabel : '')+'</label>',
+				            '<span class="tf-required--red '+(this.markRequired ? 'tf-display--none':'')+'">*</span>',
+				        '</div>',
+				        '<div control-type="tf-radiofield" class="tf-flex '+((this.groupLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
+				         	// radio list  
+				        '</div>',
+				    '</div>'
 				].join('\n');
 
 				this.$childTemplate = $(el);
@@ -54,42 +60,37 @@ var TFRadio = function(){
 
 				//cache Dom
 				this.outerComp = this.$childTemplate[0];
-				this.innerComp = this.$childTemplate.find('[control-type="tf-radio"]')[0];
-				this.labelComp = this.$childTemplate.find('[control-type="tf-label"]')[0];
-						
+				this.controlComp = this.$childTemplate.find('div[control-type="tf-radiofield"]')[0];
+				this.labelComp = this.$childTemplate.find('div[control-type="tf-label"]')[0];
 			},
 			_applyProperty : function(){
-
+				
 				//apply styles
 				if(this.styles != ''){
 					Object.keys(this.styles).forEach(function(style){
 						this.outerComp.style[style] = this.styles[style];
 					}, this);
 				}
-				
-				//apply attributes
-				if(this.attributes != ''){
-					Object.keys(this.attributes).forEach(function(attr){
-						this.innerComp.setAttribute( attr , this.attributes[attr]);
-					}, this);
-				}
 
 				//apply classes
 				if(this.compClass) this.outerComp.classList.add.apply(this.outerComp.classList , this.compClass);
 				if(this.labelClass) this.labelComp.classList.add.apply(this.labelComp.classList, this.labelClass);
-				
+
+				// add check boxes to template
+				this.fieldGroup.forEach(function(item){
+					this.controlComp.append(TFRadio.call(item));
+				},this);
 			},
 			_bindEvents : function(){
-				
 				var me = this.scope;
-
 				if(this.listeners != ''){
 					for(var listener in this.listeners){
-						this.innerComp.addEventListener(listener , this.listeners[listener].bind(me));
+						this.controlComp.addEventListener(listener , this.listeners[listener].bind(me));
 					}
 				}
 			},
 			_render : function(){
+				
 				if(this.render != ''){
 					this.render();
 				}
@@ -98,14 +99,14 @@ var TFRadio = function(){
 				var me = this.scope;
 
 				//properties
-				me.innerComp = this.innerComp;
+				me.controlComp = this.controlComp;
 				me.outerComp = this.outerComp;
 				me.labelComp = this.labelComp;
-
+				
 				//methods
-				TFCheckboxMethods.call(me);
+				TFCheckboxFieldMethods.call(me);
 
-				me.innerComp.shared = me;
+				me.outerComp.shared = me;
 			}
 
 		};
@@ -117,6 +118,6 @@ var TFRadio = function(){
 			return Math.floor(Math.random()*(max - min)+min);
 		}
 		
-	return	radio._init();
+	return	radiofield._init();
 	
 };

@@ -17,15 +17,23 @@
 <script src="TFContainerMethods.js"></script>
 <script src="TFTextFieldMethods.js"></script>
 <script src="TFCheckboxMethods.js"></script>
+<script src="TFCheckboxFieldMethods.js"></script>
 
 <script src="TFIterator.js"></script>
 <script src="TFForm.js"></script>
 <script src="TFContainer.js"></script>
+
+<script src="TFCheckboxField.js"></script>
 <script src="TFCheckbox.js"></script>
+
 <script src="TFTextArea.js"></script>
 <script src="TFTextfield.js"></script>
 <script src="TFForm.js"></script>
+
+<script src="TFRadioField.js"></script>
 <script src="TFRadio.js"></script>
+
+
 <script src="TFButton.js"></script>
 <script src="TFValidations.js"></script>
 <script src="TFEvents.js"></script>
@@ -79,6 +87,12 @@
 					tabindex : '1',
 					markRequired : true,
 					flex : 2,
+					styles :{
+
+					},
+					attributes : {
+
+					},
 					/*validations : {
 						'isRequired' : {value : true , errmsg : 'This field is required.'}
 						'onlyNumber' : {value: true , errmsg : 'Numbers'}
@@ -112,7 +126,9 @@
 					}], 
 					listeners : {
 						input : function(e, val){
+							
 							debugger;
+							
 							
 						}
 					}
@@ -276,23 +292,15 @@
 					tabindex : '15',
 					flex : 1
 				},{
-					type : 'radio',
+					type : 'radiofield',
 					fieldLabel : 'Entity Type',
 					fieldLayout : 'column',
 					id: 'invoiceEntity',
 					compClass : 'padding--five',
 					flex : 1,
 					groupLayout : 'row',
-					listeners : {
-						change : function(e){
-							this.displayHide();
-							debugger;
-							this.displayShow();
-							
-						}
-					},
 					fieldGroup : [{
-						display : 'Individual',
+						fieldLabel : 'Individual',
 						attributes : {
 							id : 'shivamCheck',
 							display : 'shivam',
@@ -300,7 +308,7 @@
 							value : 'shivam'
 						}
 					},{
-						display : 'Company',
+						fieldLabel : 'Company',
 						attributes : {
 							display : 'shivam',
 							name : 'shiavm',
@@ -328,7 +336,10 @@
 					},
 					listeners : {
 						click : function(e){
-
+							
+							this.setAttribute('disabled', true);
+							debugger;
+							
 						}
 					}
 				}]
