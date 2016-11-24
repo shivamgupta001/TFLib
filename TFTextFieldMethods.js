@@ -40,6 +40,31 @@ var TFTextFieldMethods = function(){
 		this.controlComp.style.visibility = "";
 	};
 
+	// add remove style
+	this.addStyle = function(prop , val){
+		this.outerComp.style[prop] = val;
+	};
+	this.removeStyle = function(prop){
+		this.outerComp.style[prop] = '';
+	};
+	this.addLabelStyle = function(prop , val){
+		this.labelComp.style[prop] = val;
+	};
+	this.removeLabelStyle = function(prop){
+		this.labelComp.style[prop] = '';
+	};
+	this.addControlStyle = function(prop , val){
+		this.controlComp.style[prop] = val;
+	};
+	this.removeControlStyle = function(prop){
+		this.controlComp.style[prop] = '';
+	};
+	
+	// change label name 
+	this.changeLabelText = function(newLabelText){
+		this.labelComp.querySelector('label').innerHTML = newLabelText;
+	};
+
 	// add remove class handler
 	this.addClass = function(newClass){
 		newClass = newClass.constructor === Array ? newClass : [newClass];
@@ -68,7 +93,7 @@ var TFTextFieldMethods = function(){
 
 	// append dom handlers
 	this.appendDom = function(el){
-		this.outerComp.append(el);
+		this.outerComp.appendChild(el);
 	};
 	this.prependDom = function(el){
 		this.outerComp.insertBefore(el , this.outerComp.childNodes[0]);
@@ -77,7 +102,7 @@ var TFTextFieldMethods = function(){
 		this.outerComp.insertBefore(el , this.outerComp.childNodes[index]);
 	};
 	this.appendDomToLabel = function(el){
-		this.labelComp.append(el);
+		this.labelComp.appendChild(el);
 	};
 	this.prependDomToLabel = function(el){
 		this.labelComp.insertBefore(el , this.labelComp.childNodes[0]);
@@ -86,7 +111,7 @@ var TFTextFieldMethods = function(){
 		this.labelComp.insertBefore(el , this.labelComp.childNodes[index]);
 	};
 	this.appendDomToControl = function(el){
-		this.controlComp.append(el);
+		this.controlComp.appendChild(el);
 	};
 	this.prependDomToControl = function(el){
 		this.controlComp.insertBefore(el , this.controlComp.childNodes[0]);
@@ -96,13 +121,32 @@ var TFTextFieldMethods = function(){
 	};
 
 	// set and rmove validation
-	/*this.setError = function(){
-		TFValidations.call(this);
-		this.innerComp.addEventListener('blur', this.scope.isRequired.bind(this.scope));
-		this.innerComp.addEventListener('input', this.scope.isRequired.bind(this.scope));
+	this.setError = function(errmsg){
+		
+		// if initially validations config included 
+		// this.isRequired = function 
+		// else this.isRequired = undefined 
+		//[ before or after running setError this.isRequired remains same]
+		// if this.validations.isRequired was not set it will get set after setError called
+
+		
+		if(this.validations && this.validations.isRequired){
+			
+		}else {
+			if(!this.scope){
+				this.validations = { 'isRequired' : {value : true , errmsg : errmsg}};
+				this.setValidations();	
+			}	
+		}
+		
 	};
 	this.removeError = function(){
-
-	};*/
+				
+		if(this.scope && this.scope.isRequired){
+			debugger;
+			this.validations.isRequired[value] = false;
+			this.setValidations();
+		}
+	};
 
 };

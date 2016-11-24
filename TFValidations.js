@@ -8,6 +8,8 @@ var TFValidations = function(){
 	var charKeyList = [',' , '.', ';' , '[' , ']' , '{', '}' , '|', '\\', '\'','"', '`','~','!', '@', '$', '%' , '^' , '&', '(' ,')' ,'_']; 
 	var mathKeyList = ['+','-','*','/', '='];
 
+
+	
 	// allows validation on key lists
 	function validateAllow(key , lists){
 		var status = false;
@@ -22,29 +24,33 @@ var TFValidations = function(){
 
 	// required validation
 	this.isRequired = function(e){
-
+		
 		var control = this.controlComp;
 		var inputControl = this.innerComp;
 		if(e.type === 'blur'){
 			if(e.target.value === ''){
 				control.classList.add('tooltip', 'tf-err-border--red');
-				control.setAttribute('data-tooltip', this.validations.required.errmsg);	
-				inputControl.setAttribute('title',this.validations.required.errmsg);	
+				control.setAttribute('data-tooltip', this.validations.isRequired.errmsg);	
+				inputControl.setAttribute('title',this.validations.isRequired.errmsg);	
 
 			}else{
 				if(control.classList.contains('tooltip')){
 					control.classList.remove('tooltip', 'tf-err-border--red');
 					control.removeAttribute('data-tooltip');
-					inputControl.setAttribute('title',this.validations.required.errmsg);
+					inputControl.setAttribute('title',this.validations.isRequired.errmsg);
 				}
 			}	
 		}else if(e.type === 'input'){
-			if(e.target.value.length > 0){
+			if(e.target.value.length > 0 && (control.getAttribute('data-tooltip') === this.validations.isRequired.errmsg)){
 				if(control.classList.contains('tooltip')){
 					control.classList.remove('tooltip', 'tf-err-border--red');
 					control.removeAttribute('data-tooltip');
-					inputControl.setAttribute('title',this.validations.required.errmsg);
+					inputControl.setAttribute('title',this.validations.isRequired.errmsg);	
 				}
+			}else if(e.target.value === ''){
+					control.classList.add('tooltip', 'tf-err-border--red');
+					control.setAttribute('data-tooltip', this.validations.isRequired.errmsg);	
+					inputControl.setAttribute('title',this.validations.isRequired.errmsg);	
 			}	
 		}
 	};
@@ -54,7 +60,8 @@ var TFValidations = function(){
 		
 		if( validateAllow(e.key ,[numberKeyList , generalKeyList, functionKeyList]) ){
 
-		}else e.preventDefault(); 
+		}else e.preventDefault(); 	
+		
 		
 	};
 
@@ -75,19 +82,20 @@ var TFValidations = function(){
 
 			var regex = new RegExp(this.validations.regex.value);
 			if(e.type === 'blur' || e.type === 'input'){
-			
-				if(!regex.test(e.target.value)){
-					control.classList.add('tooltip', 'tf-err-border--red');
-					control.setAttribute('data-tooltip', this.validations.regex.errmsg);	
-					inputControl.setAttribute('title',this.validations.regex.errmsg);	
+				if(e.target.value.length > 0){
+					if(!regex.test(e.target.value)){
+						control.classList.add('tooltip', 'tf-err-border--red');
+						control.setAttribute('data-tooltip', this.validations.regex.errmsg);	
+						inputControl.setAttribute('title',this.validations.regex.errmsg);	
 
-				}else{
-					if(control.classList.contains('tooltip')){
-						control.classList.remove('tooltip', 'tf-err-border--red');
-						control.removeAttribute('data-tooltip');
-						inputControl.setAttribute('title',this.validations.regex.errmsg);
-					}
-				}	
+					}else{
+						if(control.classList.contains('tooltip')){
+							control.classList.remove('tooltip', 'tf-err-border--red');
+							control.removeAttribute('data-tooltip');
+							inputControl.setAttribute('title',this.validations.regex.errmsg);
+						}
+					}	
+				}			
 			}	
 		}
 		

@@ -40,6 +40,31 @@ var TFCheckboxFieldMethods = function(){
 		this.controlComp.style.visibility = "";
 	};
 
+	// add remove style
+	this.addStyle = function(prop , val){
+		this.outerComp.style[prop] = val;
+	};
+	this.removeStyle = function(prop){
+		this.outerComp.style[prop] = '';
+	};
+	this.addLabelStyle = function(prop , val){
+		this.labelComp.style[prop] = val;
+	};
+	this.removeLabelStyle = function(prop){
+		this.labelComp.style[prop] = '';
+	};
+	this.addControlStyle = function(prop , val){
+		this.controlComp.style[prop] = val;
+	};
+	this.removeControlStyle = function(prop){
+		this.controlComp.style[prop] = '';
+	};
+
+	// change label name 
+	this.changeLabelText = function(newLabelText){
+		this.labelComp.querySelector('label').innerHTML = newLabelText;
+	};
+
 	// add remove class
 	this.addClass = function(newClass){
 		newClass = newClass.constructor === Array ? newClass : [newClass];
@@ -68,7 +93,7 @@ var TFCheckboxFieldMethods = function(){
 
 	// append dom handlers
 	this.appendDom = function(el){
-		this.outerComp.append(el);
+		this.outerComp.appendChild(el);
 	};
 	this.prependDom = function(el){
 		this.outerComp.insertBefore(el , this.outerComp.childNodes[0]);
@@ -77,7 +102,7 @@ var TFCheckboxFieldMethods = function(){
 		this.outerComp.insertBefore(el , this.outerComp.childNodes[index]);
 	};
 	this.appendDomToLabel = function(el){
-		this.labelComp.append(el);
+		this.labelComp.appendChild(el);
 	};
 	this.prependDomToLabel = function(el){
 		this.labelComp.insertBefore(el , this.labelComp.childNodes[0]);
@@ -86,7 +111,7 @@ var TFCheckboxFieldMethods = function(){
 		this.labelComp.insertBefore(el , this.labelComp.childNodes[index]);
 	};
 	this.appendDomToControl = function(el){
-		this.controlComp.append(el);
+		this.controlComp.appendChild(el);
 	};
 	this.prependDomToControl = function(el){
 		this.controlComp.insertBefore(el , this.controlComp.childNodes[0]);
@@ -94,13 +119,5 @@ var TFCheckboxFieldMethods = function(){
 	this.insertDomToControlAt = function(el , index){
 		this.controlComp.insertBefore(el , this.controlComp.childNodes[index]);
 	};
-
-	// add remove attribute
-	this.setAttribute = function( attrName , attrVal){
-		debugger;
-		this.innerComp.setAttribute(attrName , attrVal);
-	};
-	this.removeAttribute = function(attrName){
-		this.innerComp.removeAttribute(attrName);
-	};
+	
 };

@@ -78,7 +78,7 @@ var TFRadioField = function($fieldset){
 
 				// add check boxes to template
 				this.fieldGroup.forEach(function(item){
-					this.controlComp.append(TFRadio.call(item));
+					this.controlComp.appendChild(TFRadio.call(item));
 				},this);
 			},
 			_bindEvents : function(){

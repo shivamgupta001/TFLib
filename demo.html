@@ -1,361 +1,364 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title></title>
-	<link rel="stylesheet" type="text/css" href="TFStyle.css">
-	<link rel="stylesheet" type="text/css" href="demostyle.css">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="TFStyle.css">
+    <link rel="stylesheet" type="text/css" href="demostyle.css">
 </head>
+
 <body>
+    <div id="mydiv"> this is my div</div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="TFButtonMethods.js"></script>
+    <script src="TFContainerMethods.js"></script>
+    <script src="TFTextFieldMethods.js"></script>
+    <script src="TFCheckboxMethods.js"></script>
+    <script src="TFCheckboxFieldMethods.js"></script>
+    <script src="TFIterator.js"></script>
+    <script src="TFForm.js"></script>
+    <script src="TFContainer.js"></script>
+    <script src="TFCheckboxField.js"></script>
+    <script src="TFCheckbox.js"></script>
+    <script src="TFTextArea.js"></script>
+    <script src="TFTextfield.js"></script>
+    <script src="TFForm.js"></script>
+    <script src="TFRadioField.js"></script>
+    <script src="TFRadio.js"></script>
+    <script src="TFButton.js"></script>
+    <script src="TFValidations.js"></script>
+    <script src="TFEvents.js"></script>
+    <script>
+    (function() {
 
-<div id="mydiv"> this is my div</div>
+        /*window.Current.Invoice.SenderFields =[];
+        var FirstNamev = {};
+         var Mobile = {};
+        window.Current.Invoice.SenderFields = [FirstNamev,Mobile];*/
+        var btn = TFButton.call({
+            btnText: 'Hello'
+        });
 
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-<script src="TFButtonMethods.js"></script>
-<script src="TFContainerMethods.js"></script>
-<script src="TFTextFieldMethods.js"></script>
-<script src="TFCheckboxMethods.js"></script>
-<script src="TFCheckboxFieldMethods.js"></script>
-
-<script src="TFIterator.js"></script>
-<script src="TFForm.js"></script>
-<script src="TFContainer.js"></script>
-
-<script src="TFCheckboxField.js"></script>
-<script src="TFCheckbox.js"></script>
-
-<script src="TFTextArea.js"></script>
-<script src="TFTextfield.js"></script>
-<script src="TFForm.js"></script>
-
-<script src="TFRadioField.js"></script>
-<script src="TFRadio.js"></script>
-
-
-<script src="TFButton.js"></script>
-<script src="TFValidations.js"></script>
-<script src="TFEvents.js"></script>
-<script>
-(function(){
-
-	/*window.Current.Invoice.SenderFields =[];
-	var FirstNamev = {};
-	 var Mobile = {};
-	window.Current.Invoice.SenderFields = [FirstNamev,Mobile];*/
-	var btn = TFButton.call({
-			btnText : 'Hello'
-		});
-
-	var block1 = Iterator({
-		type : 'container',
-		layout : 'column',
-		containerClass : 'abc',
-		items : [{
-			type: 'container',
-			containerClass : ['bg-col--blue','abcdef'],
-			styles : {
-				height : '20px',
-				justifyContent : 'center',
-				alignItems : 'center',
-				color : 'whitesmoke'
-			},
-			layout : 'row',
-			innerHTML : 'Step1: <b>SENDER INFORMATION</b>',
-			listeners : {
-				click : function(){
-					
-
-				}
-			}
-			
-		},{
-			type: 'container',
-			flex : 1,
-			layout : 'column',
-			items : [{
-				type : 'container',
-				flex : 1,
-				layout : 'row',
-				items : [{
-					type : 'textfield',
-					fieldType : 'column',
-					fieldLabel : 'Name',
-					id: 'invoiceName',
-					compClass : 'padding--five',
-					tabindex : '1',
-					markRequired : true,
-					flex : 2,
-					styles :{
-
-					},
-					attributes : {
-
-					},
-					/*validations : {
-						'isRequired' : {value : true , errmsg : 'This field is required.'}
-						'onlyNumber' : {value: true , errmsg : 'Numbers'}
-						'onlyText' : {value : true, errmsg : 'Text'}
-						'regex' : { value:'abc' , errmsg : 'Only Valid Characters are 0-9'}
-					},*/
-					buttons : [{
-						id : 'btn1',
-						btnClass : 'btn-OtherLanguage',
-						listeners : {
-							click : function(e , val){
-								console.log('btn1');
-							}
-						}
-					},{
-						id : 'btn2',
-						btnClass : 'btn-Search',
-						listeners : {
-							click : function(e , val){
-								console.log('btn2');
-							}
-						}
-					},{
-						id : 'btn3',
-						btnClass : ['dbc', 'bg-col--blue'],
-						listeners : {
-							click : function(e , val){
-								console.log('btn3');
-							}
-						}
-					}], 
-					listeners : {
-						input : function(e, val){
-							
-							debugger;
-							
-							
-						}
-					}
-				},{
-					type : 'textfield',
-					fieldType : 'column',
-					fieldLabel : 'Mobile',
-					id: 'invoiceName1',
-					tabindex : '2',
-					required : true,
-					compClass : 'padding--five',
-					flex : 1
-				}]
-
-			},{
-				type : 'container',
-				flex : 1,
-				layout : 'row',
-				items : [{
-					type : 'textfield',
-					fieldType : 'column',
-					fieldLabel : 'Address',
-					id: 'invoiceAddress',
-					tabindex : '4',
-					required : true,
-					compClass : 'padding--five',
-					flex : 2,
-					styles : {
-						width : '50px',
-						height : '50px',
-						paddingLeft : '20px'
-					}
-				},{
-					type : 'textfield',
-					fieldType : 'column',
-					fieldLabel : 'Zip',
-					id: 'invoiceZip',
-					tabindex : '5',
-					required : true,
-					compClass : 'padding--five',
-					flex : 1
-				}]
-			},{
-				type : 'container',
-				flex : 1,
-				layout : 'row',
-				items : [{
-					type : 'textfield',
-					fieldType : 'column',
-					fieldLabel : 'Country',
-					id: 'invoiceCountry',
-					tabindex : '5',
-					required : true,
-					compClass : 'padding--five',
-					flex : 1
-				},{
-					type : 'textfield',
-					fieldType : 'column',
-					fieldLabel : 'State',
-					id: 'invoiceState',
-					tabindex : '6',
-					required : true,
-					compClass : 'padding--five',
-					flex : 1
-				},{
-					type : 'textfield',
-					fieldType : 'column',
-					fieldLabel : 'City',
-					id: 'invoiceCity',
-					tabindex : '7',
-					required : true,
-					compClass : 'padding--five',
-					flex : 1
-				}]
-			},{
-				type : 'container',
-				flex : 1,
-				justifyContent : 'center',
-				layout : 'row',
-				alignItems : 'center',
-				innerHTML : '-------------------------------Additional Information--------------------------------',
-				render : function(){
-
-				}
-			},{
-				type : 'container',
-				flex : 1,
-				layout : 'row',
-				items : [{
-					type : 'textfield',
-					fieldType : 'column',
-					fieldLabel : 'Home Number',
-					id: 'invoiceHomeNo',
-					tabindex : '8',
-					compClass : 'padding--five',
-					flex : 1
-				},{
-					type : 'textfield',
-					fieldType : 'column',
-					fieldLabel : 'Work Number',
-					id: 'invoiceWorkNo',
-					compClass : 'padding--five',
-					tabindex : '9',
-					flex : 1
-				},{
-					type : 'textfield',
-					fieldType : 'column',
-					fieldLabel : 'ID Type',
-					id: 'invoiceID',
-					compClass : 'padding--five',
-					tabindex : '10',
-					flex : 1
-				}]
-			},{
-				type : 'container',
-				flex : 1,
-				layout : 'row',
-				items : [{
-					type : 'textfield',
-					fieldType : 'column',
-					fieldLabel : 'ID Number',
-					id: 'invoiceIDNum',
-					tabindex : '11',
-					compClass : 'padding--five',
-					flex : 1
-				},{
-					type : 'textfield',
-					fieldType : 'column',
-					fieldLabel : 'ID Expiration Date',
-					id: 'invoiceIDExp',
-					tabindex : '12',
-					compClass : 'padding--five',
-					flex : 1
-				},{
-					type : 'textfield',
-					fieldType : 'column',
-					fieldLabel : 'DOB',
-					id: 'invoiceDOB',
-					tabindex : '13',
-					compClass : 'padding--five',
-					flex : 1
-				}]
-			},{
-				type : 'container',
-				flex : 1,
-				layout : 'row',
-				items : [{
-					type : 'textfield',
-					fieldType : 'column',
-					fieldLabel : 'Nationality',
-					id: 'invoiceNationality',
-					compClass : 'padding--five',
-					tabindex : '14',
-					flex : 1
-				},{
-					type : 'textfield',
-					fieldType : 'column',
-					fieldLabel : 'Email',
-					id: 'invoiceEmail',
-					compClass : 'padding--five',
-					tabindex : '15',
-					flex : 1
-				},{
-					type : 'radiofield',
-					fieldLabel : 'Entity Type',
-					fieldLayout : 'column',
-					id: 'invoiceEntity',
-					compClass : 'padding--five',
-					flex : 1,
-					groupLayout : 'row',
-					fieldGroup : [{
-						fieldLabel : 'Individual',
-						attributes : {
-							id : 'shivamCheck',
-							display : 'shivam',
-							name : 'shiavm',
-							value : 'shivam'
-						}
-					},{
-						fieldLabel : 'Company',
-						attributes : {
-							display : 'shivam',
-							name : 'shiavm',
-							value : 'shivam'
-						}
-					}]
-				}]
-			},{
-				type : 'container',
-				flex : 1,
-				layout : 'row',
-
-				items : [{
-					type : 'button',
-					btnClass : 'abcdef',
-					id : 'randomBtn',
-					btnText : 'Click Me',
-					styles : {
-						width : '100px',
-						height : '25px',
-						paddingLeft : '20px'
-					},
-					attributes : {
-						
-					},
-					listeners : {
-						click : function(e){
-							
-							this.setAttribute('disabled', true);
-							debugger;
-							
-						}
-					}
-				}]
-				
-
-			}]
-		}]
-
-	});
-	var div = document.getElementById('mydiv');
-	div.appendChild(block1);
-	
-})();
+        var block1 = Iterator({
+            type: 'container',
+            layout: 'column',
+            containerClass: 'abc',
+            items: [{
+                type: 'container',
+                containerClass: ['bg-col--blue', 'abcdef'],
+                styles: {
+                    height: '20px',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    color: 'whitesmoke'
+                },
+                layout: 'row',
+                innerHTML: 'Step1: <b>SENDER INFORMATION</b>',
+                listeners: {
+                    click: function() {
 
 
-</script>
+                    }
+                }
 
+            }, {
+                type: 'container',
+                flex: 1,
+                layout: 'column',
+                items: [{
+                    type: 'container',
+                    flex: 1,
+                    layout: 'row',
+                    items: [{
+                        type: 'textfield',
+                        fieldType: 'column',
+                        fieldLabel: 'Name',
+                        id: 'invoiceName',
+                        compClass: 'padding--five',
+                        tabindex: '1',
+                        markRequired: true,
+                        flex: 2,
+                        styles: {
+
+                        },
+                        attributes: {
+
+                        },
+                        validations : {
+                        	/*'regex' : { value:'abc' , errmsg : 'Only Valid Characters are 0-9'}*/
+                        	/*'isRequired' : {value : true , errmsg : 'This field is required.'}*/
+                        	/*'onlyNumber' : {value: true , errmsg : 'Numbers'},*/
+                        	'onlyText' : {value : true, errmsg : 'Text'}
+                        	
+                        },
+                        buttons: [{
+                            id: 'btn1',
+                            btnClass: 'btn-OtherLanguage',
+                            listeners: {
+                                click: function(e, val) {
+                                    console.log('btn1');
+                                }
+                            }
+                        }, {
+                            id: 'btn2',
+                            btnClass: 'btn-Search',
+                            listeners: {
+                                click: function(e, val) {
+                                    console.log('btn2');
+                                }
+                            }
+                        }, {
+                            id: 'btn3',
+                            btnClass: ['dbc', 'bg-col--blue'],
+                            listeners: {
+                                click: function(e, val) {
+                                    console.log('btn3');
+                                }
+                            }
+                        }],
+                        listeners: {
+                            input: function(e, val) {
+                                
+                                this.setError("He ha");
+
+                            },
+                            blur : function(e, val){
+
+                            	this.removeError();
+                            }
+                        }
+                    }, {
+                        type: 'textfield',
+                        fieldType: 'column',
+                        fieldLabel: 'Mobile',
+                        id: 'invoiceName1',
+                        tabindex: '2',
+                        required: true,
+                        compClass: 'padding--five',
+                        flex: 1
+                    }]
+
+                }, {
+                    type: 'container',
+                    flex: 1,
+                    layout: 'row',
+                    items: [{
+                        type: 'textfield',
+                        fieldType: 'column',
+                        fieldLabel: 'Address',
+                        id: 'invoiceAddress',
+                        tabindex: '4',
+                        required: true,
+                        compClass: 'padding--five',
+                        flex: 2,
+                        styles: {
+                            width: '50px',
+                            height: '50px',
+                            paddingLeft: '20px'
+                        }
+                    }, {
+                        type: 'textfield',
+                        fieldType: 'column',
+                        fieldLabel: 'Zip',
+                        id: 'invoiceZip',
+                        tabindex: '5',
+                        required: true,
+                        compClass: 'padding--five',
+                        flex: 1
+                    }]
+                }, {
+                    type: 'container',
+                    flex: 1,
+                    layout: 'row',
+                    items: [{
+                        type: 'textfield',
+                        fieldType: 'column',
+                        fieldLabel: 'Country',
+                        id: 'invoiceCountry',
+                        tabindex: '5',
+                        required: true,
+                        compClass: 'padding--five',
+                        flex: 1
+                    }, {
+                        type: 'textfield',
+                        fieldType: 'column',
+                        fieldLabel: 'State',
+                        id: 'invoiceState',
+                        tabindex: '6',
+                        required: true,
+                        compClass: 'padding--five',
+                        flex: 1
+                    }, {
+                        type: 'textfield',
+                        fieldType: 'column',
+                        fieldLabel: 'City',
+                        id: 'invoiceCity',
+                        tabindex: '7',
+                        required: true,
+                        compClass: 'padding--five',
+                        flex: 1
+                    }]
+                }, {
+                    type: 'container',
+                    flex: 1,
+                    justifyContent: 'center',
+                    layout: 'row',
+                    alignItems: 'center',
+                    innerHTML: '-------------------------------Additional Information--------------------------------',
+                    render: function() {
+
+                    }
+                }, {
+                    type: 'container',
+                    flex: 1,
+                    layout: 'row',
+                    items: [{
+                        type: 'textfield',
+                        fieldType: 'column',
+                        fieldLabel: 'Home Number',
+                        id: 'invoiceHomeNo',
+                        tabindex: '8',
+                        compClass: 'padding--five',
+                        flex: 1
+                    }, {
+                        type: 'textfield',
+                        fieldType: 'column',
+                        fieldLabel: 'Work Number',
+                        id: 'invoiceWorkNo',
+                        compClass: 'padding--five',
+                        tabindex: '9',
+                        flex: 1
+                    }, {
+                        type: 'textfield',
+                        fieldType: 'column',
+                        fieldLabel: 'ID Type',
+                        id: 'invoiceID',
+                        compClass: 'padding--five',
+                        tabindex: '10',
+                        flex: 1
+                    }]
+                }, {
+                    type: 'container',
+                    flex: 1,
+                    layout: 'row',
+                    items: [{
+                        type: 'textfield',
+                        fieldType: 'column',
+                        fieldLabel: 'ID Number',
+                        id: 'invoiceIDNum',
+                        tabindex: '11',
+                        compClass: 'padding--five',
+                        flex: 1
+                    }, {
+                        type: 'textfield',
+                        fieldType: 'column',
+                        fieldLabel: 'ID Expiration Date',
+                        id: 'invoiceIDExp',
+                        tabindex: '12',
+                        compClass: 'padding--five',
+                        flex: 1
+                    }, {
+                        type: 'textfield',
+                        fieldType: 'column',
+                        fieldLabel: 'DOB',
+                        id: 'invoiceDOB',
+                        tabindex: '13',
+                        compClass: 'padding--five',
+                        flex: 1
+                    }]
+                }, {
+                    type: 'container',
+                    flex: 1,
+                    layout: 'row',
+                    items: [{
+                        type: 'textfield',
+                        fieldType: 'column',
+                        fieldLabel: 'Nationality',
+                        id: 'invoiceNationality',
+                        compClass: 'padding--five',
+                        tabindex: '14',
+                        flex: 1
+                    }, {
+                        type: 'textfield',
+                        fieldType: 'column',
+                        fieldLabel: 'Email',
+                        id: 'invoiceEmail',
+                        compClass: 'padding--five',
+                        tabindex: '15',
+                        flex: 1
+                    }, {
+                        type: 'radiofield',
+                        fieldLabel: 'Entity Type',
+                        fieldLayout: 'column',
+                        id: 'invoiceEntity',
+                        compClass: 'padding--five',
+                        flex: 1,
+                        groupLayout: 'row',
+                        fieldGroup: [{
+                            fieldLabel: 'Individual',
+                            attributes: {
+                                id: 'shivamCheck',
+                                display: 'shivam',
+                                name: 'shiavm',
+                                value: 'shivam'
+                            },
+                            listeners: {
+                                click: function() {
+                                   this.changeLabelText('car'); 
+                                }
+                            }
+                        }, {
+                            fieldLabel: 'Company',
+                            attributes: {
+                                display: 'shivam',
+                                name: 'shiavm',
+                                value: 'shivam'
+                            },
+                            listeners: {
+                                click: function() {
+                                   this.changeLabelText('bike'); 
+                                }
+                            }
+                        }]
+                    }]
+                }, {
+                    type: 'container',
+                    flex: 1,
+                    layout: 'row',
+
+                    items: [{
+                        type: 'button',
+                        btnClass: 'abcdef',
+                        id: 'randomBtn',
+                        btnText: 'Click Me',
+                        styles: {
+                            width: '100px',
+                            height: '25px',
+                            paddingLeft: '20px'
+                        },
+                        attributes: {
+
+                        },
+                        listeners: {
+                            click: function(e) {
+
+                                this.setAttribute('disabled', true);
+                                
+
+                            }
+                        }
+                    }]
+
+
+                }]
+            }]
+
+        });
+        var div = document.getElementById('mydiv');
+        div.appendChild(block1);
+
+    })();
+    </script>
 </body>
+
 </html>

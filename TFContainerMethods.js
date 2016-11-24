@@ -8,6 +8,15 @@ var TFContainerMethods = function() {
         this.innerComp.style.display = "";
     };
     
+    // add remove style
+    this.addStyle = function(prop , val){
+        this.innerComp.style[prop] = val;
+    };
+    this.removeStyle = function(prop){
+        this.innerComp.style[prop] = '';
+    };
+    
+
     //visibility property handlers
     this.visibleHide = function() {
         this.innerComp.style.visibility = "hidden";
@@ -28,7 +37,7 @@ var TFContainerMethods = function() {
     
     // appending dom handlers
     this.appendDom = function(newItem){
-    	this.innerComp.append(newItem);
+    	this.innerComp.appendChild(newItem);
     };
     this.prependDom = function(newItem){
     	this.innerComp.insertBefore(newItem , this.innerComp.childNodes[0]);

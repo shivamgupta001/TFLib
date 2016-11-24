@@ -40,6 +40,31 @@ var TFCheckboxMethods = function(){
 		this.innerComp.style.visibility = "";
 	};
 
+	// add remove style
+	this.addStyle = function(prop , val){
+		this.outerComp.style[prop] = val;
+	};
+	this.removeStyle = function(prop){
+		this.outerComp.style[prop] = '';
+	};
+	this.addLabelStyle = function(prop , val){
+		this.labelComp.style[prop] = val;
+	};
+	this.removeLabelStyle = function(prop){
+		this.labelComp.style[prop] = '';
+	};
+	this.addInnerStyle = function(prop , val){
+		this.innerComp.style[prop] = val;
+	};
+	this.removeInnerStyle = function(prop){
+		this.innerComp.style[prop] = '';
+	};
+
+	// change label name 
+	this.changeLabelText = function(newLabelText){
+		this.labelComp.innerHTML = newLabelText;
+	};
+
 	// add remove class
 	this.addClass = function(newClass){
 		newClass = newClass.constructor === Array ? newClass : [newClass];
@@ -68,7 +93,7 @@ var TFCheckboxMethods = function(){
 
 	// append dom handlers
 	this.appendDom = function(el){
-		this.outerComp.append(el);
+		this.outerComp.appendChild(el);
 	};
 	this.prependDom = function(el){
 		this.outerComp.insertBefore(el , this.outerComp.childNodes[0]);
@@ -77,7 +102,7 @@ var TFCheckboxMethods = function(){
 		this.outerComp.insertBefore(el , this.outerComp.childNodes[index]);
 	};
 	this.appendDomToLabel = function(el){
-		this.labelComp.append(el);
+		this.labelComp.appendChild(el);
 	};
 	this.prependDomToLabel = function(el){
 		this.labelComp.insertBefore(el , this.labelComp.childNodes[0]);
@@ -86,7 +111,7 @@ var TFCheckboxMethods = function(){
 		this.labelComp.insertBefore(el , this.labelComp.childNodes[index]);
 	};
 	this.appendDomToInner = function(el){
-		this.innerComp.append(el);
+		this.innerComp.appendChild(el);
 	};
 	this.prependDomToInner = function(el){
 		this.innerComp.insertBefore(el , this.innerComp.childNodes[0]);

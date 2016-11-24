@@ -83,7 +83,7 @@ var TFCheckboxField = function(){
 
 				// add checkbox to template
 				this.fieldGroup.forEach(function(item){
-					this.controlComp.append(TFCheckbox.call(item));
+					this.controlComp.appendChild(TFCheckbox.call(item));
 				},this);
 			},
 			_bindEvents : function(){
