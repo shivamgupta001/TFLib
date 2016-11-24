@@ -143,8 +143,7 @@ var TFTextFieldMethods = function(){
 	this.removeError = function(){
 				
 		if(this.scope && this.scope.isRequired){
-			debugger;
-			this.validations.isRequired[value] = false;
+			this.validations.isRequired.value = false;
 			this.setValidations();
 		}
 	};

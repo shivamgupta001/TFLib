@@ -160,27 +160,40 @@ var TFTextField = function($fieldset) {
         setValidations: function() {
             //private listeners
             if (this.validations  && Object.keys(this.validations).length) {
-
+            	
                 //adding validations 
-                this.scope = this.scope ? this.scope : {};
-                TFValidations.call(this.scope);
+                
+                if(!this.scope){
+                	this.scope = this.scope ? this.scope : {};
+                	TFValidations.call(this.scope);	
+                }else if(this.scope.type === "textfield" ){
+                	TFValidations.call(this.scope);	
+                }
+                
 
                 Object.keys(this.validations).forEach(function(val) {
 
                     switch (val) {
                         case 'isRequired':
-                        	debugger;
+                        	
                         	if(this.validations.isRequired.value){
-                        		this.innerComp.addEventListener('blur', this.scope.isRequired.bind(this));
-                            	this.innerComp.addEventListener('input', this.scope.isRequired.bind(this));
+
+                        		this.scope.isRequiredHandler = this.scope.isRequired.bind(this);
+
+                        		this.innerComp.addEventListener('blur', this.scope.isRequiredHandler);
+                            	this.innerComp.addEventListener('input', this.scope.isRequiredHandler);
+
+
                         	}else {
-                        		this.innerComp.removeEventListener('blur', this.scope.isRequired.bind(this));
-                            	this.innerComp.removeEventListener('input', this.scope.isRequired.bind(this));
+                        		this.innerComp.removeEventListener('blur', this.scope.isRequiredHandler);
+                            	this.innerComp.removeEventListener('input', this.scope.isRequiredHandler);
                            	}
                             break;
 
                         case 'onlyNumber':
                         	if(this.validations.onlyNumber.value){
+
+                        		
                         		this.innerComp.addEventListener('keydown', this.scope.isNumber);	
                         	}else{
                         		this.innerComp.removeEventListener('keydown', this.scope.isNumber);	
@@ -189,6 +202,7 @@ var TFTextField = function($fieldset) {
 
                         case 'regex':
                         	if(this.validations.regex.value){
+
                         		this.innerComp.addEventListener('blur', this.scope.isRegEx.bind(this));
                             	this.innerComp.addEventListener('input', this.scope.isRegEx.bind(this));
                             }else{
