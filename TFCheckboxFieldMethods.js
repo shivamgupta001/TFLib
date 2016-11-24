@@ -20,7 +20,7 @@ var TFCheckboxFieldMethods = function(){
 		this.controlComp.style.display = "";
 	};
 
-	// vsisible property handler
+	// visibility property handler
 	this.visibleHide = function(){
 		this.outerComp.style.visibility = "hidden";
 	};

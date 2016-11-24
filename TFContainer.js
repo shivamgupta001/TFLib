@@ -1,5 +1,7 @@
 var TFContainer = function(){
+		
 		var container = {
+			
 			scope : this,
 			_init : function(){
 				
@@ -12,22 +14,23 @@ var TFContainer = function(){
 				this._render();	
 				
 				// return el
-				return this.$childTemplate[0];
+				return this.innerComp;
 			},
 			_initialize : function(){
 				
 				var me = this.scope;
 
-				//  variables
-				this.dynamicId = me.id || "tfcontainer-"+getRandomInt(1, 10000);
-				this.containerClass = (me.containerClass ? (me.containerClass.constructor === Array ? me.containerClass : [me.containerClass]) : false);
+				//  configs
+				this.dynamicId = me.id || "tf-container-"+getRandomInt(1, 10000);
 				this.layout = me.layout;
-				
-				//styles
 				this.styles = me.styles || '';
-				this.attributes = me.attributes || '';
+								
+				//style
 				this.flex = me.flex || '';
 				
+				// classes
+				this.compClass = (me.compClass ? (me.compClass.constructor === Array ? me.compClass : [me.compClass]) : false);
+
 				// inner HTML or Text
 				this.innerHTML = me.innerHTML || false;
 				this.innerText = me.innerText || false;				
@@ -38,6 +41,7 @@ var TFContainer = function(){
 
 			},
 			_generateTemplate : function(){
+				
 				var el  =[
 					'<div control-type="tf-container"',
 						'id="'+this.dynamicId+'"',
@@ -46,11 +50,12 @@ var TFContainer = function(){
 					'</div>'
 				].join('\n');
 				
-				this.$childTemplate = $(el);
+				this.childTemplate = $(el)[0];
 			},
 			_cacheDom : function(){
+				
 				// cache Dom
-				this.innerComp = this.$childTemplate[0];
+				this.innerComp = this.childTemplate;
 				
 			},
 			_applyStyles : function(){
@@ -62,47 +67,46 @@ var TFContainer = function(){
 					}, this);
 				}
 
-				//apply attributes
-				if(this.attributes != ''){
-					Object.keys(this.attributes).forEach(function(attribute){
-						this.innerComp.setAttribute(attribute , this.attributes[attribute]);
-					}, this);	
-				}				
-
 				// apply flex
 				if(this.flex) this.innerComp.style.flex = this.flex;
 
 				//apply class
-				if(this.containerClass) this.innerComp.classList.add.apply(this.innerComp.classList , this.containerClass);
+				if(this.compClass) this.innerComp.classList.add.apply(this.innerComp.classList , this.compClass);
 
 				// inner text or html
 				if(this.innerText) this.innerComp.innerText = this.innerText;
 				if(this.innerHTML) this.innerComp.innerHTML = this.innerHTML;
 			},
 			_bindEvents : function(){
+				
 				var me = this.scope;
+				
 				if(this.listeners != ''){
 					for(var listener in this.listeners){
 						this.innerComp.addEventListener(listener , this.listeners[listener].bind(this.scope));
 					}
 				}
 			},
-			_render : function(){
-				var me = this.scope;
-				if(this.render != ''){
-					me.render( 5 , 6);
-				}
-			},
 			_attachProperties : function(){
+				
 				var me = this.scope;
 
-				//properties
+				// add properties
 				me.innerComp = this.innerComp;
 
-				//methods
+				// add methods
 				TFContainerMethods.call(me);
 
+				// share methods to el
 				me.innerComp.shared = me;
+			},
+			_render : function(){
+				
+				var me = this.scope;
+				
+				if(this.render != ''){
+					me.render.call(me);
+				}
 			}
 		};
 		

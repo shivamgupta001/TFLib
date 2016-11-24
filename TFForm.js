@@ -1,6 +1,7 @@
 var TFForm = function(){
 	
 		var form = {
+
 			scope : this,
 			_init : function(){
 				
@@ -13,17 +14,22 @@ var TFForm = function(){
 				this._render();
 
 				// return el	
-				return this.$childTemplate[0];
+				return this.innerComp;
 			},
 			_initialize : function(){
+				
 				var me = this.scope;
 
 				//  variables
-				this.dynamicId = me.id || "tfcontainer-"+getRandomInt(1, 10000);
-				this.flex = me.flex || false;
-				this.compClass = (me.compClass ? (me.compClass.constructor === Array ? me.compClass.join(' ') : me.compClass) : false);
+				this.dynamicId = me.id || "tf-form-"+getRandomInt(1, 10000);
 				this.layout = me.layout;
-				
+
+				// classes
+				this.compClass = (me.compClass ? (me.compClass.constructor === Array ? me.compClass : [me.compClass]) : false);
+								
+				// styles
+				this.flex = me.flex || false;
+
 				//attributes
 				this.action = me.action || false;
 				this.method = me.method || false;
@@ -37,6 +43,7 @@ var TFForm = function(){
 
 			},
 			_generateTemplate : function(){
+				
 				var el  =[
 					'<form control-type="tf-form" ', 
 						'id="'+this.dynamicId+'"',
@@ -50,39 +57,42 @@ var TFForm = function(){
 					'</form>'
 				].join('\n');
 				
-				this.$childTemplate = $(el);
+				this.childTemplate = $(el)[0];
 				
 			},
 			_cacheDom : function(){
 
-				this.innerComp = this.$childTemplate[0];
+				// cache Dom
+				this.innerComp = this.childTemplate;
 			},
 			_applyProperty : function(){
 				
-				this.innerComp.classList.add.apply(this.innerComp.classList , this.compClass);	
+				// apply class
+				if(this.compClass) this.innerComp.classList.add.apply(this.innerComp.classList , this.compClass);	
 			},
 			_bindEvents : function(){
+				
 				var me = this.scope;
+				
 				if(this.listeners != ''){
 					for(var listener in this.listeners){
 						this.innerComp.addEventListener(listener , this.listeners[listener].bind(this.scope));
 					}
 				}
 			},
-			_render : function(){
-				var me = this.scope;
-				if(this.render != ''){
-					me.render( 5 , 6);
-				}
-			},
 			_attachProperties : function(){
-				var me = this.scope;
-
-				//properties
+				
+				// add properties
 				me.$innerComp = this.$innerComp;
 							
-				//methods
-				//sharedMethods.call(me);
+			},
+			_render : function(){
+				
+				var me = this.scope;
+				
+				if(this.render != ''){
+					me.render.call(me);
+				}
 			}
 		};
 		

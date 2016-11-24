@@ -42,14 +42,16 @@ var Iterator = function(config){
 	// static variable to identify duplicate ids
 	iterateStructure.idList = [];
 
-	// register new componenet module here
+	// register new component module here
 	function iterateItems(item){
+		
 		var el; 
+		
 		switch(item.type){
 			
 			case 'textfield' 	: el = TFTextField.call(item);
 									break;
-			case 'textarea' 	: el = TFTextArea.call(item);
+			case 'textareafield' 	: el = TFTextAreaField.call(item);
 									break;
 			case 'checkboxfield': el = TFCheckboxField.call(item);
 									break;
@@ -68,6 +70,7 @@ var Iterator = function(config){
 			default 			: el = TFContainer.call(item);
 									break;
 		}
+		
 		if(el)
 			return el;
 	}

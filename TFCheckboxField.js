@@ -1,7 +1,8 @@
-/** This is a description of the Checkbox Module. */
+/** This is a description of the CheckboxField Module. */
 var TFCheckboxField = function(){
 		
 		var checkboxfield = {
+			
 			scope : this,
 			_init : function(){
 				
@@ -14,40 +15,39 @@ var TFCheckboxField = function(){
 				this._render();
 
 				// return el
-				return this.$childTemplate[0];
+				return this.outerComp;
 					
 			},
 			_initialize : function(){
+				
 				var me = this.scope;
 
-				//  variables
-				this.dynamicId = me.id || "checkboxfield-"+getRandomInt(1, 10000);
+				//  configs
+				this.dynamicId = me.id || "tf-chkf-"+getRandomInt(1, 10000);
 				this.markRequired = me.markRequired || false;
 				this.fieldLayout = me.fieldLayout || 'row';
 				this.styles = me.styles || '';
-				
-				
-				// innerHTML configs
-				this.fieldLabel = me.fieldLabel || '';
-				this.value = me.value || '';
 				this.fieldGroup = me.fieldGroup || [];
 				this.groupLayout = me.groupLayout || 'column';
-				
-							
+								
+				// innerHTML configs
+				this.fieldLabel = me.fieldLabel || '';
+											
 				//class
 				this.labelClass = (me.labelClass ? (me.labelClass.constructor === Array ? me.labelClass : [me.labelClass]) : false);
 				this.compClass = (me.compClass ? (me.compClass.constructor === Array ? me.compClass : [me.compClass]) : false); 
-				
-				
+				this.controlClass = (me.controlClass ? (me.controlClass.constructor === Array ? me.controlClass : [me.controlClass]) : false);
+								
 				//  methods
 				this.render = me.render || '';
 				this.listeners = me.listeners || '';
 			},
 			_generateTemplate : function(){
+				
 				var el = [
 					'<div id="'+this.dynamicId+'"', 
 						'class="tf-flex '+((this.fieldLayout === 'row')? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
-				        '<div control-type="tf-label" class="'+((this.displayLabel === "none")? 'tf-display--none':'')+'">',
+				        '<div control-type="tf-chkf-label" class="'+((this.displayLabel === "none")? 'tf-display--none':'')+'">',
 				            '<label>'+(this.fieldLabel ? this.fieldLabel : '')+'</label>',
 				            '<span class="tf-required--red '+(this.markRequired ? 'tf-display--none':'')+'">*</span>',
 				        '</div>',
@@ -57,14 +57,14 @@ var TFCheckboxField = function(){
 				    '</div>'
 				].join('\n');
 
-				this.$childTemplate = $(el);
+				this.childTemplate = $(el)[0];
 			},
 			_cacheDom : function(){
 
 				//cache Dom
-				this.outerComp = this.$childTemplate[0];
-				this.controlComp = this.$childTemplate.find('div[control-type="tf-checkboxfield"]')[0];
-				this.labelComp = this.$childTemplate.find('div[control-type="tf-label"]')[0];
+				this.outerComp = this.childTemplate;
+				this.controlComp = this.childTemplate.querySelector('[control-type="tf-checkboxfield"]');
+				this.labelComp = this.childTemplate.querySelector('[control-type="tf-chkf-label"]');
 				this.innerComp = this.controlComp.getElementsByTagName('input');
 				
 			},
@@ -80,8 +80,9 @@ var TFCheckboxField = function(){
 				//apply classes
 				if(this.compClass) this.outerComp.classList.add.apply(this.outerComp.classList , this.compClass);
 				if(this.labelClass) this.labelComp.classList.add.apply(this.labelComp.classList, this.labelClass);
-
-				// add checkbox to template
+				if(this.controlClass) this.controlComp.classList.add.apply(this.controlComp.classList, this.controlClass);
+				
+				// add checkbox el's to control
 				this.fieldGroup.forEach(function(item){
 					this.controlComp.appendChild(TFCheckbox.call(item));
 				},this);
@@ -96,12 +97,8 @@ var TFCheckboxField = function(){
 					}
 				}
 			},
-			_render : function(){
-				if(this.render != ''){
-					this.render();
-				}
-			},
 			_attachProperties : function(){
+				
 				var me = this.scope;
 
 				//properties
@@ -112,7 +109,16 @@ var TFCheckboxField = function(){
 				//methods
 				TFCheckboxMethods.call(me);
 
+				//share methods to el
 				me.outerComp.shared = me;
+			},
+			_render : function(){
+
+				var me = this.scope;
+
+				if(this.render != ''){
+					this.render.call(me);
+				}
 			}
 
 		};

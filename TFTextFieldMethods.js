@@ -133,6 +133,8 @@ var TFTextFieldMethods = function(){
 		if(this.validations && this.validations.isRequired){
 			
 		}else {
+
+			// this.scope gets set only when setError ran successfully once
 			if(!this.scope){
 				this.validations = { 'isRequired' : {value : true , errmsg : errmsg}};
 				this.setValidations();	
@@ -143,8 +145,10 @@ var TFTextFieldMethods = function(){
 	this.removeError = function(){
 				
 		if(this.scope && this.scope.isRequired){
+
 			this.validations.isRequired.value = false;
 			this.setValidations();
+			
 		}
 	};
 

@@ -1,6 +1,10 @@
+/** This is a description of the Button Module. */
 var TFButton = function(){
+		
 		var button = {
+			
 			scope : this,
+			
 			_init : function(){
 				
 				this._initialize();
@@ -12,21 +16,21 @@ var TFButton = function(){
 				this._render();		
 				
 				// return el
-				return this.$childTemplate[0];
+				return this.innerComp;
 				
 			},
 			_initialize : function(){
+				
 				var me = this.scope;
 				
-				//  variables
-				this.dynamicId = me.id || "tfbtn-"+getRandomInt(1, 10000);
+				//  config
+				this.dynamicId = me.id || "tf-btn-"+getRandomInt(1, 10000);
+				this.styles = me.styles || '';
+				this.attributes = me.attributes || '';
 				
 				//class
 				this.btnClass = (me.btnClass ? (me.btnClass.constructor === Array ? me.btnClass : [me.btnClass]) : false);
 
-				//styles
-				this.styles = me.styles || '';
-				this.attributes = me.attributes || '';
 				
 				//inner HTML or text
 				this.btnText = me.btnText || '';
@@ -45,15 +49,16 @@ var TFButton = function(){
 					'></button>'
 				].join('\n');
 
-				this.$childTemplate = $(el);
+				this.childTemplate = $(el)[0];
 			},
 			_cacheDom : function(){
 
 				//cache DOM
-				this.innerComp = this.$childTemplate[0];
+				this.innerComp = this.childTemplate;
 				
 			},
 			_applyProperty : function(){
+				
 				//apply styles
 				if(this.styles != ''){
 					Object.keys(this.styles).forEach(function(style){
@@ -74,37 +79,44 @@ var TFButton = function(){
 				//apply class
 				if(this.btnClass) this.innerComp.classList.add.apply(this.innerComp.classList , this.btnClass);
 			},
-			_render : function(){
-				var me = this.scope;
-				if(this.render != ''){
-					me.render();
-				}
-			},
 			_bindEvents : function(){
+				
 				var me = this.scope;
+				
 				if(this.listeners != ''){
 					for(var listener in this.listeners){
-						this.innerComp.addEventListener(listener , this.listeners[listener].bind(this.scope));
+						this.innerComp.addEventListener(listener , this.listeners[listener].bind(me));
 					}
 				}
 			},
 			_attachProperties : function(){
 				var me = this.scope;
 
-				//properties
+				// add properties
 				me.innerComp = this.innerComp;
 										
-				//methods
+				// add methods
 				TFButtonMethods.call(me);
 
+				// shared methods over el
 				me.innerComp.shared = me;
+			},
+			_render : function(){
+				
+				var me = this.scope;
+				
+				if(this.render != ''){
+					me.render.call(me);	// last method , everything done
+				}
 			}
 		};
 		
 				
 		function getRandomInt(min, max){
+			
 			min = Math.ceil(min);
 			max = Math.floor(max);
+			
 			return Math.floor(Math.random()*(max - min)+min);
 		}
 		

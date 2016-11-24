@@ -8,7 +8,7 @@ var TFButtonMethods = function(){
 		this.innerComp.style.display = "";
 	};
 
-	// visibility preoperty handler
+	// visibility property handler
 	this.visibleHide = function(){
 		this.innerComp.style.visibility = "hidden";
 	};

@@ -15,12 +15,13 @@
     <script src="TFTextFieldMethods.js"></script>
     <script src="TFCheckboxMethods.js"></script>
     <script src="TFCheckboxFieldMethods.js"></script>
+
     <script src="TFIterator.js"></script>
     <script src="TFForm.js"></script>
     <script src="TFContainer.js"></script>
     <script src="TFCheckboxField.js"></script>
     <script src="TFCheckbox.js"></script>
-    <script src="TFTextArea.js"></script>
+    <script src="TFTextAreaField.js"></script>
     <script src="TFTextfield.js"></script>
     <script src="TFForm.js"></script>
     <script src="TFRadioField.js"></script>
@@ -279,7 +280,7 @@
                         tabindex: '14',
                         flex: 1
                     }, {
-                        type: 'textfield',
+                        type: 'textareafield',
                         fieldType: 'column',
                         fieldLabel: 'Email',
                         id: 'invoiceEmail',
@@ -287,7 +288,7 @@
                         tabindex: '15',
                         flex: 1
                     }, {
-                        type: 'radiofield',
+                        type: 'checkboxfield',
                         fieldLabel: 'Entity Type',
                         fieldLayout: 'column',
                         id: 'invoiceEntity',
@@ -301,6 +302,10 @@
                                 display: 'shivam',
                                 name: 'shiavm',
                                 value: 'shivam'
+                            },
+                            layout : 'row',
+                            render : function(){
+                                
                             },
                             listeners: {
                                 click: function() {

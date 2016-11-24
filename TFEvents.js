@@ -1,9 +1,12 @@
 var TFEvents = {
+
 	events : {},
+
 	on : function(eventName , fn){
 		this.events[eventName] = this.events[eventName] || [];
 		this.events[eventName].push(fn);
 	},
+
 	off : function(eventName , fn){
 		if(this.events[eventname]){
 			for(var i=0;i< this.events[eventname].length; i++){
@@ -14,6 +17,7 @@ var TFEvents = {
 			}
 		}
 	},
+
 	emit : function(eventName, data){
 		if(this.events[eventName]){
 			this.events[eventName].forEach(function(fn){

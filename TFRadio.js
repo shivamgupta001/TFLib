@@ -2,6 +2,7 @@
 var TFRadio = function(){
 		
 		var radio = {
+			
 			scope : this,
 			_init : function(){
 				
@@ -14,48 +15,47 @@ var TFRadio = function(){
 				this._render();
 
 				// return el
-				return this.$childTemplate[0];
+				return this.outerComp;
 					
 			},
 			_initialize : function(){
+				
 				var me = this.scope;
 
-				//  variables
+				//  configs
 				this.dynamicId = me.id || "tf-radio-"+getRandomInt(1, 10000);
 				this.layout = me.layout || 'row';
 				this.styles = me.styles || '';
 				this.attributes = me.attributes || '';
-				
-				
+								
 				// innerHTML configs
 				this.fieldLabel = me.fieldLabel || '';
-				
-											
+															
 				//class
 				this.labelClass = (me.labelClass ? (me.labelClass.constructor === Array ? me.labelClass : [me.labelClass]) : false);
 				this.compClass = (me.compClass ? (me.compClass.constructor === Array ? me.compClass : [me.compClass]) : false); 
-				
-				
+								
 				//  methods
 				this.render = me.render || '';
 				this.listeners = me.listeners || '';
 			},
 			_generateTemplate : function(){
+				
 				var el = [
 					'<div class="tf-flex '+((this.layout === "row") ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
 						'<input control-type="tf-radio" id="'+this.dynamicId+'" type="radio"/>',
-						'<label control-type="tf-label" for="'+this.dynamicId+'">'+this.fieldLabel+'</label>',
+						'<label control-type="tf-radio-label" for="'+this.dynamicId+'">'+this.fieldLabel+'</label>',
 					'</div>'
 				].join('\n');
 
-				this.$childTemplate = $(el);
+				this.childTemplate = $(el)[0];
 			},
 			_cacheDom : function(){
 
 				//cache Dom
-				this.outerComp = this.$childTemplate[0];
-				this.innerComp = this.$childTemplate.find('[control-type="tf-radio"]')[0];
-				this.labelComp = this.$childTemplate.find('[control-type="tf-label"]')[0];
+				this.outerComp = this.childTemplate;
+				this.innerComp = this.childTemplate.querySelector('[control-type="tf-radio"]');
+				this.labelComp = this.childTemplate.querySelector('[control-type="tf-radio-label"]');
 						
 			},
 			_applyProperty : function(){
@@ -89,27 +89,29 @@ var TFRadio = function(){
 					}
 				}
 			},
-			_render : function(){
-				if(this.render != ''){
-					this.render();
-				}
-			},
 			_attachProperties : function(){
 				var me = this.scope;
 
-				//properties
+				// add properties
 				me.innerComp = this.innerComp;
 				me.outerComp = this.outerComp;
 				me.labelComp = this.labelComp;
 
-				//methods
+				// add methods
 				TFCheckboxMethods.call(me);
 
+				// shared methods add to el 
 				me.innerComp.shared = me;
-			}
+			},
+			_render : function(){
 
+				var me = this.scope;
+
+				if(this.render != ''){
+					this.render.call(me);
+				}
+			}
 		};
-		
 				
 		function getRandomInt(min, max){
 			min = Math.ceil(min);

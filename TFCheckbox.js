@@ -14,48 +14,47 @@ var TFCheckbox = function(){
 				this._render();
 
 				// return el
-				return this.$childTemplate[0];
+				return this.outerComp;
 					
 			},
 			_initialize : function(){
+
 				var me = this.scope;
 
 				//  variables
-				this.dynamicId = me.id || "checkbox-"+getRandomInt(1, 10000);
+				this.dynamicId = me.id || "tf-checkbox-"+getRandomInt(1, 10000);
 				this.layout = me.layout || 'row';
 				this.styles = me.styles || '';
 				this.attributes = me.attributes || '';
-				
-				
+								
 				// innerHTML configs
 				this.fieldLabel = me.fieldLabel || '';
-				
-											
+															
 				//class
 				this.labelClass = (me.labelClass ? (me.labelClass.constructor === Array ? me.labelClass : [me.labelClass]) : false);
 				this.compClass = (me.compClass ? (me.compClass.constructor === Array ? me.compClass : [me.compClass]) : false); 
-				
-				
-				//  methods
+								
+				//  methods 
 				this.render = me.render || '';
 				this.listeners = me.listeners || '';
 			},
 			_generateTemplate : function(){
+				
 				var el = [
 					'<div class="tf-flex '+((this.layout === "row") ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
 						'<input control-type="tf-checkbox" id="'+this.dynamicId+'" type="checkbox">',
-						'<label control-type="tf-label" for="'+this.dynamicId+'">'+this.fieldLabel+'</label>',
+						'<label control-type="tf-chk-label" for="'+this.dynamicId+'">'+this.fieldLabel+'</label>',
 					'</div>'
 				].join('\n');
 
-				this.$childTemplate = $(el);
+				this.childTemplate = $(el)[0];
 			},
 			_cacheDom : function(){
 
 				//cache Dom
-				this.outerComp = this.$childTemplate[0];
-				this.innerComp = this.$childTemplate.find('[control-type="tf-checkbox"]')[0];
-				this.labelComp = this.$childTemplate.find('[control-type="tf-label"]')[0];
+				this.outerComp = this.childTemplate;
+				this.innerComp = this.childTemplate.querySelector('[control-type="tf-checkbox"]');
+				this.labelComp = this.childTemplate.querySelector('[control-type="tf-chk-label"]');
 						
 			},
 			_applyProperty : function(){
@@ -89,23 +88,28 @@ var TFCheckbox = function(){
 					}
 				}
 			},
-			_render : function(){
-				if(this.render != ''){
-					this.render();
-				}
-			},
 			_attachProperties : function(){
+				
 				var me = this.scope;
 
-				//properties
+				// add properties
 				me.innerComp = this.innerComp;
 				me.outerComp = this.outerComp;
 				me.labelComp = this.labelComp;
 
-				//methods
+				// add methods
 				TFCheckboxMethods.call(me);
 
-				me.innerComp.shared = me;
+				// share methods on el
+				me.outerComp.shared = me;
+			},
+			_render : function(){
+
+				var me = this.scope;
+
+				if(this.render != ''){
+					this.render.call(me);
+				}
 			}
 
 		};

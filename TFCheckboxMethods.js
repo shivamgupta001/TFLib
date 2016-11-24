@@ -20,7 +20,7 @@ var TFCheckboxMethods = function(){
 		this.innerComp.style.display = "";
 	};
 
-	// vsisible property handler
+	// visibility property handler
 	this.visibleHide = function(){
 		this.outerComp.style.visibility = "hidden";
 	};
@@ -120,7 +120,7 @@ var TFCheckboxMethods = function(){
 		this.innerComp.insertBefore(el , this.innerComp.childNodes[index]);
 	};
 
-	// add remove attribute
+	// set remove attribute
 	this.setAttribute = function( attrName , attrVal){
 		this.innerComp.setAttribute(attrName , attrVal);
 	};

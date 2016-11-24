@@ -1,9 +1,9 @@
-/** This is a description of the Textfield Module. */
-var TFTextArea = function(){
+/** This is a description of the TextAreaField Module. */
+var TFTextAreaField = function(){
 		
-		var textarea = {
+		var textareafield = {
+			
 			scope : this,
-			 /** @access private */
 			_init : function(){
 				
 				this._initialize();
@@ -15,23 +15,23 @@ var TFTextArea = function(){
 				this._render();	
 
 				//return el
-				return this.$childTemplate[0];
+				return this.outerComp;
 			},
-			 /** @access private */
 			_initialize : function(){
+				
 				var me = this.scope;
 				 
-				this.dynamicId = me.id || "tf-textarea-"+getRandomInt(1, 10000);
-				
 				//config
+				this.dynamicId = me.id || "tf-textareaf-"+getRandomInt(1, 10000);
 				this.styles = me.styles || '';
 				this.attributes = me.attributes || '';
 				this.displayLabel = me.displayLabel || false;
+				this.fieldLayout = me.fieldLayout || 'row';
+				this.markRequired = me.markRequired || false;
 
-				//style
+				//innerHTML or innerText
 				this.fieldLabel = me.fieldLabel || '';
-				this.fieldType = me.fieldType || 'row';
-
+				
 				//class
 				this.labelClass = (me.labelClass ? (me.labelClass.constructor === Array ? me.labelClass : [me.labelClass]) : false);
 				this.compClass = (me.compClass ? (me.compClass.constructor === Array ? me.compClass : [me.compClass]) : false);
@@ -45,24 +45,22 @@ var TFTextArea = function(){
 				this.value = me.value || '';
 				this.readOnly = (me.readOnly === true) ? 'readonly' : '';
 				this.maxlength = me.maxlength || '';
-				this.markRequired = me.markRequired || '';
-
-				 /** @access private */
+				
+				// methods
 				this.render = me.render || '';
 				this.listeners = me.listeners || '';
 
 			},
-			 /** @access private */
 			_generateTemplate : function(){
 				var el =[
 					'<div',
 						'id="'+this.dynamicId+'"',
-						'class="tf-flex '+((this.fieldType === 'row') ? 'tf-flex-direction--row ':'tf-flex-direction--column ')+'">',
-						'<div control-type="tf-label" class="tf-flex" '+(this.displayLabel ? 'tf-display--none': '')+'>',
+						'class="tf-flex '+((this.fieldLayout === 'row') ? 'tf-flex-direction--row ':'tf-flex-direction--column ')+'">',
+						'<div control-type="tf-taf-label" class="tf-flex" '+(this.displayLabel ? 'tf-display--none': '')+'>',
 							'<label>'+(this.fieldLabel ? this.fieldLabel : '')+'</label>',
 							'<span class="tf-required--red '+(this.markRequired ? '' : 'tf-display--none')+'">*</span>',
 						'</div>',
-						'<div control-type="tf-textarea" class="field-with-btn ">',
+						'<div control-type="tf-textareafield" class="field-with-btn ">',
 							'<textarea',
 								''+(this.name ? 'name="'+this.name+'"' : '')+'',
 								''+(this.placeholder ? 'placeholder="'+this.placeholder+'"' : '')+'',
@@ -79,17 +77,15 @@ var TFTextArea = function(){
 					'</div>'
 				].join('\n');
 				
-				this.$childTemplate = $(el);
-				
-				
+				this.childTemplate = $(el)[0];
 			},
 			_cacheDom : function(){
 
 				//cache Dom
-				this.innerComp = this.$childTemplate.find("textarea")[0];
-				this.outerComp = this.$childTemplate[0];
-				this.labelComp = this.$childTemplate.find('div[control-type="tf-label"]')[0];
-				this.controlComp = this.$childTemplate.find('div[control-type="tf-textarea"]')[0];
+				this.outerComp = this.childTemplate;
+				this.innerComp = this.childTemplate.querySelector("textarea");
+				this.labelComp = this.childTemplate.querySelector('[control-type="tf-taf-label"]');
+				this.controlComp = this.childTemplate.querySelector('[control-type="tf-textareafield"]');
 			 
 			},
 			_applyProperty : function(){
@@ -112,39 +108,41 @@ var TFTextArea = function(){
 				if(this.controlClass) this.controlComp.classList.add.apply(this.controlComp.classList , this.controlClass);
 				if(this.labelClass) this.labelComp.classList.add.apply(this.labelComp.classList , this.labelClass);
 				if(this.compClass) this.outerComp.classList.add.apply(this.outerComp.classList, this.compClass);
-
 				
 			},
 			_bindEvents : function(){
 				
 				var me = this.scope;
+				
 				if(this.listeners != ''){
 					for(var listener in this.listeners){
 						this.innerComp.addEventListener(listener , this.listeners[listener].bind(me));
 					}
 				}
 			},
-			 /** @access private */
-			_render : function(){
-
-				if(this.render != ''){
-					this.render();
-				}
-			},
-			 /** @access private */
 			_attachProperties : function(){
+				
 				var me = this.scope;
 
-				//properties
+				// add properties
 				me.innerComp = this.innerComp;
 				me.labelComp = this.labelComp;
 				me.outerComp = this.outerComp;
 				me.controlComp = this.controlComp;
 				
-				//methods
+				// add methods
 				TFTextFieldMethods.call(me);
 
+				// share methods over el
 				this.outerComp.shared = me;
+			},
+			_render : function(){
+
+				var me = this;
+
+				if(this.render != ''){
+					this.render.call(me);
+				}
 			}
 		};
 						
@@ -154,6 +152,6 @@ var TFTextArea = function(){
 			return Math.floor(Math.random()*(max - min)+min);
 		}
 		
-	return	textarea._init();
+	return	textareafield._init();
 	
 };

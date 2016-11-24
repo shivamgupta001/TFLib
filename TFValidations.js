@@ -41,6 +41,8 @@ var TFValidations = function(){
 				}
 			}	
 		}else if(e.type === 'input'){
+
+			// second condition prevents regex tooltip is present
 			if(e.target.value.length > 0 && (control.getAttribute('data-tooltip') === this.validations.isRequired.errmsg)){
 				if(control.classList.contains('tooltip')){
 					control.classList.remove('tooltip', 'tf-err-border--red');
@@ -48,6 +50,7 @@ var TFValidations = function(){
 					inputControl.setAttribute('title',this.validations.isRequired.errmsg);	
 				}
 			}else if(e.target.value === ''){
+					// handles after setting value if value deleted and goes blank
 					control.classList.add('tooltip', 'tf-err-border--red');
 					control.setAttribute('data-tooltip', this.validations.isRequired.errmsg);	
 					inputControl.setAttribute('title',this.validations.isRequired.errmsg);	

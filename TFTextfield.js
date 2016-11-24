@@ -2,8 +2,8 @@
 var TFTextField = function($fieldset) {
 
     var textfield = {
+        
         scope: this,
-        /** @access private */
         _init: function() {
 
             this._initialize();
@@ -15,31 +15,29 @@ var TFTextField = function($fieldset) {
             this._render();
 
             //return el
-            return this.$childTemplate[0];
+            return this.outerComp;
         },
-        /** @access private */
         _initialize: function() {
+            
             var me = this.scope;
 
-            this.dynamicId = me.id || "textfield-" + getRandomInt(1, 10000);
-
             //config
+            this.dynamicId = me.id || "tf-textfield-" + getRandomInt(1, 10000);
             this.buttons = me.buttons || [];
             this.validations = me.validations || false;
-
-            //style
-            this.fieldLabel = me.fieldLabel || '';
-            this.flex = me.flex || false;
-            this.fieldType = me.fieldType || 'row';
-
             this.styles = me.styles || '';
             this.attributes = me.attributes || '';
+            this.displayLabel = me.displayLabel || false;
+            this.fieldLabel = me.fieldLabel || '';
+            this.fieldType = me.fieldType || 'row';
 
+            //style
+            this.flex = me.flex || false;
+            
             //class
             this.labelClass = (me.labelClass ? (me.labelClass.constructor === Array ? me.labelClass : [me.labelClass]) : false);
             this.compClass = (me.compClass ? (me.compClass.constructor === Array ? me.compClass : [me.compClass]) : false);
             this.controlClass = (me.controlClass ? (me.controlClass.constructor === Array ? me.controlClass : [me.controlClass]) : false);
-            this.displayLabel = me.displayLabel || false;
 
             //attributes
             this.name = me.name || '';
@@ -52,18 +50,18 @@ var TFTextField = function($fieldset) {
             this.tabindex = me.tabindex || '';
             this.markRequired = me.markRequired || false;
 
-            /** @access private */
+            // methods
             this.render = me.render || '';
             this.listeners = me.listeners || '';
 
         },
-        /** @access private */
         _generateTemplate: function() {
+            
             var el = [
                 '<div',
                 'id="' + this.dynamicId + '"',
                 'class="tf-flex ' + ((this.fieldType === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
-                '<div control-type="tf-label" class="tf-flex ' + (this.displayLabel ? 'tf-display--none' : '') + '">',
+                '<div control-type="tf-tf-label" class="tf-flex ' + (this.displayLabel ? 'tf-display--none' : '') + '">',
                 '<label>' + (this.fieldLabel ? this.fieldLabel : '') + '</label>',
                 '<span class="tf-required--red ' + (this.markRequired ? '' : 'tf-display--none') + '">*</span>',
                 '</div>',
@@ -83,15 +81,15 @@ var TFTextField = function($fieldset) {
                 '</div>'
             ].join('\n');
 
-            this.$childTemplate = $(el);
+            this.childTemplate = $(el)[0];
         },
         _cacheDom: function() {
 
             //cache DOM
-            this.innerComp = this.$childTemplate.find("input")[0];
-            this.outerComp = this.$childTemplate[0];
-            this.controlComp = this.$childTemplate.find("[control-type='tf-textfield']")[0];
-            this.labelComp = this.$childTemplate.find("[control-type='tf-label']")[0];
+            this.outerComp = this.childTemplate;
+            this.innerComp = this.childTemplate.querySelector("input");
+            this.controlComp = this.childTemplate.querySelector("[control-type='tf-textfield']");
+            this.labelComp = this.childTemplate.querySelector("[control-type='tf-tf-label']");
         },
         _applyProperty: function() {
 
@@ -119,12 +117,11 @@ var TFTextField = function($fieldset) {
                 this.controlComp.appendChild(TFButton.call(val));
             }, this);
         },
-        /** @access private */
         _bindEvents: function() {
+            
             var me = this.scope;
 
             this.setValidations();
-
 
             //public listeners
             if (this.listeners != '') {
@@ -133,44 +130,51 @@ var TFTextField = function($fieldset) {
                 }
             }
         },
-        /** @access private */
         _render: function() {
 
-            if (this.render != '') {
-
-                this.render();
-            }
-        },
-        /** @access private */
-        _attachProperties: function() {
             var me = this.scope;
 
-            //properties
+            if (this.render != '') {
+                this.render.call(me);
+            }
+        },
+        _attachProperties: function() {
+            
+            var me = this.scope;
+
+            // add properties
             me.outerComp = this.outerComp;
             me.innerComp = this.innerComp;
             me.controlComp = this.controlComp;
             me.labelComp = this.labelComp;
             me.setValidations = this.setValidations; 
 
-            //methods
+            // add methods
             TFTextFieldMethods.call(me);
 
+            // share methods to el
             this.outerComp.shared = me;
         },
         setValidations: function() {
+            
             //private listeners
             if (this.validations  && Object.keys(this.validations).length) {
             	
-                //adding validations 
+                 
                 
                 if(!this.scope){
-                	this.scope = this.scope ? this.scope : {};
+                    // executes when setError is called
+                    // will not execute when removeError is called	
+                    this.scope = this.scope ? this.scope : {};
                 	TFValidations.call(this.scope);	
+                
                 }else if(this.scope.type === "textfield" ){
-                	TFValidations.call(this.scope);	
+                	
+                    //exceutes from initial this.validations
+                    TFValidations.call(this.scope);	
                 }
                 
-
+                //adding validations
                 Object.keys(this.validations).forEach(function(val) {
 
                     switch (val) {
@@ -192,11 +196,8 @@ var TFTextField = function($fieldset) {
 
                         case 'onlyNumber':
                         	if(this.validations.onlyNumber.value){
-
-                        		
+                      		
                         		this.innerComp.addEventListener('keydown', this.scope.isNumber);	
-                        	}else{
-                        		this.innerComp.removeEventListener('keydown', this.scope.isNumber);	
                         	}                            
                             break;
 
@@ -205,17 +206,12 @@ var TFTextField = function($fieldset) {
 
                         		this.innerComp.addEventListener('blur', this.scope.isRegEx.bind(this));
                             	this.innerComp.addEventListener('input', this.scope.isRegEx.bind(this));
-                            }else{
-                            	this.innerComp.removeEventListener('blur', this.scope.isRegEx.bind(this));
-                            	this.innerComp.removeEventListener('input', this.scope.isRegEx.bind(this));
                             }
                             break;
 
                         case 'onlyText':
                         	if(this.validations.onlyText.value){
                         		this.innerComp.addEventListener('keydown', this.scope.isOnlyText);	
-                        	}else{
-                        		this.innerComp.removeEventListener('keydown', this.scope.isOnlyText);	
                         	}
                             break;
                     }
