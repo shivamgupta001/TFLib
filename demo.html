@@ -30,47 +30,7 @@
     <script src="TFValidations.js"></script>
     <script src="TFEvents.js"></script>
     <script>
-    (function() {
-
-        /*window.Current.Invoice.SenderFields =[];
-        var FirstNamev = {};
-         var Mobile = {};
-        window.Current.Invoice.SenderFields = [FirstNamev,Mobile];*/
-        var btn = TFButton.call({
-            btnText: 'Hello'
-        });
-
-        var block1 = Iterator({
-            type: 'container',
-            layout: 'column',
-            containerClass: 'abc',
-            items: [{
-                type: 'container',
-                containerClass: ['bg-col--blue', 'abcdef'],
-                styles: {
-                    height: '20px',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    color: 'whitesmoke'
-                },
-                layout: 'row',
-                innerHTML: 'Step1: <b>SENDER INFORMATION</b>',
-                listeners: {
-                    click: function() {
-
-
-                    }
-                }
-
-            }, {
-                type: 'container',
-                flex: 1,
-                layout: 'column',
-                items: [{
-                    type: 'container',
-                    flex: 1,
-                    layout: 'row',
-                    items: [{
+    var SenderName =TFTextField.call({
                         type: 'textfield',
                         fieldType: 'column',
                         fieldLabel: 'Name',
@@ -128,7 +88,50 @@
                             	this.removeError();
                             }
                         }
-                    }, {
+                    });
+    (function() {
+
+        /*window.Current.Invoice.SenderFields =[];
+        var FirstNamev = {};
+         var Mobile = {};
+        window.Current.Invoice.SenderFields = [FirstNamev,Mobile];*/
+        var btn = TFButton.call({
+            btnText: 'Hello'
+        });
+
+
+        var block1 = Iterator({
+            type: 'container',
+            layout: 'column',
+            tagName : 'section',
+            containerClass: 'abc',
+            items: [{
+                type: 'container',
+                containerClass: ['bg-col--blue', 'abcdef'],
+                styles: {
+                    height: '20px',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    color: 'whitesmoke'
+                },
+                layout: 'row',
+                innerHTML: 'Step1: <b>SENDER INFORMATION</b>',
+                listeners: {
+                    click: function() {
+
+
+                    }
+                }
+
+            }, {
+                type: 'container',
+                flex: 1,
+                layout: 'column',
+                items: [{
+                    type: 'container',
+                    flex: 1,
+                    layout: 'row',
+                    items: [SenderName, {
                         type: 'textfield',
                         fieldType: 'column',
                         fieldLabel: 'Mobile',
@@ -288,20 +291,21 @@
                         tabindex: '15',
                         flex: 1
                     }, {
-                        type: 'checkboxfield',
+                        type: 'radiofield',
                         fieldLabel: 'Entity Type',
                         fieldLayout: 'column',
                         id: 'invoiceEntity',
                         compClass: 'padding--five',
                         flex: 1,
                         groupLayout: 'row',
+                        
                         fieldGroup: [{
                             fieldLabel: 'Individual',
                             attributes: {
                                 id: 'shivamCheck',
                                 display: 'shivam',
-                                name: 'shiavm',
-                                value: 'shivam'
+                                name : 'high',
+                                value: 'shivamsasd'
                             },
                             layout : 'row',
                             render : function(){
@@ -316,7 +320,7 @@
                             fieldLabel: 'Company',
                             attributes: {
                                 display: 'shivam',
-                                name: 'shiavm',
+                        
                                 value: 'shivam'
                             },
                             listeners: {
@@ -336,13 +340,14 @@
                         btnClass: 'abcdef',
                         id: 'randomBtn',
                         btnText: 'Click Me',
+                        compClass : ['Name','asdds'],
                         styles: {
                             width: '100px',
                             height: '25px',
                             paddingLeft: '20px'
                         },
                         attributes: {
-
+                        	
                         },
                         listeners: {
                             click: function(e) {
@@ -359,8 +364,7 @@
             }]
 
         });
-        var div = document.getElementById('mydiv');
-        div.appendChild(block1);
+        block1.appendTo('#mydiv');
 
     })();
     </script>

@@ -60,7 +60,7 @@ var TFTextAreaField = function(){
 							'<label>'+(this.fieldLabel ? this.fieldLabel : '')+'</label>',
 							'<span class="tf-required--red '+(this.markRequired ? '' : 'tf-display--none')+'">*</span>',
 						'</div>',
-						'<div control-type="tf-textareafield" class="field-with-btn ">',
+						'<div control-type="tf-textareafield" class="tf-field-with-btn ">',
 							'<textarea',
 								''+(this.name ? 'name="'+this.name+'"' : '')+'',
 								''+(this.placeholder ? 'placeholder="'+this.placeholder+'"' : '')+'',

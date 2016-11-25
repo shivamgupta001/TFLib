@@ -98,26 +98,9 @@ var TFCheckboxFieldMethods = function(){
 	this.prependDom = function(el){
 		this.outerComp.insertBefore(el , this.outerComp.childNodes[0]);
 	};
-	this.insertDomAt = function(el , index){
-		this.outerComp.insertBefore(el , this.outerComp.childNodes[index]);
+	this.insertDomAt = function(el , selector){
+		this.outerComp.insertBefore(el , this.outerComp.querySelector(selector));
 	};
-	this.appendDomToLabel = function(el){
-		this.labelComp.appendChild(el);
-	};
-	this.prependDomToLabel = function(el){
-		this.labelComp.insertBefore(el , this.labelComp.childNodes[0]);
-	};
-	this.insertDomToLabelAt = function(el , index){
-		this.labelComp.insertBefore(el , this.labelComp.childNodes[index]);
-	};
-	this.appendDomToControl = function(el){
-		this.controlComp.appendChild(el);
-	};
-	this.prependDomToControl = function(el){
-		this.controlComp.insertBefore(el , this.controlComp.childNodes[0]);
-	};
-	this.insertDomToControlAt = function(el , index){
-		this.controlComp.insertBefore(el , this.controlComp.childNodes[index]);
-	};
+	
 	
 };

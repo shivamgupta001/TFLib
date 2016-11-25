@@ -65,7 +65,7 @@ var TFTextField = function($fieldset) {
                 '<label>' + (this.fieldLabel ? this.fieldLabel : '') + '</label>',
                 '<span class="tf-required--red ' + (this.markRequired ? '' : 'tf-display--none') + '">*</span>',
                 '</div>',
-                '<div control-type="tf-textfield" class="field-with-btn">',
+                '<div control-type="tf-textfield" class="tf-field-with-btn">',
                 '<input',
                 'type="text"',
                 '' + (this.name ? 'name="' + this.name + '"' : '') + '',
@@ -159,8 +159,7 @@ var TFTextField = function($fieldset) {
             
             //private listeners
             if (this.validations  && Object.keys(this.validations).length) {
-            	
-                 
+            	       
                 
                 if(!this.scope){
                     // executes when setError is called
@@ -197,21 +196,21 @@ var TFTextField = function($fieldset) {
                         case 'onlyNumber':
                         	if(this.validations.onlyNumber.value){
                       		
-                        		this.innerComp.addEventListener('keydown', this.scope.isNumber);	
+                        		this.innerComp.addEventListener('keydown', this.scope.onlyNumber);	
                         	}                            
                             break;
 
                         case 'regex':
                         	if(this.validations.regex.value){
 
-                        		this.innerComp.addEventListener('blur', this.scope.isRegEx.bind(this));
-                            	this.innerComp.addEventListener('input', this.scope.isRegEx.bind(this));
+                        		this.innerComp.addEventListener('blur', this.scope.regex.bind(this));
+                            	this.innerComp.addEventListener('input', this.scope.regex.bind(this));
                             }
                             break;
 
                         case 'onlyText':
                         	if(this.validations.onlyText.value){
-                        		this.innerComp.addEventListener('keydown', this.scope.isOnlyText);	
+                        		this.innerComp.addEventListener('keydown', this.scope.onlyText);	
                         	}
                             break;
                     }

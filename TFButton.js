@@ -16,7 +16,7 @@ var TFButton = function(){
 				this._render();		
 				
 				// return el
-				return this.innerComp;
+				return this.outerComp;
 				
 			},
 			_initialize : function(){
@@ -29,6 +29,7 @@ var TFButton = function(){
 				this.attributes = me.attributes || '';
 				
 				//class
+				this.compClass = (me.compClass ? (me.compClass.constructor === Array ? me.compClass : [me.compClass]) : false);
 				this.btnClass = (me.btnClass ? (me.btnClass.constructor === Array ? me.btnClass : [me.btnClass]) : false);
 
 				
@@ -43,10 +44,12 @@ var TFButton = function(){
 			_generateTemplate : function(){
 				
 				var el  =[
-					'<button control-type="tf-btn"',
-						'id="'+this.dynamicId+'"',
-						'class="tf-button"',
-					'></button>'
+					'<div>',
+						'<button control-type="tf-btn"',
+							'id="'+this.dynamicId+'"',
+							'class="tf-button"',
+						'></button>',
+					'</div>'
 				].join('\n');
 
 				this.childTemplate = $(el)[0];
@@ -54,7 +57,8 @@ var TFButton = function(){
 			_cacheDom : function(){
 
 				//cache DOM
-				this.innerComp = this.childTemplate;
+				this.outerComp = this.childTemplate;
+				this.innerComp = this.childTemplate.querySelector('[control-type="tf-btn"]');
 				
 			},
 			_applyProperty : function(){
@@ -78,6 +82,7 @@ var TFButton = function(){
 				
 				//apply class
 				if(this.btnClass) this.innerComp.classList.add.apply(this.innerComp.classList , this.btnClass);
+				if(this.compClass) this.outerComp.classList.add.apply(this.outerComp.classList , this.compClass);
 			},
 			_bindEvents : function(){
 				
@@ -90,16 +95,18 @@ var TFButton = function(){
 				}
 			},
 			_attachProperties : function(){
+				
 				var me = this.scope;
 
 				// add properties
 				me.innerComp = this.innerComp;
+				me.outerComp = this.outerComp;
 										
 				// add methods
 				TFButtonMethods.call(me);
 
 				// shared methods over el
-				me.innerComp.shared = me;
+				me.outerComp.shared = me;
 			},
 			_render : function(){
 				

@@ -29,7 +29,8 @@ var TFCheckboxField = function(){
 				this.styles = me.styles || '';
 				this.fieldGroup = me.fieldGroup || [];
 				this.groupLayout = me.groupLayout || 'column';
-								
+				this.name = me.name || '';
+				
 				// innerHTML configs
 				this.fieldLabel = me.fieldLabel || '';
 											

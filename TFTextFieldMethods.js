@@ -1,10 +1,10 @@
 var TFTextFieldMethods = function(){
 
 	// display property handler
-	this.displayHide = function(){
+	this.hide = function(){
 		this.outerComp.style.display = "none";
 	};
-	this.displayShow = function(){
+	this.show = function(){
 		this.outerComp.style.display = "";
 	};
 	this.displayLabelHide = function(){
@@ -61,8 +61,8 @@ var TFTextFieldMethods = function(){
 	};
 	
 	// change label name 
-	this.changeLabelText = function(newLabelText){
-		this.labelComp.querySelector('label').innerHTML = newLabelText;
+	this.changeLabel = function(newLabelText){
+		this.labelComp.querySelector('tf-tf-label').innerHTML = newLabelText;
 	};
 
 	// add remove class handler
@@ -98,27 +98,28 @@ var TFTextFieldMethods = function(){
 	this.prependDom = function(el){
 		this.outerComp.insertBefore(el , this.outerComp.childNodes[0]);
 	};
-	this.insertDomAt = function(el , index){
-		this.outerComp.insertBefore(el , this.outerComp.childNodes[index]);
+	// add query selector
+	this.insertDomAt = function(el , selector){
+		this.outerComp.insertBefore(el , this.outerComp.querySelector(selector));
 	};
-	this.appendDomToLabel = function(el){
-		this.labelComp.appendChild(el);
-	};
-	this.prependDomToLabel = function(el){
-		this.labelComp.insertBefore(el , this.labelComp.childNodes[0]);
-	};
-	this.insertDomToLabelAt = function(el , index){
-		this.labelComp.insertBefore(el , this.labelComp.childNodes[index]);
-	};
-	this.appendDomToControl = function(el){
-		this.controlComp.appendChild(el);
-	};
-	this.prependDomToControl = function(el){
-		this.controlComp.insertBefore(el , this.controlComp.childNodes[0]);
-	};
-	this.insertDomToControlAt = function(el , index){
-		this.controlComp.insertBefore(el , this.controlComp.childNodes[index]);
-	};
+	// this.appendDomToLabel = function(el){
+	// 	this.labelComp.appendChild(el);
+	// };
+	// this.prependDomToLabel = function(el){
+	// 	this.labelComp.insertBefore(el , this.labelComp.childNodes[0]);
+	// };
+	// this.insertDomToLabelAt = function(el , index){
+	// 	this.labelComp.insertBefore(el , this.labelComp.childNodes[index]);
+	// };
+	// this.appendDomToControl = function(el){
+	// 	this.controlComp.appendChild(el);
+	// };
+	// this.prependDomToControl = function(el){
+	// 	this.controlComp.insertBefore(el , this.controlComp.childNodes[0]);
+	// };
+	// this.insertDomToControlAt = function(el , index){
+	// 	this.controlComp.insertBefore(el , this.controlComp.childNodes[index]);
+	// };
 
 	// set and rmove validation
 	this.setError = function(errmsg){
@@ -151,5 +152,12 @@ var TFTextFieldMethods = function(){
 			
 		}
 	};
+/*this.isRequired(true,message);
+this.regex(true, regex, message);
+this.onlyText(true);
+this.onlyNumber(true);
+this.hide()
+this.prop("readonly", true);*/
+
 
 };

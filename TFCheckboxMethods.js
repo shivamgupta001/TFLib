@@ -98,27 +98,10 @@ var TFCheckboxMethods = function(){
 	this.prependDom = function(el){
 		this.outerComp.insertBefore(el , this.outerComp.childNodes[0]);
 	};
-	this.insertDomAt = function(el , index){
-		this.outerComp.insertBefore(el , this.outerComp.childNodes[index]);
+	this.insertDomAt = function(el , selector){
+		this.outerComp.insertBefore(el , this.outerComp.querySelector(selector));
 	};
-	this.appendDomToLabel = function(el){
-		this.labelComp.appendChild(el);
-	};
-	this.prependDomToLabel = function(el){
-		this.labelComp.insertBefore(el , this.labelComp.childNodes[0]);
-	};
-	this.insertDomToLabelAt = function(el , index){
-		this.labelComp.insertBefore(el , this.labelComp.childNodes[index]);
-	};
-	this.appendDomToInner = function(el){
-		this.innerComp.appendChild(el);
-	};
-	this.prependDomToInner = function(el){
-		this.innerComp.insertBefore(el , this.innerComp.childNodes[0]);
-	};
-	this.insertDomToInnerAt = function(el , index){
-		this.innerComp.insertBefore(el , this.innerComp.childNodes[index]);
-	};
+	
 
 	// set remove attribute
 	this.setAttribute = function( attrName , attrVal){

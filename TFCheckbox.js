@@ -22,10 +22,11 @@ var TFCheckbox = function(){
 				var me = this.scope;
 
 				//  variables
-				this.dynamicId = me.id || "tf-checkbox-"+getRandomInt(1, 10000);
+				this.dynamicId = me.id || "tf-chk-"+ (me.attributes ? (me.attributes.name ? me.attributes.name : '') : '')+ getRandomInt(1, 10000);
 				this.layout = me.layout || 'row';
 				this.styles = me.styles || '';
 				this.attributes = me.attributes || '';
+
 								
 				// innerHTML configs
 				this.fieldLabel = me.fieldLabel || '';
@@ -65,6 +66,9 @@ var TFCheckbox = function(){
 						this.outerComp.style[style] = this.styles[style];
 					}, this);
 				}
+				
+				// apply name attribute
+				if(this.name != '') this.innerComp.setAttribute( 'name' , this.name);
 				
 				//apply attributes
 				if(this.attributes != ''){

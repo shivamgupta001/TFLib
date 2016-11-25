@@ -51,7 +51,7 @@ var Iterator = function(config){
 			
 			case 'textfield' 	: el = TFTextField.call(item);
 									break;
-			case 'textareafield' 	: el = TFTextAreaField.call(item);
+			case 'textareafield': el = TFTextAreaField.call(item);
 									break;
 			case 'checkboxfield': el = TFCheckboxField.call(item);
 									break;
@@ -76,5 +76,23 @@ var Iterator = function(config){
 	}
 
 	// return iterated code block
-	return  iterateStructure(config);
+	var el =  iterateStructure(config);
+	
+	el.appendTo = function(selector){
+		
+		var el = document.body.querySelector(selector);
+		if(el) el.appendChild(this);
+	};
+	el.prependTo = function(selector){
+		
+		var el = document.body.querySelector(selector);
+		if(el) el.insertBefore(this , el.childNodes[0]);
+	};
+	el.insertDomToAt = function(selector1 , selector2){
+
+		var el = document.body.querySelector(selector1);
+		if(el) el.insertBefore(this , el.querySelector(selector2));
+	};
+
+	return el;
 }

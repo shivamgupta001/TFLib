@@ -14,7 +14,7 @@ var TFContainer = function(){
 				this._render();	
 				
 				// return el
-				return this.innerComp;
+				return this.outerComp;
 			},
 			_initialize : function(){
 				
@@ -22,8 +22,9 @@ var TFContainer = function(){
 
 				//  configs
 				this.dynamicId = me.id || "tf-container-"+getRandomInt(1, 10000);
-				this.layout = me.layout;
+				this.layout = me.layout || 'row';
 				this.styles = me.styles || '';
+				this.tagName = me.tagName || 'div';
 								
 				//style
 				this.flex = me.flex || '';
@@ -42,20 +43,17 @@ var TFContainer = function(){
 			},
 			_generateTemplate : function(){
 				
-				var el  =[
-					'<div control-type="tf-container"',
-						'id="'+this.dynamicId+'"',
-						'class="tf-flex '+((this.layout === "row") ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'"',
-						'>',
-					'</div>'
-				].join('\n');
+				var el = document.createElement(this.tagName);
+				el.classList.add('tf-flex');
+				el.setAttribute('control-type','tf-container');
+				el.setAttribute('id', this.dynamicId);
 				
-				this.childTemplate = $(el)[0];
+				this.childTemplate = el;
 			},
 			_cacheDom : function(){
 				
 				// cache Dom
-				this.innerComp = this.childTemplate;
+				this.outerComp = this.childTemplate;
 				
 			},
 			_applyStyles : function(){
@@ -63,19 +61,24 @@ var TFContainer = function(){
 				//apply styles
 				if(this.styles != ''){
 					Object.keys(this.styles).forEach(function(style){
-						this.innerComp.style[style] = this.styles[style];
+						this.outerComp.style[style] = this.styles[style];
 					}, this);
 				}
 
 				// apply flex
-				if(this.flex) this.innerComp.style.flex = this.flex;
+				if(this.flex) this.outerComp.style.flex = this.flex;
 
 				//apply class
-				if(this.compClass) this.innerComp.classList.add.apply(this.innerComp.classList , this.compClass);
+				if(this.compClass) this.outerComp.classList.add.apply(this.outerComp.classList , this.compClass);
+				
+				//apply layout
+				if(this.layout === "row")
+					this.outerComp.classList.add('tf-flex-direction--row');
+				else this.outerComp.classList.add('tf-flex-direction--column');
 
 				// inner text or html
-				if(this.innerText) this.innerComp.innerText = this.innerText;
-				if(this.innerHTML) this.innerComp.innerHTML = this.innerHTML;
+				if(this.innerText) this.outerComp.innerText = this.innerText;
+				if(this.innerHTML) this.outerComp.innerHTML = this.innerHTML;
 			},
 			_bindEvents : function(){
 				
@@ -83,7 +86,7 @@ var TFContainer = function(){
 				
 				if(this.listeners != ''){
 					for(var listener in this.listeners){
-						this.innerComp.addEventListener(listener , this.listeners[listener].bind(this.scope));
+						this.outerComp.addEventListener(listener , this.listeners[listener].bind(this.scope));
 					}
 				}
 			},
@@ -92,13 +95,13 @@ var TFContainer = function(){
 				var me = this.scope;
 
 				// add properties
-				me.innerComp = this.innerComp;
+				me.outerComp = this.outerComp;
 
 				// add methods
 				TFContainerMethods.call(me);
 
 				// share methods to el
-				me.innerComp.shared = me;
+				me.outerComp.shared = me;
 			},
 			_render : function(){
 				

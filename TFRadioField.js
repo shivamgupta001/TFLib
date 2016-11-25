@@ -28,6 +28,7 @@ var TFRadioField = function($fieldset){
 				this.styles = me.styles || '';
 				this.fieldGroup = me.fieldGroup || [];
 				this.groupLayout = me.groupLayout || 'column';
+				this.name = me.name || '';
 
 				// innerHTML configs
 				this.fieldLabel = me.fieldLabel || '';
@@ -82,6 +83,8 @@ var TFRadioField = function($fieldset){
 
 				// add check boxes to template
 				this.fieldGroup.forEach(function(item){
+					if(this.name != '')
+						item.name = this.name;
 					this.controlComp.appendChild(TFRadio.call(item));
 				},this);
 			},

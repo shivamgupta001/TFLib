@@ -23,10 +23,12 @@ var TFRadio = function(){
 				var me = this.scope;
 
 				//  configs
-				this.dynamicId = me.id || "tf-radio-"+getRandomInt(1, 10000);
+				this.dynamicId = me.id || "tf-radio-"+ ( me.attributes ? (me.attributes.name ? me.attributes.name : '') : '') + getRandomInt(1, 10000);
 				this.layout = me.layout || 'row';
 				this.styles = me.styles || '';
 				this.attributes = me.attributes || '';
+				this.name = me.name || '';
+
 								
 				// innerHTML configs
 				this.fieldLabel = me.fieldLabel || '';
@@ -67,6 +69,9 @@ var TFRadio = function(){
 					}, this);
 				}
 				
+				// apply name attribute
+				if(this.name != '') this.innerComp.setAttribute( 'name' , this.name);
+
 				//apply attributes
 				if(this.attributes != ''){
 					Object.keys(this.attributes).forEach(function(attr){
@@ -101,7 +106,7 @@ var TFRadio = function(){
 				TFCheckboxMethods.call(me);
 
 				// shared methods add to el 
-				me.innerComp.shared = me;
+				me.outerComp.shared = me;
 			},
 			_render : function(){
 

@@ -11,7 +11,7 @@ var TFValidations = function(){
 
 	
 	// allows validation on key lists
-	function validateAllow(key , lists){
+	function isKeyAllowed(key , lists){
 		var status = false;
 		for(var i=0 ; i < lists.length ;i++){
 			if(lists[i].indexOf(key) > -1){
@@ -59,9 +59,9 @@ var TFValidations = function(){
 	};
 
 	// only number validation
-	this.isNumber = function(e){
+	this.onlyNumber = function(e){
 		
-		if( validateAllow(e.key ,[numberKeyList , generalKeyList, functionKeyList]) ){
+		if( isKeyAllowed(e.key ,[numberKeyList , generalKeyList, functionKeyList]) ){
 
 		}else e.preventDefault(); 	
 		
@@ -69,16 +69,16 @@ var TFValidations = function(){
 	};
 
 	// only text validation
-	this.isOnlyText = function(e){
+	this.onlyText = function(e){
 		
-		if(validateAllow(e.key ,[alphaKeyList , generalKeyList, functionKeyList])){
+		if(isKeyAllowed(e.key ,[alphaKeyList , generalKeyList, functionKeyList])){
 
 		}else e.preventDefault();
 	};
 
 	// regEx validation
-	this.isRegEx = function(e){
-
+	this.regex = function(e){
+		// add same validation code in webagent project
 		var control = this.controlComp;
 		var inputControl = this.innerComp;
 		if(this.validations.regex.value){
