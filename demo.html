@@ -15,10 +15,9 @@
     <script src="TFCheckboxMethods.js"></script>
     <script src="TFCheckboxFieldMethods.js"></script>
     <script src="TFSharedMethods.js"></script>
-
+    <script src="TFComboboxField.js"></script>
 
     <script src="TFIterator.js"></script>
-    <script src="TFComboboxField.js"></script>
     <script src="TFForm.js"></script>
     <script src="TFContainer.js"></script>
     <script src="TFCheckboxField.js"></script>
@@ -32,7 +31,8 @@
     <script src="TFValidations.js"></script>
     <script src="TFEvents.js"></script>
     <script>
-    var SenderName =TFComboboxField.call({
+    var SenderName =TFTextField.call({
+                        type: 'textfield',
                         fieldType: 'column',
                         fieldLabel: 'Name',
                         id: 'invoiceName',
@@ -41,25 +41,15 @@
                         markRequired: true,
                         flex: 2,
                         styles: {
-                            width : '200px'
+
                         },
                         attributes: {
 
                         },
-                        options : [{
-                            value : 'Abc1',
-                            display : 'Abc1'
-                        },{
-                            value : 'Abc2',
-                            display : 'Abc2'
-                        },{
-                            value : 'Abc3',
-                            display : 'Abc3'
-                        }],
                         validations : {
-                        	/*'regex' : { value:'abc' , errmsg : 'Only Valid Characters are 0-9'}*/
-                        	/*'isRequired' : {value : true , errmsg : 'This field is required.'}*/
-                        	/*'onlyNumber' : {value: true , errmsg : 'Numbers'},*/
+                        	/*'regex' : { value:true ,pattern : 'abc' ,errmsg : 'Only Valid Characters are 0-9'}*/
+                        	/*'isRequired' : {value : true , errmsg : 'This field is required.'},*/
+                        	/*'onlyNumber' : {value: true}*/
                         	/*'onlyText' : {value : true, errmsg : 'Text'}*/
                         	
                         },
@@ -88,15 +78,18 @@
                                 }
                             }
                         }],
+                        render : function(){
+                            this.onlyText({value : true });
+                        },
                         listeners: {
                             input: function(e, val) {
-                                
-                                this.setError("He ha");
+                               
+                               
 
                             },
                             blur : function(e, val){
-
-                            	this.removeError();
+                                 
+                            	
                             }
                         }
                     });
@@ -309,7 +302,9 @@
                         compClass: 'padding--five',
                         flex: 1,
                         groupLayout: 'row',
-                        
+                        validations : {
+                            'isRequired' : {value : true , errmsg : 'Thsio fk skjfhjg'}
+                        },
                         fieldGroup: [{
                             fieldLabel: 'Individual',
                             attributes: {
@@ -331,7 +326,7 @@
                             fieldLabel: 'Company',
                             attributes: {
                                 display: 'shivam',
-                        
+                                name : 'high',
                                 value: 'shivam'
                             },
                             listeners: {

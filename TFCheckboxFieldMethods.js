@@ -65,4 +65,49 @@ var TFCheckboxFieldMethods = function(){
 		this.controlComp.classList.remove.apply(this.controlComp.classList , oldClass);
 	};
 	
+	// isRequired method
+	this.isRequired = function(obj){
+	
+		var status = obj.value;
+		var errmsg = obj.errmsg;
+		if(this.validations.hasOwnProperty("isRequired")){
+
+			this.validations.isRequired.value = status;
+			this.validations.isRequired.errmsg = errmsg;	
+
+		}else{
+			this.validations = Object.defineProperty(this.validations, 'isRequired', 
+								{	value : {},
+									writable : true,
+									configurable : true,
+									enumerable : true
+								});
+			if(status)
+				this.validations.isRequired.value = status;
+			if(errmsg)
+				this.validations.isRequired.errmsg = errmsg;
+		}
+		
+		this.setValidations.call(this);
+	
+	};
+
+	this.validate = function(){
+		
+		var chkstatus = false;
+		for(var i = 0 ; i< this.innerComp.length ; i++){
+			if(this.innerComp[i].checked){
+				chkstatus = true;
+				break;
+			}
+		}
+
+		if(chkstatus){
+			this.controlComp.classList.remove('tooltip', 'tf-err-border--red');
+			this.controlComp.removeAttribute('data-tooltip');
+		}else{
+			this.controlComp.classList.add('tooltip', 'tf-err-border--red');
+			this.controlComp.setAttribute('data-tooltip', this.validations.isRequired.errmsg);
+		}
+	};
 };

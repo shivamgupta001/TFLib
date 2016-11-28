@@ -24,7 +24,13 @@ var TFTextField = function($fieldset) {
             //config
             this.dynamicId = me.id || "tf-textfield-" + getRandomInt(1, 10000);
             this.buttons = me.buttons || [];
-            this.validations = me.validations || false;
+            this.validations = me.validations || {};
+            this.validations.__proto__ =  {
+                'isRequired' : {value : false , errmsg : 'This field is Required'},
+                'onlyText' : {value : false},
+                'onlyNumber' : {value :false},
+                'regex' : {value : false, errmsg : 'Allowed Values are alphabets'}
+            };
             this.styles = me.styles || '';
             this.attributes = me.attributes || '';
             this.displayLabel = me.displayLabel || false;
@@ -121,8 +127,6 @@ var TFTextField = function($fieldset) {
             
             var me = this.scope;
 
-            this.setValidations();
-
             //public listeners
             if (this.listeners != '') {
                 for (var listener in this.listeners) {
@@ -147,7 +151,8 @@ var TFTextField = function($fieldset) {
             me.innerComp = this.innerComp;
             me.controlComp = this.controlComp;
             me.labelComp = this.labelComp;
-            me.setValidations = this.setValidations; 
+            me.setValidations = this.setValidations;
+            me.validations = this.validations; 
 
             // add methods
             TFTextFieldMethods.call(me);
@@ -155,68 +160,87 @@ var TFTextField = function($fieldset) {
 
             // share methods to el
             this.outerComp.shared = me;
+
+            // handle validations
+            me.validationMethods = {};
+            TFValidations.call(me.validationMethods);
+
+            if(Object.keys(this.validations).length > 0)
+                this.setValidations.call(me);
         },
         setValidations: function() {
-            
-            //private listeners
-            if (this.validations  && Object.keys(this.validations).length) {
-            	       
-                
-                if(!this.scope){
-                    // executes when setError is called
-                    // will not execute when removeError is called	
-                    this.scope = this.scope ? this.scope : {};
-                	TFValidations.call(this.scope);	
-                
-                }else if(this.scope.type === "textfield" ){
-                	
-                    //exceutes from initial this.validations
-                    TFValidations.call(this.scope);	
-                }
                 
                 //adding validations
                 Object.keys(this.validations).forEach(function(val) {
 
                     switch (val) {
                         case 'isRequired':
-                        	
                         	if(this.validations.isRequired.value){
+                        		
+                                if(!this.isRequiredHandler){
 
-                        		this.scope.isRequiredHandler = this.scope.isRequired.bind(this);
-
-                        		this.innerComp.addEventListener('blur', this.scope.isRequiredHandler);
-                            	this.innerComp.addEventListener('input', this.scope.isRequiredHandler);
+                                    this.isRequiredHandler = this.validationMethods.isRequired.bind(this);
+                                    this.innerComp.addEventListener('blur', this.isRequiredHandler);
+                                    this.innerComp.addEventListener('input', this.isRequiredHandler);
+                                }
+                                
 
 
                         	}else {
-                        		this.innerComp.removeEventListener('blur', this.scope.isRequiredHandler);
-                            	this.innerComp.removeEventListener('input', this.scope.isRequiredHandler);
+                        		this.innerComp.removeEventListener('blur', this.isRequiredHandler);
+                            	this.innerComp.removeEventListener('input', this.isRequiredHandler);
+                                delete this.isRequiredHandler;
                            	}
                             break;
 
                         case 'onlyNumber':
                         	if(this.validations.onlyNumber.value){
-                      		
-                        		this.innerComp.addEventListener('keydown', this.scope.onlyNumber);	
-                        	}                            
+                      		    
+                                if(!this.onlyNumberHandler){
+                                    this.onlyNumberHandler = this.validationMethods.onlyNumber.bind(this);
+                                    this.innerComp.addEventListener('keydown', this.onlyNumberHandler); 
+                                }
+                                
+                        	}else{
+                                this.innerComp.removeEventListener('keydown', this.onlyNumberHandler);
+                                delete this.onlyNumberHandler;
+                            }                            
                             break;
 
                         case 'regex':
                         	if(this.validations.regex.value){
 
-                        		this.innerComp.addEventListener('blur', this.scope.regex.bind(this));
-                            	this.innerComp.addEventListener('input', this.scope.regex.bind(this));
-                            }
+                                if(!this.regexHandler){
+                                    this.regexHandler = this.validationMethods.regex.bind(this);
+                                    this.innerComp.addEventListener('blur', this.regexHandler);
+                                    this.innerComp.addEventListener('input', this.regexHandler);
+                                }
+                                
+                            }else {
+
+                                this.innerComp.removeEventListener('blur', this.regexHandler);
+                                this.innerComp.removeEventListener('input', this.regexHandler);
+                                delete this.regexHandler;
+                            } 
                             break;
 
                         case 'onlyText':
                         	if(this.validations.onlyText.value){
-                        		this.innerComp.addEventListener('keydown', this.scope.onlyText);	
-                        	}
+                        		
+                                if(!this.onlyTextHandler){
+                                    this.onlyTextHandler = this.validationMethods.onlyText.bind(this);
+                                    this.innerComp.addEventListener('keydown', this.onlyTextHandler);       
+                                }
+                                
+                        	}else{
+
+                                this.innerComp.removeEventListener('keydown', this.onlyTextHandler);
+                                delete this.onlyTextHandler;
+                            }
                             break;
                     }
                 }, this);
-            }
+            
         }
     };
 

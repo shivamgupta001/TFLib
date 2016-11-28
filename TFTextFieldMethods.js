@@ -66,7 +66,7 @@ var TFTextFieldMethods = function(){
 	};
 
 	// set and rmove validation
-	this.setError = function(errmsg){
+	/*this.setError = function(errmsg){
 		
 		// if initially validations config included 
 		// this.isRequired = function 
@@ -95,13 +95,123 @@ var TFTextFieldMethods = function(){
 			this.setValidations();
 			
 		}
+	};*/
+
+	// validation methods
+	this.isRequired = function(obj){
+	
+		var status = obj.value;
+		var errmsg = obj.errmsg;
+		if(this.validations.hasOwnProperty("isRequired")){
+
+			this.validations.isRequired.value = status;
+			this.validations.isRequired.errmsg = errmsg;	
+
+		}else{
+			this.validations = Object.defineProperty(this.validations, 'isRequired', 
+								{	value : {},
+									writable : true,
+									configurable : true,
+									enumerable : true
+								});
+			if(status)
+				this.validations.isRequired.value = status;
+			if(errmsg)
+				this.validations.isRequired.errmsg = errmsg;
+		}
+		
+		this.setValidations.call(this);
+	
 	};
-/*this.isRequired(true,message);
-this.regex(true, regex, message);
-this.onlyText(true);
-this.onlyNumber(true);
-this.hide()
-this.prop("readonly", true);*/
+	this.onlyText = function(obj){
+		
+		var status = obj.value;
+		
+		if(this.validations.hasOwnProperty("onlyText")){
+			this.validations.onlyText.value = status;
+				
+		}else{
+			this.validations = Object.defineProperty(this.validations, 'onlyText', 
+									{	value : { },
+										writable : true,
+										configurable : true,
+										enumerable : true
+									});
+			if(status)
+				this.validations.onlyText.value = status;
+		}
+		
+		this.setValidations.call(this);
+	
+	};
+	this.onlyNumber = function(obj){
+		
+		var status = obj.value;
+		
+		if(this.validations.hasOwnProperty("onlyNumber")){
+			
+			this.validations.onlyNumber.value = status;
+			
+		}else{
 
+			this.validations = Object.defineProperty(this.validations, 'onlyNumber', 
+									{	value : { },
+										writable : true,
+										configurable : true,
+										enumerable : true
+									});
+			if(status)
+				this.validations.onlyNumber.value = status;
+		}
+		
+		this.setValidations.call(this);
+	
+	};
+	this.regex = function(obj){
+		
+		var status = obj.value;
+		var errmsg = obj.errmsg;
+		var pattern = obj.pattern;
+		if(this.validations.hasOwnProperty("regex")){
+			this.validations.regex.value = status;
+			this.validations.regex.errmsg = errmsg;	
+			this.validations.regex.pattern = pattern;	
+		}else{
+			this.validations = Object.defineProperty(this.validations , 'regex',
+								{
+									value : {},
+									writable : true,
+									configurable : true,
+									enumerable : true
+								});
+			if(status)
+				this.validations.regex.value = status;
+			if(errmsg)
+				this.validations.regex.errmsg = errmsg;
+			if(pattern)
+				this.validations.regex.pattern = pattern;
+		}
+		this.setValidations.call(this);
+	
+	};
 
+	this.validate = function(){
+		
+		Object.keys(this.validation).forEach(function(val){
+			if(val === 'isRequired'){
+				if(this.validations.isRequired.value){
+					this.controlComp.classList.add('tooltip', 'tf-err-border--red');
+					this.controlComp.setAttribute('data-tooltip', this.validations.isRequired.errmsg);	
+				}
+			}else if(val === 'regex'){
+				if(this.validations.regex.value){
+					var regex = new RegExp(this.validations.regex.pattern);
+					if(!regex.test(e.target.value)){
+						this.controlComp.classList.add('tooltip', 'tf-err-border--red');
+						this.controlComp.setAttribute('data-tooltip', this.validations.regex.errmsg);			
+					}					
+				}
+			}
+		})
+	};
 };

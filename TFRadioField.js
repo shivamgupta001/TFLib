@@ -29,6 +29,13 @@ var TFRadioField = function($fieldset){
 				this.fieldGroup = me.fieldGroup || [];
 				this.groupLayout = me.groupLayout || 'column';
 				this.name = me.name || '';
+				this.validations = me.validations || {};
+	            this.validations.__proto__ =  {
+	                'isRequired' : {value : false , errmsg : 'This field is Required'},
+	                'onlyText' : {value : false},
+	                'onlyNumber' : {value :false},
+	                'regex' : {value : false, errmsg : 'Allowed Values are alphabets'}
+	            };
 
 				// innerHTML configs
 				this.fieldLabel = me.fieldLabel || '';
@@ -66,6 +73,7 @@ var TFRadioField = function($fieldset){
 				this.outerComp = this.childTemplate;
 				this.controlComp = this.childTemplate.querySelector('[control-type="tf-radiofield"]');
 				this.labelComp = this.childTemplate.querySelector('[control-type="tf-radiof-label"]');
+				
 			},
 			_applyProperty : function(){
 				
@@ -87,6 +95,9 @@ var TFRadioField = function($fieldset){
 						item.name = this.name;
 					this.controlComp.appendChild(TFRadio.call(item));
 				},this);
+
+				// cache Dom
+				this.innerComp = this.controlComp.getElementsByTagName('input');
 			},
 			_bindEvents : function(){
 				
@@ -106,6 +117,7 @@ var TFRadioField = function($fieldset){
 				me.controlComp = this.controlComp;
 				me.outerComp = this.outerComp;
 				me.labelComp = this.labelComp;
+				me.innerComp = this.innerComp;
 				
 				// add methods
 				TFCheckboxFieldMethods.call(me);
@@ -113,6 +125,13 @@ var TFRadioField = function($fieldset){
 
 				// share methods to el
 				me.outerComp.shared = me;
+
+				// handle validations
+	            me.validationMethods = {};
+	            TFValidations.call(me.validationMethods);
+
+	            if(Object.keys(this.validations).length > 0)
+	                this.setValidations.call(me);
 			},
 			_render : function(){
 				
@@ -121,7 +140,33 @@ var TFRadioField = function($fieldset){
 				if(this.render != ''){
 					this.render.call(me);
 				}
-			}
+			},
+	        setValidations: function() {
+	                
+	                //adding validations
+
+	                Object.keys(this.validations).forEach(function(val) {
+
+	                    if(val === 'isRequired'){
+
+	                        	if(this.validations.isRequired.value){
+	                        		
+	                                if(!this.isRequiredHandler){
+
+	                                    this.isRequiredHandler = this.validationMethods.isRequired.bind(this);
+	                                    for(var i=0; i<this.innerComp.length ;i++ ){
+	                                    	this.innerComp[i].addEventListener('change', this.isRequiredHandler);
+	                                    }
+	                                }
+	                            }else {
+	                        		for(var i=0; i<this.innerComp.length ;i++ ){
+	                                   	this.innerComp[i].removeEventListener('change', this.isRequiredHandler);
+	                                }
+	                            	delete this.isRequiredHandler;
+	                           	}
+	                    }
+	                }, this);
+	        }
 		};
 				
 		function getRandomInt(min, max){

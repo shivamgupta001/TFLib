@@ -24,7 +24,7 @@
     display: none !important;
 }
 .tf-err-border--red{
-    border-color: red !important;
+    border: 1px solid red !important;
 }
 .tf-required--red{
     color : red;

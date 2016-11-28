@@ -30,7 +30,14 @@ var TFCheckboxField = function(){
 				this.fieldGroup = me.fieldGroup || [];
 				this.groupLayout = me.groupLayout || 'column';
 				this.name = me.name || '';
-				
+				this.validations = me.validations || {};
+	            this.validations.__proto__ =  {
+	                'isRequired' : {value : false , errmsg : 'This field is Required'},
+	                'onlyText' : {value : false},
+	                'onlyNumber' : {value :false},
+	                'regex' : {value : false, errmsg : 'Allowed Values are alphabets'}
+	            };
+
 				// innerHTML configs
 				this.fieldLabel = me.fieldLabel || '';
 											
@@ -89,6 +96,8 @@ var TFCheckboxField = function(){
 						item.name = this.name;
 					this.controlComp.appendChild(TFCheckbox.call(item));
 				},this);
+
+				this.innerComp = this.controlComp.getElementsByTagName('input');
 			},
 			_bindEvents : function(){
 				
@@ -108,6 +117,7 @@ var TFCheckboxField = function(){
 				me.controlComp = this.controlComp;
 				me.outerComp = this.outerComp;
 				me.labelComp = this.labelComp;
+				me.innerComp = this.innerComp;
 
 				//methods
 				TFCheckboxMethods.call(me);
@@ -115,6 +125,13 @@ var TFCheckboxField = function(){
 
 				//share methods to el
 				me.outerComp.shared = me;
+
+				// handle validations
+	            me.validationMethods = {};
+	            TFValidations.call(me.validationMethods);
+
+	            if(Object.keys(this.validations).length > 0)
+	                this.setValidations.call(me);
 			},
 			_render : function(){
 
@@ -123,7 +140,33 @@ var TFCheckboxField = function(){
 				if(this.render != ''){
 					this.render.call(me);
 				}
-			}
+			},
+	        setValidations: function() {
+	                
+	                //adding validations
+
+	                Object.keys(this.validations).forEach(function(val) {
+
+	                    if(val === 'isRequired'){
+
+	                        	if(this.validations.isRequired.value){
+	                        		
+	                                if(!this.isRequiredHandler){
+
+	                                    this.isRequiredHandler = this.validationMethods.isRequired.bind(this);
+	                                    for(var i=0; i<this.innerComp.length ;i++ ){
+	                                    	this.innerComp[i].addEventListener('change', this.isRequiredHandler);
+	                                    }
+	                                }
+	                            }else {
+	                        		for(var i=0; i<this.innerComp.length ;i++ ){
+	                                   	this.innerComp[i].removeEventListener('change', this.isRequiredHandler);
+	                                }
+	                            	delete this.isRequiredHandler;
+	                           	}
+	                    }
+	                }, this);
+	        }
 
 		};
 		
