@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: methods/TFButtonMethods.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,53 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: methods/TFButtonMethods.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @author Shivam Gupta &lt;shivamcs3080@gmail.com>
+ */
+ /** This is a description of the Button Methods  Module. */
+var TFButtonMethods = function(){
 
+	// inner text handler
+	this.replaceText = function(newText){
+		this.innerComp.innerText = newText;
+	};
 
-    <h3> </h3>
+	this.addInnerClass = function(newClass){
+		newClass = newClass.constructor === Array ? newClass : [newClass];  
+		this.innerComp.classList.add.apply(this.innerComp.classList , newClass);
+	};
+	this.removeInnerClass = function(oldClass){
+		oldClass = oldClass.constructor === Array ? oldClass : [oldClass];
+		this.innerComp.classList.remove.apply(this.innerComp.classList , oldClass);
+	};
 
+	// disable enable handler
+	this.disable = function(){
+		this.innerComp.setAttribute('disabled' , true);
+	};
+	this.enable = function(){
+		this.innerComp.removeAttribute('disabled');
+	};
 
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+	// add remove attribute
+	this.setAttribute = function( attrName , attrVal){
+		this.innerComp.setAttribute(attrName , attrVal);
+	};
+	this.removeAttribute = function(attrName){
+		this.innerComp.removeAttribute(attrName);
+	};
+};</code></pre>
+        </article>
+    </section>
 
 
 

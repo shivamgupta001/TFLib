@@ -1,3 +1,7 @@
+/**
+ * @author Shivam Gupta <shivamcs3080@gmail.com>
+ */
+ /** This is a description of the Shared Methods Module. */
 var TFSharedMethods = function(){
 	
 	//display property handler

@@ -1,9 +1,13 @@
+/**
+ * @author Shivam Gupta <shivamcs3080@gmail.com>
+ */
 /** This is a description of the CheckboxField Module. */
 var TFCheckboxField = function(){
 		
 		var checkboxfield = {
 			
 			scope : this,
+			/** @access private */
 			_init : function(){
 				
 				this._initialize();
@@ -17,7 +21,7 @@ var TFCheckboxField = function(){
 				// return el
 				return this.outerComp;
 					
-			},
+			},/** @access private */
 			_initialize : function(){
 				
 				var me = this.scope;
@@ -49,7 +53,7 @@ var TFCheckboxField = function(){
 				//  methods
 				this.render = me.render || '';
 				this.listeners = me.listeners || '';
-			},
+			},/** @access private */
 			_generateTemplate : function(){
 				
 				var el = [
@@ -66,7 +70,7 @@ var TFCheckboxField = function(){
 				].join('\n');
 
 				this.childTemplate = $(el)[0];
-			},
+			},/** @access private */
 			_cacheDom : function(){
 
 				//cache Dom
@@ -75,7 +79,7 @@ var TFCheckboxField = function(){
 				this.labelComp = this.childTemplate.querySelector('[control-type="tf-chkf-label"]');
 				this.innerComp = this.controlComp.getElementsByTagName('input');
 				
-			},
+			},/** @access private */
 			_applyProperty : function(){
 
 				//apply styles
@@ -98,7 +102,7 @@ var TFCheckboxField = function(){
 				},this);
 
 				this.innerComp = this.controlComp.getElementsByTagName('input');
-			},
+			},/** @access private */
 			_bindEvents : function(){
 				
 				var me = this.scope;
@@ -108,7 +112,7 @@ var TFCheckboxField = function(){
 						this.controlComp.addEventListener(listener , this.listeners[listener].bind(me));
 					}
 				}
-			},
+			},/** @access private */
 			_attachProperties : function(){
 				
 				var me = this.scope;
@@ -132,7 +136,7 @@ var TFCheckboxField = function(){
 
 	            if(Object.keys(this.validations).length > 0)
 	                this.setValidations.call(me);
-			},
+			},/** @access private */
 			_render : function(){
 
 				var me = this.scope;
@@ -140,7 +144,7 @@ var TFCheckboxField = function(){
 				if(this.render != ''){
 					this.render.call(me);
 				}
-			},
+			},/** @access public */
 	        setValidations: function() {
 	                
 	                //adding validations
