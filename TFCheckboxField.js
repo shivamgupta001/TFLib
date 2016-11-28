@@ -85,6 +85,8 @@ var TFCheckboxField = function(){
 				
 				// add checkbox el's to control
 				this.fieldGroup.forEach(function(item){
+					if(this.name != '')
+						item.name = this.name;
 					this.controlComp.appendChild(TFCheckbox.call(item));
 				},this);
 			},
