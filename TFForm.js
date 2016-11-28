@@ -14,7 +14,7 @@ var TFForm = function(){
 				this._render();
 
 				// return el	
-				return this.innerComp;
+				return this.outerComp;
 			},
 			_initialize : function(){
 				
@@ -63,12 +63,12 @@ var TFForm = function(){
 			_cacheDom : function(){
 
 				// cache Dom
-				this.innerComp = this.childTemplate;
+				this.outerComp = this.childTemplate;
 			},
 			_applyProperty : function(){
 				
 				// apply class
-				if(this.compClass) this.innerComp.classList.add.apply(this.innerComp.classList , this.compClass);	
+				if(this.compClass) this.outerComp.classList.add.apply(this.outerComp.classList , this.compClass);	
 			},
 			_bindEvents : function(){
 				
@@ -76,15 +76,21 @@ var TFForm = function(){
 				
 				if(this.listeners != ''){
 					for(var listener in this.listeners){
-						this.innerComp.addEventListener(listener , this.listeners[listener].bind(this.scope));
+						this.outerComp.addEventListener(listener , this.listeners[listener].bind(this.scope));
 					}
 				}
 			},
 			_attachProperties : function(){
 				
 				// add properties
-				me.$innerComp = this.$innerComp;
-							
+				me.outerComp = this.$outerComp;
+
+				// add methods
+				TFSharedMethods.call(me);
+
+				// shared properties to el 
+				me.outerComp.shared = me;
+
 			},
 			_render : function(){
 				

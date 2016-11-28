@@ -132,6 +132,7 @@ var TFTextAreaField = function(){
 				
 				// add methods
 				TFTextFieldMethods.call(me);
+				TFSharedMethods.call(me);
 
 				// share methods over el
 				this.outerComp.shared = me;

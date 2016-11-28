@@ -111,6 +111,7 @@ var TFCheckboxField = function(){
 
 				//methods
 				TFCheckboxMethods.call(me);
+				TFSharedMethods.call(me);
 
 				//share methods to el
 				me.outerComp.shared = me;

@@ -104,6 +104,7 @@ var TFRadio = function(){
 
 				// add methods
 				TFCheckboxMethods.call(me);
+				TFSharedMethods.call(me);
 
 				// shared methods add to el 
 				me.outerComp.shared = me;

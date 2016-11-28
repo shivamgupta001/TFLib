@@ -1,7 +1,7 @@
-/** This is a description of the Textfield Module. */
-var TFTextField = function($fieldset) {
+/** This is a description of the ComboboxField Module. */
+var TFComboboxField = function($fieldset) {
 
-    var textfield = {
+    var comboboxfield = {
         
         scope: this,
         _init: function() {
@@ -22,7 +22,7 @@ var TFTextField = function($fieldset) {
             var me = this.scope;
 
             //config
-            this.dynamicId = me.id || "tf-textfield-" + getRandomInt(1, 10000);
+            this.dynamicId = me.id || "tf-combo-" + getRandomInt(1, 10000);
             this.buttons = me.buttons || [];
             this.validations = me.validations || false;
             this.styles = me.styles || '';
@@ -30,6 +30,7 @@ var TFTextField = function($fieldset) {
             this.displayLabel = me.displayLabel || false;
             this.fieldLabel = me.fieldLabel || '';
             this.fieldType = me.fieldType || 'row';
+            this.options = me.options || [];
 
             //style
             this.flex = me.flex || false;
@@ -41,12 +42,8 @@ var TFTextField = function($fieldset) {
 
             //attributes
             this.name = me.name || '';
-            this.placeholder = me.placeholder || '';
-            this.pattern = me.pattern || '';
             this.required = (me.required === true) ? 'required' : '';
-            this.value = me.value || '';
-            this.readOnly = (me.readOnly === true) ? 'readonly' : '';
-            this.maxlength = me.maxlength || '';
+            this.multiple = (me.multiple === true) ? 'multiple' : '';
             this.tabindex = me.tabindex || '';
             this.markRequired = me.markRequired || false;
 
@@ -61,22 +58,18 @@ var TFTextField = function($fieldset) {
                 '<div',
                     'id="' + this.dynamicId + '"',
                     'class="tf-flex ' + ((this.fieldType === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
-                        '<div control-type="tf-tf-label" class="tf-flex ' + (this.displayLabel ? 'tf-display--none' : '') + '">',
+                        '<div control-type="tf-combo-label" class="tf-flex ' + (this.displayLabel ? 'tf-display--none' : '') + '">',
                             '<label>' + (this.fieldLabel ? this.fieldLabel : '') + '</label>',
                             '<span class="tf-required--red ' + (this.markRequired ? '' : 'tf-display--none') + '">*</span>',
                         '</div>',
-                        '<div control-type="tf-textfield" class="tf-field-with-btn">',
-                            '<input',
+                        '<div control-type="tf-combofield" class="tf-field-with-btn">',
+                            '<select class="tf-flex tf-flex--one"',
                                 'type="text"',
                                 '' + (this.name ? 'name="' + this.name + '"' : '') + '',
-                                '' + (this.value ? 'value="' + this.value + '"' : '') + '',
-                                '' + (this.placeholder ? 'placeholder="' + this.placeholder + '"' : '') + '',
-                                '' + (this.pattern ? 'pattern="' + this.pattern + '"' : '') + '',
-                                '' + (this.maxlength ? 'maxlength="' + this.maxlength + '"' : '') + '',
                                 '' + (this.tabindex ? 'tabindex="' + this.tabindex + '"' : '') + '',
-                                '' + this.readOnly + '',
                                 '' + this.required + '',
-                            '/>',
+                                '' + this.multiple + '',
+                            '></select>',
                         '</div>',
                     '</div>'
             ].join('\n');
@@ -87,11 +80,19 @@ var TFTextField = function($fieldset) {
 
             //cache DOM
             this.outerComp = this.childTemplate;
-            this.innerComp = this.childTemplate.querySelector("input");
-            this.controlComp = this.childTemplate.querySelector("[control-type='tf-textfield']");
-            this.labelComp = this.childTemplate.querySelector("[control-type='tf-tf-label']");
+            this.innerComp = this.childTemplate.querySelector("select");
+            this.controlComp = this.childTemplate.querySelector("[control-type='tf-combofield']");
+            this.labelComp = this.childTemplate.querySelector("[control-type='tf-combo-label']");
         },
         _applyProperty: function() {
+
+            // add data to combobox
+            this.options.forEach(function(val , index){
+            	var opt = document.createElement("option");
+            	opt.setAttribute("value", val.value);
+            	opt.innerHTML = val.display;
+            	this.innerComp.appendChild(opt);
+            }, this);
 
             //apply styles
             if (this.styles != '') {
@@ -121,7 +122,7 @@ var TFTextField = function($fieldset) {
             
             var me = this.scope;
 
-            this.setValidations();
+           // this.setValidations();
 
             //public listeners
             if (this.listeners != '') {
@@ -227,6 +228,6 @@ var TFTextField = function($fieldset) {
         return Math.floor(Math.random() * (max - min) + min);
     }
 
-    return textfield._init();
+    return comboboxfield._init();
 
 };

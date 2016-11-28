@@ -109,6 +109,7 @@ var TFRadioField = function($fieldset){
 				
 				// add methods
 				TFCheckboxFieldMethods.call(me);
+				TFSharedMethods.call(me);
 
 				// share methods to el
 				me.outerComp.shared = me;

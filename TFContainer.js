@@ -98,7 +98,7 @@ var TFContainer = function(){
 				me.outerComp = this.outerComp;
 
 				// add methods
-				TFContainerMethods.call(me);
+				TFSharedMethods.call(me);
 
 				// share methods to el
 				me.outerComp.shared = me;

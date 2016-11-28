@@ -67,6 +67,8 @@ var Iterator = function(config){
 									break;
 			case 'button' 		: el = TFButton.call(item);
 									break;
+			case 'comboboxfield': el = TFComboboxField.call(item);
+									break;
 			default 			: el = TFContainer.call(item);
 									break;
 		}

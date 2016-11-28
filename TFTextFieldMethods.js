@@ -1,12 +1,6 @@
 var TFTextFieldMethods = function(){
 
 	// display property handler
-	this.hide = function(){
-		this.outerComp.style.display = "none";
-	};
-	this.show = function(){
-		this.outerComp.style.display = "";
-	};
 	this.displayLabelHide = function(){
 		this.labelComp.style.display = "none";
 	};
@@ -21,12 +15,6 @@ var TFTextFieldMethods = function(){
 	};
 
 	// visibility property handler
-	this.visibleHide = function(){
-		this.outerComp.style.visibility = "hidden";
-	};
-	this.visibleShow = function(){
-		this.outerComp.style.visibility = "";
-	};
 	this.visibleLabelHide = function(){
 		this.labelComp.style.visibility = "hidden";
 	};
@@ -41,12 +29,6 @@ var TFTextFieldMethods = function(){
 	};
 
 	// add remove style
-	this.addStyle = function(prop , val){
-		this.outerComp.style[prop] = val;
-	};
-	this.removeStyle = function(prop){
-		this.outerComp.style[prop] = '';
-	};
 	this.addLabelStyle = function(prop , val){
 		this.labelComp.style[prop] = val;
 	};
@@ -66,14 +48,6 @@ var TFTextFieldMethods = function(){
 	};
 
 	// add remove class handler
-	this.addClass = function(newClass){
-		newClass = newClass.constructor === Array ? newClass : [newClass];
-		this.outerComp.classList.add.apply(this.outerComp.classList , newClass);
-	};
-	this.removeClass = function(oldClass){
-		oldClass = oldClass.constructor === Array ? oldClass : [oldClass];
-		this.outerComp.classList.remove.apply(this.outerComp.classList , oldClass);
-	};
 	this.addLabelClass = function(newClass){
 		newClass = newClass.constructor === Array ? newClass : [newClass];
 		this.labelComp.classList.add.apply(this.labelComp.classList , newClass);
@@ -90,36 +64,6 @@ var TFTextFieldMethods = function(){
 		oldClass = oldClass.constructor === Array ? oldClass : [oldClass];
 		this.controlComp.classList.remove.apply(this.controlComp.classList , oldClass);
 	};
-
-	// append dom handlers
-	this.appendDom = function(el){
-		this.outerComp.appendChild(el);
-	};
-	this.prependDom = function(el){
-		this.outerComp.insertBefore(el , this.outerComp.childNodes[0]);
-	};
-	// add query selector
-	this.insertDomAt = function(el , selector){
-		this.outerComp.insertBefore(el , this.outerComp.querySelector(selector));
-	};
-	// this.appendDomToLabel = function(el){
-	// 	this.labelComp.appendChild(el);
-	// };
-	// this.prependDomToLabel = function(el){
-	// 	this.labelComp.insertBefore(el , this.labelComp.childNodes[0]);
-	// };
-	// this.insertDomToLabelAt = function(el , index){
-	// 	this.labelComp.insertBefore(el , this.labelComp.childNodes[index]);
-	// };
-	// this.appendDomToControl = function(el){
-	// 	this.controlComp.appendChild(el);
-	// };
-	// this.prependDomToControl = function(el){
-	// 	this.controlComp.insertBefore(el , this.controlComp.childNodes[0]);
-	// };
-	// this.insertDomToControlAt = function(el , index){
-	// 	this.controlComp.insertBefore(el , this.controlComp.childNodes[index]);
-	// };
 
 	// set and rmove validation
 	this.setError = function(errmsg){

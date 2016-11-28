@@ -1,12 +1,6 @@
 var TFCheckboxFieldMethods = function(){
 
-	//display property handler
-	this.displayHide = function(){
-		this.outerComp.style.display = "none";
-	};
-	this.displayShow = function(){
-		this.outerComp.style.display = "";
-	};
+	// display property handler
 	this.displayLabelHide = function(){
 		this.labelComp.style.display = "none";
 	};
@@ -21,12 +15,6 @@ var TFCheckboxFieldMethods = function(){
 	};
 
 	// visibility property handler
-	this.visibleHide = function(){
-		this.outerComp.style.visibility = "hidden";
-	};
-	this.visibleShow = function(){
-		this.outerComp.style.visibility = "";
-	};
 	this.visibleLabelHide = function(){
 		this.labelComp.style.visibility = "hidden";
 	};
@@ -41,12 +29,6 @@ var TFCheckboxFieldMethods = function(){
 	};
 
 	// add remove style
-	this.addStyle = function(prop , val){
-		this.outerComp.style[prop] = val;
-	};
-	this.removeStyle = function(prop){
-		this.outerComp.style[prop] = '';
-	};
 	this.addLabelStyle = function(prop , val){
 		this.labelComp.style[prop] = val;
 	};
@@ -66,14 +48,6 @@ var TFCheckboxFieldMethods = function(){
 	};
 
 	// add remove class
-	this.addClass = function(newClass){
-		newClass = newClass.constructor === Array ? newClass : [newClass];
-		this.outerComp.classList.add.apply(this.outerComp.classList , newClass); 
-	};
-	this.removeClass = function(oldClass){
-		oldClass = oldClass.constructor === Array ? oldClass : [oldClass];
-		this.outerComp.classList.remove.apply(this.outerComp.classList , oldClass);
-	};
 	this.addLabelClass = function(newClass){
 		newClass = newClass.constructor === Array ? newClass : [newClass];
 		this.labelComp.classList.add.apply(this.labelComp.classList , newClass); 
@@ -90,17 +64,5 @@ var TFCheckboxFieldMethods = function(){
 		oldClass = oldClass.constructor === Array ? oldClass : [oldClass];
 		this.controlComp.classList.remove.apply(this.controlComp.classList , oldClass);
 	};
-
-	// append dom handlers
-	this.appendDom = function(el){
-		this.outerComp.appendChild(el);
-	};
-	this.prependDom = function(el){
-		this.outerComp.insertBefore(el , this.outerComp.childNodes[0]);
-	};
-	this.insertDomAt = function(el , selector){
-		this.outerComp.insertBefore(el , this.outerComp.querySelector(selector));
-	};
-	
 	
 };

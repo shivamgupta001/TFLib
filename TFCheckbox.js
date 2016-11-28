@@ -103,6 +103,7 @@ var TFCheckbox = function(){
 
 				// add methods
 				TFCheckboxMethods.call(me);
+				TFSharedMethods.call(me);
 
 				// share methods on el
 				me.outerComp.shared = me;

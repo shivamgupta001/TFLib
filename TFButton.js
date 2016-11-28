@@ -104,6 +104,7 @@ var TFButton = function(){
 										
 				// add methods
 				TFButtonMethods.call(me);
+				TFSharedMethods.call(me);
 
 				// shared methods over el
 				me.outerComp.shared = me;
