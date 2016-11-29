@@ -147,12 +147,14 @@ var TFCheckboxFieldMethods = function(){
       * @property {boolean} value - true or false to apply or not apply validation
       * @property {string} errmsg - error message to show on tooltip
       */
-	this.isRequired = function(obj){
+	this.isRequired = function(status , errmsg){
 	
-		var status = obj.value;
-		var errmsg = obj.errmsg;
 		if(this.validations.hasOwnProperty("isRequired")){
 
+			if(!status){
+				this.controlComp.classList.remove('tooltip','tf-err-border--red');
+				this.controlComp.removeAttribute("data-tooltip");
+			}
 			this.validations.isRequired.value = status;
 			this.validations.isRequired.errmsg = errmsg;	
 
@@ -193,5 +195,7 @@ var TFCheckboxFieldMethods = function(){
 			this.controlComp.classList.add('tooltip', 'tf-err-border--red');
 			this.controlComp.setAttribute('data-tooltip', this.validations.isRequired.errmsg);
 		}
+
+		return chkstatus;
 	};
 };

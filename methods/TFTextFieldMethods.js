@@ -101,6 +101,7 @@ var TFTextFieldMethods = function(){
       */
 	this.changeLabel = function(newLabelText){
 		this.labelComp.querySelector('label').innerHTML = newLabelText;
+		this.labelComp.querySelector('')
 	};
 
 	/**This method will add class to label comp 
@@ -236,7 +237,7 @@ var TFTextFieldMethods = function(){
       * @property {string} errmsg - error message to show on tooltip
       * @property {string} pattern - regex pattern
       */
-	this.regex = function(status,errmsg,pattern){
+	this.regex = function(status, errmsg, pattern){
 		
 		if(this.validations.hasOwnProperty("regex")){
 			this.validations.regex.value = status;

@@ -44,6 +44,13 @@ var TFTextAreaField = function(){
 				this.displayLabel = me.displayLabel || false;
 				this.fieldLayout = me.fieldLayout || 'row';
 				this.markRequired = me.markRequired || false;
+				this.validations = me.validations || {};
+	            this.validations.__proto__ =  {
+	                'isRequired' : {value : false , errmsg : 'This field is Required'},
+	                'onlyText' : {value : false},
+	                'onlyNumber' : {value :false},
+	                'regex' : {value : false, errmsg : 'Allowed Values are alphabets'}
+	            };
 
 				//innerHTML or innerText
 				this.fieldLabel = me.fieldLabel || '';
@@ -145,6 +152,8 @@ var TFTextAreaField = function(){
 				me.labelComp = this.labelComp;
 				me.outerComp = this.outerComp;
 				me.controlComp = this.controlComp;
+				me.setValidations = this.setValidations;
+            	me.validations = this.validations;
 				
 				// add methods
 				TFTextFieldMethods.call(me);
@@ -152,6 +161,13 @@ var TFTextAreaField = function(){
 
 				// share methods over el
 				this.outerComp.shared = me;
+
+				// handle validations
+	            me.validationMethods = {};
+	            TFValidations.call(me.validationMethods);
+
+	            if(Object.keys(this.validations).length > 0)
+	                this.setValidations.call(me);
 			},
 			_render : function(){
 
@@ -160,7 +176,81 @@ var TFTextAreaField = function(){
 				if(this.render != ''){
 					this.render.call(me);
 				}
-			}
+			},
+	        setValidations: function() {
+	                
+	                //adding validations
+	                Object.keys(this.validations).forEach(function(val) {
+
+	                    switch (val) {
+	                        case 'isRequired':
+	                        	if(this.validations.isRequired.value){
+	                        		
+	                                if(!this.isRequiredHandler){
+
+	                                    this.isRequiredHandler = this.validationMethods.isRequired.bind(this);
+	                                    this.innerComp.addEventListener('blur', this.isRequiredHandler);
+	                                    this.innerComp.addEventListener('input', this.isRequiredHandler);
+	                                }
+	                                
+
+
+	                        	}else {
+	                        		this.innerComp.removeEventListener('blur', this.isRequiredHandler);
+	                            	this.innerComp.removeEventListener('input', this.isRequiredHandler);
+	                                delete this.isRequiredHandler;
+	                           	}
+	                            break;
+
+	                        case 'onlyNumber':
+	                        	if(this.validations.onlyNumber.value){
+	                      		    
+	                                if(!this.onlyNumberHandler){
+	                                    this.onlyNumberHandler = this.validationMethods.onlyNumber.bind(this);
+	                                    this.innerComp.addEventListener('keydown', this.onlyNumberHandler); 
+	                                }
+	                                
+	                        	}else{
+	                                this.innerComp.removeEventListener('keydown', this.onlyNumberHandler);
+	                                delete this.onlyNumberHandler;
+	                            }                            
+	                            break;
+
+	                        case 'regex':
+	                        	if(this.validations.regex.value){
+
+	                                if(!this.regexHandler){
+	                                    this.regexHandler = this.validationMethods.regex.bind(this);
+	                                    this.innerComp.addEventListener('blur', this.regexHandler);
+	                                    this.innerComp.addEventListener('input', this.regexHandler);
+	                                }
+	                                
+	                            }else {
+
+	                                this.innerComp.removeEventListener('blur', this.regexHandler);
+	                                this.innerComp.removeEventListener('input', this.regexHandler);
+	                                delete this.regexHandler;
+	                            } 
+	                            break;
+
+	                        case 'onlyText':
+	                        	if(this.validations.onlyText.value){
+	                        		
+	                                if(!this.onlyTextHandler){
+	                                    this.onlyTextHandler = this.validationMethods.onlyText.bind(this);
+	                                    this.innerComp.addEventListener('keydown', this.onlyTextHandler);       
+	                                }
+	                                
+	                        	}else{
+
+	                                this.innerComp.removeEventListener('keydown', this.onlyTextHandler);
+	                                delete this.onlyTextHandler;
+	                            }
+	                            break;
+	                    }
+	                }, this);
+	            
+	        }
 		};
 						
 		function getRandomInt(min, max){
