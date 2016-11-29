@@ -255,10 +255,6 @@ var TFCheckboxFieldMethods = function(){
 						this.isValidated = true;
 					}					
 				}
-			}else if(val === "customError"){
-				if(this.validations.customError.value){
-
-				}
 			}
 		}, this);
 		

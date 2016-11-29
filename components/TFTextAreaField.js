@@ -52,7 +52,8 @@ var TFTextAreaField = function(){
 	                'isRequired' : {value : false , errmsg : 'This field is Required'},
 	                'onlyText' : {value : false},
 	                'onlyNumber' : {value :false},
-	                'regex' : {value : false, errmsg : 'Allowed Values are alphabets'}
+	                'regex' : {value : false, errmsg : 'Allowed Values are alphabets'},
+	                'customError' : {value : false , errmsg : 'custom error'}
 	            };
 
 				//innerHTML or innerText

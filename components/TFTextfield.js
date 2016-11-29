@@ -48,7 +48,8 @@ var TFTextField = function($fieldset) {
                 'isRequired' : {value : false , errmsg : 'This field is Required'},
                 'onlyText' : {value : false},
                 'onlyNumber' : {value :false},
-                'regex' : {value : false, errmsg : 'Allowed Values are alphabets'}
+                'regex' : {value : false, pattern:"abc", errmsg : 'Allowed Values are alphabets'},
+                'customError' : {value : false , errmsg : 'custom error'}
             };
             this.styles = me.styles || '';
             this.attributes = me.attributes || '';
