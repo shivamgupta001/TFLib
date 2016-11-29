@@ -100,9 +100,10 @@ var TFTextFieldMethods = function(){
       * @param {string} newLabelText - label text or html
       */
 	this.changeLabel = function(newLabelText){
-		this.labelComp.querySelector('label').innerHTML = newLabelText;
-		this.labelComp.querySelector('')
+		this.labelComp.querySelector('[for="'+this.innerId+'"]').innerHTML = newLabelText;
+		a.shared.fieldLabel = newLabelText;
 	};
+
 
 	/**This method will add class to label comp 
       * @memberof TFTextField

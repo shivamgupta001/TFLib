@@ -99,8 +99,10 @@ var TFCheckboxFieldMethods = function(){
       * @memberof TFRadioField
       * @param {string} newLabelText - label text or html
       */
-	this.changeLabelText = function(newLabelText){
-		this.labelComp.querySelector('label').innerHTML = newLabelText;
+	this.changeLabel = function(newLabelText){
+		
+		this.labelComp.querySelector('#'+this.labelId).innerHTML = newLabelText;
+		this.fieldLabel = newLabelText;
 	};
 
 	/**This method will add class to label comp 

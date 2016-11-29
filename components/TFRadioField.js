@@ -1,7 +1,8 @@
 /**
  * @author Shivam Gupta 
  * @constructor TFRadioField
- * @property {string} id - id will be assigned to checkbox[id] & label[for].
+ * @property {string} id - id will be assigned to outer component.
+ * @property {string} labelId - will be assigned to label[id].
  * @property {string} markRequired - will add *.
  * @property {string} fieldLayout - can be 'row' or 'column'.
  * @property {object} styles - styles will be applied to button tag.
@@ -40,6 +41,8 @@ var TFRadioField = function($fieldset){
 
 				//  configs
 				this.dynamicId = me.id || "tf-radiof-"+getRandomInt(1, 10000);
+				this.labelId = me.labelId || "tf-label-"+getRandomInt(1, 10000);
+
 				this.markRequired = me.markRequired || false;
 				this.fieldLayout = me.fieldLayout || 'row';
 				this.styles = me.styles || '';
@@ -73,7 +76,7 @@ var TFRadioField = function($fieldset){
 					'<div id="'+this.dynamicId+'"', 
 						'class="tf-flex '+((this.fieldLayout === 'row')? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
 				        '<div control-type="tf-radiof-label" class="'+((this.displayLabel === "none")? 'tf-display--none':'')+'">',
-				            '<label>'+(this.fieldLabel ? this.fieldLabel : '')+'</label>',
+				            '<label id="'+this.labelId+'">'+(this.fieldLabel ? this.fieldLabel : '')+'</label>',
 				            '<span class="tf-required--red '+(this.markRequired ? 'tf-display--none':'')+'">*</span>',
 				        '</div>',
 				        '<div control-type="tf-radiofield" class="tf-flex '+((this.groupLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
@@ -135,6 +138,7 @@ var TFRadioField = function($fieldset){
 				me.outerComp = this.outerComp;
 				me.labelComp = this.labelComp;
 				me.innerComp = this.innerComp;
+				me.labelId = this.labelId;
 				
 				// add methods
 				TFCheckboxFieldMethods.call(me);

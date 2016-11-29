@@ -2,7 +2,7 @@
  * @author Shivam Gupta 
  * @constructor TFTextField
  * @property {string} id - id will be assigned to outer comp.
- * @property {string} inputId -  will be assigned to input[id] & label[for].
+ * @property {string} innerId -  will be assigned to input[id] & label[for].
  * @property {string} markRequired - will add *.
  * @property {string} fieldLayout - can be 'row' or 'column'.
  * @property {object} styles - styles will be applied to outer div of component.
@@ -40,7 +40,7 @@ var TFTextField = function($fieldset) {
 
             //config
             this.dynamicId = me.id || "tf-textfield-" + getRandomInt(1, 10000);
-            this.inputId = me.inputId || "tf-input-text-"+ getRandomInt(1 , 10000);
+            this.innerId = me.innerId || "tf-input-text-"+ getRandomInt(1 , 10000);
             
             this.buttons = me.buttons || [];
             this.validations = me.validations || {};
@@ -87,13 +87,13 @@ var TFTextField = function($fieldset) {
                     'id="' + this.dynamicId + '"',
                     'class="tf-flex ' + ((this.fieldType === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
                         '<div control-type="tf-tf-label" class="tf-flex ' + (this.displayLabel ? 'tf-display--none' : '') + '">',
-                            '<label for="'+this.inputId+'">' + (this.fieldLabel ? this.fieldLabel : '') + '</label>',
+                            '<label for="'+this.innerId+'">' + (this.fieldLabel ? this.fieldLabel : '') + '</label>',
                             '<span class="tf-required--red ' + (this.markRequired ? '' : 'tf-display--none') + '">*</span>',
                         '</div>',
                         '<div control-type="tf-textfield" class="tf-field-with-btn">',
                             '<input',
                                 'type="text"',
-                                'id="'+this.inputId+'"',
+                                'id="'+this.innerId+'"',
                                 '' + (this.name ? 'name="' + this.name + '"' : '') + '',
                                 '' + (this.value ? 'value="' + this.value + '"' : '') + '',
                                 '' + (this.placeholder ? 'placeholder="' + this.placeholder + '"' : '') + '',
@@ -173,6 +173,7 @@ var TFTextField = function($fieldset) {
             me.labelComp = this.labelComp;
             me.setValidations = this.setValidations;
             me.validations = this.validations; 
+            me.innerId = this.innerId;
 
             // add methods
             TFTextFieldMethods.call(me);

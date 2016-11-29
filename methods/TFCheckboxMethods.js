@@ -101,6 +101,7 @@ var TFCheckboxMethods = function(){
       */
 	this.changeLabel = function(newLabelText){
 		this.labelComp.innerHTML = newLabelText;
+		this.fieldLabel = newLabelText;
 	};
 
 	/**This method will add class to label comp 

@@ -1,7 +1,8 @@
 /**
  * @author Shivam Gupta 
  * @constructor TFTextAreaField
- * @property {string} id - id will be assigned to checkbox[id] & label[for].
+ * @property {string} id - id will be assigned to outer component.
+ * @property {string} innerId -  will be assigned to input[id] & label[for].
  * @property {string} markRequired - will add *.
  * @property {string} fieldLayout - can be 'row' or 'column'.
  * @property {object} styles - styles will be applied to outer div of component.
@@ -38,7 +39,9 @@ var TFTextAreaField = function(){
 				var me = this.scope;
 				 
 				//config
-				this.dynamicId = me.id || "tf-textareaf-"+getRandomInt(1, 10000);
+				this.dynamicId = me.id || "tf-textarea-comp-"+getRandomInt(1, 10000);
+				this.innerId = me.innerId || "tf-textarea-"+ getRandomInt(1 , 10000);
+
 				this.styles = me.styles || '';
 				this.attributes = me.attributes || '';
 				this.displayLabel = me.displayLabel || false;
@@ -80,11 +83,12 @@ var TFTextAreaField = function(){
 						'id="'+this.dynamicId+'"',
 						'class="tf-flex '+((this.fieldLayout === 'row') ? 'tf-flex-direction--row ':'tf-flex-direction--column ')+'">',
 						'<div control-type="tf-taf-label" class="tf-flex" '+(this.displayLabel ? 'tf-display--none': '')+'>',
-							'<label>'+(this.fieldLabel ? this.fieldLabel : '')+'</label>',
+							'<label for="'+this.innerId+'">'+(this.fieldLabel ? this.fieldLabel : '')+'</label>',
 							'<span class="tf-required--red '+(this.markRequired ? '' : 'tf-display--none')+'">*</span>',
 						'</div>',
 						'<div control-type="tf-textareafield" class="tf-field-with-btn ">',
 							'<textarea',
+								'id="'+this.innerId+'"',
 								''+(this.name ? 'name="'+this.name+'"' : '')+'',
 								''+(this.placeholder ? 'placeholder="'+this.placeholder+'"' : '')+'',
 								''+(this.cols ? 'cols="'+this.cols+'"' : '')+'',
@@ -154,6 +158,7 @@ var TFTextAreaField = function(){
 				me.controlComp = this.controlComp;
 				me.setValidations = this.setValidations;
             	me.validations = this.validations;
+            	me.innerId = this.innerId;
 				
 				// add methods
 				TFTextFieldMethods.call(me);

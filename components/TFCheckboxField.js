@@ -1,7 +1,8 @@
 /**
  * @author Shivam Gupta 
  * @constructor TFCheckboxField
- * @property {string} id - id will be assigned to checkbox[id] & label[for].
+ * @property {string} id - id will be assigned to outer component.
+ * @property {string} labelId - will be assigned to label[id].
  * @property {string} markRequired - will add *.
  * @property {string} fieldLayout - can be 'row' or 'column'.
  * @property {object} styles - styles will be applied to button tag.
@@ -42,6 +43,8 @@ var TFCheckboxField = function(){
 
 				//  configs
 				this.dynamicId = me.id || "tf-chkf-"+getRandomInt(1, 10000);
+				this.labelId = me.labelId || "tf-chk-label-"+getRandomInt(1 , 10000);
+
 				this.markRequired = me.markRequired || false;
 				this.fieldLayout = me.fieldLayout || 'row';
 				this.styles = me.styles || '';
@@ -74,7 +77,7 @@ var TFCheckboxField = function(){
 					'<div id="'+this.dynamicId+'"', 
 						'class="tf-flex '+((this.fieldLayout === 'row')? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
 				        '<div control-type="tf-chkf-label" class="'+((this.displayLabel === "none")? 'tf-display--none':'')+'">',
-				            '<label>'+(this.fieldLabel ? this.fieldLabel : '')+'</label>',
+				            '<label id="'+this.labelId+'">'+(this.fieldLabel ? this.fieldLabel : '')+'</label>',
 				            '<span class="tf-required--red '+(this.markRequired ? 'tf-display--none':'')+'">*</span>',
 				        '</div>',
 				        '<div control-type="tf-checkboxfield" class="tf-flex '+((this.groupLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
@@ -136,6 +139,7 @@ var TFCheckboxField = function(){
 				me.outerComp = this.outerComp;
 				me.labelComp = this.labelComp;
 				me.innerComp = this.innerComp;
+				me.labelId = this.labelId;
 
 				//methods
 				TFCheckboxMethods.call(me);
