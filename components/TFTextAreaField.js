@@ -3,7 +3,6 @@
  * @constructor TFTextAreaField
  * @property {string} id - id will be assigned to outer component.
  * @property {string} innerId -  will be assigned to input[id] & label[for].
- * @property {string} markRequired - will add *.
  * @property {string} fieldLayout - can be 'row' or 'column'.
  * @property {object} styles - styles will be applied to outer div of component.
  * @property {string} displayLabel - 'none' will hide display part of component.
@@ -39,14 +38,15 @@ var TFTextAreaField = function(){
 				var me = this.scope;
 				 
 				//config
-				this.dynamicId = me.id || "tf-textarea-comp-"+getRandomInt(1, 10000);
-				this.innerId = me.innerId || "tf-textarea-"+ getRandomInt(1 , 10000);
+				this.dynamicId = me.id || "tf-ta-comp-"+getRandomInt(1, 10000);
+				this.innerId = me.innerId || "tf-ta-"+ getRandomInt(1 , 10000);
+				this.requiredId = "tf-ta-req-"+getRandomInt(1,1000);
 
 				this.styles = me.styles || '';
 				this.attributes = me.attributes || '';
 				this.displayLabel = me.displayLabel || false;
 				this.fieldLayout = me.fieldLayout || 'row';
-				this.markRequired = me.markRequired || false;
+			
 				this.validations = me.validations || {};
 	            this.validations.__proto__ =  {
 	                'isRequired' : {value : false , errmsg : 'This field is Required'},
@@ -84,7 +84,7 @@ var TFTextAreaField = function(){
 						'class="tf-flex '+((this.fieldLayout === 'row') ? 'tf-flex-direction--row ':'tf-flex-direction--column ')+'">',
 						'<div control-type="tf-taf-label" class="tf-flex" '+(this.displayLabel ? 'tf-display--none': '')+'>',
 							'<label for="'+this.innerId+'">'+(this.fieldLabel ? this.fieldLabel : '')+'</label>',
-							'<span class="tf-required--red '+(this.markRequired ? '' : 'tf-display--none')+'">*</span>',
+							'<span id="'+this.requiredId+'" class="tf-required--red" style="display:none;" >*</span>',
 						'</div>',
 						'<div control-type="tf-textareafield" class="tf-field-with-btn ">',
 							'<textarea',
@@ -113,6 +113,7 @@ var TFTextAreaField = function(){
 				this.innerComp = this.childTemplate.querySelector("textarea");
 				this.labelComp = this.childTemplate.querySelector('[control-type="tf-taf-label"]');
 				this.controlComp = this.childTemplate.querySelector('[control-type="tf-textareafield"]');
+				this.requiredComp = this.childTemplate.querySelector('#'+this.requiredId);
 			 
 			},
 			_applyProperty : function(){
@@ -159,6 +160,7 @@ var TFTextAreaField = function(){
 				me.setValidations = this.setValidations;
             	me.validations = this.validations;
             	me.innerId = this.innerId;
+            	me.requiredComp = this.requiredComp;
 				
 				// add methods
 				TFTextFieldMethods.call(me);
@@ -192,7 +194,7 @@ var TFTextAreaField = function(){
 	                        	if(this.validations.isRequired.value){
 	                        		
 	                                if(!this.isRequiredHandler){
-
+	                                	this.requiredComp.style.display = '';
 	                                    this.isRequiredHandler = this.validationMethods.isRequired.bind(this);
 	                                    this.innerComp.addEventListener('blur', this.isRequiredHandler);
 	                                    this.innerComp.addEventListener('input', this.isRequiredHandler);
@@ -201,6 +203,7 @@ var TFTextAreaField = function(){
 
 
 	                        	}else {
+	                        		this.requiredComp.style.display = 'none';
 	                        		this.innerComp.removeEventListener('blur', this.isRequiredHandler);
 	                            	this.innerComp.removeEventListener('input', this.isRequiredHandler);
 	                                delete this.isRequiredHandler;

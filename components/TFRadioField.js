@@ -3,7 +3,6 @@
  * @constructor TFRadioField
  * @property {string} id - id will be assigned to outer component.
  * @property {string} labelId - will be assigned to label[id].
- * @property {string} markRequired - will add *.
  * @property {string} fieldLayout - can be 'row' or 'column'.
  * @property {object} styles - styles will be applied to button tag.
  * @property {object[]} fieldGroup - pass all checkboxes details as each item.
@@ -41,9 +40,10 @@ var TFRadioField = function($fieldset){
 
 				//  configs
 				this.dynamicId = me.id || "tf-radiof-"+getRandomInt(1, 10000);
-				this.labelId = me.labelId || "tf-label-"+getRandomInt(1, 10000);
+				this.labelId = me.labelId || "tf-radio-label-"+getRandomInt(1, 10000);
+				this.requiredId = "tf-radio-req-"+getRandomInt(1, 10000);
 
-				this.markRequired = me.markRequired || false;
+			
 				this.fieldLayout = me.fieldLayout || 'row';
 				this.styles = me.styles || '';
 				this.fieldGroup = me.fieldGroup || [];
@@ -51,10 +51,7 @@ var TFRadioField = function($fieldset){
 				this.name = me.name || '';
 				this.validations = me.validations || {};
 	            this.validations.__proto__ =  {
-	                'isRequired' : {value : false , errmsg : 'This field is Required'},
-	                'onlyText' : {value : false},
-	                'onlyNumber' : {value :false},
-	                'regex' : {value : false, errmsg : 'Allowed Values are alphabets'}
+	                'isRequired' : {value : false , errmsg : 'This field is Required'}
 	            };
 
 				// innerHTML configs
@@ -77,7 +74,7 @@ var TFRadioField = function($fieldset){
 						'class="tf-flex '+((this.fieldLayout === 'row')? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
 				        '<div control-type="tf-radiof-label" class="'+((this.displayLabel === "none")? 'tf-display--none':'')+'">',
 				            '<label id="'+this.labelId+'">'+(this.fieldLabel ? this.fieldLabel : '')+'</label>',
-				            '<span class="tf-required--red '+(this.markRequired ? 'tf-display--none':'')+'">*</span>',
+				            '<span id="'+this.requiredId+'" class="tf-required--red" style="display:none;">*</span>',
 				        '</div>',
 				        '<div control-type="tf-radiofield" class="tf-flex '+((this.groupLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
 				         	// radio list  
@@ -93,6 +90,7 @@ var TFRadioField = function($fieldset){
 				this.outerComp = this.childTemplate;
 				this.controlComp = this.childTemplate.querySelector('[control-type="tf-radiofield"]');
 				this.labelComp = this.childTemplate.querySelector('[control-type="tf-radiof-label"]');
+				this.requiredComp = this.labelComp.querySelector('#'+this.requiredId);
 				
 			},
 			_applyProperty : function(){
@@ -139,6 +137,7 @@ var TFRadioField = function($fieldset){
 				me.labelComp = this.labelComp;
 				me.innerComp = this.innerComp;
 				me.labelId = this.labelId;
+				me.requiredComp = this.requiredComp;
 				
 				// add methods
 				TFCheckboxFieldMethods.call(me);
@@ -173,13 +172,14 @@ var TFRadioField = function($fieldset){
 	                        	if(this.validations.isRequired.value){
 	                        		
 	                                if(!this.isRequiredHandler){
-
+	                                	this.requiredComp.style.display ='';
 	                                    this.isRequiredHandler = this.validationMethods.isRequired.bind(this);
 	                                    for(var i=0; i<this.innerComp.length ;i++ ){
 	                                    	this.innerComp[i].addEventListener('change', this.isRequiredHandler);
 	                                    }
 	                                }
 	                            }else {
+	                            	this.requiredComp.style.display ='none';
 	                        		for(var i=0; i<this.innerComp.length ;i++ ){
 	                                   	this.innerComp[i].removeEventListener('change', this.isRequiredHandler);
 	                                }
