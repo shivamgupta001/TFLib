@@ -3,33 +3,33 @@
 
 <head>
     <title></title>
-    <link rel="stylesheet" type="text/css" href="TFComponentCommon.css">
+    <link rel="stylesheet" type="text/css" href="../css/TFComponentCommon.css">
     <link rel="stylesheet" type="text/css" href="demostyle.css">
 </head>
 
 <body>
     <div id="mydiv"> this is my div</div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="TFButtonMethods.js"></script>
-    <script src="TFTextFieldMethods.js"></script>
-    <script src="TFCheckboxMethods.js"></script>
-    <script src="TFCheckboxFieldMethods.js"></script>
-    <script src="TFSharedMethods.js"></script>
-    <script src="TFComboboxField.js"></script>
+    <script type="text/javascript" src="jquery-1.11.1.js"></script>
+    <script src="../methods/TFButtonMethods.js"></script>
+    <script src="../methods/TFTextFieldMethods.js"></script>
+    <script src="../methods/TFCheckboxMethods.js"></script>
+    <script src="../methods/TFCheckboxFieldMethods.js"></script>
+    <script src="../methods/TFSharedMethods.js"></script>
+    <!-- <script src="../methods/TFComboboxField.js"></script> -->
 
-    <script src="TFIterator.js"></script>
-    <script src="TFForm.js"></script>
-    <script src="TFContainer.js"></script>
-    <script src="TFCheckboxField.js"></script>
-    <script src="TFCheckbox.js"></script>
-    <script src="TFTextAreaField.js"></script>
-    <script src="TFTextfield.js"></script>
-    <script src="TFForm.js"></script>
-    <script src="TFRadioField.js"></script>
-    <script src="TFRadio.js"></script>
-    <script src="TFButton.js"></script>
-    <script src="TFValidations.js"></script>
-    <script src="TFEvents.js"></script>
+    <script src="../components/TFIterator.js"></script>
+    <script src="../components/TFForm.js"></script>
+    <script src="../components/TFContainer.js"></script>
+    <script src="../components/TFCheckboxField.js"></script>
+    <script src="../components/TFCheckbox.js"></script>
+    <script src="../components/TFTextAreaField.js"></script>
+    <script src="../components/TFTextfield.js"></script>
+    <script src="../components/TFForm.js"></script>
+    <script src="../components/TFRadioField.js"></script>
+    <script src="../components/TFRadio.js"></script>
+    <script src="../components/TFButton.js"></script>
+    <script src="../validations/TFValidations.js"></script>
+<!--     <script src="../components/TFEvents.js"></script> -->
     <script>
     var SenderName =TFTextField.call({
                         type: 'textfield',
@@ -79,7 +79,7 @@
                             }
                         }],
                         render : function(){
-                            this.onlyText({value : true });
+                            this.isRequired({value : true , errmsg : 'hja hjhdk'});
                         },
                         listeners: {
                             input: function(e, val) {
@@ -88,11 +88,13 @@
 
                             },
                             blur : function(e, val){
-                                 
+                                 this.validate();
                             	
                             }
                         }
                     });
+    
+    SenderName.shared.appendTo('input');
     (function() {
 
         /*window.Current.Invoice.SenderFields =[];

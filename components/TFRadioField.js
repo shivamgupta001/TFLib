@@ -1,7 +1,21 @@
 /**
- * @author Shivam Gupta <shivamcs3080@gmail.com>
+ * @author Shivam Gupta 
+ * @constructor TFRadioField
+ * @property {string} id - id will be assigned to checkbox[id] & label[for].
+ * @property {string} markRequired - will add *.
+ * @property {string} fieldLayout - can be 'row' or 'column'.
+ * @property {object} styles - styles will be applied to button tag.
+ * @property {object[]} fieldGroup - pass all checkboxes details as each item.
+ * @property {string} groupLayout - layout of items provided in fieldGroup can be 'row' or 'column'.
+ * @property {string} name - will be common to all checkboxes , no need to provide individually , but you can override.
+ * @property {object} validations - Does apply validations to component only 'isRequired' present.
+ * @property {string} fieldLabel - label to component field.
+ * @property {(string|string[])} labelClass -  will be applied to TFCheckboxField label wrapper.
+ * @property {(string|string[])} compClass -  will be applied to TFCheckboxField outermost div.
+ * @property {(string|string[])} controlClass -  will be applied to div wraper of all checkboxes.
+ * @property {function} render - this function will run when the component is generated but not yet returned.
+ * @property {object} listeners - is an object where all listener handlers can be written as key value pair.
  */
-/** This is a description of the RadioField Module. */
 var TFRadioField = function($fieldset){
 		
 		var radiofield = {

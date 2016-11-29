@@ -1,7 +1,8 @@
 /**
- * @author Shivam Gupta <shivamcs3080@gmail.com>
+ * @author Shivam Gupta 
+ * @constructor TFForm
+ *
  */
- /** This is a description of the Form Module. */
 var TFForm = function(){
 	
 		var form = {

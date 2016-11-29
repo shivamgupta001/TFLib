@@ -1,7 +1,20 @@
 /**
- * @author Shivam Gupta <shivamcs3080@gmail.com>
+ * @author Shivam Gupta 
+ * @constructor TFTextAreaField
+ * @property {string} id - id will be assigned to checkbox[id] & label[for].
+ * @property {string} markRequired - will add *.
+ * @property {string} fieldLayout - can be 'row' or 'column'.
+ * @property {object} styles - styles will be applied to outer div of component.
+ * @property {string} displayLabel - 'none' will hide display part of component.
+ * @property {object} attributes - attributes will be applied to textarea tag.
+ * @property {object} validations - Does apply validations to component only 'isRequired' present.
+ * @property {string} fieldLabel - label to component field.
+ * @property {(string|string[])} labelClass -  will be applied to  label wrapper.
+ * @property {(string|string[])} compClass -  will be applied to  outermost div.
+ * @property {(string|string[])} controlClass -  will be applied to div wraper of all teaxtarea wrapper.
+ * @property {function} render - this function will run when the component is generated but not yet returned.
+ * @property {object} listeners - is an object where all listener handlers can be written as key value pair.
  */
-/** This is a description of the TextAreaField Module. */
 var TFTextAreaField = function(){
 		
 		var textareafield = {

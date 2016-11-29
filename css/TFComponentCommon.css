@@ -59,7 +59,7 @@
 }
 
 .tf-field-with-btn button {
-    background-image: url("Caution.png");
+    background-image: url("../demo/Caution.png");
     width: 14px;
     height: 14px;
     background-size: 14px 14px;

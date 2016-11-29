@@ -1,7 +1,16 @@
 /**
- * @author Shivam Gupta <shivamcs3080@gmail.com>
+ * @author Shivam Gupta 
+ * @constructor TFCheckbox
+ * @property {string} id - id will be assigned to checkbox[id] & label[for].
+ * @property {string} layout - can be 'row' or 'column'.
+ * @property {object} styles - styles will be applied to button tag.
+ * @property {object} attributes - attributes will be applied to button tag.
+ * @property {(string|string[])} labelClass -  will be applied to TFCheckbox label.
+ * @property {(string|string[])} compClass -  will be applied to TFCheckbox.
+ * @property {string} fieldLabel - field label value.
+ * @property {function} render - this function will run when the coponent is generated but not yet appended.
+ * @property {object} listeners - is an object where all listener handlers can be written as key value pair.
  */
-/** This is a description of the Checkbox Module. */
 var TFCheckbox = function(){
 		
 		var checkbox = {

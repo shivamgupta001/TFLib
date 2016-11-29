@@ -1,7 +1,16 @@
 /**
- * @author Shivam Gupta <shivamcs3080@gmail.com>
+ * @author Shivam Gupta 
+ * @constructor TFButton
+ * @property {string} id - id will be assigned to button tag.
+ * @property {object} styles - styles will be applied to button tag.
+ * @property {object} attributes - attributes will be applied to button tag.
+ * @property {(string|string[])} compClass - compClass will be applied to TFButton component.
+ * @property {(string|string[])} btnClass - btnClass will be applied to button tag.
+ * @property {string} btnText - btnText value is text for button.
+ * @property {function} render - this function will run when the coponent is generated but not yet appended.
+ * @property {object} listeners - is an object where all listener handlers can be written as key value pair.
  */
-/** This is a description of the Button Module. */
+
 var TFButton = function(){
 		
 		var button = {
@@ -18,7 +27,10 @@ var TFButton = function(){
 				this._attachProperties();
 				this._render();		
 				
-				// return el
+				
+				/** @return {Point} 
+				 *         The location of the event
+				 */
 				return this.outerComp;
 				
 			},/** @access private */

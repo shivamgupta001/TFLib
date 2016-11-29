@@ -1,78 +1,159 @@
-/**
- * @author Shivam Gupta <shivamcs3080@gmail.com>
- */
- /** This is a description of the Checkbox Methods Module. */
+
 var TFCheckboxMethods = function(){
 
-	//display property handler
+	/**This method will hide label as display 'none'
+      * @memberof TFCheckbox
+      * @memberof TFRadio
+      */
 	this.displayLabelHide = function(){
 		this.labelComp.style.display = "none";
 	};
+	/**This method will show label if display 'none'
+      * @memberof TFCheckbox
+      * @memberof TFRadio
+      */
 	this.displayLabelShow = function(){
 		this.labelComp.style.display = "";
 	};
+	/**This method will inner comp as display 'none'
+      * @memberof TFCheckbox
+      * @memberof TFRadio
+      */
 	this.displayInnerHide = function(){
 		this.innerComp.style.display = "none";
 	};
+	/**This method will inner comp as display 'none'
+      * @memberof TFCheckbox
+      * @memberof TFRadio
+      */
 	this.displayInnerShow = function(){
 		this.innerComp.style.display = "";
 	};
 
-	// visibility property handler
+	/**This method will hide label as visibility 'hidden'
+      * @memberof TFCheckbox
+      * @memberof TFRadio
+      */
 	this.visibleLabelHide = function(){
 		this.labelComp.style.visibility = "hidden";
 	};
+	/**This method will show label if visibility 'hidden'
+      * @memberof TFCheckbox
+      * @memberof TFRadio
+      */
 	this.visibleLabelShow = function(){
 		this.labelComp.style.visibility = "";
 	};
+	/**This method will hide inner label as visibility 'hidden'
+      * @memberof TFCheckbox
+      * @memberof TFRadio
+      */
 	this.visibleInnerHide = function(){
 		this.innerComp.style.visibility = "hidden";
 	};
+	/**This method will show inner label if visibility 'hidden'
+      * @memberof TFCheckbox
+      * @memberof TFRadio
+      */
 	this.visibleInnerShow = function(){
 		this.innerComp.style.visibility = "";
 	};
 
-	// add remove style
+	/**This method will add style to label comp 
+      * @memberof TFCheckbox
+      * @memberof TFRadio
+      * @param {string} property - property name 
+      * @param {string} val - property value 
+      */
 	this.addLabelStyle = function(prop , val){
 		this.labelComp.style[prop] = val;
 	};
+	/**This method will remove style to label comp 
+      * @memberof TFCheckbox
+      * @memberof TFRadio
+      * @param {string} property - property name 
+      */
 	this.removeLabelStyle = function(prop){
 		this.labelComp.style[prop] = '';
 	};
+	/**This method will add style to inner comp 
+      * @memberof TFCheckbox
+      * @memberof TFRadio
+      * @param {string} property - property name 
+      * @param {string} val - property value 
+      */
 	this.addInnerStyle = function(prop , val){
 		this.innerComp.style[prop] = val;
 	};
+	/**This method will remove style to inner comp 
+      * @memberof TFCheckbox
+      * @memberof TFRadio
+      * @param {string} property - property name 
+      */
 	this.removeInnerStyle = function(prop){
 		this.innerComp.style[prop] = '';
 	};
 
-	// change label name 
-	this.changeLabelText = function(newLabelText){
+	/**This method will change label text 
+      * @memberof TFCheckbox
+      * @memberof TFRadio
+      * @param {string} newLabelText - label text or html
+      */
+	this.changeLabel = function(newLabelText){
 		this.labelComp.innerHTML = newLabelText;
 	};
 
-	// add remove class
+	/**This method will add class to label comp 
+      * @memberof TFCheckbox
+      * @memberof TFRadio
+      * @param {string|string[]} newClass - class name 
+      */
 	this.addLabelClass = function(newClass){
 		newClass = newClass.constructor === Array ? newClass : [newClass];
 		this.labelComp.classList.add.apply(this.labelComp.classList , newClass); 
 	};
+	/**This method will remove class to label comp 
+      * @memberof TFCheckbox
+      * @memberof TFRadio
+      * @param {string|string[]} oldClass - class name 
+      */
 	this.removeLabelClass = function(oldClass){
 		oldClass = oldClass.constructor === Array ? oldClass : [oldClass];
 		this.labelComp.classList.remove.apply(this.labelComp.classList , oldClass);
 	};
+	/**This method will add class to inner comp 
+      * @memberof TFCheckbox
+      * @memberof TFRadio
+      * @param {string|string[]} newClass - class name 
+      */
 	this.addInnerClass = function(newClass){
 		newClass = newClass.constructor === Array ? newClass : [newClass];
 		this.innerComp.classList.add.apply(this.innerComp.classList , newClass); 	
 	};
+	/**This method will remove class to inner comp 
+      * @memberof TFCheckbox
+      * @memberof TFRadio
+      * @param {string|string[]} oldClass - class name 
+      */
 	this.removeInnerClass = function(oldClass){
 		oldClass = oldClass.constructor === Array ? oldClass : [oldClass];
 		this.innerComp.classList.remove.apply(this.innerComp.classList , oldClass);
 	};
 
-	// set remove attribute
+	/**This method will set attribute to inner comp 
+      * @memberof TFCheckbox
+      * @memberof TFRadio
+      * @param {string} attrName - attribute name
+      * @param {string} attrVal - attribute value
+      */
 	this.setAttribute = function( attrName , attrVal){
 		this.innerComp.setAttribute(attrName , attrVal);
 	};
+	/**This method will remove attribute to inner comp 
+      * @memberof TFCheckbox
+      * @memberof TFRadio
+      * @param {string} attrName - attribute name 
+      */
 	this.removeAttribute = function(attrName){
 		this.innerComp.removeAttribute(attrName);
 	};

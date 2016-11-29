@@ -1,7 +1,4 @@
-/**
- * @author Shivam Gupta <shivamcs3080@gmail.com>
- */
-/** This is a description of the ComboboxField Module. */
+/** This is a description of combobox field */
 var TFComboboxField = function($fieldset) {
 
     var comboboxfield = {

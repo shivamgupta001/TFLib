@@ -1,7 +1,17 @@
 /**
- * @author Shivam Gupta <shivamcs3080@gmail.com>
+ * @author Shivam Gupta 
+ * @constructor TFContainer
+ * @property {string} id - id will be assigned to container.
+ * @property {string} layout - can be 'row' or 'column'.
+ * @property {object} styles - styles will be applied to button tag.
+ * @property {string} tagName - can pass tag name of which container can be formed.
+ * @property {number} flex - will define what %age of width to take in comparison to others.
+ * @property {(string|string[])} compClass -  will be applied to outermost div of component.
+ * @property {string} innerHTML - can pass html directly.
+ * @property {string} innerText - can pass text.
+ * @property {function} render - this function will run when the coponent is generated but not yet appended.
+ * @property {object} listeners - is an object where all listener handlers can be written as key value pair.
  */
- /** This is a description of the Container Module. */
 var TFContainer = function(){
 		
 		var container = {

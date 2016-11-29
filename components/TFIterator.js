@@ -1,7 +1,8 @@
 /**
  * @author Shivam Gupta <shivamcs3080@gmail.com>
+ * @constructor Iterator
  */
-/** This is a description of the Iterator Module. */
+
 var Iterator = function(config){
 
 	// iterates object passed to iterator

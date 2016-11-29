@@ -26,110 +26,155 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @author Shivam Gupta &lt;shivamcs3080@gmail.com>
- */
- /** This is a description of the TextField Methods Module. */
+            <pre class="prettyprint source linenums"><code>
 var TFTextFieldMethods = function(){
 
-	// display property handler
+	/**This method will hide label as display 'none'
+      * @memberof TFTextField
+      * @memberof TFTextAreaField
+      */
 	this.displayLabelHide = function(){
 		this.labelComp.style.display = "none";
 	};
+	/**This method will show label if display 'none'
+      * @memberof TFTextField
+      * @memberof TFTextAreaField
+      */
 	this.displayLabelShow = function(){
 		this.labelComp.style.display = "";
 	};
+	/**This method will control comp as display 'none'
+      * @memberof TFTextField
+      * @memberof TFTextAreaField
+      */
 	this.displayControlHide = function(){
 		this.controlComp.style.display = "none";
 	};
+	/**This method will show control comp if display 'none'
+      * @memberof TFTextField
+      * @memberof TFTextAreaField
+      */
 	this.displayControlShow = function(){
 		this.controlComp.style.display = "";
 	};
 
-	// visibility property handler
+	/**This method will hide label as visibility 'hidden'
+      * @memberof TFTextField
+      * @memberof TFTextAreaField
+      */
 	this.visibleLabelHide = function(){
 		this.labelComp.style.visibility = "hidden";
 	};
+	/**This method will show label as if visibility 'hidden'
+      * @memberof TFTextField
+      * @memberof TFTextAreaField
+      */
 	this.visibleLabelShow = function(){
 		this.labelComp.style.visibility = "";
 	};
+	/**This method will hide control as visibility 'hidden'
+      * @memberof TFTextField
+      * @memberof TFTextAreaField
+      */
 	this.visibleControlHide = function(){
 		this.controlComp.style.visibility = "hidden";
 	};
+	/**This method will show control if visibility 'hidden'
+      * @memberof TFTextField
+      * @memberof TFTextAreaField
+      */
 	this.visibleControlShow = function(){
 		this.controlComp.style.visibility = "";
 	};
 
-	// add remove style
+	/**This method will add style to label comp 
+      * @memberof TFTextField
+      * @memberof TFTextAreaField
+      * @param {string} property - property name 
+      * @param {string} val - property value 
+      */
 	this.addLabelStyle = function(prop , val){
 		this.labelComp.style[prop] = val;
 	};
+	/**This method will remove style to label comp 
+      * @memberof TFTextField
+      * @memberof TFTextAreaField
+      * @param {string} property - property name 
+      */
 	this.removeLabelStyle = function(prop){
 		this.labelComp.style[prop] = '';
 	};
+	/**This method will add style to control comp 
+      * @memberof TFTextField
+      * @memberof TFTextAreaField
+      * @param {string} property - property name 
+      * @param {string} val - property value 
+      */
 	this.addControlStyle = function(prop , val){
 		this.controlComp.style[prop] = val;
 	};
+	/**This method will remove style to control comp 
+      * @memberof TFTextField
+      * @memberof TFTextAreaField
+      * @param {string} property - property name 
+      */
 	this.removeControlStyle = function(prop){
 		this.controlComp.style[prop] = '';
 	};
 	
-	// change label name 
+	/**This method will change label text 
+      * @memberof TFTextField
+      * @memberof TFTextAreaField
+      * @param {string} newLabelText - label text or html
+      */
 	this.changeLabel = function(newLabelText){
 		this.labelComp.querySelector('tf-tf-label').innerHTML = newLabelText;
 	};
 
-	// add remove class handler
+	/**This method will add class to label comp 
+      * @memberof TFTextField
+      * @memberof TFTextAreaField
+      * @param {string} newClass - class name 
+      */
 	this.addLabelClass = function(newClass){
 		newClass = newClass.constructor === Array ? newClass : [newClass];
 		this.labelComp.classList.add.apply(this.labelComp.classList , newClass);
 	};
+	/**This method will remove class to label comp 
+      * @memberof TFTextField
+      * @memberof TFTextAreaField
+      * @param {string} oldClass - class name 
+      */
 	this.removeLabelClass = function(oldClass){
 		oldClass = oldClass.constructor === Array ? oldClass : [oldClass];
 		this.labelComp.classList.remove.apply(this.labelComp.classList , oldClass);		
 	};
+	/**This method will add class to control comp 
+      * @memberof TFTextField
+      * @memberof TFTextAreaField
+      * @param {string} newClass - class name 
+      */
 	this.addControlClass = function(newClass){
 		newClass = newClass.constructor === Array ? newClass : [newClass];
 		this.controlComp.classList.add.apply(this.controlComp.classList , newClass);
 	};
+	/**This method will remove class to control comp 
+      * @memberof TFTextField
+      * @memberof TFTextAreaField
+      * @param {string} oldClass - class name 
+      */
 	this.removeControlClass = function(oldClass){
 		oldClass = oldClass.constructor === Array ? oldClass : [oldClass];
 		this.controlComp.classList.remove.apply(this.controlComp.classList , oldClass);
 	};
 
-	// set and rmove validation
-	/*this.setError = function(errmsg){
-		
-		// if initially validations config included 
-		// this.isRequired = function 
-		// else this.isRequired = undefined 
-		//[ before or after running setError this.isRequired remains same]
-		// if this.validations.isRequired was not set it will get set after setError called
-
-		
-		if(this.validations &amp;&amp; this.validations.isRequired){
-			
-		}else {
-
-			// this.scope gets set only when setError ran successfully once
-			if(!this.scope){
-				this.validations = { 'isRequired' : {value : true , errmsg : errmsg}};
-				this.setValidations();	
-			}	
-		}
-		
-	};
-	this.removeError = function(){
-				
-		if(this.scope &amp;&amp; this.scope.isRequired){
-
-			this.validations.isRequired.value = false;
-			this.setValidations();
-			
-		}
-	};*/
-
-	// validation methods
+	/**This method will apply validation to component 
+      * @memberof TFTextField
+      * @memberof TFTextAreaField
+      * @param {object}
+      * @property {boolean} value - true or false to apply or not apply validation
+      * @property {string} errmsg - error message to show on tooltip
+      */
 	this.isRequired = function(obj){
 	
 		var status = obj.value;
@@ -155,6 +200,12 @@ var TFTextFieldMethods = function(){
 		this.setValidations.call(this);
 	
 	};
+	/**This method will apply validation to component 
+      * @memberof TFTextField
+      * @memberof TFTextAreaField
+      * @param {object}
+      * @property {boolean} value - true or false to apply or not apply validation
+      */
 	this.onlyText = function(obj){
 		
 		var status = obj.value;
@@ -176,6 +227,12 @@ var TFTextFieldMethods = function(){
 		this.setValidations.call(this);
 	
 	};
+	/**This method will apply validation to component 
+      * @memberof TFTextField
+      * @memberof TFTextAreaField
+      * @param {object}
+      * @property {boolean} value - true or false to apply or not apply validation
+      */
 	this.onlyNumber = function(obj){
 		
 		var status = obj.value;
@@ -199,6 +256,14 @@ var TFTextFieldMethods = function(){
 		this.setValidations.call(this);
 	
 	};
+	/**This method will apply validation to component 
+      * @memberof TFTextField
+      * @memberof TFTextAreaField
+      * @param {object}
+      * @property {boolean} value - true or false to apply or not apply validation
+      * @property {string} errmsg - error message to show on tooltip
+      * @property {string} pattern - regex pattern
+      */
 	this.regex = function(obj){
 		
 		var status = obj.value;
@@ -256,13 +321,13 @@ var TFTextFieldMethods = function(){
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Iterator">Iterator</a></li><li><a href="global.html#TFButton">TFButton</a></li><li><a href="global.html#TFButtonMethods">TFButtonMethods</a></li><li><a href="global.html#TFCheckbox">TFCheckbox</a></li><li><a href="global.html#TFCheckboxField">TFCheckboxField</a></li><li><a href="global.html#TFCheckboxFieldMethods">TFCheckboxFieldMethods</a></li><li><a href="global.html#TFCheckboxMethods">TFCheckboxMethods</a></li><li><a href="global.html#TFComboboxField">TFComboboxField</a></li><li><a href="global.html#TFContainer">TFContainer</a></li><li><a href="global.html#TFForm">TFForm</a></li><li><a href="global.html#TFRadio">TFRadio</a></li><li><a href="global.html#TFRadioField">TFRadioField</a></li><li><a href="global.html#TFSharedMethods">TFSharedMethods</a></li><li><a href="global.html#TFTextAreaField">TFTextAreaField</a></li><li><a href="global.html#TFTextField">TFTextField</a></li><li><a href="global.html#TFTextFieldMethods">TFTextFieldMethods</a></li><li><a href="global.html#TFValidations">TFValidations</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Iterator.html">Iterator</a></li><li><a href="TFButton.html">TFButton</a></li><li><a href="TFCheckbox.html">TFCheckbox</a></li><li><a href="TFCheckboxField.html">TFCheckboxField</a></li><li><a href="TFContainer.html">TFContainer</a></li><li><a href="TFForm.html">TFForm</a></li><li><a href="TFRadio.html">TFRadio</a></li><li><a href="TFRadioField.html">TFRadioField</a></li><li><a href="TFTextAreaField.html">TFTextAreaField</a></li><li><a href="TFTextField.html">TFTextField</a></li></ul><h3>Global</h3><ul><li><a href="global.html#TFComboboxField">TFComboboxField</a></li><li><a href="global.html#TFValidations">TFValidations</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Nov 29 2016 02:01:23 GMT+0530 (IST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Nov 29 2016 16:11:58 GMT+0530 (India Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
