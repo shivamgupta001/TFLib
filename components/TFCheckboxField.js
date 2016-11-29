@@ -54,9 +54,7 @@ var TFCheckboxField = function(){
 				this.validations = me.validations || {};
 	            this.validations.__proto__ =  {
 	                'isRequired' : {value : false , errmsg : 'This field is Required'},
-	                'onlyText' : {value : false},
-	                'onlyNumber' : {value :false},
-	                'regex' : {value : false, errmsg : 'Allowed Values are alphabets'}
+	                'customError' : {value : false , errmsg : 'Custom error'}
 	            };
 
 				// innerHTML configs
@@ -142,6 +140,7 @@ var TFCheckboxField = function(){
 				me.innerComp = this.innerComp;
 				me.labelId = this.labelId;
 				me.requiredComp = this.requiredComp;
+				me.setValidations = this.setValidations;
 
 				//methods
 				TFCheckboxMethods.call(me);

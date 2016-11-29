@@ -51,7 +51,8 @@ var TFRadioField = function($fieldset){
 				this.name = me.name || '';
 				this.validations = me.validations || {};
 	            this.validations.__proto__ =  {
-	                'isRequired' : {value : false , errmsg : 'This field is Required'}
+	                'isRequired' : {value : false , errmsg : 'This field is Required'},
+	                'customError' : {value : false , errmsg : 'custom error'}
 	            };
 
 				// innerHTML configs
@@ -138,6 +139,7 @@ var TFRadioField = function($fieldset){
 				me.innerComp = this.innerComp;
 				me.labelId = this.labelId;
 				me.requiredComp = this.requiredComp;
+				me.setValidations = this.setValidations; 
 				
 				// add methods
 				TFCheckboxFieldMethods.call(me);

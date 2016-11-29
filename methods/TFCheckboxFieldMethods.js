@@ -150,19 +150,25 @@ var TFCheckboxFieldMethods = function(){
       * @property {string} errmsg - error message to show on tooltip
       */
 	this.isRequired = function(status , errmsg){
-	
+		
 		if(this.validations.hasOwnProperty("isRequired")){
 
-			if(!status){
+			this.validations.isRequired.value = status;
+
+			if(this.validations.isRequired.value){
+				if(errmsg)
+					this.validations.isRequired.errmsg = errmsg;
+				if(!this.validations.customError.value)
+					this.controlComp.setAttribute('data-tooltip',this.validations.isRequired.errmsg);
+			}else if(!this.validations.customError.value){
+
 				this.controlComp.classList.remove('tooltip','tf-err-border--red');
 				this.controlComp.removeAttribute("data-tooltip");
 			}
-			this.validations.isRequired.value = status;
-			this.validations.isRequired.errmsg = errmsg;	
 
 		}else{
-			this.validations = Object.defineProperty(this.validations, 'isRequired', 
-								{	value : {},
+			Object.defineProperty(this.validations, 'isRequired',{	
+									value : {},
 									writable : true,
 									configurable : true,
 									enumerable : true
@@ -180,7 +186,7 @@ var TFCheckboxFieldMethods = function(){
       * @memberof TFCheckboxField
       * @memberof TFRadioField
       */
-	this.validate = function(){
+	this.customError = function(status,errmsg){
 		
 		var chkstatus = false;
 		for(var i = 0 ; i< this.innerComp.length ; i++){
@@ -194,10 +200,68 @@ var TFCheckboxFieldMethods = function(){
 			this.controlComp.classList.remove('tooltip', 'tf-err-border--red');
 			this.controlComp.removeAttribute('data-tooltip');
 		}else{
-			this.controlComp.classList.add('tooltip', 'tf-err-border--red');
-			this.controlComp.setAttribute('data-tooltip', this.validations.isRequired.errmsg);
-		}
+			if(this.validations.hasOwnProperty("customError")){
+				
+				this.validations.customError.value = status;
+				if(this.validations.customError.value){
+					if(errmsg)
+						this.validations.customError.errmsg = errmsg
 
-		return chkstatus;
+					this.controlComp.classList.add('tooltip', 'tf-err-border--red');
+					this.controlComp.setAttribute('data-tooltip',this.validations.customError.errmsg);
+				}else{
+					this.controlComp.classList.remove('tooltip', 'tf-err-border--red');
+					this.controlComp.removeAttribute('data-tooltip');
+				}
+					
+			}else{
+
+				Object.defineProperty(this.validations ,'customError',{
+					value : {},
+					writable : true,
+					configurable : true,
+					enumerable : true,
+				});
+				
+				if(status)
+					this.validations.customError.value = status;
+				if(errmsg)
+					this.validations.customError.errmsg = errmsg;
+
+				this.controlComp.classList.add('tooltip', 'tf-err-border--red');
+				this.controlComp.setAttribute('data-tooltip',this.validations.customError.errmsg);
+
+			}
+			
+		}
+	
+	};
+	this.validate = function(){
+
+		this.isValidated = false;
+		Object.keys(this.validations).forEach(function(val){
+			if(val === 'isRequired'){
+				if(this.validations.isRequired.value){
+					this.controlComp.classList.add('tooltip', 'tf-err-border--red');
+					this.controlComp.setAttribute('data-tooltip', this.validations.isRequired.errmsg);	
+					this.isValidated = true;
+				}
+			}else if(val === 'regex'){
+				if(this.validations.regex.value){
+					var regex = new RegExp(this.validations.regex.pattern);
+					if(!regex.test(this.innerComp.value)){
+						this.controlComp.classList.add('tooltip', 'tf-err-border--red');
+						this.controlComp.setAttribute('data-tooltip', this.validations.regex.errmsg);			
+						this.isValidated = true;
+					}					
+				}
+			}else if(val === "customError"){
+				if(this.validations.customError.value){
+
+				}
+			}
+		}, this);
+		
+		return this.isValidated;
 	};
 };

@@ -241,6 +241,11 @@ var TFTextFieldMethods = function(){
 	this.regex = function(status, errmsg, pattern){
 		
 		if(this.validations.hasOwnProperty("regex")){
+			
+			if(!status){
+				this.controlComp.classList.remove('tooltip','tf-err-border--red');
+				this.controlComp.removeAttribute("data-tooltip");
+			}
 			this.validations.regex.value = status;
 			this.validations.regex.errmsg = errmsg;	
 			this.validations.regex.pattern = pattern;	
