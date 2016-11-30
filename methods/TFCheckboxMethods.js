@@ -1,5 +1,5 @@
 
-var TFCheckboxMethods = function(){
+TFLib.TFCheckboxMethods = function(){
 
 	/**This method will hide label as display 'none'
       * @memberof TFCheckbox

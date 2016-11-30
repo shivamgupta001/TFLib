@@ -3,7 +3,7 @@
  * @constructor Iterator
  */
 
-var Iterator = function(config){
+TFLib.Iterator = function(config){
 
 	// iterates object passed to iterator
 	function iterateStructure(config){
@@ -52,27 +52,27 @@ var Iterator = function(config){
 		
 		switch(item.type){
 			
-			case 'textfield' 	: el = TFTextField.call(item);
+			case 'textfield' 	: el = TFLib.TFTextField.call(item);
 									break;
-			case 'textareafield': el = TFTextAreaField.call(item);
+			case 'textareafield': el = TFLib.TFTextAreaField.call(item);
 									break;
-			case 'checkboxfield': el = TFCheckboxField.call(item);
+			case 'checkboxfield': el = TFLib.TFCheckboxField.call(item);
 									break;
-			case 'radiofield'	: el = TFRadioField.call(item);
+			case 'radiofield'	: el = TFLib.TFRadioField.call(item);
 									break;
-			case 'checkbox'		: el = TFCheckbox.call(item);
+			case 'checkbox'		: el = TFLib.TFCheckbox.call(item);
 									break;
-			case 'radio'		: el = TFRadio.call(item);
+			case 'radio'		: el = TFLib.TFRadio.call(item);
 									break;
-			case 'container'	: el = TFContainer.call(item);
+			case 'container'	: el = TFLib.TFContainer.call(item);
 									break;
-			case 'form'			: el = TFForm.call(item);
+			case 'form'			: el = TFLib.TFForm.call(item);
 									break;
-			case 'button' 		: el = TFButton.call(item);
+			case 'button' 		: el = TFLib.TFButton.call(item);
 									break;
-			case 'comboboxfield': el = TFComboboxField.call(item);
+			case 'comboboxfield': el = TFLib.TFComboboxField.call(item);
 									break;
-			default 			: el = TFContainer.call(item);
+			default 			: el = TFLib.TFContainer.call(item);
 									break;
 		}
 		

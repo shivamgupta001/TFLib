@@ -1,5 +1,5 @@
 /** This is a description of combobox field */
-var TFComboboxField = function($fieldset) {
+TFLib.TFComboboxField = function($fieldset) {
 
     var comboboxfield = {
         
@@ -151,8 +151,8 @@ var TFComboboxField = function($fieldset) {
             me.setValidations = this.setValidations; 
 
             // add methods
-            TFTextFieldMethods.call(me);
-            TFSharedMethods.call(me);
+            TFLib.TFTextFieldMethods.call(me);
+            TFLib.TFSharedMethods.call(me);
 
             // share methods to el
             this.outerComp.shared = me;

@@ -15,7 +15,7 @@
  * @property {function} render - this function will run when the component is generated but not yet returned.
  * @property {object} listeners - is an object where all listener handlers can be written as key value pair.
  */
-var TFTextAreaField = function(){
+TFLib.TFTextAreaField = function(){
 		
 		var textareafield = {
 			
@@ -43,6 +43,7 @@ var TFTextAreaField = function(){
 				this.requiredId = "tf-ta-req-"+getRandomInt(1,1000);
 
 				this.styles = me.styles || '';
+				this.buttons = me.buttons || [];
 				this.attributes = me.attributes || '';
 				this.displayLabel = me.displayLabel || false;
 				this.fieldLayout = me.fieldLayout || 'row';
@@ -88,7 +89,7 @@ var TFTextAreaField = function(){
 							'<span id="'+this.requiredId+'" class="tf-required--red" style="display:none;" >*</span>',
 						'</div>',
 						'<div control-type="tf-textareafield" class="tf-field-with-btn ">',
-							'<textarea',
+							'<textarea class="tf-flex tf-flex--one"',
 								'id="'+this.innerId+'"',
 								''+(this.name ? 'name="'+this.name+'"' : '')+'',
 								''+(this.placeholder ? 'placeholder="'+this.placeholder+'"' : '')+'',
@@ -137,6 +138,11 @@ var TFTextAreaField = function(){
 				if(this.controlClass) this.controlComp.classList.add.apply(this.controlComp.classList , this.controlClass);
 				if(this.labelClass) this.labelComp.classList.add.apply(this.labelComp.classList , this.labelClass);
 				if(this.compClass) this.outerComp.classList.add.apply(this.outerComp.classList, this.compClass);
+
+				// handling buttons
+	            this.buttons.forEach(function(val) {
+	                this.controlComp.appendChild(TFLib.TFButton.call(val));
+	            }, this);
 				
 			},
 			_bindEvents : function(){
@@ -164,15 +170,15 @@ var TFTextAreaField = function(){
             	me.requiredComp = this.requiredComp;
 				
 				// add methods
-				TFTextFieldMethods.call(me);
-				TFSharedMethods.call(me);
+				TFLib.TFTextFieldMethods.call(me);
+				TFLib.TFSharedMethods.call(me);
 
 				// share methods over el
 				this.outerComp.shared = me;
 
 				// handle validations
 	            me.validationMethods = {};
-	            TFValidations.call(me.validationMethods);
+	            TFLib.TFValidations.call(me.validationMethods);
 
 	            if(Object.keys(this.validations).length > 0)
 	                this.setValidations.call(me);

@@ -1,5 +1,5 @@
 
-var TFButtonMethods = function(){
+TFLib.TFButtonMethods = function(){
 
 	
 	/**

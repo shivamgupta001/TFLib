@@ -15,7 +15,7 @@
  * @property {function} render - this function will run when the component is generated but not yet returned.
  * @property {object} listeners - is an object where all listener handlers can be written as key value pair.
  */
-var TFTextField = function($fieldset) {
+TFLib.TFTextField = function($fieldset) {
 
     var textfield = {
         
@@ -55,7 +55,7 @@ var TFTextField = function($fieldset) {
             this.attributes = me.attributes || '';
             this.displayLabel = me.displayLabel || false;
             this.fieldLabel = me.fieldLabel || '';
-            this.fieldType = me.fieldType || 'row';
+            this.fieldLayout = me.fieldLayout || 'row';
 
             //style
             this.flex = me.flex || false;
@@ -85,13 +85,13 @@ var TFTextField = function($fieldset) {
             var el = [
                 '<div',
                     'id="' + this.dynamicId + '"',
-                    'class="tf-flex ' + ((this.fieldType === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
+                    'class="tf-flex ' + ((this.fieldLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
                         '<div control-type="tf-tf-label" class="tf-flex ' + (this.displayLabel ? 'tf-display--none' : '') + '">',
                             '<label for="'+this.innerId+'">' + (this.fieldLabel ? this.fieldLabel : '') + '</label>',
                             '<span id="'+this.requiredId+'" class="tf-required--red" style="display:none;">*</span>',
                         '</div>',
                         '<div control-type="tf-textfield" class="tf-field-with-btn">',
-                            '<input',
+                            '<input class="tf-flex tf-flex--one"',
                                 'type="text"',
                                 'id="'+this.innerId+'"',
                                 '' + (this.name ? 'name="' + this.name + '"' : '') + '',
@@ -141,7 +141,7 @@ var TFTextField = function($fieldset) {
 
             // handling buttons
             this.buttons.forEach(function(val) {
-                this.controlComp.appendChild(TFButton.call(val));
+                this.controlComp.appendChild(TFLib.TFButton.call(val));
             }, this);
         },
         _bindEvents: function() {
@@ -178,15 +178,15 @@ var TFTextField = function($fieldset) {
             me.requiredComp = this.requiredComp;
 
             // add methods
-            TFTextFieldMethods.call(me);
-            TFSharedMethods.call(me);
+            TFLib.TFTextFieldMethods.call(me);
+            TFLib.TFSharedMethods.call(me);
 
             // share methods to el
             this.outerComp.shared = me;
 
             // handle validations
             me.validationMethods = {};
-            TFValidations.call(me.validationMethods);
+            TFLib.TFValidations.call(me.validationMethods);
 
             if(Object.keys(this.validations).length > 0)
                 this.setValidations.call(me);

@@ -16,7 +16,7 @@
  * @property {function} render - this function will run when the component is generated but not yet returned.
  * @property {object} listeners - is an object where all listener handlers can be written as key value pair.
  */
-var TFRadioField = function($fieldset){
+TFLib.TFRadioField = function($fieldset){
 		
 		var radiofield = {
 			
@@ -112,7 +112,7 @@ var TFRadioField = function($fieldset){
 				this.fieldGroup.forEach(function(item){
 					if(this.name != '')
 						item.name = this.name;
-					this.controlComp.appendChild(TFRadio.call(item));
+					this.controlComp.appendChild(TFLib.TFRadio.call(item));
 				},this);
 
 				// cache Dom
@@ -150,7 +150,7 @@ var TFRadioField = function($fieldset){
 
 				// handle validations
 	            me.validationMethods = {};
-	            TFValidations.call(me.validationMethods);
+	            TFLib.TFValidations.call(me.validationMethods);
 
 	            if(Object.keys(this.validations).length > 0)
 	                this.setValidations.call(me);
@@ -187,6 +187,8 @@ var TFRadioField = function($fieldset){
 	                                }
 	                            	delete this.isRequiredHandler;
 	                           	}
+	                    }else if(val === 'customError'){
+	                    	this.customError(true);
 	                    }
 	                }, this);
 	        }

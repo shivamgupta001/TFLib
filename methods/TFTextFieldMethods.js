@@ -1,5 +1,5 @@
 
-var TFTextFieldMethods = function(){
+TFLib.TFTextFieldMethods = function(){
 
 	/**This method will hide label as display 'none'
       * @memberof TFTextField
@@ -363,6 +363,9 @@ var TFTextFieldMethods = function(){
 						this.isValidated = true;
 					}					
 				}
+			}else if(val === 'customError'){
+				if(this.validations.customError.value)
+					this.isValidated = true;
 			}
 		}, this);
 		

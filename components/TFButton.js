@@ -11,7 +11,7 @@
  * @property {object} listeners - is an object where all listener handlers can be written as key value pair.
  */
 
-var TFButton = function(){
+TFLib.TFButton = function(){
 		
 		var button = {
 			
@@ -118,8 +118,8 @@ var TFButton = function(){
 				me.outerComp = this.outerComp;
 										
 				// add methods
-				TFButtonMethods.call(me);
-				TFSharedMethods.call(me);
+				TFLib.TFButtonMethods.call(me);
+				TFLib.TFSharedMethods.call(me);
 
 				// shared methods over el
 				me.outerComp.shared = me;

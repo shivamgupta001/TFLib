@@ -8,373 +8,105 @@
 </head>
 
 <body>
-    <div id="mydiv"> this is my div</div>
+    <div id="mydiv"></div>
     <script type="text/javascript" src="jquery-1.11.1.js"></script>
-    <script src="../methods/TFButtonMethods.js"></script>
-    <script src="../methods/TFTextFieldMethods.js"></script>
-    <script src="../methods/TFCheckboxMethods.js"></script>
-    <script src="../methods/TFCheckboxFieldMethods.js"></script>
-    <script src="../methods/TFSharedMethods.js"></script>
-    <!-- <script src="../methods/TFComboboxField.js"></script> -->
-
-    <script src="../components/TFIterator.js"></script>
-    <script src="../components/TFForm.js"></script>
-    <script src="../components/TFContainer.js"></script>
-    <script src="../components/TFCheckboxField.js"></script>
-    <script src="../components/TFCheckbox.js"></script>
-    <script src="../components/TFTextAreaField.js"></script>
-    <script src="../components/TFTextfield.js"></script>
-    <script src="../components/TFForm.js"></script>
-    <script src="../components/TFRadioField.js"></script>
-    <script src="../components/TFRadio.js"></script>
-    <script src="../components/TFButton.js"></script>
-    <script src="../validations/TFValidations.js"></script>
-<!--     <script src="../components/TFEvents.js"></script> -->
+    <script type="text/javascript" src="../dest/tflib.min.js"></script>   
     <script>
-    var SenderName =TFTextField.call({
-                        type: 'textfield',
-                        fieldType: 'column',
-                        fieldLabel: 'Name',
-                        id: 'invoiceName',
-                        compClass: 'padding--five',
-                        tabindex: '1',
-                        markRequired: true,
-                        flex: 2,
-                        styles: {
+        (function(){
 
-                        },
-                        attributes: {
-
-                        },
-                        validations : {
-                        	/*'regex' : { value:true ,pattern : 'abc' ,errmsg : 'Only Valid Characters are 0-9'}*/
-                        	/*'isRequired' : {value : true , errmsg : 'This field is required.'},*/
-                        	/*'onlyNumber' : {value: true}*/
-                        	/*'onlyText' : {value : true, errmsg : 'Text'}*/
-                        	
-                        },
-                        buttons: [{
-                            id: 'btn1',
-                            btnClass: 'btn-OtherLanguage',
-                            listeners: {
-                                click: function(e, val) {
-                                    console.log('btn1');
-                                }
-                            }
-                        }, {
-                            id: 'btn2',
-                            btnClass: 'btn-Search',
-                            listeners: {
-                                click: function(e, val) {
-                                    console.log('btn2');
-                                }
-                            }
-                        }, {
-                            id: 'btn3',
-                            btnClass: ['dbc', 'bg-col--blue'],
-                            listeners: {
-                                click: function(e, val) {
-                                    console.log('btn3');
-                                }
-                            }
-                        }],
-                        render : function(){
-                            this.isRequired({value : true , errmsg : 'hja hjhdk'});
-                        },
-                        listeners: {
-                            input: function(e, val) {
-                               
-                               
-
-                            },
-                            blur : function(e, val){
-                                 this.validate();
-                            	
-                            }
-                        }
-                    });
-    
-    SenderName.shared.appendTo('input');
-    (function() {
-
-        /*window.Current.Invoice.SenderFields =[];
-        var FirstNamev = {};
-         var Mobile = {};
-        window.Current.Invoice.SenderFields = [FirstNamev,Mobile];*/
-        var btn = TFButton.call({
-            btnText: 'Hello'
-        });
-
-
-        var block1 = Iterator({
-            type: 'container',
-            layout: 'column',
-            tagName : 'section',
-            containerClass: 'abc',
-            items: [{
-                type: 'container',
-                containerClass: ['bg-col--blue', 'abcdef'],
-                styles: {
-                    height: '20px',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    color: 'whitesmoke'
-                },
-                layout: 'row',
-                innerHTML: 'Step1: <b>SENDER INFORMATION</b>',
-                listeners: {
-                    click: function() {
-
-
+            /*sender name start*/
+            var senderName = TFLib.TFTextField.call({
+                fieldLabel : 'Name',
+                fieldLayout : 'column',
+                buttons : [{
+                    styles : {
+                        backgroundImage : "url('Magnifier.png')"   
                     }
+                },{
+                    styles : {
+                        backgroundImage : "url('OL.png')"   
+                    }
+                }],
+                validations : {
+                    'isRequired' : {value : true , errmsg : 'name is required'}
                 }
 
-            }, {
-                type: 'container',
-                flex: 1,
-                layout: 'column',
-                items: [{
-                    type: 'container',
-                    flex: 1,
-                    layout: 'row',
-                    items: [SenderName, {
-                        type: 'textfield',
-                        fieldType: 'column',
-                        fieldLabel: 'Mobile',
-                        id: 'invoiceName1',
-                        tabindex: '2',
-                        required: true,
-                        compClass: 'padding--five',
-                        flex: 1
-                    }]
+            });
+            /*sender name end*/
 
-                }, {
-                    type: 'container',
-                    flex: 1,
-                    layout: 'row',
-                    items: [{
-                        type: 'textfield',
-                        fieldType: 'column',
-                        fieldLabel: 'Address',
-                        id: 'invoiceAddress',
-                        tabindex: '4',
-                        required: true,
-                        compClass: 'padding--five',
-                        flex: 2,
-                        styles: {
-                            width: '50px',
-                            height: '50px',
-                            paddingLeft: '20px'
-                        }
-                    }, {
-                        type: 'textfield',
-                        fieldType: 'column',
-                        fieldLabel: 'Zip',
-                        id: 'invoiceZip',
-                        tabindex: '5',
-                        required: true,
-                        compClass: 'padding--five',
-                        flex: 1
-                    }]
-                }, {
-                    type: 'container',
-                    flex: 1,
-                    layout: 'row',
-                    items: [{
-                        type: 'textfield',
-                        fieldType: 'column',
-                        fieldLabel: 'Country',
-                        id: 'invoiceCountry',
-                        tabindex: '5',
-                        required: true,
-                        compClass: 'padding--five',
-                        flex: 1
-                    }, {
-                        type: 'textfield',
-                        fieldType: 'column',
-                        fieldLabel: 'State',
-                        id: 'invoiceState',
-                        tabindex: '6',
-                        required: true,
-                        compClass: 'padding--five',
-                        flex: 1
-                    }, {
-                        type: 'textfield',
-                        fieldType: 'column',
-                        fieldLabel: 'City',
-                        id: 'invoiceCity',
-                        tabindex: '7',
-                        required: true,
-                        compClass: 'padding--five',
-                        flex: 1
-                    }]
-                }, {
-                    type: 'container',
-                    flex: 1,
-                    justifyContent: 'center',
-                    layout: 'row',
-                    alignItems: 'center',
-                    innerHTML: '-------------------------------Additional Information--------------------------------',
-                    render: function() {
+            /*sender mobile start*/
+            var senderMobile = TFLib.TFTextField.call({
+                fieldLabel : 'Mobile',
+                fieldLayout : 'column',
+                validations : {
+                    'isRequired' : {value : true , errmsg : 'mobile is required'}
+                }
+            });
+            /*sender mobile end*/
 
-                    }
-                }, {
-                    type: 'container',
-                    flex: 1,
-                    layout: 'row',
-                    items: [{
-                        type: 'textfield',
-                        fieldType: 'column',
-                        fieldLabel: 'Home Number',
-                        id: 'invoiceHomeNo',
-                        tabindex: '8',
-                        compClass: 'padding--five',
-                        flex: 1
-                    }, {
-                        type: 'textfield',
-                        fieldType: 'column',
-                        fieldLabel: 'Work Number',
-                        id: 'invoiceWorkNo',
-                        compClass: 'padding--five',
-                        tabindex: '9',
-                        flex: 1
-                    }, {
-                        type: 'textfield',
-                        fieldType: 'column',
-                        fieldLabel: 'ID Type',
-                        id: 'invoiceID',
-                        compClass: 'padding--five',
-                        tabindex: '10',
-                        flex: 1
-                    }]
-                }, {
-                    type: 'container',
-                    flex: 1,
-                    layout: 'row',
-                    items: [{
-                        type: 'textfield',
-                        fieldType: 'column',
-                        fieldLabel: 'ID Number',
-                        id: 'invoiceIDNum',
-                        tabindex: '11',
-                        compClass: 'padding--five',
-                        flex: 1
-                    }, {
-                        type: 'textfield',
-                        fieldType: 'column',
-                        fieldLabel: 'ID Expiration Date',
-                        id: 'invoiceIDExp',
-                        tabindex: '12',
-                        compClass: 'padding--five',
-                        flex: 1
-                    }, {
-                        type: 'textfield',
-                        fieldType: 'column',
-                        fieldLabel: 'DOB',
-                        id: 'invoiceDOB',
-                        tabindex: '13',
-                        compClass: 'padding--five',
-                        flex: 1
-                    }]
-                }, {
-                    type: 'container',
-                    flex: 1,
-                    layout: 'row',
-                    items: [{
-                        type: 'textfield',
-                        fieldType: 'column',
-                        fieldLabel: 'Nationality',
-                        id: 'invoiceNationality',
-                        compClass: 'padding--five',
-                        tabindex: '14',
-                        flex: 1
-                    }, {
-                        type: 'textareafield',
-                        fieldType: 'column',
-                        fieldLabel: 'Email',
-                        id: 'invoiceEmail',
-                        compClass: 'padding--five',
-                        tabindex: '15',
-                        flex: 1
-                    }, {
-                        type: 'radiofield',
-                        fieldLabel: 'Entity Type',
-                        fieldLayout: 'column',
-                        id: 'invoiceEntity',
-                        compClass: 'padding--five',
-                        flex: 1,
-                        groupLayout: 'row',
-                        validations : {
-                            'isRequired' : {value : true , errmsg : 'Thsio fk skjfhjg'}
-                        },
-                        fieldGroup: [{
-                            fieldLabel: 'Individual',
-                            attributes: {
-                                id: 'shivamCheck',
-                                display: 'shivam',
-                                name : 'high',
-                                value: 'shivamsasd'
-                            },
-                            layout : 'row',
-                            render : function(){
-                                
-                            },
-                            listeners: {
-                                click: function() {
-                                   this.changeLabel('car'); 
-                                }
-                            }
-                        }, {
-                            fieldLabel: 'Company',
-                            attributes: {
-                                display: 'shivam',
-                                name : 'high',
-                                value: 'shivam'
-                            },
-                            listeners: {
-                                click: function() {
-                                   this.changeLabel('bike'); 
-                                }
-                            }
-                        }]
-                    }]
-                }, {
-                    type: 'container',
-                    flex: 1,
-                    layout: 'row',
+            /*sender address start*/
+            var senderAddress = TFLib.TFTextField.call({
+                fieldLabel : 'Address',
+                fieldLayout : 'column',
+                validations : {
+                    'isRequired' : {value : true , errmsg : 'address is required'}
+                }
+            });
+            /*sender address end*/
 
-                    items: [{
-                        type: 'button',
-                        btnClass: 'abcdef',
-                        id: 'randomBtn',
-                        btnText: 'Click Me',
-                        compClass : ['Name','asdds'],
-                        styles: {
-                            width: '100px',
-                            height: '25px',
-                            paddingLeft: '20px'
-                        },
-                        attributes: {
-                        	
-                        },
-                        listeners: {
-                            click: function(e) {
+            /*sender zip start*/
+            var senderZip = TFLib.TFTextField.call({
+                fieldLabel : 'Zip',
+                fieldLayout : 'column'
+            });
+            /*sender zip end*/
 
-                                this.setAttribute('disabled', true);
-                                
-
-                            }
-                        }
-                    }]
-
-
+            var receiverNotes = TFLib.TFTextAreaField.call({
+                fieldLabel : 'save Notes',
+                fieldLayout : 'column',
+                validations : {
+                    'isRequired' : {value : true , errmsg : 'notes required'}
+                },
+                buttons : [{
+                    styles : {
+                        backgroundImage : "url('OL.png')",    
+                    },                    
+                    compClass : 'bottom-align'
                 }]
-            }]
 
-        });
-        block1.appendTo('#mydiv');
+            });
 
-    })();
+            var receiverEntity = TFLib.TFCheckboxField.call({
+                fieldLabel  : 'Entity Type',
+                fieldLayout : 'column',
+                groupLayout : 'row',
+                fieldGroup : [{
+                    fieldLabel : 'Individual'
+                },{
+                    fieldLabel : 'Company'
+                }],
+                validations : {
+                    'customError' : {value : true , errmsg : 'entity required'}
+                }
+            });
+
+            var receiverCashPickup = TFLib.TFCheckbox.call({
+                fieldLabel : 'Cash Pickup Anywhere',
+
+            })
+
+            var block = TFLib.Iterator({
+                type : 'container',
+                layout : 'column',
+                styles : {
+                    width : '500px'
+                },
+                items : [senderName , senderMobile , senderZip , senderAddress , receiverNotes , receiverEntity , receiverCashPickup]
+            }).appendTo('#mydiv');
+
+
+        })();
+
     </script>
 </body>
 

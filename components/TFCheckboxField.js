@@ -16,7 +16,7 @@
  * @property {function} render - this function will run when the coponent is generated but not yet appended.
  * @property {object} listeners - is an object where all listener handlers can be written as key value pair.
  */
-var TFCheckboxField = function(){
+TFLib.TFCheckboxField = function(){
 		
 		var checkboxfield = {
 			
@@ -114,7 +114,7 @@ var TFCheckboxField = function(){
 				this.fieldGroup.forEach(function(item){
 					if(this.name != '')
 						item.name = this.name;
-					this.controlComp.appendChild(TFCheckbox.call(item));
+					this.controlComp.appendChild(TFLib.TFCheckbox.call(item));
 				},this);
 
 				this.innerComp = this.controlComp.getElementsByTagName('input');
@@ -143,15 +143,15 @@ var TFCheckboxField = function(){
 				me.setValidations = this.setValidations;
 
 				//methods
-				TFCheckboxMethods.call(me);
-				TFSharedMethods.call(me);
+				TFLib.TFCheckboxMethods.call(me);
+				TFLib.TFSharedMethods.call(me);
 
 				//share methods to el
 				me.outerComp.shared = me;
 
 				// handle validations
 	            me.validationMethods = {};
-	            TFValidations.call(me.validationMethods);
+	            TFLib.TFValidations.call(me.validationMethods);
 
 	            if(Object.keys(this.validations).length > 0)
 	                this.setValidations.call(me);
@@ -189,6 +189,10 @@ var TFCheckboxField = function(){
 	                                }
 	                            	delete this.isRequiredHandler;
 	                           	}
+
+	                    }else if(val === 'customError'){
+	                    	console.log(this);
+	                    	this.customError(true);
 	                    }
 	                }, this);
 	        }

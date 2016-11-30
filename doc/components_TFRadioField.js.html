@@ -29,8 +29,8 @@
             <pre class="prettyprint source linenums"><code>/**
  * @author Shivam Gupta 
  * @constructor TFRadioField
- * @property {string} id - id will be assigned to checkbox[id] &amp; label[for].
- * @property {string} markRequired - will add *.
+ * @property {string} id - id will be assigned to outer component.
+ * @property {string} labelId - will be assigned to label[id].
  * @property {string} fieldLayout - can be 'row' or 'column'.
  * @property {object} styles - styles will be applied to button tag.
  * @property {object[]} fieldGroup - pass all checkboxes details as each item.
@@ -44,7 +44,7 @@
  * @property {function} render - this function will run when the component is generated but not yet returned.
  * @property {object} listeners - is an object where all listener handlers can be written as key value pair.
  */
-var TFRadioField = function($fieldset){
+TFLib.TFRadioField = function($fieldset){
 		
 		var radiofield = {
 			
@@ -68,7 +68,10 @@ var TFRadioField = function($fieldset){
 
 				//  configs
 				this.dynamicId = me.id || "tf-radiof-"+getRandomInt(1, 10000);
-				this.markRequired = me.markRequired || false;
+				this.labelId = me.labelId || "tf-radio-label-"+getRandomInt(1, 10000);
+				this.requiredId = "tf-radio-req-"+getRandomInt(1, 10000);
+
+			
 				this.fieldLayout = me.fieldLayout || 'row';
 				this.styles = me.styles || '';
 				this.fieldGroup = me.fieldGroup || [];
@@ -77,9 +80,7 @@ var TFRadioField = function($fieldset){
 				this.validations = me.validations || {};
 	            this.validations.__proto__ =  {
 	                'isRequired' : {value : false , errmsg : 'This field is Required'},
-	                'onlyText' : {value : false},
-	                'onlyNumber' : {value :false},
-	                'regex' : {value : false, errmsg : 'Allowed Values are alphabets'}
+	                'customError' : {value : false , errmsg : 'custom error'}
 	            };
 
 				// innerHTML configs
@@ -101,8 +102,8 @@ var TFRadioField = function($fieldset){
 					'&lt;div id="'+this.dynamicId+'"', 
 						'class="tf-flex '+((this.fieldLayout === 'row')? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
 				        '&lt;div control-type="tf-radiof-label" class="'+((this.displayLabel === "none")? 'tf-display--none':'')+'">',
-				            '&lt;label>'+(this.fieldLabel ? this.fieldLabel : '')+'&lt;/label>',
-				            '&lt;span class="tf-required--red '+(this.markRequired ? 'tf-display--none':'')+'">*&lt;/span>',
+				            '&lt;label id="'+this.labelId+'">'+(this.fieldLabel ? this.fieldLabel : '')+'&lt;/label>',
+				            '&lt;span id="'+this.requiredId+'" class="tf-required--red" style="display:none;">*&lt;/span>',
 				        '&lt;/div>',
 				        '&lt;div control-type="tf-radiofield" class="tf-flex '+((this.groupLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
 				         	// radio list  
@@ -118,6 +119,7 @@ var TFRadioField = function($fieldset){
 				this.outerComp = this.childTemplate;
 				this.controlComp = this.childTemplate.querySelector('[control-type="tf-radiofield"]');
 				this.labelComp = this.childTemplate.querySelector('[control-type="tf-radiof-label"]');
+				this.requiredComp = this.labelComp.querySelector('#'+this.requiredId);
 				
 			},
 			_applyProperty : function(){
@@ -138,7 +140,7 @@ var TFRadioField = function($fieldset){
 				this.fieldGroup.forEach(function(item){
 					if(this.name != '')
 						item.name = this.name;
-					this.controlComp.appendChild(TFRadio.call(item));
+					this.controlComp.appendChild(TFLib.TFRadio.call(item));
 				},this);
 
 				// cache Dom
@@ -163,6 +165,9 @@ var TFRadioField = function($fieldset){
 				me.outerComp = this.outerComp;
 				me.labelComp = this.labelComp;
 				me.innerComp = this.innerComp;
+				me.labelId = this.labelId;
+				me.requiredComp = this.requiredComp;
+				me.setValidations = this.setValidations; 
 				
 				// add methods
 				TFCheckboxFieldMethods.call(me);
@@ -173,7 +178,7 @@ var TFRadioField = function($fieldset){
 
 				// handle validations
 	            me.validationMethods = {};
-	            TFValidations.call(me.validationMethods);
+	            TFLib.TFValidations.call(me.validationMethods);
 
 	            if(Object.keys(this.validations).length > 0)
 	                this.setValidations.call(me);
@@ -197,18 +202,21 @@ var TFRadioField = function($fieldset){
 	                        	if(this.validations.isRequired.value){
 	                        		
 	                                if(!this.isRequiredHandler){
-
+	                                	this.requiredComp.style.display ='';
 	                                    this.isRequiredHandler = this.validationMethods.isRequired.bind(this);
 	                                    for(var i=0; i&lt;this.innerComp.length ;i++ ){
 	                                    	this.innerComp[i].addEventListener('change', this.isRequiredHandler);
 	                                    }
 	                                }
 	                            }else {
+	                            	this.requiredComp.style.display ='none';
 	                        		for(var i=0; i&lt;this.innerComp.length ;i++ ){
 	                                   	this.innerComp[i].removeEventListener('change', this.isRequiredHandler);
 	                                }
 	                            	delete this.isRequiredHandler;
 	                           	}
+	                    }else if(val === 'customError'){
+	                    	this.customError(true);
 	                    }
 	                }, this);
 	        }
@@ -233,13 +241,13 @@ var TFRadioField = function($fieldset){
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Iterator.html">Iterator</a></li><li><a href="TFButton.html">TFButton</a></li><li><a href="TFCheckbox.html">TFCheckbox</a></li><li><a href="TFCheckboxField.html">TFCheckboxField</a></li><li><a href="TFContainer.html">TFContainer</a></li><li><a href="TFForm.html">TFForm</a></li><li><a href="TFRadio.html">TFRadio</a></li><li><a href="TFRadioField.html">TFRadioField</a></li><li><a href="TFTextAreaField.html">TFTextAreaField</a></li><li><a href="TFTextField.html">TFTextField</a></li></ul><h3>Global</h3><ul><li><a href="global.html#TFComboboxField">TFComboboxField</a></li><li><a href="global.html#TFValidations">TFValidations</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Iterator.html">Iterator</a></li><li><a href="TFButton.html">TFButton</a></li><li><a href="TFCheckbox.html">TFCheckbox</a></li><li><a href="TFCheckboxField.html">TFCheckboxField</a></li><li><a href="TFContainer.html">TFContainer</a></li><li><a href="TFForm.html">TFForm</a></li><li><a href="TFRadio.html">TFRadio</a></li><li><a href="TFRadioField.html">TFRadioField</a></li><li><a href="TFTextAreaField.html">TFTextAreaField</a></li><li><a href="TFTextField.html">TFTextField</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Nov 29 2016 16:11:58 GMT+0530 (India Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Wed Nov 30 2016 13:44:23 GMT+0530 (India Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

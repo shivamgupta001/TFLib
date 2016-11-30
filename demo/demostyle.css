@@ -1,12 +1,5 @@
-.bg-col--blue{
-	background-color: blue;
-}
-.padding--five{
-	padding : 5px;
-}
-.abc {
-    width: 500px;
-    height: 400px;
-    
+.bottom-align{
+	display: flex;
+	align-self: flex-end;
 }
 

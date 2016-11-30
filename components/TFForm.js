@@ -3,7 +3,7 @@
  * @constructor TFForm
  *
  */
-var TFForm = function(){
+TFLib.TFForm = function(){
 	
 		var form = {
 
@@ -91,7 +91,7 @@ var TFForm = function(){
 				me.outerComp = this.$outerComp;
 
 				// add methods
-				TFSharedMethods.call(me);
+				TFLib.TFSharedMethods.call(me);
 
 				// shared properties to el 
 				me.outerComp.shared = me;

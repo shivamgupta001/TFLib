@@ -1,5 +1,5 @@
 
-var TFSharedMethods = function(){
+TFLib.TFSharedMethods = function(){
 	
 	/**This method will hide component as display 'none'
       * @memberof TFTextField

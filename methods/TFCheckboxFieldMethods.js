@@ -1,5 +1,5 @@
 
-var TFCheckboxFieldMethods = function(){
+TFLib.TFCheckboxFieldMethods = function(){
 
 	/**This method will hide label as display 'none'
       * @memberof TFCheckboxField
@@ -255,6 +255,9 @@ var TFCheckboxFieldMethods = function(){
 						this.isValidated = true;
 					}					
 				}
+			}else if(val === 'customError'){
+				if(this.validations.customError.value)
+					this.isValidated = true;
 			}
 		}, this);
 		

@@ -12,7 +12,7 @@
  * @property {function} render - this function will run when the coponent is generated but not yet appended.
  * @property {object} listeners - is an object where all listener handlers can be written as key value pair.
  */
-var TFContainer = function(){
+TFLib.TFContainer = function(){
 		
 		var container = {
 			
@@ -113,7 +113,7 @@ var TFContainer = function(){
 				me.outerComp = this.outerComp;
 
 				// add methods
-				TFSharedMethods.call(me);
+				TFLib.TFSharedMethods.call(me);
 
 				// share methods to el
 				me.outerComp.shared = me;

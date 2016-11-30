@@ -29,8 +29,8 @@
             <pre class="prettyprint source linenums"><code>/**
  * @author Shivam Gupta 
  * @constructor TFTextAreaField
- * @property {string} id - id will be assigned to checkbox[id] &amp; label[for].
- * @property {string} markRequired - will add *.
+ * @property {string} id - id will be assigned to outer component.
+ * @property {string} innerId -  will be assigned to input[id] &amp; label[for].
  * @property {string} fieldLayout - can be 'row' or 'column'.
  * @property {object} styles - styles will be applied to outer div of component.
  * @property {string} displayLabel - 'none' will hide display part of component.
@@ -43,7 +43,7 @@
  * @property {function} render - this function will run when the component is generated but not yet returned.
  * @property {object} listeners - is an object where all listener handlers can be written as key value pair.
  */
-var TFTextAreaField = function(){
+TFLib.TFTextAreaField = function(){
 		
 		var textareafield = {
 			
@@ -66,12 +66,24 @@ var TFTextAreaField = function(){
 				var me = this.scope;
 				 
 				//config
-				this.dynamicId = me.id || "tf-textareaf-"+getRandomInt(1, 10000);
+				this.dynamicId = me.id || "tf-ta-comp-"+getRandomInt(1, 10000);
+				this.innerId = me.innerId || "tf-ta-"+ getRandomInt(1 , 10000);
+				this.requiredId = "tf-ta-req-"+getRandomInt(1,1000);
+
 				this.styles = me.styles || '';
+				this.buttons = me.buttons || [];
 				this.attributes = me.attributes || '';
 				this.displayLabel = me.displayLabel || false;
 				this.fieldLayout = me.fieldLayout || 'row';
-				this.markRequired = me.markRequired || false;
+			
+				this.validations = me.validations || {};
+	            this.validations.__proto__ =  {
+	                'isRequired' : {value : false , errmsg : 'This field is Required'},
+	                'onlyText' : {value : false},
+	                'onlyNumber' : {value :false},
+	                'regex' : {value : false, errmsg : 'Allowed Values are alphabets'},
+	                'customError' : {value : false , errmsg : 'custom error'}
+	            };
 
 				//innerHTML or innerText
 				this.fieldLabel = me.fieldLabel || '';
@@ -101,11 +113,12 @@ var TFTextAreaField = function(){
 						'id="'+this.dynamicId+'"',
 						'class="tf-flex '+((this.fieldLayout === 'row') ? 'tf-flex-direction--row ':'tf-flex-direction--column ')+'">',
 						'&lt;div control-type="tf-taf-label" class="tf-flex" '+(this.displayLabel ? 'tf-display--none': '')+'>',
-							'&lt;label>'+(this.fieldLabel ? this.fieldLabel : '')+'&lt;/label>',
-							'&lt;span class="tf-required--red '+(this.markRequired ? '' : 'tf-display--none')+'">*&lt;/span>',
+							'&lt;label for="'+this.innerId+'">'+(this.fieldLabel ? this.fieldLabel : '')+'&lt;/label>',
+							'&lt;span id="'+this.requiredId+'" class="tf-required--red" style="display:none;" >*&lt;/span>',
 						'&lt;/div>',
 						'&lt;div control-type="tf-textareafield" class="tf-field-with-btn ">',
-							'&lt;textarea',
+							'&lt;textarea class="tf-flex tf-flex--one"',
+								'id="'+this.innerId+'"',
 								''+(this.name ? 'name="'+this.name+'"' : '')+'',
 								''+(this.placeholder ? 'placeholder="'+this.placeholder+'"' : '')+'',
 								''+(this.cols ? 'cols="'+this.cols+'"' : '')+'',
@@ -130,6 +143,7 @@ var TFTextAreaField = function(){
 				this.innerComp = this.childTemplate.querySelector("textarea");
 				this.labelComp = this.childTemplate.querySelector('[control-type="tf-taf-label"]');
 				this.controlComp = this.childTemplate.querySelector('[control-type="tf-textareafield"]');
+				this.requiredComp = this.childTemplate.querySelector('#'+this.requiredId);
 			 
 			},
 			_applyProperty : function(){
@@ -152,6 +166,11 @@ var TFTextAreaField = function(){
 				if(this.controlClass) this.controlComp.classList.add.apply(this.controlComp.classList , this.controlClass);
 				if(this.labelClass) this.labelComp.classList.add.apply(this.labelComp.classList , this.labelClass);
 				if(this.compClass) this.outerComp.classList.add.apply(this.outerComp.classList, this.compClass);
+
+				// handling buttons
+	            this.buttons.forEach(function(val) {
+	                this.controlComp.appendChild(TFLib.TFButton.call(val));
+	            }, this);
 				
 			},
 			_bindEvents : function(){
@@ -173,13 +192,24 @@ var TFTextAreaField = function(){
 				me.labelComp = this.labelComp;
 				me.outerComp = this.outerComp;
 				me.controlComp = this.controlComp;
+				me.setValidations = this.setValidations;
+            	me.validations = this.validations;
+            	me.innerId = this.innerId;
+            	me.requiredComp = this.requiredComp;
 				
 				// add methods
-				TFTextFieldMethods.call(me);
-				TFSharedMethods.call(me);
+				TFLib.TFTextFieldMethods.call(me);
+				TFLib.TFSharedMethods.call(me);
 
 				// share methods over el
 				this.outerComp.shared = me;
+
+				// handle validations
+	            me.validationMethods = {};
+	            TFLib.TFValidations.call(me.validationMethods);
+
+	            if(Object.keys(this.validations).length > 0)
+	                this.setValidations.call(me);
 			},
 			_render : function(){
 
@@ -188,7 +218,82 @@ var TFTextAreaField = function(){
 				if(this.render != ''){
 					this.render.call(me);
 				}
-			}
+			},
+	        setValidations: function() {
+	                
+	                //adding validations
+	                Object.keys(this.validations).forEach(function(val) {
+
+	                    switch (val) {
+	                        case 'isRequired':
+	                        	if(this.validations.isRequired.value){
+	                        		
+	                                if(!this.isRequiredHandler){
+	                                	this.requiredComp.style.display = '';
+	                                    this.isRequiredHandler = this.validationMethods.isRequired.bind(this);
+	                                    this.innerComp.addEventListener('blur', this.isRequiredHandler);
+	                                    this.innerComp.addEventListener('input', this.isRequiredHandler);
+	                                }
+	                                
+
+
+	                        	}else {
+	                        		this.requiredComp.style.display = 'none';
+	                        		this.innerComp.removeEventListener('blur', this.isRequiredHandler);
+	                            	this.innerComp.removeEventListener('input', this.isRequiredHandler);
+	                                delete this.isRequiredHandler;
+	                           	}
+	                            break;
+
+	                        case 'onlyNumber':
+	                        	if(this.validations.onlyNumber.value){
+	                      		    
+	                                if(!this.onlyNumberHandler){
+	                                    this.onlyNumberHandler = this.validationMethods.onlyNumber.bind(this);
+	                                    this.innerComp.addEventListener('keydown', this.onlyNumberHandler); 
+	                                }
+	                                
+	                        	}else{
+	                                this.innerComp.removeEventListener('keydown', this.onlyNumberHandler);
+	                                delete this.onlyNumberHandler;
+	                            }                            
+	                            break;
+
+	                        case 'regex':
+	                        	if(this.validations.regex.value){
+
+	                                if(!this.regexHandler){
+	                                    this.regexHandler = this.validationMethods.regex.bind(this);
+	                                    this.innerComp.addEventListener('blur', this.regexHandler);
+	                                    this.innerComp.addEventListener('input', this.regexHandler);
+	                                }
+	                                
+	                            }else {
+
+	                                this.innerComp.removeEventListener('blur', this.regexHandler);
+	                                this.innerComp.removeEventListener('input', this.regexHandler);
+	                                delete this.regexHandler;
+	                            } 
+	                            break;
+
+	                        case 'onlyText':
+	                        	if(this.validations.onlyText.value){
+	                        		
+	                                if(!this.onlyTextHandler){
+	                                    this.onlyTextHandler = this.validationMethods.onlyText.bind(this);
+	                                    this.innerComp.addEventListener('keydown', this.onlyTextHandler);       
+	                                }
+	                                
+	                        	}else{
+
+	                                this.innerComp.removeEventListener('keydown', this.onlyTextHandler);
+	                                delete this.onlyTextHandler;
+	                            }
+	                            break;
+	                    }
+	                }, this);
+	            
+	        }
 		};
 						
 		function getRandomInt(min, max){
@@ -210,13 +315,13 @@ var TFTextAreaField = function(){
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Iterator.html">Iterator</a></li><li><a href="TFButton.html">TFButton</a></li><li><a href="TFCheckbox.html">TFCheckbox</a></li><li><a href="TFCheckboxField.html">TFCheckboxField</a></li><li><a href="TFContainer.html">TFContainer</a></li><li><a href="TFForm.html">TFForm</a></li><li><a href="TFRadio.html">TFRadio</a></li><li><a href="TFRadioField.html">TFRadioField</a></li><li><a href="TFTextAreaField.html">TFTextAreaField</a></li><li><a href="TFTextField.html">TFTextField</a></li></ul><h3>Global</h3><ul><li><a href="global.html#TFComboboxField">TFComboboxField</a></li><li><a href="global.html#TFValidations">TFValidations</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Iterator.html">Iterator</a></li><li><a href="TFButton.html">TFButton</a></li><li><a href="TFCheckbox.html">TFCheckbox</a></li><li><a href="TFCheckboxField.html">TFCheckboxField</a></li><li><a href="TFContainer.html">TFContainer</a></li><li><a href="TFForm.html">TFForm</a></li><li><a href="TFRadio.html">TFRadio</a></li><li><a href="TFRadioField.html">TFRadioField</a></li><li><a href="TFTextAreaField.html">TFTextAreaField</a></li><li><a href="TFTextField.html">TFTextField</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Nov 29 2016 16:11:58 GMT+0530 (India Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Wed Nov 30 2016 13:44:23 GMT+0530 (India Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

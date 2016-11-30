@@ -2,7 +2,7 @@
  * @author Shivam Gupta 
  * @constructor TFRadio
  * @property {string} id - id will be assigned to checkbox[id] & label[for].
- * @property {string} layout - can be 'row' or 'column'.
+ * @property {string} fieldLayout - can be 'row' or 'column'.
  * @property {object} styles - styles will be applied to button tag.
  * @property {object} attributes - attributes will be applied to button tag.
  * @property {(string|string[])} labelClass -  will be applied to  label.
@@ -11,7 +11,7 @@
  * @property {function} render - this function will run when the coponent is generated but not yet appended.
  * @property {object} listeners - is an object where all listener handlers can be written as key value pair.
  */
-var TFRadio = function(){
+TFLib.TFRadio = function(){
 		
 		var radio = {
 			
@@ -36,7 +36,7 @@ var TFRadio = function(){
 
 				//  configs
 				this.dynamicId = me.id || "tf-radio-"+ ( me.attributes ? (me.attributes.name ? me.attributes.name : '') : '') + getRandomInt(1, 10000);
-				this.layout = me.layout || 'row';
+				this.fieldLayout = me.fieldLayout || 'row';
 				this.styles = me.styles || '';
 				this.attributes = me.attributes || '';
 				this.name = me.name || '';
@@ -56,7 +56,7 @@ var TFRadio = function(){
 			_generateTemplate : function(){
 				
 				var el = [
-					'<div class="tf-flex '+((this.layout === "row") ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
+					'<div class="tf-flex '+((this.fieldLayout === "row") ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
 						'<input control-type="tf-radio" id="'+this.dynamicId+'" type="radio"/>',
 						'<label control-type="tf-radio-label" for="'+this.dynamicId+'">'+this.fieldLabel+'</label>',
 					'</div>'
@@ -115,8 +115,8 @@ var TFRadio = function(){
 				me.labelComp = this.labelComp;
 
 				// add methods
-				TFCheckboxMethods.call(me);
-				TFSharedMethods.call(me);
+				TFLib.TFCheckboxMethods.call(me);
+				TFLib.TFSharedMethods.call(me);
 
 				// shared methods add to el 
 				me.outerComp.shared = me;
