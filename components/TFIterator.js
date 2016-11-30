@@ -7,10 +7,7 @@ TFLib.Iterator = function(config){
 
 	// iterates object passed to iterator
 	function iterateStructure(config){
-		if(config.initEvents){
-			config.initEvents.call(config);
-		}
-		
+				
 		//first item
 		var el = iterateItems(config);
 		
@@ -66,12 +63,12 @@ TFLib.Iterator = function(config){
 									break;
 			case 'container'	: el = TFLib.TFContainer.call(item);
 									break;
-			case 'form'			: el = TFLib.TFForm.call(item);
-									break;
+			/*case 'form'			: el = TFLib.TFForm.call(item);
+									break;*/
 			case 'button' 		: el = TFLib.TFButton.call(item);
 									break;
-			case 'comboboxfield': el = TFLib.TFComboboxField.call(item);
-									break;
+			/*case 'comboboxfield': el = TFLib.TFComboboxField.call(item);
+									break;*/
 			default 			: el = TFLib.TFContainer.call(item);
 									break;
 		}
@@ -82,22 +79,42 @@ TFLib.Iterator = function(config){
 
 	// return iterated code block
 	var el =  iterateStructure(config);
-	
-	el.appendTo = function(selector){
-		
-		var el = document.body.querySelector(selector);
-		if(el) el.appendChild(this);
-	};
-	el.prependTo = function(selector){
-		
-		var el = document.body.querySelector(selector);
-		if(el) el.insertBefore(this , el.childNodes[0]);
-	};
-	el.insertDomToAt = function(selector1 , selector2){
+	/**This method will apply validation to component 
+      * @memberof Iterator
+      * @param {string} selector - pass selector
+      * @param {object} el - dom object
+      */	
+	el.appendTo = function(selector , el){
+            
+            if(!el){
+                  var ele = document.querySelector(selector);
+                  if(ele)
+                        ele.appendChild(this.shared.outerComp);
+            }else {
+                  var ele = this.shared.outerComp.querySelector(selector);
+                  ele.appendChild(el);
+            }
+    };
+    /**This method will apply validation to component 
+      * @memberof Iterator
+      * @param {string} selector - pass selector
+      * @param {object} el - dom object
+      */
+    el.insertBefore = function(selector , el){
 
-		var el = document.body.querySelector(selector1);
-		if(el) el.insertBefore(this , el.querySelector(selector2));
-	};
-
+            if(!el){
+                  var ele = document.querySelector(selector);
+                  if(ele){
+                  		var callingEL = document.body == ele.parentElement ? document.body.parentElement : document.body ;
+                        callingEL.insertBefore(this.shared.outerComp , ele.parentElement);
+                  }
+            }else{
+                  var ele = this.shared.outerComp.querySelector(selector);
+                  if(ele){
+                  		var callingEL = this.shared.outerComp == ele.parentElement ? this.shared.outerComp.parentElement : this.shared.outerComp ;
+                        callingEL.insertBefore(el , ele.parentElement);
+                  }
+            }
+    };
 	return el;
 }

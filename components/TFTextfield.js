@@ -48,7 +48,7 @@ TFLib.TFTextField = function($fieldset) {
                 'isRequired' : {value : false , errmsg : 'This field is Required'},
                 'onlyText' : {value : false},
                 'onlyNumber' : {value :false},
-                'regex' : {value : false, pattern:"abc", errmsg : 'Allowed Values are alphabets'},
+                'regex' : {value : false, pattern:"abc", errmsg : 'Failed regular expression'},
                 'customError' : {value : false , errmsg : 'custom error'}
             };
             this.styles = me.styles || '';
@@ -138,6 +138,8 @@ TFLib.TFTextField = function($fieldset) {
             if (this.controlClass) this.controlComp.classList.add.apply(this.controlComp.classList, this.controlClass);
             if (this.compClass) this.outerComp.classList.add.apply(this.outerComp.classList, this.compClass);
             if (this.labelClass) this.labelComp.classList.add.apply(this.labelComp.classList, this.labelClass);
+
+            if(this.flex) this.outerComp.style.flex = this.flex;
 
             // handling buttons
             this.buttons.forEach(function(val) {
@@ -261,6 +263,10 @@ TFLib.TFTextField = function($fieldset) {
                                 this.innerComp.removeEventListener('keydown', this.onlyTextHandler);
                                 delete this.onlyTextHandler;
                             }
+                            break;
+                        case 'customError' : 
+                            if(this.validations.customError.value)
+                                this.customError(this.validations.customError.value);
                             break;
                     }
                 }, this);

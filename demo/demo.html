@@ -8,11 +8,13 @@
 </head>
 
 <body>
-    <div id="mydiv"></div>
+    <div id="mydiv">
+        <div id="secdiv"></div>
+    </div>
     <script type="text/javascript" src="jquery-1.11.1.js"></script>
     <script type="text/javascript" src="../dest/tflib.min.js"></script>   
     <script>
-        (function(){
+        /*(function(){*/
 
             /*sender name start*/
             var senderName = TFLib.TFTextField.call({
@@ -93,21 +95,66 @@
             var receiverCashPickup = TFLib.TFCheckbox.call({
                 fieldLabel : 'Cash Pickup Anywhere',
 
-            })
+            });
 
+            var receiverTotalAmount = TFLib.Iterator({
+                type :'container',
+                fieldLayout : 'row',
+                items : [{
+                    flex : 3,
+                    type : 'textfield',
+                    fieldLabel : 'TotalRecieve Amoount',
+                    fieldLayout : 'column'
+                },{
+                    flex : 1,
+                    type : 'container',
+                    styles : {
+                        width : '50px'
+                    },
+                    innerText : 'Receive Currency'
+                }]
+            });
+
+            var payoutFeeRate = TFLib.TFTextField.call({
+                fieldLabel : '<a href="#">Fee rate</a>',
+                fieldLayout : 'column'
+
+
+            });
+            var btn = TFLib.TFButton.call({
+                btnText : 'Click me',
+                listeners : {
+                    click : function(e){
+                        debugger;
+                    }
+                }
+            });
             var block = TFLib.Iterator({
                 type : 'container',
                 layout : 'column',
                 styles : {
                     width : '500px'
                 },
-                items : [senderName , senderMobile , senderZip , senderAddress , receiverNotes , receiverEntity , receiverCashPickup]
-            }).appendTo('#mydiv');
+                items : [
+                    senderName , 
+                    senderMobile , 
+                    senderZip , 
+                    senderAddress , 
+                    receiverNotes , 
+                    receiverEntity , 
+                    receiverCashPickup,
+                    receiverTotalAmount,
+                    payoutFeeRate,
+                    btn
+                ]
+            }).insertBefore('#mydiv');
 
 
-        })();
+        /*})();*/
 
     </script>
+
+    <div id="other" style="border: 1px solid blue"></div>
 </body>
 
 </html>

@@ -183,28 +183,34 @@ TFLib.TFSharedMethods = function(){
                   ele.appendChild(el);
             }
       };
-      this.prependTo = function(selector , el){
+      /**This method will append  dom at  selector found in dom
+      * else if el provided than it will append to current component querying using selector and append el
+      * @memberof TFTextField
+      * @memberof TFTextAreaField
+      * @memberof TFCheckbox
+      * @memberof TFCheckboxfield
+      * @memberof TFRadio
+      * @memberof TFRadioField
+      * @memberof TFButton
+      * @memberof TFContainer
+      * @param {object} el - pass dom el
+      * @param {string} selector - selector string 
+      */
+      this.insertBefore = function(selector , el){
 
             if(!el){
                   var ele = document.querySelector(selector);
-                  if(ele)
-                        document.body.insertBefore(el , ele);
+                  if(ele){
+                        var callingEL = document.body == ele.parentElement ? document.body.parentElement : document.body ;
+                        document.body.insertBefore(this.outerComp , ele.parentElement);
+                  }
             }else{
                   var ele = this.outerComp.querySelector(selector);
-                  if(ele)
-                        this.outerComp.insertBefore(el , ele);
+                  if(ele){
+                        var callingEL = this.outerComp == ele.parentElement ? this.outerComp.parentElement : this.outerComp ;
+                        callingEL.insertBefore(el , ele.parentElement);
+                  }
             }
       };
-      this.insertDomToAt = function(selector , el){
-            
-            if(!el){
-                  var ele = document.querySelector(selector);
-                  if(ele)
-                        document.body.insertBefore(el , ele);
-            }else{
-                  var ele = this.outerComp.querySelector(selector);
-                  if(ele)
-                        this.outerComp.appendChild(el , ele);
-            }
-      };
+      
 };

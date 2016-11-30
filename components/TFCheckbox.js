@@ -40,6 +40,7 @@ TFLib.TFCheckbox = function(){
 				this.fieldLayout = me.fieldLayout || 'row';
 				this.styles = me.styles || '';
 				this.attributes = me.attributes || '';
+				this.name = me.name || '';
 
 								
 				// innerHTML configs

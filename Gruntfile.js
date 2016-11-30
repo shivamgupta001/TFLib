@@ -4,7 +4,8 @@ module.exports = function(grunt){
 		uglify: {
 		    my_target: {
 		      options: {
-		        mangle : false
+		        mangle : false,
+		        beautify : true
 		      },
 		      files: {
 		        'dest/tflib.min.js': [	'initialize/initialize.js',

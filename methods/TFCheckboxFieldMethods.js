@@ -182,7 +182,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 		this.setValidations.call(this);
 	
 	};
-	/**This method will apply validate if validation applied to component at any point
+	/**This method will apply custom validation  to component at any point
       * @memberof TFCheckboxField
       * @memberof TFRadioField
       */
@@ -236,15 +236,19 @@ TFLib.TFCheckboxFieldMethods = function(){
 		}
 	
 	};
+	/**This method will validate if validations present to component 
+      * @memberof TFCheckboxField
+      * @memberof TFRadioField
+      */
 	this.validate = function(){
 
-		this.isValidated = false;
+		this.isValidated = true;
 		Object.keys(this.validations).forEach(function(val){
 			if(val === 'isRequired'){
 				if(this.validations.isRequired.value){
 					this.controlComp.classList.add('tooltip', 'tf-err-border--red');
 					this.controlComp.setAttribute('data-tooltip', this.validations.isRequired.errmsg);	
-					this.isValidated = true;
+					this.isValidated = false;
 				}
 			}else if(val === 'regex'){
 				if(this.validations.regex.value){
@@ -252,12 +256,12 @@ TFLib.TFCheckboxFieldMethods = function(){
 					if(!regex.test(this.innerComp.value)){
 						this.controlComp.classList.add('tooltip', 'tf-err-border--red');
 						this.controlComp.setAttribute('data-tooltip', this.validations.regex.errmsg);			
-						this.isValidated = true;
+						this.isValidated = false;
 					}					
 				}
 			}else if(val === 'customError'){
 				if(this.validations.customError.value)
-					this.isValidated = true;
+					this.isValidated = false;
 			}
 		}, this);
 		

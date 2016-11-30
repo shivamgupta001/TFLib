@@ -23,7 +23,7 @@ TFLib.TFContainer = function(){
 				this._initialize();
 				this._generateTemplate();
 				this._cacheDom();
-				this._applyStyles();
+				this._applyProperty();
 				this._bindEvents();
 				this._attachProperties();
 				this._render();	
@@ -71,7 +71,7 @@ TFLib.TFContainer = function(){
 				this.outerComp = this.childTemplate;
 				
 			},/** @access private *//** @access private */
-			_applyStyles : function(){
+			_applyProperty : function(){
 
 				//apply styles
 				if(this.styles != ''){

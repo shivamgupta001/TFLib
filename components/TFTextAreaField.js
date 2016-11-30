@@ -53,10 +53,13 @@ TFLib.TFTextAreaField = function(){
 	                'isRequired' : {value : false , errmsg : 'This field is Required'},
 	                'onlyText' : {value : false},
 	                'onlyNumber' : {value :false},
-	                'regex' : {value : false, errmsg : 'Allowed Values are alphabets'},
+	                'regex' : {value : false, errmsg : 'Failed regular expression'},
 	                'customError' : {value : false , errmsg : 'custom error'}
 	            };
 
+	            //style
+            	this.flex = me.flex || false;
+				
 				//innerHTML or innerText
 				this.fieldLabel = me.fieldLabel || '';
 				
@@ -134,6 +137,8 @@ TFLib.TFTextAreaField = function(){
 					}, this);	
 				}
 
+				if(this.flex) this.outerComp.style.flex = this.flex;
+				
 				// apply class
 				if(this.controlClass) this.controlComp.classList.add.apply(this.controlComp.classList , this.controlClass);
 				if(this.labelClass) this.labelComp.classList.add.apply(this.labelComp.classList , this.labelClass);
@@ -262,6 +267,10 @@ TFLib.TFTextAreaField = function(){
 	                                delete this.onlyTextHandler;
 	                            }
 	                            break;
+	                        case 'customError' : 
+                            	if(this.validations.customError.value)
+                                	this.customError(this.validations.customError.value);
+                            	break;
 	                    }
 	                }, this);
 	            

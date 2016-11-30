@@ -16,196 +16,211 @@
  * @property {function} render - this function will run when the coponent is generated but not yet appended.
  * @property {object} listeners - is an object where all listener handlers can be written as key value pair.
  */
-TFLib.TFCheckboxField = function(){
-		
-		var checkboxfield = {
-			
-			scope : this,
-			/** @access private */
-			_init : function(){
-				
-				this._initialize();
-				this._generateTemplate();
-				this._cacheDom();
-				this._applyProperty();
-				this._bindEvents();
-				this._attachProperties();
-				this._render();
+TFLib.TFCheckboxField = function() {
 
-				// return el
-				return this.outerComp;
-					
-			},/** @access private */
-			_initialize : function(){
-				
-				var me = this.scope;
+    var checkboxfield = {
 
-				//  configs
-				this.dynamicId = me.id || "tf-chkf-"+getRandomInt(1, 10000);
-				this.labelId = me.labelId || "tf-chk-label-"+getRandomInt(1 , 10000);
-				this.requiredId = "tf-chk-req-"+getRandomInt(1, 10000);
+        scope: this,
+        /** @access private */
+        _init: function() {
 
-				this.markRequired = me.markRequired || false;
-				this.fieldLayout = me.fieldLayout || 'row';
-				this.styles = me.styles || '';
-				this.fieldGroup = me.fieldGroup || [];
-				this.groupLayout = me.groupLayout || 'column';
-				this.name = me.name || '';
-				this.validations = me.validations || {};
-	            this.validations.__proto__ =  {
-	                'isRequired' : {value : false , errmsg : 'This field is Required'},
-	                'customError' : {value : false , errmsg : 'Custom error'}
-	            };
+            this._initialize();
+            this._generateTemplate();
+            this._cacheDom();
+            this._applyProperty();
+            this._bindEvents();
+            this._attachProperties();
+            this._render();
 
-				// innerHTML configs
-				this.fieldLabel = me.fieldLabel || '';
-											
-				//class
-				this.labelClass = (me.labelClass ? (me.labelClass.constructor === Array ? me.labelClass : [me.labelClass]) : false);
-				this.compClass = (me.compClass ? (me.compClass.constructor === Array ? me.compClass : [me.compClass]) : false); 
-				this.controlClass = (me.controlClass ? (me.controlClass.constructor === Array ? me.controlClass : [me.controlClass]) : false);
-								
-				//  methods
-				this.render = me.render || '';
-				this.listeners = me.listeners || '';
-			},/** @access private */
-			_generateTemplate : function(){
-				
-				var el = [
-					'<div id="'+this.dynamicId+'"', 
-						'class="tf-flex '+((this.fieldLayout === 'row')? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
-				        '<div control-type="tf-chkf-label" class="'+((this.displayLabel === "none")? 'tf-display--none':'')+'">',
-				            '<label id="'+this.labelId+'">'+(this.fieldLabel ? this.fieldLabel : '')+'</label>',
-				            '<span id="'+this.requiredId+'" class="tf-required--red" style="display:none;">*</span>',
-				        '</div>',
-				        '<div control-type="tf-checkboxfield" class="tf-flex '+((this.groupLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
-				         	// checkbox list  
-				        '</div>',
-				    '</div>'
-				].join('\n');
+            // return el
+            return this.outerComp;
 
-				this.childTemplate = $(el)[0];
-			},/** @access private */
-			_cacheDom : function(){
+        },
+        /** @access private */
+        _initialize: function() {
 
-				//cache Dom
-				this.outerComp = this.childTemplate;
-				this.controlComp = this.childTemplate.querySelector('[control-type="tf-checkboxfield"]');
-				this.labelComp = this.childTemplate.querySelector('[control-type="tf-chkf-label"]');
-				this.innerComp = this.controlComp.getElementsByTagName('input');
-				this.requiredComp = this.labelComp.querySelector('#'+this.requiredId);
-				
-			},/** @access private */
-			_applyProperty : function(){
+            var me = this.scope;
 
-				//apply styles
-				if(this.styles != ''){
-					Object.keys(this.styles).forEach(function(style){
-						this.outerComp.style[style] = this.styles[style];
-					}, this);
-				}
-				
-				//apply classes
-				if(this.compClass) this.outerComp.classList.add.apply(this.outerComp.classList , this.compClass);
-				if(this.labelClass) this.labelComp.classList.add.apply(this.labelComp.classList, this.labelClass);
-				if(this.controlClass) this.controlComp.classList.add.apply(this.controlComp.classList, this.controlClass);
-				
-				// add checkbox el's to control
-				this.fieldGroup.forEach(function(item){
-					if(this.name != '')
-						item.name = this.name;
-					this.controlComp.appendChild(TFLib.TFCheckbox.call(item));
-				},this);
+            //  configs
+            this.dynamicId = me.id || "tf-chkf-" + getRandomInt(1, 10000);
+            this.labelId = me.labelId || "tf-chk-label-" + getRandomInt(1, 10000);
+            this.requiredId = "tf-chk-req-" + getRandomInt(1, 10000);
 
-				this.innerComp = this.controlComp.getElementsByTagName('input');
-			},/** @access private */
-			_bindEvents : function(){
-				
-				var me = this.scope;
+            this.markRequired = me.markRequired || false;
+            this.fieldLayout = me.fieldLayout || 'row';
+            this.styles = me.styles || '';
+            this.fieldGroup = me.fieldGroup || [];
+            this.groupLayout = me.groupLayout || 'column';
+            this.name = me.name || '';
+            this.validations = me.validations || {};
+            this.validations.__proto__ = {
+                'isRequired': { value: false, errmsg: 'This field is Required' },
+                'customError': { value: false, errmsg: 'Custom error' }
+            };
 
-				if(this.listeners != ''){
-					for(var listener in this.listeners){
-						this.controlComp.addEventListener(listener , this.listeners[listener].bind(me));
-					}
-				}
-			},/** @access private */
-			_attachProperties : function(){
-				
-				var me = this.scope;
+            //style
+            this.flex = me.flex || '';
 
-				//properties
-				me.controlComp = this.controlComp;
-				me.outerComp = this.outerComp;
-				me.labelComp = this.labelComp;
-				me.innerComp = this.innerComp;
-				me.labelId = this.labelId;
-				me.requiredComp = this.requiredComp;
-				me.setValidations = this.setValidations;
+            // innerHTML configs
+            this.fieldLabel = me.fieldLabel || '';
 
-				//methods
-				TFLib.TFCheckboxMethods.call(me);
-				TFLib.TFSharedMethods.call(me);
+            //class
+            this.labelClass = (me.labelClass ? (me.labelClass.constructor === Array ? me.labelClass : [me.labelClass]) : false);
+            this.compClass = (me.compClass ? (me.compClass.constructor === Array ? me.compClass : [me.compClass]) : false);
+            this.controlClass = (me.controlClass ? (me.controlClass.constructor === Array ? me.controlClass : [me.controlClass]) : false);
 
-				//share methods to el
-				me.outerComp.shared = me;
+            //  methods
+            this.render = me.render || '';
+            this.listeners = me.listeners || '';
+        },
+        /** @access private */
+        _generateTemplate: function() {
 
-				// handle validations
-	            me.validationMethods = {};
-	            TFLib.TFValidations.call(me.validationMethods);
+            var el = [
+                '<div id="' + this.dynamicId + '"',
+                'class="tf-flex ' + ((this.fieldLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
+                '<div control-type="tf-chkf-label" class="' + ((this.displayLabel === "none") ? 'tf-display--none' : '') + '">',
+                '<label id="' + this.labelId + '">' + (this.fieldLabel ? this.fieldLabel : '') + '</label>',
+                '<span id="' + this.requiredId + '" class="tf-required--red" style="display:none;">*</span>',
+                '</div>',
+                '<div control-type="tf-checkboxfield" class="tf-flex ' + ((this.groupLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
+                // checkbox list  
+                '</div>',
+                '</div>'
+            ].join('\n');
 
-	            if(Object.keys(this.validations).length > 0)
-	                this.setValidations.call(me);
-			},/** @access private */
-			_render : function(){
+            this.childTemplate = $(el)[0];
+        },
+        /** @access private */
+        _cacheDom: function() {
 
-				var me = this.scope;
+            //cache Dom
+            this.outerComp = this.childTemplate;
+            this.controlComp = this.childTemplate.querySelector('[control-type="tf-checkboxfield"]');
+            this.labelComp = this.childTemplate.querySelector('[control-type="tf-chkf-label"]');
+            this.innerComp = this.controlComp.getElementsByTagName('input');
+            this.requiredComp = this.labelComp.querySelector('#' + this.requiredId);
 
-				if(this.render != ''){
-					this.render.call(me);
-				}
-			},/** @access public */
-	        setValidations: function() {
-	                
-	                //adding validations
+        },
+        /** @access private */
+        _applyProperty: function() {
 
-	                Object.keys(this.validations).forEach(function(val) {
+            //apply styles
+            if (this.styles != '') {
+                Object.keys(this.styles).forEach(function(style) {
+                    this.outerComp.style[style] = this.styles[style];
+                }, this);
+            }
 
-	                    if(val === 'isRequired'){
+            // apply flex
+            if(this.flex) this.outerComp.style.flex = this.flex;
 
-	                        	if(this.validations.isRequired.value){
-	                        		
-	                                if(!this.isRequiredHandler){
-	                                	this.requiredComp.style.display ='';
-	                                    this.isRequiredHandler = this.validationMethods.isRequired.bind(this);
-	                                    for(var i=0; i<this.innerComp.length ;i++ ){
-	                                    	this.innerComp[i].addEventListener('change', this.isRequiredHandler);
-	                                    }
-	                                }
-	                            }else {
-	                            	
-	                            	this.requiredComp.style.display ='none';
-	                        		for(var i=0; i<this.innerComp.length ;i++ ){
-	                                   	this.innerComp[i].removeEventListener('change', this.isRequiredHandler);
-	                                }
-	                            	delete this.isRequiredHandler;
-	                           	}
+            //apply classes
+            if (this.compClass) this.outerComp.classList.add.apply(this.outerComp.classList, this.compClass);
+            if (this.labelClass) this.labelComp.classList.add.apply(this.labelComp.classList, this.labelClass);
+            if (this.controlClass) this.controlComp.classList.add.apply(this.controlComp.classList, this.controlClass);
 
-	                    }else if(val === 'customError'){
-	                    	console.log(this);
-	                    	this.customError(true);
-	                    }
-	                }, this);
-	        }
+            // add checkbox el's to control
+            this.fieldGroup.forEach(function(item) {
+                if (this.name != '')
+                    item.name = this.name;
+                this.controlComp.appendChild(TFLib.TFCheckbox.call(item));
+            }, this);
 
-		};
-		
-				
-		function getRandomInt(min, max){
-			min = Math.ceil(min);
-			max = Math.floor(max);
-			return Math.floor(Math.random()*(max - min)+min);
-		}
-		
-	return	checkboxfield._init();
-	
+            this.innerComp = this.controlComp.getElementsByTagName('input');
+        },
+        /** @access private */
+        _bindEvents: function() {
+
+            var me = this.scope;
+
+            if (this.listeners != '') {
+                for (var listener in this.listeners) {
+                    this.controlComp.addEventListener(listener, this.listeners[listener].bind(me));
+                }
+            }
+        },
+        /** @access private */
+        _attachProperties: function() {
+
+            var me = this.scope;
+
+            //properties
+            me.controlComp = this.controlComp;
+            me.outerComp = this.outerComp;
+            me.labelComp = this.labelComp;
+            me.innerComp = this.innerComp;
+            me.labelId = this.labelId;
+            me.requiredComp = this.requiredComp;
+            me.setValidations = this.setValidations;
+
+            //methods
+            TFLib.TFCheckboxFieldMethods.call(me);
+            TFLib.TFSharedMethods.call(me);
+
+            //share methods to el
+            me.outerComp.shared = me;
+
+            // handle validations
+            me.validationMethods = {};
+            TFLib.TFValidations.call(me.validationMethods);
+
+            if (Object.keys(this.validations).length > 0)
+                this.setValidations.call(me);
+        },
+        /** @access private */
+        _render: function() {
+
+            var me = this.scope;
+
+            if (this.render != '') {
+                this.render.call(me);
+            }
+        },
+        /** @access public */
+        setValidations: function() {
+
+            //adding validations
+
+            Object.keys(this.validations).forEach(function(val) {
+
+                switch (val) {
+                    case 'isRequired':
+
+                        if (this.validations.isRequired.value) {
+                            if (!this.isRequiredHandler) {
+                                this.requiredComp.style.display = '';
+                                this.isRequiredHandler = this.validationMethods.isRequired.bind(this);
+                                for (var i = 0; i < this.innerComp.length; i++) {
+                                    this.innerComp[i].addEventListener('change', this.isRequiredHandler);
+                                }
+                            }
+                        } else {
+
+                            this.requiredComp.style.display = 'none';
+                            for (var i = 0; i < this.innerComp.length; i++) {
+                                this.innerComp[i].removeEventListener('change', this.isRequiredHandler);
+                            }
+                            delete this.isRequiredHandler;
+                        }
+                        break;
+                    case 'customError':
+                    	if(this.validations.customError.value)
+                        	this.customError(this.validations.customError.value);
+                        break;
+                }
+            }, this);
+        }
+
+    };
+
+
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    return checkboxfield._init();
+
 };
