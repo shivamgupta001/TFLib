@@ -4,6 +4,7 @@
  * @property {string} id - id will be assigned to outer component.
  * @property {string} labelId - will be assigned to label[id].
  * @property {string} fieldLayout - can be 'row' or 'column'.
+ * @property {integer} flex - can take flex value as integer will be assigned to outerComp.
  * @property {object} styles - styles will be applied to button tag.
  * @property {object[]} fieldGroup - pass all checkboxes details as each item.
  * @property {string} groupLayout - layout of items provided in fieldGroup can be 'row' or 'column'.

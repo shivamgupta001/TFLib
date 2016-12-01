@@ -4,6 +4,7 @@
  * @property {string} id - id will be assigned to checkbox[id] & label[for].
  * @property {string} fieldLayout - can be 'row' or 'column'.
  * @property {boolean} checked - can be true or false to be checked initially .
+ * @property {string} name - name will be assigned to input as attribute .
  * @property {object} styles - styles will be applied to button tag.
  * @property {object} attributes - attributes will be applied to button tag.
  * @property {(string|string[])} labelClass -  will be applied to TFCheckbox label.

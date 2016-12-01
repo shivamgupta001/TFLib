@@ -1,67 +1,67 @@
-
+/** @mixin */
 TFLib.TFTextFieldMethods = function(){
 
 	/**This method will hide label as display 'none'
-      * @memberof TFTextField
-      * @memberof TFTextAreaField
+      * @mixes TFTextField
+      * @mixes TFTextAreaField
       */
 	this.displayLabelHide = function(){
 		this.labelComp.style.display = "none";
 	};
 	/**This method will show label if display 'none'
-      * @memberof TFTextField
-      * @memberof TFTextAreaField
+      * @mixes TFTextField
+      * @mixes TFTextAreaField
       */
 	this.displayLabelShow = function(){
 		this.labelComp.style.display = "";
 	};
 	/**This method will control comp as display 'none'
-      * @memberof TFTextField
-      * @memberof TFTextAreaField
+      * @mixes TFTextField
+      * @mixes TFTextAreaField
       */
 	this.displayControlHide = function(){
 		this.controlComp.style.display = "none";
 	};
 	/**This method will show control comp if display 'none'
-      * @memberof TFTextField
-      * @memberof TFTextAreaField
+      * @mixes TFTextField
+      * @mixes TFTextAreaField
       */
 	this.displayControlShow = function(){
 		this.controlComp.style.display = "";
 	};
 
 	/**This method will hide label as visibility 'hidden'
-      * @memberof TFTextField
-      * @memberof TFTextAreaField
+      * @mixes TFTextField
+      * @mixes TFTextAreaField
       */
 	this.visibleLabelHide = function(){
 		this.labelComp.style.visibility = "hidden";
 	};
 	/**This method will show label as if visibility 'hidden'
-      * @memberof TFTextField
-      * @memberof TFTextAreaField
+      * @mixes TFTextField
+      * @mixes TFTextAreaField
       */
 	this.visibleLabelShow = function(){
 		this.labelComp.style.visibility = "";
 	};
 	/**This method will hide control as visibility 'hidden'
-      * @memberof TFTextField
-      * @memberof TFTextAreaField
+      * @mixes TFTextField
+      * @mixes TFTextAreaField
       */
 	this.visibleControlHide = function(){
 		this.controlComp.style.visibility = "hidden";
 	};
 	/**This method will show control if visibility 'hidden'
-      * @memberof TFTextField
-      * @memberof TFTextAreaField
+      * @mixes TFTextField
+      * @mixes TFTextAreaField
       */
 	this.visibleControlShow = function(){
 		this.controlComp.style.visibility = "";
 	};
 
 	/**This method will add style to label comp 
-      * @memberof TFTextField
-      * @memberof TFTextAreaField
+      * @mixes TFTextField
+      * @mixes TFTextAreaField
       * @param {string} property - property name 
       * @param {string} val - property value 
       */
@@ -69,16 +69,16 @@ TFLib.TFTextFieldMethods = function(){
 		this.labelComp.style[prop] = val;
 	};
 	/**This method will remove style to label comp 
-      * @memberof TFTextField
-      * @memberof TFTextAreaField
+      * @mixes TFTextField
+      * @mixes TFTextAreaField
       * @param {string} property - property name 
       */
 	this.removeLabelStyle = function(prop){
 		this.labelComp.style[prop] = '';
 	};
 	/**This method will add style to control comp 
-      * @memberof TFTextField
-      * @memberof TFTextAreaField
+      * @mixes TFTextField
+      * @mixes TFTextAreaField
       * @param {string} property - property name 
       * @param {string} val - property value 
       */
@@ -86,8 +86,8 @@ TFLib.TFTextFieldMethods = function(){
 		this.controlComp.style[prop] = val;
 	};
 	/**This method will remove style to control comp 
-      * @memberof TFTextField
-      * @memberof TFTextAreaField
+      * @mixes TFTextField
+      * @mixes TFTextAreaField
       * @param {string} property - property name 
       */
 	this.removeControlStyle = function(prop){
@@ -95,8 +95,8 @@ TFLib.TFTextFieldMethods = function(){
 	};
 	
 	/**This method will change label text 
-      * @memberof TFTextField
-      * @memberof TFTextAreaField
+      * @mixes TFTextField
+      * @mixes TFTextAreaField
       * @param {string} newLabelText - label text or html
       */
 	this.changeLabel = function(newLabelText){
@@ -106,8 +106,8 @@ TFLib.TFTextFieldMethods = function(){
 
 
 	/**This method will add class to label comp 
-      * @memberof TFTextField
-      * @memberof TFTextAreaField
+      * @mixes TFTextField
+      * @mixes TFTextAreaField
       * @param {string} newClass - class name 
       */
 	this.addLabelClass = function(newClass){
@@ -115,8 +115,8 @@ TFLib.TFTextFieldMethods = function(){
 		this.labelComp.classList.add.apply(this.labelComp.classList , newClass);
 	};
 	/**This method will remove class to label comp 
-      * @memberof TFTextField
-      * @memberof TFTextAreaField
+      * @mixes TFTextField
+      * @mixes TFTextAreaField
       * @param {string} oldClass - class name 
       */
 	this.removeLabelClass = function(oldClass){
@@ -124,8 +124,8 @@ TFLib.TFTextFieldMethods = function(){
 		this.labelComp.classList.remove.apply(this.labelComp.classList , oldClass);		
 	};
 	/**This method will add class to control comp 
-      * @memberof TFTextField
-      * @memberof TFTextAreaField
+      * @mixes TFTextField
+      * @mixes TFTextAreaField
       * @param {string} newClass - class name 
       */
 	this.addControlClass = function(newClass){
@@ -133,8 +133,8 @@ TFLib.TFTextFieldMethods = function(){
 		this.controlComp.classList.add.apply(this.controlComp.classList , newClass);
 	};
 	/**This method will remove class to control comp 
-      * @memberof TFTextField
-      * @memberof TFTextAreaField
+      * @mixes TFTextField
+      * @mixes TFTextAreaField
       * @param {string} oldClass - class name 
       */
 	this.removeControlClass = function(oldClass){
@@ -143,8 +143,8 @@ TFLib.TFTextFieldMethods = function(){
 	};
 
 	/**This method will add validation of custom error to control comp 
-      * @memberof TFTextField
-      * @memberof TFTextAreaField
+      * @mixes TFTextField
+      * @mixes TFTextAreaField
       * @param {boolean} status - can be true or false
       * @param {string} errmsg - pass message
       */
@@ -187,8 +187,8 @@ TFLib.TFTextFieldMethods = function(){
 	};
 
 	/**This method will apply validation to component 
-      * @memberof TFTextField
-      * @memberof TFTextAreaField
+      * @mixes TFTextField
+      * @mixes TFTextAreaField
       * @param {object}
       * @property {boolean} value - true or false to apply or not apply validation
       * @property {string} errmsg - error message to show on tooltip
@@ -236,8 +236,8 @@ TFLib.TFTextFieldMethods = function(){
 	
 	};
 	/**This method will apply validation to component 
-      * @memberof TFTextField
-      * @memberof TFTextAreaField
+      * @mixes TFTextField
+      * @mixes TFTextAreaField
       * @param {object}
       * @property {boolean} value - true or false to apply or not apply validation
       */
@@ -265,8 +265,8 @@ TFLib.TFTextFieldMethods = function(){
 	
 	};
 	/**This method will apply validation to component 
-      * @memberof TFTextField
-      * @memberof TFTextAreaField
+      * @mixes TFTextField
+      * @mixes TFTextAreaField
       * @param {object}
       * @property {boolean} value - true or false to apply or not apply validation
       */
@@ -296,8 +296,8 @@ TFLib.TFTextFieldMethods = function(){
 	
 	};
 	/**This method will apply validation to component 
-      * @memberof TFTextField
-      * @memberof TFTextAreaField
+      * @mixes TFTextField
+      * @mixes TFTextAreaField
       * @param {object}
       * @property {boolean} value - true or false to apply or not apply validation
       * @property {string} errmsg - error message to show on tooltip
@@ -350,8 +350,8 @@ TFLib.TFTextFieldMethods = function(){
 	
 	};
 	/**This method will validate if validations present to component 
-      * @memberof TFTextField
-      * @memberof TFTextAreaField
+      * @mixes TFTextField
+      * @mixes TFTextAreaField
       */
 	this.validate = function(){
 

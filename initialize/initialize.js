@@ -1,1 +1,4 @@
+/**
+ * @namespace TFLib
+ */
 var TFLib = {};

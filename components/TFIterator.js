@@ -79,7 +79,8 @@ TFLib.Iterator = function(config){
 
 	// return iterated code block
 	var el =  iterateStructure(config);
-	/**This method will apply validation to component 
+
+	/**This method will append el to selector , and will be appended as last child
       * @memberof Iterator
       * @param {string} selector - pass selector
       * @param {object} el - dom object
@@ -95,7 +96,7 @@ TFLib.Iterator = function(config){
                   ele.appendChild(el);
             }
     };
-    /**This method will apply validation to component 
+    /**This method will insert el to selector ,just before selected dom as sibling
       * @memberof Iterator
       * @param {string} selector - pass selector
       * @param {object} el - dom object

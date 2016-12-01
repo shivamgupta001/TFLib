@@ -1,6 +1,6 @@
 /**
  * @author Shivam Gupta 
- * @constructor TFButton
+ * @class TFButton
  * @property {string} id - id will be assigned to button tag.
  * @property {object} styles - styles will be applied to button tag.
  * @property {object} attributes - attributes will be applied to button tag.
@@ -11,6 +11,7 @@
  * @property {object} listeners - is an object where all listener handlers can be written as key value pair.
  */
 
+ 
 TFLib.TFButton = function(){
 		
 		var button = {

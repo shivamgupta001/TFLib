@@ -26,70 +26,70 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>
+            <pre class="prettyprint source linenums"><code>/** @mixin */
 TFLib.TFCheckboxMethods = function(){
 
 	/**This method will hide label as display 'none'
-      * @memberof TFCheckbox
-      * @memberof TFRadio
+      * @mixes TFCheckbox
+      * @mixes TFRadio
       */
 	this.displayLabelHide = function(){
 		this.labelComp.style.display = "none";
 	};
 	/**This method will show label if display 'none'
-      * @memberof TFCheckbox
-      * @memberof TFRadio
+      * @mixes TFCheckbox
+      * @mixes TFRadio
       */
 	this.displayLabelShow = function(){
 		this.labelComp.style.display = "";
 	};
 	/**This method will inner comp as display 'none'
-      * @memberof TFCheckbox
-      * @memberof TFRadio
+      * @mixes TFCheckbox
+      * @mixes TFRadio
       */
 	this.displayInnerHide = function(){
 		this.innerComp.style.display = "none";
 	};
 	/**This method will inner comp as display 'none'
-      * @memberof TFCheckbox
-      * @memberof TFRadio
+      * @mixes TFCheckbox
+      * @mixes TFRadio
       */
 	this.displayInnerShow = function(){
 		this.innerComp.style.display = "";
 	};
 
 	/**This method will hide label as visibility 'hidden'
-      * @memberof TFCheckbox
-      * @memberof TFRadio
+      * @mixes TFCheckbox
+      * @mixes TFRadio
       */
 	this.visibleLabelHide = function(){
 		this.labelComp.style.visibility = "hidden";
 	};
 	/**This method will show label if visibility 'hidden'
-      * @memberof TFCheckbox
-      * @memberof TFRadio
+      * @mixes TFCheckbox
+      * @mixes TFRadio
       */
 	this.visibleLabelShow = function(){
 		this.labelComp.style.visibility = "";
 	};
 	/**This method will hide inner label as visibility 'hidden'
-      * @memberof TFCheckbox
-      * @memberof TFRadio
+      * @mixes TFCheckbox
+      * @mixes TFRadio
       */
 	this.visibleInnerHide = function(){
 		this.innerComp.style.visibility = "hidden";
 	};
 	/**This method will show inner label if visibility 'hidden'
-      * @memberof TFCheckbox
-      * @memberof TFRadio
+      * @mixes TFCheckbox
+      * @mixes TFRadio
       */
 	this.visibleInnerShow = function(){
 		this.innerComp.style.visibility = "";
 	};
 
 	/**This method will add style to label comp 
-      * @memberof TFCheckbox
-      * @memberof TFRadio
+      * @mixes TFCheckbox
+      * @mixes TFRadio
       * @param {string} property - property name 
       * @param {string} val - property value 
       */
@@ -97,16 +97,16 @@ TFLib.TFCheckboxMethods = function(){
 		this.labelComp.style[prop] = val;
 	};
 	/**This method will remove style to label comp 
-      * @memberof TFCheckbox
-      * @memberof TFRadio
+      * @mixes TFCheckbox
+      * @mixes TFRadio
       * @param {string} property - property name 
       */
 	this.removeLabelStyle = function(prop){
 		this.labelComp.style[prop] = '';
 	};
 	/**This method will add style to inner comp 
-      * @memberof TFCheckbox
-      * @memberof TFRadio
+      * @mixes TFCheckbox
+      * @mixes TFRadio
       * @param {string} property - property name 
       * @param {string} val - property value 
       */
@@ -114,8 +114,8 @@ TFLib.TFCheckboxMethods = function(){
 		this.innerComp.style[prop] = val;
 	};
 	/**This method will remove style to inner comp 
-      * @memberof TFCheckbox
-      * @memberof TFRadio
+      * @mixes TFCheckbox
+      * @mixes TFRadio
       * @param {string} property - property name 
       */
 	this.removeInnerStyle = function(prop){
@@ -123,8 +123,8 @@ TFLib.TFCheckboxMethods = function(){
 	};
 
 	/**This method will change label text 
-      * @memberof TFCheckbox
-      * @memberof TFRadio
+      * @mixes TFCheckbox
+      * @mixes TFRadio
       * @param {string} newLabelText - label text or html
       */
 	this.changeLabel = function(newLabelText){
@@ -133,8 +133,8 @@ TFLib.TFCheckboxMethods = function(){
 	};
 
 	/**This method will add class to label comp 
-      * @memberof TFCheckbox
-      * @memberof TFRadio
+      * @mixes TFCheckbox
+      * @mixes TFRadio
       * @param {string|string[]} newClass - class name 
       */
 	this.addLabelClass = function(newClass){
@@ -142,8 +142,8 @@ TFLib.TFCheckboxMethods = function(){
 		this.labelComp.classList.add.apply(this.labelComp.classList , newClass); 
 	};
 	/**This method will remove class to label comp 
-      * @memberof TFCheckbox
-      * @memberof TFRadio
+      * @mixes TFCheckbox
+      * @mixes TFRadio
       * @param {string|string[]} oldClass - class name 
       */
 	this.removeLabelClass = function(oldClass){
@@ -151,8 +151,8 @@ TFLib.TFCheckboxMethods = function(){
 		this.labelComp.classList.remove.apply(this.labelComp.classList , oldClass);
 	};
 	/**This method will add class to inner comp 
-      * @memberof TFCheckbox
-      * @memberof TFRadio
+      * @mixes TFCheckbox
+      * @mixes TFRadio
       * @param {string|string[]} newClass - class name 
       */
 	this.addInnerClass = function(newClass){
@@ -160,8 +160,8 @@ TFLib.TFCheckboxMethods = function(){
 		this.innerComp.classList.add.apply(this.innerComp.classList , newClass); 	
 	};
 	/**This method will remove class to inner comp 
-      * @memberof TFCheckbox
-      * @memberof TFRadio
+      * @mixes TFCheckbox
+      * @mixes TFRadio
       * @param {string|string[]} oldClass - class name 
       */
 	this.removeInnerClass = function(oldClass){
@@ -170,8 +170,8 @@ TFLib.TFCheckboxMethods = function(){
 	};
 
 	/**This method will set attribute to inner comp 
-      * @memberof TFCheckbox
-      * @memberof TFRadio
+      * @mixes TFCheckbox
+      * @mixes TFRadio
       * @param {string} attrName - attribute name
       * @param {string} attrVal - attribute value
       */
@@ -179,8 +179,8 @@ TFLib.TFCheckboxMethods = function(){
 		this.innerComp.setAttribute(attrName , attrVal);
 	};
 	/**This method will remove attribute to inner comp 
-      * @memberof TFCheckbox
-      * @memberof TFRadio
+      * @mixes TFCheckbox
+      * @mixes TFRadio
       * @param {string} attrName - attribute name 
       */
 	this.removeAttribute = function(attrName){
@@ -196,13 +196,13 @@ TFLib.TFCheckboxMethods = function(){
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Iterator.html">Iterator</a></li><li><a href="TFButton.html">TFButton</a></li><li><a href="TFCheckbox.html">TFCheckbox</a></li><li><a href="TFCheckboxField.html">TFCheckboxField</a></li><li><a href="TFComboboxField.html">TFComboboxField</a></li><li><a href="TFContainer.html">TFContainer</a></li><li><a href="TFForm.html">TFForm</a></li><li><a href="TFRadio.html">TFRadio</a></li><li><a href="TFRadioField.html">TFRadioField</a></li><li><a href="TFTextAreaField.html">TFTextAreaField</a></li><li><a href="TFTextField.html">TFTextField</a></li><li><a href="TFToast.html">TFToast</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Iterator.html">Iterator</a></li><li><a href="TFButton.html">TFButton</a></li><li><a href="TFCheckbox.html">TFCheckbox</a></li><li><a href="TFCheckboxField.html">TFCheckboxField</a></li><li><a href="TFComboboxField.html">TFComboboxField</a></li><li><a href="TFContainer.html">TFContainer</a></li><li><a href="TFForm.html">TFForm</a></li><li><a href="TFRadio.html">TFRadio</a></li><li><a href="TFRadioField.html">TFRadioField</a></li><li><a href="TFTextAreaField.html">TFTextAreaField</a></li><li><a href="TFTextField.html">TFTextField</a></li><li><a href="TFToast.html">TFToast</a></li></ul><h3>Mixins</h3><ul><li><a href="TFLib.TFCheckboxFieldMethods.html">TFCheckboxFieldMethods</a></li><li><a href="TFLib.TFCheckboxMethods.html">TFCheckboxMethods</a></li><li><a href="TFLib.TFSharedMethods.html">TFSharedMethods</a></li><li><a href="TFLib.TFTextFieldMethods.html">TFTextFieldMethods</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addClass">addClass</a></li><li><a href="global.html#addControlClass">addControlClass</a></li><li><a href="global.html#addControlStyle">addControlStyle</a></li><li><a href="global.html#addInnerClass">addInnerClass</a></li><li><a href="global.html#addInnerStyle">addInnerStyle</a></li><li><a href="global.html#addLabelClass">addLabelClass</a></li><li><a href="global.html#addLabelStyle">addLabelStyle</a></li><li><a href="global.html#addStyle">addStyle</a></li><li><a href="global.html#append">append</a></li><li><a href="global.html#appendTo">appendTo</a></li><li><a href="global.html#changeLabel">changeLabel</a></li><li><a href="global.html#customError">customError</a></li><li><a href="global.html#displayControlHide">displayControlHide</a></li><li><a href="global.html#displayControlShow">displayControlShow</a></li><li><a href="global.html#displayInnerHide">displayInnerHide</a></li><li><a href="global.html#displayInnerShow">displayInnerShow</a></li><li><a href="global.html#displayLabelHide">displayLabelHide</a></li><li><a href="global.html#displayLabelShow">displayLabelShow</a></li><li><a href="global.html#hide">hide</a></li><li><a href="global.html#insertBefore">insertBefore</a></li><li><a href="global.html#insertDomAt">insertDomAt</a></li><li><a href="global.html#isRequired">isRequired</a></li><li><a href="global.html#onlyNumber">onlyNumber</a></li><li><a href="global.html#onlyText">onlyText</a></li><li><a href="global.html#prepend">prepend</a></li><li><a href="global.html#regex">regex</a></li><li><a href="global.html#removeAttribute">removeAttribute</a></li><li><a href="global.html#removeClass">removeClass</a></li><li><a href="global.html#removeControlClass">removeControlClass</a></li><li><a href="global.html#removeControlStyle">removeControlStyle</a></li><li><a href="global.html#removeInnerClass">removeInnerClass</a></li><li><a href="global.html#removeInnerStyle">removeInnerStyle</a></li><li><a href="global.html#removeLabelClass">removeLabelClass</a></li><li><a href="global.html#removeLabelStyle">removeLabelStyle</a></li><li><a href="global.html#removeStyle">removeStyle</a></li><li><a href="global.html#setAttribute">setAttribute</a></li><li><a href="global.html#show">show</a></li><li><a href="global.html#validate">validate</a></li><li><a href="global.html#visibleControlHide">visibleControlHide</a></li><li><a href="global.html#visibleControlShow">visibleControlShow</a></li><li><a href="global.html#visibleHide">visibleHide</a></li><li><a href="global.html#visibleInnerHide">visibleInnerHide</a></li><li><a href="global.html#visibleInnerShow">visibleInnerShow</a></li><li><a href="global.html#visibleLabelHide">visibleLabelHide</a></li><li><a href="global.html#visibleLabelShow">visibleLabelShow</a></li><li><a href="global.html#visibleShow">visibleShow</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu Dec 01 2016 18:29:29 GMT+0530 (India Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu Dec 01 2016 20:18:51 GMT+0530 (India Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

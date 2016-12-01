@@ -4,6 +4,7 @@
  * @property {string} id - id will be assigned to outer component.
  * @property {string} innerId -  will be assigned to input[id] & label[for].
  * @property {string} fieldLayout - can be 'row' or 'column'.
+ * @property {integer} flex - can take flex value as integer will be assigned to outerComp.
  * @property {object} styles - styles will be applied to outer div of component.
  * @property {string} displayLabel - 'none' will hide display part of component.
  * @property {object} attributes - attributes will be applied to textarea tag.

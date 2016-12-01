@@ -4,10 +4,11 @@
  * @property {string} id - id will be assigned to outer comp.
  * @property {string} labelId -  will be assigned to  label[id].
  * @property {string} fieldLayout - can be 'row' or 'column'.
+ * @property {integer} flex - integer value to assign flex .
  * @property {object} styles - styles will be applied to outer div of component.
  * @property {string} displayLabel - 'none' will hide display part of component.
  * @property {object} attributes - attributes will be applied to textarea tag.
- * @property {object} validations - Does apply validations to component only 'isRequired' present.
+ * @property {object} validations - Does apply validations to component only 'isRequired' and 'customError' present.
  * @property {string} fieldLabel - label to component field.
  * @property {string} name - name will be assigned to select tag.
  * @property {boolean} multiple - can take true or false for multiple attribute to be set.
@@ -145,6 +146,8 @@ TFLib.TFComboboxField = function($fieldset) {
             if (this.controlClass) this.controlComp.classList.add.apply(this.controlComp.classList, this.controlClass);
             if (this.compClass) this.outerComp.classList.add.apply(this.outerComp.classList, this.compClass);
             if (this.labelClass) this.labelComp.classList.add.apply(this.labelComp.classList, this.labelClass);
+
+            if(this.flex) this.outerComp.style.flex = this.flex;
 
             // handling buttons
             this.buttons.forEach(function(val) {

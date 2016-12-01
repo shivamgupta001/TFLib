@@ -8,8 +8,9 @@
  * @property {object[]} fieldGroup - pass all checkboxes details as each item.
  * @property {string} groupLayout - layout of items provided in fieldGroup can be 'row' or 'column'.
  * @property {string} name - will be common to all checkboxes , no need to provide individually , but you can override.
- * @property {object} validations - Does apply validations to component only 'isRequired' present.
+ * @property {object} validations - Does apply validations to component only 'isRequired' and 'customError' present.
  * @property {string} fieldLabel - label to component field.
+ * @property {integer} flex - will assign flex. 
  * @property {(string|string[])} labelClass -  will be applied to TFCheckboxField label wrapper.
  * @property {(string|string[])} compClass -  will be applied to TFCheckboxField outermost div.
  * @property {(string|string[])} controlClass -  will be applied to div wraper of all checkboxes.
@@ -45,8 +46,7 @@ TFLib.TFCheckboxField = function() {
             this.dynamicId = me.id || "tf-chkf-" + getRandomInt(1, 10000);
             this.labelId = me.labelId || "tf-chk-label-" + getRandomInt(1, 10000);
             this.requiredId = "tf-chk-req-" + getRandomInt(1, 10000);
-
-            this.markRequired = me.markRequired || false;
+            
             this.fieldLayout = me.fieldLayout || 'row';
             this.styles = me.styles || '';
             this.fieldGroup = me.fieldGroup || [];
@@ -54,6 +54,7 @@ TFLib.TFCheckboxField = function() {
             this.name = me.name || '';
             this.validations = me.validations || {};
             this.validations.__proto__ = {
+
                 'isRequired': { value: false, errmsg: 'This field is Required' },
                 'customError': { value: false, errmsg: 'Custom error' }
             };
