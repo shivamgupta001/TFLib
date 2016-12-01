@@ -182,6 +182,8 @@ TFLib.TFSharedMethods = function(){
                   var ele = this.outerComp.querySelector(selector);
                   ele.appendChild(el);
             }
+
+            return this.outerComp;
       };
       /**This method will append  dom at  selector found in dom
       * else if el provided than it will append to current component querying using selector and append el
@@ -211,6 +213,8 @@ TFLib.TFSharedMethods = function(){
                         callingEL.insertBefore(el , ele.parentElement);
                   }
             }
+
+            return this.outerComp;
       };
       
 };

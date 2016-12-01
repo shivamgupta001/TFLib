@@ -3,6 +3,7 @@
  * @constructor TFCheckbox
  * @property {string} id - id will be assigned to checkbox[id] & label[for].
  * @property {string} fieldLayout - can be 'row' or 'column'.
+ * @property {boolean} checked - can be true or false to be checked initially .
  * @property {object} styles - styles will be applied to button tag.
  * @property {object} attributes - attributes will be applied to button tag.
  * @property {(string|string[])} labelClass -  will be applied to TFCheckbox label.
@@ -42,7 +43,9 @@ TFLib.TFCheckbox = function(){
 				this.attributes = me.attributes || '';
 				this.name = me.name || '';
 
-								
+				//attributes
+				this.checked = (me.checked === true ? true : false);
+
 				// innerHTML configs
 				this.fieldLabel = me.fieldLabel || '';
 															
@@ -58,7 +61,7 @@ TFLib.TFCheckbox = function(){
 				
 				var el = [
 					'<div class="tf-flex '+((this.fieldLayout === "row") ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
-						'<input control-type="tf-checkbox" id="'+this.dynamicId+'" type="checkbox">',
+						'<input control-type="tf-checkbox" id="'+this.dynamicId+'" type="checkbox" '+(this.checked ? 'checked' :'')+'>',
 						'<label control-type="tf-chk-label" for="'+this.dynamicId+'">'+this.fieldLabel+'</label>',
 					'</div>'
 				].join('\n');

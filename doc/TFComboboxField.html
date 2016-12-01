@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: TFCheckbox</title>
+    <title>JSDoc: Class: TFComboboxField</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: TFCheckbox</h1>
+    <h1 class="page-title">Class: TFComboboxField</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2>TFCheckbox</h2>
+        <h2>TFComboboxField</h2>
         
     
 </header>
@@ -40,7 +40,7 @@
 
     
 
-    <h4 class="name" id="TFCheckbox"><span class="type-signature"></span>new TFCheckbox<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="TFComboboxField"><span class="type-signature"></span>new TFComboboxField<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
 
@@ -100,7 +100,30 @@
 
             
 
-            <td class="description last">id will be assigned to checkbox[id] & label[for].</td>
+            <td class="description last">id will be assigned to outer comp.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>labelId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">will be assigned to  label[id].</td>
         </tr>
 
     
@@ -130,29 +153,6 @@
 
         <tr>
             
-                <td class="name"><code>checked</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">can be true or false to be checked initially .</td>
-        </tr>
-
-    
-
-        <tr>
-            
                 <td class="name"><code>styles</code></td>
             
 
@@ -169,7 +169,30 @@
 
             
 
-            <td class="description last">styles will be applied to button tag.</td>
+            <td class="description last">styles will be applied to outer div of component.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>displayLabel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">'none' will hide display part of component.</td>
         </tr>
 
     
@@ -192,7 +215,122 @@
 
             
 
-            <td class="description last">attributes will be applied to button tag.</td>
+            <td class="description last">attributes will be applied to textarea tag.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>validations</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Does apply validations to component only 'isRequired' present.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>fieldLabel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">label to component field.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">name will be assigned to select tag.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>multiple</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">can take true or false for multiple attribute to be set.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>tabindex</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">integer value gets assigned to component field.</td>
         </tr>
 
     
@@ -218,7 +356,7 @@
 
             
 
-            <td class="description last">will be applied to TFCheckbox label.</td>
+            <td class="description last">will be applied to  label wrapper.</td>
         </tr>
 
     
@@ -244,14 +382,40 @@
 
             
 
-            <td class="description last">will be applied to TFCheckbox.</td>
+            <td class="description last">will be applied to  outermost div.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>fieldLabel</code></td>
+                <td class="name"><code>controlClass</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">will be applied to div wraper of all teaxtarea wrapper.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
             
 
             <td class="type">
@@ -267,7 +431,53 @@
 
             
 
-            <td class="description last">field label value.</td>
+            <td class="description last">provide value field property in data object</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>display</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">provide display field property in data object</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;object></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">will take array of object with two properties 'value' and 'display'</td>
         </tr>
 
     
@@ -290,7 +500,7 @@
 
             
 
-            <td class="description last">this function will run when the coponent is generated but not yet appended.</td>
+            <td class="description last">this function will run when the component is generated but not yet returned.</td>
         </tr>
 
     
@@ -359,7 +569,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_TFCheckbox.js.html">components/TFCheckbox.js</a>, <a href="components_TFCheckbox.js.html#line1">line 1</a>
+        <a href="components_TFComboboxField.js.html">components/TFComboboxField.js</a>, <a href="components_TFComboboxField.js.html#line1">line 1</a>
     </li></ul></dd>
     
 

@@ -2,7 +2,7 @@
  * @author Shivam Gupta 
  * @constructor TFContainer
  * @property {string} id - id will be assigned to container.
- * @property {string} layout - can be 'row' or 'column'.
+ * @property {string} layout - can be 'row' or 'column' and is display flex , if not provided container will be display block.
  * @property {object} styles - styles will be applied to button tag.
  * @property {string} tagName - can pass tag name of which container can be formed.
  * @property {number} flex - will define what %age of width to take in comparison to others.
@@ -17,7 +17,7 @@ TFLib.TFContainer = function(){
 		var container = {
 			
 			scope : this,
-			/** @access private *//** @access private */
+			/** @access private */
 			_init : function(){
 				
 				this._initialize();
@@ -37,7 +37,7 @@ TFLib.TFContainer = function(){
 
 				//  configs
 				this.dynamicId = me.id || "tf-container-"+getRandomInt(1, 10000);
-				this.layout = me.layout || 'row';
+				this.layout = me.layout || false;
 				this.styles = me.styles || '';
 				this.tagName = me.tagName || 'div';
 								
@@ -59,7 +59,8 @@ TFLib.TFContainer = function(){
 			_generateTemplate : function(){
 				
 				var el = document.createElement(this.tagName);
-				el.classList.add('tf-flex');
+				if(this.layout)
+					el.classList.add('tf-flex');
 				el.setAttribute('control-type','tf-container');
 				el.setAttribute('id', this.dynamicId);
 				
@@ -89,7 +90,8 @@ TFLib.TFContainer = function(){
 				//apply layout
 				if(this.layout === "row")
 					this.outerComp.classList.add('tf-flex-direction--row');
-				else this.outerComp.classList.add('tf-flex-direction--column');
+				else if(this.layout === "column")
+						this.outerComp.classList.add('tf-flex-direction--column');
 
 				// inner text or html
 				if(this.innerText) this.outerComp.innerText = this.innerText;

@@ -34,7 +34,9 @@
 .tf-required--red {
     color: red;
 }
-
+.tf-border--none{
+    border : none !important;
+}
 .tf-button {
     display: flex;
     justify-content: center;

@@ -5,14 +5,16 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="../css/TFComponentCommon.css">
     <link rel="stylesheet" type="text/css" href="demostyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" />
 </head>
 
 <body>
     <div id="mydiv"></div>
     <script type="text/javascript" src="jquery-1.11.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.min.js"></script>
     <script type="text/javascript" src="../dest/tflib.min.js"></script>   
     <script>
-        /*(function(){*/
+        (function(){
 
             /*sender name start*/
             var senderName = TFLib.TFTextField.call({
@@ -57,6 +59,7 @@
             });
             /*sender zip end*/
 
+            /* TFTextAreaField Demo start*/
             var receiverNotes = TFLib.TFTextAreaField.call({
                 fieldLabel : 'save Notes',
                 fieldLayout : 'column',
@@ -69,13 +72,16 @@
                 }]
 
             });
+            /* TFTextAreaField Demo end*/
 
-            var receiverEntity = TFLib.TFCheckboxField.call({
+            /* TFCheckboxField Demo start*/
+            var receiverEntity = TFLib.TFRadioField.call({
                 fieldLabel  : 'Entity Type',
                 fieldLayout : 'column',
                 groupLayout : 'row',
                 fieldGroup : [{
-                    fieldLabel : 'Individual'
+                    fieldLabel : 'Individual',
+                    checked : false
                 },{
                     fieldLabel : 'Company'
                 }],
@@ -83,12 +89,16 @@
                     'customError' : {value : true , errmsg : 'entity required'}
                 }
             });
+            /* TFCheckboxField Demo end*/
 
+            /* TFCheckbox Demo start*/
             var receiverCashPickup = TFLib.TFCheckbox.call({
                 fieldLabel : 'Cash Pickup Anywhere',
 
             });
+            /* TFCheckbox Demo end*/
 
+            /*Iterartor Demo start */
             var receiverTotalAmount = TFLib.Iterator({
                 type :'container',
                 fieldLayout : 'row',
@@ -106,13 +116,18 @@
                     innerText : 'Receive Currency'
                 }]
             });
+            /*Iterartor Demo end */
 
+            /*TFTextField start */
             var payoutFeeRate = TFLib.TFTextField.call({
                 fieldLabel : '<a href="#">Fee rate</a>',
                 fieldLayout : 'column'
 
 
             });
+            /*TFTextField end*/
+
+            /*TFButton dempo start*/
             var btn = TFLib.TFButton.call({
                 btnText : 'Click me',
                 listeners : {
@@ -121,7 +136,71 @@
                     }
                 }
             });
+            /*TFButton dempo end*/
 
+            
+            /* TFComboboxField Demo start*/
+            var data = [{
+                Id : 'a',
+                Name : 'a',
+            },{
+                Id : 'b',
+                Name : 'b'
+            },{
+                Id : 'c',
+                Name : 'c'
+            },{
+                Id : 'd',
+                Name : 'd'
+            }];
+            var combo = TFLib.TFComboboxField.call({
+                fieldLabel : 'ID Type',
+                fieldLayout : 'column',
+                data : data,
+                value : 'Id',
+                display : 'Name',
+                validations : {
+                    'isRequired' : { value : true , errmsg : 'new combo'}
+                },
+                listeners : {
+                    'select2:selecting' : function(e){
+                        // this will not work see event handling on select2 below
+                    }
+                }
+
+            }).shared.appendTo('#mydiv');
+
+            var $combosel = $(combo.shared.innerComp).select2();
+            $combosel.on('change', function(){
+                // insert code here for change event
+
+            });
+            $combosel.on('select2:selecting', function(){
+                // insert code here for before selecting but after click
+
+            });
+            $combosel.on('select2:select', function(){
+                // insert code here for after select
+                
+            });
+            /* TFComboboxField Demo end*/
+
+            /* Iterator example second start*/
+            var block = TFLib.Iterator({
+                type : 'container',
+                items : [
+                payoutFeeRate,
+                senderName,
+                receiverTotalAmount,
+                receiverEntity,
+                receiverNotes,
+                senderZip,
+                senderAddress
+
+                ]
+                
+            }).insertBefore('#mydiv');
+            /* Iterator example second end*/
         })();
 
     </script>

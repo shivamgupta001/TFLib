@@ -67,8 +67,8 @@ TFLib.Iterator = function(config){
 									break;*/
 			case 'button' 		: el = TFLib.TFButton.call(item);
 									break;
-			/*case 'comboboxfield': el = TFLib.TFComboboxField.call(item);
-									break;*/
+			case 'comboboxfield': el = TFLib.TFComboboxField.call(item);
+									break;
 			default 			: el = TFLib.TFContainer.call(item);
 									break;
 		}

@@ -188,7 +188,7 @@ TFLib.TFCheckboxFieldMethods = function(){
       */
 	this.customError = function(status,errmsg){
 		
-		var chkstatus = false;
+		/*var chkstatus = false;
 		for(var i = 0 ; i< this.innerComp.length ; i++){
 			if(this.innerComp[i].checked){
 				chkstatus = true;
@@ -199,7 +199,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 		if(chkstatus){
 			this.controlComp.classList.remove('tooltip', 'tf-err-border--red');
 			this.controlComp.removeAttribute('data-tooltip');
-		}else{
+		}else{*/
 			if(this.validations.hasOwnProperty("customError")){
 				
 				this.validations.customError.value = status;
@@ -233,7 +233,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 
 			}
 			
-		}
+		/*}*/
 	
 	};
 	/**This method will validate if validations present to component 

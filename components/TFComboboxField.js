@@ -1,4 +1,26 @@
-/** This is a description of combobox field */
+/**
+ * @author Shivam Gupta 
+ * @constructor TFComboboxField
+ * @property {string} id - id will be assigned to outer comp.
+ * @property {string} labelId -  will be assigned to  label[id].
+ * @property {string} fieldLayout - can be 'row' or 'column'.
+ * @property {object} styles - styles will be applied to outer div of component.
+ * @property {string} displayLabel - 'none' will hide display part of component.
+ * @property {object} attributes - attributes will be applied to textarea tag.
+ * @property {object} validations - Does apply validations to component only 'isRequired' present.
+ * @property {string} fieldLabel - label to component field.
+ * @property {string} name - name will be assigned to select tag.
+ * @property {boolean} multiple - can take true or false for multiple attribute to be set.
+ * @property {integer} tabindex - integer value gets assigned to component field.
+ * @property {(string|string[])} labelClass -  will be applied to  label wrapper.
+ * @property {(string|string[])} compClass -  will be applied to  outermost div.
+ * @property {(string|string[])} controlClass -  will be applied to div wraper of all teaxtarea wrapper.
+ * @property {string} value - provide value field property in data object
+ * @property {string} display - provide display field property in data object
+ * @property {object[]} data -  will take array of object with two properties 'value' and 'display'
+ * @property {function} render - this function will run when the component is generated but not yet returned.
+ * @property {object} listeners - is an object where all listener handlers can be written as key value pair.
+ */
 TFLib.TFComboboxField = function($fieldset) {
 
     var comboboxfield = {
@@ -23,14 +45,23 @@ TFLib.TFComboboxField = function($fieldset) {
 
             //config
             this.dynamicId = me.id || "tf-combo-" + getRandomInt(1, 10000);
+            this.labelId = me.labelId || "tf-combo-label-" + getRandomInt(1, 10000);
+            this.requiredId = "tf-combo-req-" + getRandomInt(1, 10000);
+
             this.buttons = me.buttons || [];
-            this.validations = me.validations || false;
+            this.validations = me.validations || {};
+            this.validations.__proto__ = {
+                'isRequired': { value: false, errmsg: 'This field is Required' },
+                'customError': { value: false, errmsg: 'custom error' }
+            };
             this.styles = me.styles || '';
             this.attributes = me.attributes || '';
             this.displayLabel = me.displayLabel || false;
             this.fieldLabel = me.fieldLabel || '';
-            this.fieldType = me.fieldType || 'row';
-            this.options = me.options || [];
+            this.fieldLayout = me.fieldLayout || 'row';
+            this.data = me.data || [];
+            this.value = me.value || 'value';
+            this.display = me.display || 'display';
 
             //style
             this.flex = me.flex || false;
@@ -42,10 +73,9 @@ TFLib.TFComboboxField = function($fieldset) {
 
             //attributes
             this.name = me.name || '';
-            this.required = (me.required === true) ? 'required' : '';
             this.multiple = (me.multiple === true) ? 'multiple' : '';
             this.tabindex = me.tabindex || '';
-            this.markRequired = me.markRequired || false;
+            
 
             // methods
             this.render = me.render || '';
@@ -55,19 +85,18 @@ TFLib.TFComboboxField = function($fieldset) {
         _generateTemplate: function() {
             
             var el = [
-                '<div',
+                    '<div',
                     'id="' + this.dynamicId + '"',
-                    'class="tf-flex ' + ((this.fieldType === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
+                    'class="tf-flex ' + ((this.fieldLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
                         '<div control-type="tf-combo-label" class="tf-flex ' + (this.displayLabel ? 'tf-display--none' : '') + '">',
-                            '<label>' + (this.fieldLabel ? this.fieldLabel : '') + '</label>',
-                            '<span class="tf-required--red ' + (this.markRequired ? '' : 'tf-display--none') + '">*</span>',
+                            '<label id="' + this.labelId + '">' + (this.fieldLabel ? this.fieldLabel : '') + '</label>',
+                            '<span id="' + this.requiredId + '" class="tf-required--red" style="display:none;">*</span>',
                         '</div>',
-                        '<div control-type="tf-combofield" class="tf-field-with-btn">',
+                        '<div control-type="tf-combofield" class="tf-field-with-btn tf-flex--one tf-border--none" >',
                             '<select class="tf-flex tf-flex--one"',
                                 'type="text"',
                                 '' + (this.name ? 'name="' + this.name + '"' : '') + '',
                                 '' + (this.tabindex ? 'tabindex="' + this.tabindex + '"' : '') + '',
-                                '' + this.required + '',
                                 '' + this.multiple + '',
                             '></select>',
                         '</div>',
@@ -80,19 +109,23 @@ TFLib.TFComboboxField = function($fieldset) {
 
             //cache DOM
             this.outerComp = this.childTemplate;
-            this.innerComp = this.childTemplate.querySelector("select");
-            this.controlComp = this.childTemplate.querySelector("[control-type='tf-combofield']");
-            this.labelComp = this.childTemplate.querySelector("[control-type='tf-combo-label']");
+            this.innerComp = this.outerComp.querySelector("select");
+            this.controlComp = this.outerComp.querySelector("[control-type='tf-combofield']");
+            this.labelComp = this.outerComp.querySelector("[control-type='tf-combo-label']");
+            this.requiredComp = this.labelComp.querySelector('#' + this.requiredId);
+            
         },
         _applyProperty: function() {
 
             // add data to combobox
-            this.options.forEach(function(val , index){
-            	var opt = document.createElement("option");
-            	opt.setAttribute("value", val.value);
-            	opt.innerHTML = val.display;
+            this.data.forEach(function(val , index){
+       	
+                var opt = document.createElement("option");
+            	opt.setAttribute("value", val[this.value]);
+            	opt.innerHTML = val[this.display];
             	this.innerComp.appendChild(opt);
             }, this);
+
 
             //apply styles
             if (this.styles != '') {
@@ -115,7 +148,7 @@ TFLib.TFComboboxField = function($fieldset) {
 
             // handling buttons
             this.buttons.forEach(function(val) {
-                this.controlComp.appendChild(TFButton.call(val));
+                this.controlComp.appendChild(TFLib.TFButton.call(val));
             }, this);
         },
         _bindEvents: function() {
@@ -148,76 +181,55 @@ TFLib.TFComboboxField = function($fieldset) {
             me.innerComp = this.innerComp;
             me.controlComp = this.controlComp;
             me.labelComp = this.labelComp;
-            me.setValidations = this.setValidations; 
+            me.setValidations = this.setValidations;
+            me.requiredComp = this.requiredComp; 
 
             // add methods
-            TFLib.TFTextFieldMethods.call(me);
+            TFLib.TFCheckboxFieldMethods.call(me);
             TFLib.TFSharedMethods.call(me);
 
             // share methods to el
             this.outerComp.shared = me;
+
+            // handle validations
+            me.validationMethods = {};
+            TFLib.TFValidations.call(me.validationMethods);
+
+            if (Object.keys(this.validations).length > 0)
+                this.setValidations.call(me);
         },
         setValidations: function() {
             
-            //private listeners
-            if (this.validations  && Object.keys(this.validations).length) {
-            	       
-                
-                if(!this.scope){
-                    // executes when setError is called
-                    // will not execute when removeError is called	
-                    this.scope = this.scope ? this.scope : {};
-                	TFValidations.call(this.scope);	
-                
-                }else if(this.scope.type === "textfield" ){
-                	
-                    //exceutes from initial this.validations
-                    TFValidations.call(this.scope);	
-                }
-                
-                //adding validations
-                Object.keys(this.validations).forEach(function(val) {
+            //adding validations
 
-                    switch (val) {
-                        case 'isRequired':
-                        	
-                        	if(this.validations.isRequired.value){
+            Object.keys(this.validations).forEach(function(val) {
 
-                        		this.scope.isRequiredHandler = this.scope.isRequired.bind(this);
+                switch (val) {
+                    case 'isRequired':
 
-                        		this.innerComp.addEventListener('blur', this.scope.isRequiredHandler);
-                            	this.innerComp.addEventListener('input', this.scope.isRequiredHandler);
-
-
-                        	}else {
-                        		this.innerComp.removeEventListener('blur', this.scope.isRequiredHandler);
-                            	this.innerComp.removeEventListener('input', this.scope.isRequiredHandler);
-                           	}
-                            break;
-
-                        case 'onlyNumber':
-                        	if(this.validations.onlyNumber.value){
-                      		
-                        		this.innerComp.addEventListener('keydown', this.scope.onlyNumber);	
-                        	}                            
-                            break;
-
-                        case 'regex':
-                        	if(this.validations.regex.value){
-
-                        		this.innerComp.addEventListener('blur', this.scope.regex.bind(this));
-                            	this.innerComp.addEventListener('input', this.scope.regex.bind(this));
+                        if (this.validations.isRequired.value) {
+                            if (!this.isRequiredHandler) {
+                                this.requiredComp.style.display = '';
+                                this.isRequiredHandler = this.validationMethods.isRequired.bind(this);
+                                for (var i = 0; i < this.innerComp.length; i++) {
+                                    this.innerComp[i].addEventListener('change', this.isRequiredHandler);
+                                }
                             }
-                            break;
+                        } else {
 
-                        case 'onlyText':
-                        	if(this.validations.onlyText.value){
-                        		this.innerComp.addEventListener('keydown', this.scope.onlyText);	
-                        	}
-                            break;
-                    }
-                }, this);
-            }
+                            this.requiredComp.style.display = 'none';
+                            for (var i = 0; i < this.innerComp.length; i++) {
+                                this.innerComp[i].removeEventListener('change', this.isRequiredHandler);
+                            }
+                            delete this.isRequiredHandler;
+                        }
+                        break;
+                    case 'customError':
+                        if(this.validations.customError.value)
+                            this.customError(this.validations.customError.value);
+                        break;
+                }
+            }, this);
         }
     };
 
