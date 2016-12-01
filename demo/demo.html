@@ -8,9 +8,7 @@
 </head>
 
 <body>
-    <div id="mydiv">
-        <div id="secdiv"></div>
-    </div>
+    <div id="mydiv"></div>
     <script type="text/javascript" src="jquery-1.11.1.js"></script>
     <script type="text/javascript" src="../dest/tflib.min.js"></script>   
     <script>
@@ -21,13 +19,9 @@
                 fieldLabel : 'Name',
                 fieldLayout : 'column',
                 buttons : [{
-                    styles : {
-                        backgroundImage : "url('Magnifier.png')"   
-                    }
+                    btnClass : 'tf-btn-search'
                 },{
-                    styles : {
-                        backgroundImage : "url('OL.png')"   
-                    }
+                    btnClass : 'tf-btn-language'
                 }],
                 validations : {
                     'isRequired' : {value : true , errmsg : 'name is required'}
@@ -70,9 +64,7 @@
                     'isRequired' : {value : true , errmsg : 'notes required'}
                 },
                 buttons : [{
-                    styles : {
-                        backgroundImage : "url('OL.png')",    
-                    },                    
+                    btnClass : 'tf-btn-language',                   
                     compClass : 'bottom-align'
                 }]
 
@@ -125,36 +117,16 @@
                 btnText : 'Click me',
                 listeners : {
                     click : function(e){
-                        debugger;
+                        TFLib.TFToast({msg : 'hello'});
                     }
                 }
             });
-            var block = TFLib.Iterator({
-                type : 'container',
-                layout : 'column',
-                styles : {
-                    width : '500px'
-                },
-                items : [
-                    senderName , 
-                    senderMobile , 
-                    senderZip , 
-                    senderAddress , 
-                    receiverNotes , 
-                    receiverEntity , 
-                    receiverCashPickup,
-                    receiverTotalAmount,
-                    payoutFeeRate,
-                    btn
-                ]
-            }).insertBefore('#mydiv');
 
-
-        /*})();*/
+        })();
 
     </script>
 
-    <div id="other" style="border: 1px solid blue"></div>
+    
 </body>
 
 </html>

@@ -19,7 +19,7 @@ module.exports = function(grunt){
 		        						'components/TFRadio.js',
 		        						'components/TFRadioField.js',
 		        						'components/TFTextAreaField.js',
-		        						'components/TFTextfield.js'
+		        						'components/TFTextfield.js',
 		        					]
 		      }
 		    }

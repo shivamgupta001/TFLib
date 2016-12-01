@@ -91,7 +91,7 @@ TFLib.TFTextAreaField = function(){
 							'<label for="'+this.innerId+'">'+(this.fieldLabel ? this.fieldLabel : '')+'</label>',
 							'<span id="'+this.requiredId+'" class="tf-required--red" style="display:none;" >*</span>',
 						'</div>',
-						'<div control-type="tf-textareafield" class="tf-field-with-btn ">',
+						'<div control-type="tf-textareafield" class="tf-field-with-btn">',
 							'<textarea class="tf-flex tf-flex--one"',
 								'id="'+this.innerId+'"',
 								''+(this.name ? 'name="'+this.name+'"' : '')+'',
