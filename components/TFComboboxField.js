@@ -92,7 +92,7 @@ TFLib.TFComboboxField = function($fieldset) {
                             '<label id="' + this.labelId + '">' + (this.fieldLabel ? this.fieldLabel : '') + '</label>',
                             '<span id="' + this.requiredId + '" class="tf-required--red" style="display:none;">*</span>',
                         '</div>',
-                        '<div control-type="tf-combofield" class="tf-field-with-btn tf-flex--one tf-border--none" >',
+                        '<div control-type="tf-combofield" class="tf-field-with-btn tf-flex--one" >',
                             '<select class="tf-flex tf-flex--one"',
                                 'type="text"',
                                 '' + (this.name ? 'name="' + this.name + '"' : '') + '',
@@ -183,8 +183,10 @@ TFLib.TFComboboxField = function($fieldset) {
             me.labelComp = this.labelComp;
             me.setValidations = this.setValidations;
             me.requiredComp = this.requiredComp; 
+            me.addData = this.addData;
 
             // add methods
+            TFLib.TFComboboxFieldMethods.call(me);
             TFLib.TFCheckboxFieldMethods.call(me);
             TFLib.TFSharedMethods.call(me);
 

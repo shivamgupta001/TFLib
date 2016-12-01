@@ -156,9 +156,6 @@
             var combo = TFLib.TFComboboxField.call({
                 fieldLabel : 'ID Type',
                 fieldLayout : 'column',
-                data : data,
-                value : 'Id',
-                display : 'Name',
                 validations : {
                     'isRequired' : { value : true , errmsg : 'new combo'}
                 },
@@ -169,6 +166,8 @@
                 }
 
             }).shared.appendTo('#mydiv');
+
+
 
             var $combosel = $(combo.shared.innerComp).select2();
             $combosel.on('change', function(){
@@ -183,6 +182,8 @@
                 // insert code here for after select
                 
             });
+
+            combo.shared.addData(data , 'Id' , 'Name');
             /* TFComboboxField Demo end*/
 
             /* Iterator example second start*/
