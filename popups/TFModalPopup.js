@@ -18,7 +18,7 @@ TFLib.ModalPopup = function(config) {
     var modalpopup = {
 
         scope: config,
-        _init: function() {
+        _init: function(){
 
             this._initialize();
 
@@ -50,6 +50,7 @@ TFLib.ModalPopup = function(config) {
                 // style
                 this.width = me.width || 800,
                 this.height = me.height || 600,
+                this.styles = me.styles || '';
 
                 // header text
                 this.title = me.title || '',
@@ -59,7 +60,8 @@ TFLib.ModalPopup = function(config) {
                 this.modalOpenCallback = me.modalOnOpen || '',
 
                 // user Template
-                this.dataTemplate = me.dataTemplate || null
+                this.dataTemplate = me.dataTemplate || null;
+                this.footerTemplate = me.footerTemplate || null;
         },
         _validateInitialize: function() {
 
@@ -93,9 +95,14 @@ TFLib.ModalPopup = function(config) {
             
             // cache Dom
             this.outerComp = this.childTemplate;
-            this.modalCloseNode = this.outerComp.querySelector('.tf-modal-close-btn');
-            this.modalBody = this.outerComp.querySelector('.tf-modal-body');
-
+            this.innerComp = this.outerComp.querySelector('.tf-modal-inner');
+            
+            this.modalHeader = this.innerComp.querySelector('.tf-modal-header');
+            this.modalBody = this.innerComp.querySelector('.tf-modal-body');
+            this.modalFooter = this.innerComp.querySelector('.tf-modal-footer');
+            
+            this.modalCloseNode = this.modalHeader.querySelector('.tf-modal-close-btn');
+        
         },
         _applyProperty : function(){
 
@@ -103,7 +110,14 @@ TFLib.ModalPopup = function(config) {
             var currentPopupCount = document.getElementsByClassName('tf-modal-outer').length;
             this.outerComp.setAttribute('data-zindex', (1000 + currentPopupCount));
 
-            // add data template if provided
+            //apply styles
+            if (this.styles != '') {
+                Object.keys(this.styles).forEach(function(style) {
+                    this.innerComp.style[style] = this.styles[style];
+                }, this);
+            }
+
+            // apply dataTemplate if provided
             if(this.dataTemplate){
                 this.modalBody.appendChild(this.dataTemplate);  
             }else{
@@ -113,7 +127,13 @@ TFLib.ModalPopup = function(config) {
                     this.modalBody.appendChild(clone);    
                 }
                 
-            } 
+            }
+
+            // apply footerTemplate 
+            if(this.footerTemplate){
+                this.modalFooter.appendChild(this.footerTemplate);
+            }
+
         },
         _bindEvents: function() {
 

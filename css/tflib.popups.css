@@ -43,6 +43,9 @@
 
 .tf-modal-footer {
     height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .tf-modal-title {
@@ -81,27 +84,31 @@
 }
 .tf-std-popup-msg{
     flex : 2;
-    padding-top: 10px;
+    padding: 10px;
 }
 .tf-confirm-icon{
-    width: 50px;
-    height : 50px;
+    width: 60px;
+    height : 60px;
     background: url("./images/warning_icon.png") no-repeat;
+    background-size: contain;
 }
 .tf-success-icon{
     width: 50px;
     height : 50px;
     background: url("./images/warning_icon.png") no-repeat;
+    background-size: contain;
 }
 .tf-info-icon{
     width: 50px;
     height : 50px;
     background: url("./images/warning_icon.png") no-repeat;
+    background-size: contain;
 }
 .tf-error-icon{
     width: 50px;
     height : 50px;
     background: url("./images/warning_icon.png") no-repeat;
+    background-size: contain;
 }
 
 /*Standard Popup End*/

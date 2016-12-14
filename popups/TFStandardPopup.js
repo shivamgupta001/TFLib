@@ -62,24 +62,36 @@ StandardPopup = function(){
             this.popupOnCancel = me.popupOnCancel || '';
             this.OK = ( me.OK == false ) ? false : true;
             this.CANCEL = ( me.CANCEL == false ) ? false : true;
-            this.OKVal = null;
-            this.CANCELVal = null;
+            this.OKVal = me.OKVal || 'OK';
+            this.CANCELVal = me.CANCELVal || 'CANCEL';
+            
         },
         _generateTemplate : function(){
             
-            var el = [
+            var elData = [
                 '<div class="tf-std-popup">',
                     '<div class="tf-std-popup-icon"><span class="' + this.imgClassName + '"></span></div>',
                     '<div class="tf-std-popup-msg"><span>' + this.msg + '</span></div>',
                 '</div>'
             ].join("\n");
+                       
+            this.childTemplateData = $(elData)[0];
             
-            this.childTemplate = $(el)[0];
+            var elFooter = [
+                '<div>',
+                    (this.OK ? '<input type="button" value="'+this.OKVal+'" ModalPopupOKBtn="true" autofocus>' : ''),
+                    (this.CANCEL ? '<input type="button" value="'+this.CANCELVal+'" ModalPopupCancelBtn="true">' : ""),
+                '</div>'
+            ].join("\n");
+            
+            this.childTemplateFooter = $(elFooter)[0];
+            
         },
         _cacheDom : function(){
 
-            this.innerComp = this.childTemplate;
-             
+            this.innerComp = this.childTemplateData;
+            this.footerComp = this.childTemplateFooter;
+
         },
         _applyProperty : function(){
 
@@ -93,8 +105,12 @@ StandardPopup = function(){
         _render : function(){
             
             TFLib.ModalPopup({
-                width: 600,
-                height: 178,
+                styles: {
+                    minWidth : '400px',
+                    maxWidth : '500px',
+                    minHeight : '180px' 
+                },
+                footerTemplate : this.footerComp,
                 title: this.title,
                 popupId: this.popupId,
                 dataTemplate: this.innerComp,
