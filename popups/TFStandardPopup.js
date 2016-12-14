@@ -91,13 +91,24 @@ StandardPopup = function(){
 
             this.innerComp = this.childTemplateData;
             this.footerComp = this.childTemplateFooter;
+            this.okComp = this.footerComp.querySelector('[ModalPopupOKBtn="true"]');
+            this.cancelComp = this.footerComp.querySelector('[ModalPopupCancelBtn="true"]');
 
         },
         _applyProperty : function(){
 
         },
         _bindEvents : function(){
-
+            
+            if(this.okComp) {
+                this.okComp.addEventListener('click', handlePopupOnOk);
+                this.okComp.addEventListener('blur', handleOkBlur);
+            } 
+             if(this.cancelComp) {
+                this.cancelComp.addEventListener('click', handlePopupOnCancel);
+                this.cancelComp.addEventListener('blur', handleCancelBlur);
+            }        
+            
         },
         _attachProperties : function(){
 
@@ -121,6 +132,36 @@ StandardPopup = function(){
                 footerVisible : false
             }).show();
             debugger;
+        },
+        function handleOkBlur() {
+            if (OK && CANCEL) {
+                // For IE
+                cacheVar.$btnCancel.focus();
+                //For Chrome & Moz
+                cacheVar.$btnCancel.attr('tabindex', 10000);
+                cacheVar.$btnOk.attr('tabindex', 10001);
+            }
+        },
+        function handleCancelBlur() {
+            if (OK && CANCEL) {
+                //For IE
+                cacheVar.$btnOk.focus();
+                //For Chrome & Moz
+                cacheVar.$btnCancel.attr('tabindex', 10001);
+                cacheVar.$btnOk.attr('tabindex', 10000);
+            }
+        },
+        function handlePopupOnOk(e) {
+            if (popupOnOk != '')
+                popupOnOk();
+            destroy();
+            cacheVar.$close.trigger('click');
+        },
+        function handlePopupOnCancel(e) {
+            if (popupOnCancel != '')
+                popupOnCancel();
+            destroy();
+            cacheVar.$close.trigger('click');
         }
     };
     
