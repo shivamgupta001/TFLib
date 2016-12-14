@@ -356,9 +356,9 @@ TFLib.TFTextFieldMethods = function(){
 	this.validate = function(){
 
 		this.isValidated = true;
-		Object.keys(this.validations).forEach(function(val){
+		if(this.validations) Object.keys(this.validations).forEach(function(val){
 			if(val === 'isRequired'){
-				if(this.validations.isRequired.value){
+				if(this.innerComp.value.trim().length == 0){
 					this.controlComp.classList.add('tooltip', 'tf-err-border--red');
 					this.controlComp.setAttribute('data-tooltip', this.validations.isRequired.errmsg);	
 					this.isValidated = false;

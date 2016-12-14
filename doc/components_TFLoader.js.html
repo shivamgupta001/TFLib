@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/TFLoader.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/TFLoader.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @author Vijay G. Thorat
+ * @constructor TFLoader
+ * @property {string} id - id will be assigned to outer comp.
+ * @property {string} loaderText -  this will display as loader text.
+ * @property {string} LoaderImage -  this will display as loader image it could be &lt;svg> or &lt;img>.
+ * @property {object} styles - styles will be applied to outer div of component.
+ * @property {object} attributes - attributes will be applied to textarea tag.
+ * @property {(string|string[])} labelClass -  will be applied to  label wrapper.
+ * @property {(string|string[])} compClass -  will be applied to  outermost div.
+ * @property {(string|string[])} controlClass -  will be applied to div wraper of all teaxtarea wrapper.
+ * @property {function} render - this function will run when the component is generated but not yet returned.
+ * @property {object} listeners - is an object where all listener handlers can be written as key value pair.
+ */
+TFLib.TFLoader = function() {
+	var loader = {
+
+		scope : this,
+		/** @access private */
+		_init : function(){
+			
+			this._initialize();
+			this._generateTemplate();
+			this._cacheDom();
+			this._applyProperty();
+			this._bindEvents();
+			this._attachProperties();
+			this._render();		
+			
+			
+			/** @return {Point} 
+			 *         The location of the event
+			 */
+			return this.outerComp;
+			
+		},/** @access private */
+		_initialize : function(){
+			
+			var me = this.scope;
+			
+			//  config
+			this.dynamicId = me.id || "tf-loader-" + new Date().getTime();
+			this.styles = me.styles || '';
+			this.attributes = me.attributes || '';
+			
+			//class
+			this.compClass = (me.compClass ? (me.compClass.constructor === Array ? me.compClass : [me.compClass]) : false);
+			this.loaderClass = (me.loaderClass ? (me.loaderClass.constructor === Array ? me.loaderClass : [me.loaderClass]) : false);
+
+			
+			//Loder text
+			this.LoaderText = me.loaderText  || 'Loading...';
+			// LoaderImage 
+			this.LoaderImage = me.loaderImage || '&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="uil-ripple">&lt;rect x="0" y="0" width="100" height="100" fill="none" class="bk">&lt;/rect>&lt;g> &lt;animate attributeName="opacity" dur="2s" repeatCount="indefinite" begin="0s" keyTimes="0;0.33;1" values="1;1;0">&lt;/animate>&lt;circle cx="50" cy="50" r="40" stroke="#5b5bf0" fill="none" stroke-width="6" stroke-linecap="round">&lt;animate attributeName="r" dur="2s" repeatCount="indefinite" begin="0s" keyTimes="0;0.33;1" values="0;22;44">&lt;/animate>&lt;/circle>&lt;/g>&lt;g>&lt;animate attributeName="opacity" dur="2s" repeatCount="indefinite" begin="1s" keyTimes="0;0.33;1" values="1;1;0">&lt;/animate>&lt;circle cx="50" cy="50" r="40" stroke="#524a69" fill="none" stroke-width="6" stroke-linecap="round">&lt;animate attributeName="r" dur="2s" repeatCount="indefinite" begin="1s" keyTimes="0;0.33;1" values="0;22;44">&lt;/animate>&lt;/circle>&lt;/g>&lt;/svg>';
+			// another loading svg - &lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="uil-squares">&lt;rect x="0" y="0" width="100" height="100" fill="none" class="bk">&lt;/rect>&lt;rect x="15" y="15" width="20" height="20" fill="#047ab3" class="sq">&lt;animate attributeName="fill" from="#047ab3" to="#00cde8" repeatCount="indefinite" dur="1s" begin="0.0s" values="#00cde8;#00cde8;#047ab3;#047ab3" keyTimes="0;0.1;0.2;1">&lt;/animate>&lt;/rect>&lt;rect x="40" y="15" width="20" height="20" fill="#047ab3" class="sq">&lt;animate attributeName="fill" from="#047ab3" to="#00cde8" repeatCount="indefinite" dur="1s" begin="0.125s" values="#00cde8;#00cde8;#047ab3;#047ab3" keyTimes="0;0.1;0.2;1">&lt;/animate>&lt;/rect>&lt;rect x="65" y="15" width="20" height="20" fill="#047ab3" class="sq">&lt;animate attributeName="fill" from="#047ab3" to="#00cde8" repeatCount="indefinite" dur="1s" begin="0.25s" values="#00cde8;#00cde8;#047ab3;#047ab3" keyTimes="0;0.1;0.2;1">&lt;/animate>&lt;/rect>&lt;rect x="15" y="40" width="20" height="20" fill="#047ab3" class="sq">&lt;animate attributeName="fill" from="#047ab3" to="#00cde8" repeatCount="indefinite" dur="1s" begin="0.875s" values="#00cde8;#00cde8;#047ab3;#047ab3" keyTimes="0;0.1;0.2;1">&lt;/animate>&lt;/rect>&lt;rect x="65" y="40" width="20" height="20" fill="#047ab3" class="sq">&lt;animate attributeName="fill" from="#047ab3" to="#00cde8" repeatCount="indefinite" dur="1s" begin="0.375" values="#00cde8;#00cde8;#047ab3;#047ab3" keyTimes="0;0.1;0.2;1">&lt;/animate>&lt;/rect>&lt;rect x="15" y="65" width="20" height="20" fill="#047ab3" class="sq">&lt;animate attributeName="fill" from="#047ab3" to="#00cde8" repeatCount="indefinite" dur="1s" begin="0.75s" values="#00cde8;#00cde8;#047ab3;#047ab3" keyTimes="0;0.1;0.2;1">&lt;/animate>&lt;/rect>&lt;rect x="40" y="65" width="20" height="20" fill="#047ab3" class="sq">&lt;animate attributeName="fill" from="#047ab3" to="#00cde8" repeatCount="indefinite" dur="1s" begin="0.625s" values="#00cde8;#00cde8;#047ab3;#047ab3" keyTimes="0;0.1;0.2;1">&lt;/animate>&lt;/rect>&lt;rect x="65" y="65" width="20" height="20" fill="#047ab3" class="sq">&lt;animate attributeName="fill" from="#047ab3" to="#00cde8" repeatCount="indefinite" dur="1s" begin="0.5s" values="#00cde8;#00cde8;#047ab3;#047ab3" keyTimes="0;0.1;0.2;1">&lt;/animate>&lt;/rect>&lt;/svg>
+
+		},/** @access private */
+		_generateTemplate : function(){
+			
+			var el  =[
+				'&lt;section class="tf--loader-main" id="'+this.dynamicId+'">',
+				    '&lt;div class="tf--loader-outer">',
+				        '&lt;div class="tf--loader" control-type="tf--loader">',
+				            '&lt;div class="tf--loader-image">',
+				                this.LoaderImage,
+				            '&lt;/div>',
+				            '&lt;div class="tf--loader-text">'+this.LoaderText+'&lt;/div>',
+				        '&lt;/div>',
+				    '&lt;/div>',
+				'&lt;/section>',
+			].join('\n');
+
+			this.childTemplate = $(el)[0];
+		},/** @access private */
+		_cacheDom : function(){
+
+			//cache DOM
+			this.outerComp = this.childTemplate;
+			this.innerComp = this.childTemplate.querySelector('[control-type="tf--loader"]');
+			this.innerComp.loaderImage = this.innerComp.querySelector(".tf--loader-image");
+			this.innerComp.loaderText = this.innerComp.querySelector(".tf--loader-text");
+			this.innerComp.initLoaderImage = this.innerComp.loaderImage.innerHTML;
+			this.innerComp.initLoaderText = this.innerComp.loaderText.innerText;
+			
+		},/** @access private */
+		_applyProperty : function(){
+			
+			//apply styles
+			if(this.styles != ''){
+				Object.keys(this.styles).forEach(function(style){
+					this.innerComp.style[style] = this.styles[style];
+				}, this);
+			}
+
+			//apply attributes
+			if(this.attributes != ''){
+				Object.keys(this.attributes).forEach(function(attribute){
+					this.innerComp.setAttribute(attribute , this.attributes[attribute]);
+				}, this);	
+			}
+
+			//apply inner text
+			if(this.LoaderText) this.innerComp.querySelector(".tf--loader-text").innerHTML = this.LoaderText;
+			
+			//apply class
+			if(this.loaderClass) this.innerComp.classList.add.apply(this.innerComp.classList , this.loaderClass);
+			if(this.compClass) this.outerComp.classList.add.apply(this.outerComp.classList , this.compClass);
+		},/** @access private */
+		_bindEvents : function(){
+			
+			var me = this.scope;
+			
+			if(this.listeners != ''){
+				for(var listener in this.listeners){
+					this.innerComp.addEventListener(listener , this.listeners[listener].bind(me));
+				}
+			}
+		},/** @access private */
+		_attachProperties : function(){
+			
+			var me = this.scope;
+
+			// add properties
+			me.innerComp = this.innerComp;
+			me.outerComp = this.outerComp;
+			me.loaderCount = 0;
+
+			// add methods
+			TFLib.TFLoaderMethods.call(me);
+
+			// shared methods over el
+			me.outerComp.shared = me;
+		},/** @access private */
+		_render : function(){
+			
+			var me = this.scope;
+			
+			if(this.render &amp;&amp; this.render != ''){
+				me.render.call(me);	// last method , everything done
+			}
+		}
+	};
+	
+	return loader._init();
+
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Iterator.html">Iterator</a></li><li><a href="TFButton.html">TFButton</a></li><li><a href="TFCheckbox.html">TFCheckbox</a></li><li><a href="TFCheckboxField.html">TFCheckboxField</a></li><li><a href="TFComboboxField.html">TFComboboxField</a></li><li><a href="TFContainer.html">TFContainer</a></li><li><a href="TFForm.html">TFForm</a></li><li><a href="TFLoader.html">TFLoader</a></li><li><a href="TFModalPopup.html">TFModalPopup</a></li><li><a href="TFRadio.html">TFRadio</a></li><li><a href="TFRadioField.html">TFRadioField</a></li><li><a href="TFStandardPopup.html">TFStandardPopup</a></li><li><a href="TFTextAreaField.html">TFTextAreaField</a></li><li><a href="TFTextField.html">TFTextField</a></li><li><a href="TFToast.html">TFToast</a></li></ul><h3>Mixins</h3><ul><li><a href="TFLib.TFCheckboxFieldMethods.html">TFCheckboxFieldMethods</a></li><li><a href="TFLib.TFCheckboxMethods.html">TFCheckboxMethods</a></li><li><a href="TFLib.TFSharedMethods.html">TFSharedMethods</a></li><li><a href="TFLib.TFTextFieldMethods.html">TFTextFieldMethods</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addClass">addClass</a></li><li><a href="global.html#addControlClass">addControlClass</a></li><li><a href="global.html#addControlStyle">addControlStyle</a></li><li><a href="global.html#addInnerClass">addInnerClass</a></li><li><a href="global.html#addInnerStyle">addInnerStyle</a></li><li><a href="global.html#addLabelClass">addLabelClass</a></li><li><a href="global.html#addLabelStyle">addLabelStyle</a></li><li><a href="global.html#addStyle">addStyle</a></li><li><a href="global.html#append">append</a></li><li><a href="global.html#appendTo">appendTo</a></li><li><a href="global.html#changeLabel">changeLabel</a></li><li><a href="global.html#customError">customError</a></li><li><a href="global.html#displayControlHide">displayControlHide</a></li><li><a href="global.html#displayControlShow">displayControlShow</a></li><li><a href="global.html#displayInnerHide">displayInnerHide</a></li><li><a href="global.html#displayInnerShow">displayInnerShow</a></li><li><a href="global.html#displayLabelHide">displayLabelHide</a></li><li><a href="global.html#displayLabelShow">displayLabelShow</a></li><li><a href="global.html#hide">hide</a></li><li><a href="global.html#insertBefore">insertBefore</a></li><li><a href="global.html#insertDomAt">insertDomAt</a></li><li><a href="global.html#isRequired">isRequired</a></li><li><a href="global.html#onlyNumber">onlyNumber</a></li><li><a href="global.html#onlyText">onlyText</a></li><li><a href="global.html#prepend">prepend</a></li><li><a href="global.html#regex">regex</a></li><li><a href="global.html#removeAttribute">removeAttribute</a></li><li><a href="global.html#removeClass">removeClass</a></li><li><a href="global.html#removeControlClass">removeControlClass</a></li><li><a href="global.html#removeControlStyle">removeControlStyle</a></li><li><a href="global.html#removeInnerClass">removeInnerClass</a></li><li><a href="global.html#removeInnerStyle">removeInnerStyle</a></li><li><a href="global.html#removeLabelClass">removeLabelClass</a></li><li><a href="global.html#removeLabelStyle">removeLabelStyle</a></li><li><a href="global.html#removeStyle">removeStyle</a></li><li><a href="global.html#setAttribute">setAttribute</a></li><li><a href="global.html#show">show</a></li><li><a href="global.html#validate">validate</a></li><li><a href="global.html#visibleControlHide">visibleControlHide</a></li><li><a href="global.html#visibleControlShow">visibleControlShow</a></li><li><a href="global.html#visibleHide">visibleHide</a></li><li><a href="global.html#visibleInnerHide">visibleInnerHide</a></li><li><a href="global.html#visibleInnerShow">visibleInnerShow</a></li><li><a href="global.html#visibleLabelHide">visibleLabelHide</a></li><li><a href="global.html#visibleLabelShow">visibleLabelShow</a></li><li><a href="global.html#visibleShow">visibleShow</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Wed Dec 14 2016 17:40:05 GMT+0530 (India Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

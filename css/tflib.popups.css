@@ -1,0 +1,107 @@
+/* Modal Popup css start*/
+.tf-modal-outer {
+    position: absolute;
+    font-family: Arial, Helvetica, sans-serif;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    pointer-events: auto;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tf-modal-inner {
+    min-width: 400px;
+    min-height: 150px;
+    background-color: white;
+    pointer-events: auto;
+    border-radius: 5px 5px 0 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.tf-modal-header {
+    background: url("./images/on_behalf_of_popup_header_bg.jpg");
+    white-space: nowrap;
+    height: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: Arial;
+    border-radius: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tf-modal-body {
+    flex: 1;
+    position: relative;
+}
+
+.tf-modal-footer {
+    height: 40px;
+}
+
+.tf-modal-title {
+    padding-left: 10px;
+}
+
+.tf-modal-close-btn {
+    width: 18px;
+    height: 18px;
+    background: url("./images/invoicePopupClose.png") no-repeat;
+    padding-right: 15px;
+}
+
+.tf-modal-close-btn:hover {
+    background-position: 0 -18px;
+}
+.tf-modal-footer {
+    background-color: green;
+}
+
+/* Modal Popup css  end*/
+
+/*Standard Popup Start*/
+
+.tf-std-popup{
+    
+    display: flex;
+    flex-flow: row wrap;
+}
+.tf-std-popup-icon{
+
+    flex : 1;
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+.tf-std-popup-msg{
+    flex : 2;
+    padding-top: 10px;
+}
+.tf-confirm-icon{
+    width: 50px;
+    height : 50px;
+    background: url("./images/warning_icon.png") no-repeat;
+}
+.tf-success-icon{
+    width: 50px;
+    height : 50px;
+    background: url("./images/warning_icon.png") no-repeat;
+}
+.tf-info-icon{
+    width: 50px;
+    height : 50px;
+    background: url("./images/warning_icon.png") no-repeat;
+}
+.tf-error-icon{
+    width: 50px;
+    height : 50px;
+    background: url("./images/warning_icon.png") no-repeat;
+}
+
+/*Standard Popup End*/

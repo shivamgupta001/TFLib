@@ -17,7 +17,7 @@
  * @property {function} render - this function will run when the component is generated but not yet returned.
  * @property {object} listeners - is an object where all listener handlers can be written as key value pair.
  */
-TFLib.TFRadioField = function($fieldset) {
+TFLib.TFRadioField = function() {
 
     var radiofield = {
 
@@ -76,14 +76,14 @@ TFLib.TFRadioField = function($fieldset) {
 
             var el = [
                 '<div id="' + this.dynamicId + '"',
-                'class="tf-flex ' + ((this.fieldLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
-                '<div control-type="tf-radiof-label" class="' + ((this.displayLabel === "none") ? 'tf-display--none' : '') + '">',
-                '<label id="' + this.labelId + '">' + (this.fieldLabel ? this.fieldLabel : '') + '</label>',
-                '<span id="' + this.requiredId + '" class="tf-required--red" style="display:none;">*</span>',
-                '</div>',
-                '<div control-type="tf-radiofield" class="tf-flex ' + ((this.groupLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
-                // radio list  
-                '</div>',
+                'class="tf-field-container tf-flex ' + ((this.fieldLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
+                    '<div control-type="tf-radiof-label" class="tf-field-container--label"' + ((this.displayLabel === "none") ? 'tf-display--none' : '') + '">',
+                        '<label id="' + this.labelId + '" class="tf-field--label">' + (this.fieldLabel ? this.fieldLabel : '') + '</label>',
+                        '<span id="' + this.requiredId + '" class="tf-required--red" style="display:none;">*</span>',
+                    '</div>',
+                    '<div control-type="tf-radiofield" class="tf-field-container--control tf-flex ' + ((this.groupLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
+                        // radio list  
+                    '</div>',
                 '</div>'
             ].join('\n');
 

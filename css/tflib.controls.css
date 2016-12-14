@@ -34,9 +34,8 @@
 .tf-required--red {
     color: red;
 }
-.tf-border--none{
-    border : none !important;
-}
+
+
 .tf-button {
     display: flex;
     justify-content: center;
@@ -45,9 +44,11 @@
     border-radius: 5px;
     border: none;
     color: whitesmoke;
-    padding: 5px 10px;
+    cursor: pointer;
 }
-
+.tf-button:hover,.tf-button:focus {
+    background-image: linear-gradient(to bottom, #61b7e4, #0f6bab);
+}
 .tf-field-with-btn {
     border: 1px solid grey;
     display: flex;
@@ -67,7 +68,6 @@
 .tf-field-with-btn button {
     width: 14px;
     height: 14px;
-    background-size: 14px 14px;
     border: none;
     background-color: transparent;
     background-repeat: no-repeat;
@@ -75,27 +75,6 @@
     outline : none;
 }
 
-.tf-btn-language {
-    
-    background-image: url('../css/images/OL_inactive.png');
-}
-
-.tf-btn-language:hover, .tf-btn-language:focus {
-    background-image: url('../css/images/OL.png');
-
-}
-
-.tf-btn-search {
-    background-image: url('../css/images/Magnifier_inactive.png');
-}
-
-.tf-btn-search:hover, .tf-btn-search:focus {
-    
-    background-image: url('../css/images/Magnifier.png');
-}
-
-
-/*Common to all modules end */
 
 
 /**
@@ -323,4 +302,53 @@
 .tooltip-right:after {
     margin-left: 0;
     margin-bottom: -16px;
+}
+
+
+/**
+ * Loader Styles
+ */
+/* Overlay */
+ .tf--loader-main{
+    display: none;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.32);
+    top: 0px;
+    left: 0px;
+    z-index: 9999;
+}
+
+/* outer container*/
+.tf--loader-outer{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+/* loader animation and text container*/
+.tf--loader{
+    position: relative;
+    margin: 0px auto;
+    width: 250px;
+    height: 70px;
+    border: 1px solid #505050;
+    border-radius: 5px;
+    background: #FFFFFF;
+    box-shadow: 3px 3px 7px #888888;
+}
+
+/* animation or gif container*/
+.tf--loader-image,.tf--loader-image img{
+    float: left;
+    height: 70px;
+    width: 70px;
+}
+/* loading text container */
+.tf--loader-text{
+    float: left;
+    font-size: 21px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 70px;
 }

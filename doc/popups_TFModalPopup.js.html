@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: popups/TFModalPopup.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: popups/TFModalPopup.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @author Shivam Gupta 
+ * @constructor TFModalPopup
+ * @property {string} popupId - popupId non existing value otherwise takes random value
+ * @property {boolean} onConfig - This config allows to open manually popup . Need to call show() method on popup returned object and close() to close. 
+ * @property {boolean} resizable - can be resized or not by default true
+ * @property {boolean} footerVisible - enable or disable footer , by default false
+ * @property {number}  width  - integer value , by default 800px
+ * @property {number} height - integer value , by-default 600px
+ * @property {string} title - title will be displayed in header part
+ * @property {object} dataTemplate - requires parent node reference    
+ * @property {function} modalCloseCallback - callback handle called when popup closed via Escape or click over close button
+ * @property {function} modalOpenCallback - callback handle called when popup is inserted in DOM
+ */
+
+TFLib.ModalPopup = function(config) {
+
+    var modalpopup = {
+
+        scope: config,
+        _init: function() {
+
+            this._initialize();
+
+            if (this._validateInitialize()) {
+
+                this._generateTemplate();
+                this._cacheDom();
+                this._applyProperty();
+                this._bindEvents();
+                this._attachProperties();
+                this._render();
+                this._handleKeyUp();
+
+                return Object.freeze(this.outerComp);
+            } else {
+                return false;
+            }
+        },
+        _initialize: function() {
+
+            var me = this.scope;
+
+                 //config
+                this.dynamicId = me.popupId || "tf-modal-" + getRandomInt(1, 10000),
+                this.onConfig = (me.onConfig == null || me.onConfig == false) ? false : true,
+                this.resizable = (me.resizable == false) ? false : true,
+                this.footerVisible = (me.footerVisible == false) ? false : true,
+
+                // style
+                this.width = me.width || 800,
+                this.height = me.height || 600,
+
+                // header text
+                this.title = me.title || '',
+
+                // callback
+                this.modalCloseCallback = me.modalOnClose || '',
+                this.modalOpenCallback = me.modalOnOpen || '',
+
+                // user Template
+                this.dataTemplate = me.dataTemplate || null
+        },
+        _validateInitialize: function() {
+
+            if (document.getElementById(this.dynamicId)) {
+                console.log('Duplicate Id ' + this.dynamicId);
+                return false;
+            }
+            return true;
+        },
+        _generateTemplate: function() {
+
+            var el = [
+                '&lt;div id="'+this.dynamicId+'" class="tf-modal-outer">',
+                    '&lt;section class="tf-modal-inner">',
+                        // header    
+                        '&lt;header class="tf-modal-header">',
+                            '&lt;span class="tf-modal-title">' + this.title + '&lt;/span>',
+                            '&lt;a  class= "tf-modal-close-btn">&lt;/a>',
+                        '&lt;/header>',
+                        //body
+                        '&lt;section class="tf-modal-body">&lt;/section>',
+                        //footer
+                        '&lt;footer class="tf-modal-footer ' + (this.footerVisible ? '' : 'tf-display--none' ) + '">&lt;/footer>',
+                    '&lt;/section>',
+                '&lt;/div>'
+            ].join('\n');
+
+            this.childTemplate = $(el)[0];
+        },
+        _cacheDom: function() {
+            
+            // cache Dom
+            this.outerComp = this.childTemplate;
+            this.modalCloseNode = this.outerComp.querySelector('.tf-modal-close-btn');
+            this.modalBody = this.outerComp.querySelector('.tf-modal-body');
+
+        },
+        _applyProperty : function(){
+
+            // data-zindex makes sure hierarchical modal popup closes in order of opening
+            var currentPopupCount = document.getElementsByClassName('tf-modal-outer').length;
+            this.outerComp.setAttribute('data-zindex', (1000 + currentPopupCount));
+
+            // add data template if provided
+            if(this.dataTemplate){
+                this.modalBody.appendChild(this.dataTemplate);  
+            }else{
+                var tpl = document.querySelector('template[data-template-id="'+this.dynamicId+'"]')
+                if(tpl){
+                    var clone = document.importNode(tpl.content, true);
+                    this.modalBody.appendChild(clone);    
+                }
+                
+            } 
+        },
+        _bindEvents: function() {
+
+            var me = this.scope;
+            document.addEventListener('keyup', this._handleModalKeyUp);
+            this._handleModalCloseBtnClick = this._handleModalCloseBtnClick.bind(this);
+            this.modalCloseNode.addEventListener('click', this._handleModalCloseBtnClick);
+        },
+        _attachProperties : function(){
+
+            var me = this.scope;
+
+            // add Properties 
+            me.outerComp = this.outerComp;
+
+            // add Methods
+            me.outerComp.show = this.show.bind(this);
+            me.outerComp.close = this.close.bind(this);
+
+        },
+        _render: function() {
+
+            if(!this.onConfig) {
+                
+                document.body.appendChild(this.outerComp);
+                this._handleModalOpenCallback();
+            }
+        },
+        _handleModalKeyUp : function(e){
+
+            var itemId = '';
+            var popups = document.getElementsByClassName('tf-modal-outer');
+            if (popups.length > 0) {
+                
+                // retrieving id and data-zindex for all popups 
+                var data = [].map.call(popups, function(value, index) {
+                    var id = value.id;
+                    var zindex = value.dataset.zindex;
+                    var obj = {};
+                    obj[zindex] = id;
+                    return obj;
+                });
+                
+                // sorting in descending order
+                data.sort(function(a, b) {
+                    var aVal = +Object.keys(a)[0];
+                    var bVal = +Object.keys(b)[0];
+                    return bVal - aVal;
+                });
+
+                for (var key in data[0]) {
+                    if (data[0].hasOwnProperty(key)) {
+                        itemId = data[0][key];
+                    }
+                }
+                if (e.keyCode == 27) {
+                    document.getElementById(itemId).querySelector('.tf-modal-close-btn').click();
+                }
+            }
+        },
+        _handleModalOpenCallback: function() {
+            
+            var me = this.scope;
+
+            if(this.modalOpenCallback != '') this.modalOpenCallback.call(me);
+        },
+        _handleModalCloseBtnClick: function(e) {
+            
+            var me = this.scope;
+
+            if (this.modalCloseCallback != '')  this.modalCloseCallback.call(me);
+            this._destroy();
+        },
+        _handleKeyUp: function(e) {
+
+
+        },
+        show: function() {
+            
+            if(!document.getElementById(this.dynamicId)){
+
+                var me = this.scope;
+
+                document.body.appendChild(this.outerComp);
+                this._handleModalOpenCallback.call(this);
+            }
+        },
+        close: function() {
+            
+            if(document.getElementById(this.dynamicId)) {
+                this.modalCloseNode.click();
+            }
+        },
+        _destroy: function() {
+
+            var oldChild = document.body.removeChild(document.getElementById(this.dynamicId));
+            oldChild.removeEventListener('click', this._handleModalCloseBtnClick);
+        }
+    };
+
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min) + min);
+    }
+    return modalpopup._init();
+
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Iterator.html">Iterator</a></li><li><a href="TFButton.html">TFButton</a></li><li><a href="TFCheckbox.html">TFCheckbox</a></li><li><a href="TFCheckboxField.html">TFCheckboxField</a></li><li><a href="TFComboboxField.html">TFComboboxField</a></li><li><a href="TFContainer.html">TFContainer</a></li><li><a href="TFForm.html">TFForm</a></li><li><a href="TFLoader.html">TFLoader</a></li><li><a href="TFModalPopup.html">TFModalPopup</a></li><li><a href="TFRadio.html">TFRadio</a></li><li><a href="TFRadioField.html">TFRadioField</a></li><li><a href="TFStandardPopup.html">TFStandardPopup</a></li><li><a href="TFTextAreaField.html">TFTextAreaField</a></li><li><a href="TFTextField.html">TFTextField</a></li><li><a href="TFToast.html">TFToast</a></li></ul><h3>Mixins</h3><ul><li><a href="TFLib.TFCheckboxFieldMethods.html">TFCheckboxFieldMethods</a></li><li><a href="TFLib.TFCheckboxMethods.html">TFCheckboxMethods</a></li><li><a href="TFLib.TFSharedMethods.html">TFSharedMethods</a></li><li><a href="TFLib.TFTextFieldMethods.html">TFTextFieldMethods</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addClass">addClass</a></li><li><a href="global.html#addControlClass">addControlClass</a></li><li><a href="global.html#addControlStyle">addControlStyle</a></li><li><a href="global.html#addInnerClass">addInnerClass</a></li><li><a href="global.html#addInnerStyle">addInnerStyle</a></li><li><a href="global.html#addLabelClass">addLabelClass</a></li><li><a href="global.html#addLabelStyle">addLabelStyle</a></li><li><a href="global.html#addStyle">addStyle</a></li><li><a href="global.html#append">append</a></li><li><a href="global.html#appendTo">appendTo</a></li><li><a href="global.html#changeLabel">changeLabel</a></li><li><a href="global.html#customError">customError</a></li><li><a href="global.html#displayControlHide">displayControlHide</a></li><li><a href="global.html#displayControlShow">displayControlShow</a></li><li><a href="global.html#displayInnerHide">displayInnerHide</a></li><li><a href="global.html#displayInnerShow">displayInnerShow</a></li><li><a href="global.html#displayLabelHide">displayLabelHide</a></li><li><a href="global.html#displayLabelShow">displayLabelShow</a></li><li><a href="global.html#hide">hide</a></li><li><a href="global.html#insertBefore">insertBefore</a></li><li><a href="global.html#insertDomAt">insertDomAt</a></li><li><a href="global.html#isRequired">isRequired</a></li><li><a href="global.html#onlyNumber">onlyNumber</a></li><li><a href="global.html#onlyText">onlyText</a></li><li><a href="global.html#prepend">prepend</a></li><li><a href="global.html#regex">regex</a></li><li><a href="global.html#removeAttribute">removeAttribute</a></li><li><a href="global.html#removeClass">removeClass</a></li><li><a href="global.html#removeControlClass">removeControlClass</a></li><li><a href="global.html#removeControlStyle">removeControlStyle</a></li><li><a href="global.html#removeInnerClass">removeInnerClass</a></li><li><a href="global.html#removeInnerStyle">removeInnerStyle</a></li><li><a href="global.html#removeLabelClass">removeLabelClass</a></li><li><a href="global.html#removeLabelStyle">removeLabelStyle</a></li><li><a href="global.html#removeStyle">removeStyle</a></li><li><a href="global.html#setAttribute">setAttribute</a></li><li><a href="global.html#show">show</a></li><li><a href="global.html#validate">validate</a></li><li><a href="global.html#visibleControlHide">visibleControlHide</a></li><li><a href="global.html#visibleControlShow">visibleControlShow</a></li><li><a href="global.html#visibleHide">visibleHide</a></li><li><a href="global.html#visibleInnerHide">visibleInnerHide</a></li><li><a href="global.html#visibleInnerShow">visibleInnerShow</a></li><li><a href="global.html#visibleLabelHide">visibleLabelHide</a></li><li><a href="global.html#visibleLabelShow">visibleLabelShow</a></li><li><a href="global.html#visibleShow">visibleShow</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Wed Dec 14 2016 17:40:05 GMT+0530 (India Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

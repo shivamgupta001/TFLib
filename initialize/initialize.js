@@ -1,4 +1,4 @@
 /**
  * @namespace TFLib
  */
-var TFLib = {};
+var TFLib = TFLib || {};

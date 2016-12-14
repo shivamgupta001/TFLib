@@ -16,7 +16,7 @@
  * @property {function} render - this function will run when the component is generated but not yet returned.
  * @property {object} listeners - is an object where all listener handlers can be written as key value pair.
  */
-TFLib.TFTextField = function($fieldset) {
+TFLib.TFTextField = function() {
 
     var textfield = {
         
@@ -39,8 +39,8 @@ TFLib.TFTextField = function($fieldset) {
             var me = this.scope;
 
             //config
-            this.dynamicId = me.id || "tf-textfield-" + getRandomInt(1, 10000);
-            this.innerId = me.innerId || "tf-input-text-"+ getRandomInt(1 , 10000);
+            this.dynamicId = me.id ||  "tf-textfield-" + getRandomInt(1, 10000);
+            this.innerId = me.innerId || me.name || "tf-input-text-"+ getRandomInt(1 , 10000);
             this.requiredId = "tf-input-req-"+getRandomInt(1, 1000);
             
             this.buttons = me.buttons || [];
@@ -65,7 +65,7 @@ TFLib.TFTextField = function($fieldset) {
             this.labelClass = (me.labelClass ? (me.labelClass.constructor === Array ? me.labelClass : [me.labelClass]) : false);
             this.compClass = (me.compClass ? (me.compClass.constructor === Array ? me.compClass : [me.compClass]) : false);
             this.controlClass = (me.controlClass ? (me.controlClass.constructor === Array ? me.controlClass : [me.controlClass]) : false);
-
+            this.classPrefix = me.classPrefix || 'libcomp'
             //attributes
             this.name = me.name || '';
             this.placeholder = me.placeholder || '';
@@ -86,13 +86,13 @@ TFLib.TFTextField = function($fieldset) {
             var el = [
                 '<div',
                     'id="' + this.dynamicId + '"',
-                    'class="tf-flex ' + ((this.fieldLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
-                        '<div control-type="tf-tf-label" class="tf-flex ' + (this.displayLabel ? 'tf-display--none' : '') + '">',
-                            '<label for="'+this.innerId+'">' + (this.fieldLabel ? this.fieldLabel : '') + '</label>',
+                    'class="tf-field-container tf-flex ' + ((this.fieldLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
+                        '<div control-type="tf-tf-label" class="tf-flex tf-field-container--label' + (this.displayLabel ? 'tf-display--none' : '') + '">',
+                            '<label for="'+this.innerId+'" class="tf-field--label">' + (this.fieldLabel ? this.fieldLabel : '') + '</label>',
                             '<span id="'+this.requiredId+'" class="tf-required--red" style="display:none;">*</span>',
                         '</div>',
-                        '<div control-type="tf-textfield" class="tf-field-with-btn">',
-                            '<input class="tf-flex tf-flex--one"',
+                        '<div control-type="tf-textfield" class="tf-field-container--control tf-field-with-btn">',
+                            '<input class="tf-field--control tf-flex tf-flex--one"',
                                 'type="text"',
                                 'id="'+this.innerId+'"',
                                 '' + (this.name ? 'name="' + this.name + '"' : '') + '',

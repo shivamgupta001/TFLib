@@ -22,7 +22,7 @@
  * @property {function} render - this function will run when the component is generated but not yet returned.
  * @property {object} listeners - is an object where all listener handlers can be written as key value pair.
  */
-TFLib.TFComboboxField = function($fieldset) {
+TFLib.TFComboboxField = function() {
 
     var comboboxfield = {
         

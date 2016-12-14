@@ -243,7 +243,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 	this.validate = function(){
 
 		this.isValidated = true;
-		Object.keys(this.validations).forEach(function(val){
+		if(this.validations) Object.keys(this.validations).forEach(function(val){
 			if(val === 'isRequired'){
 				if(this.validations.isRequired.value){
 					this.controlComp.classList.add('tooltip', 'tf-err-border--red');

@@ -3,7 +3,7 @@
 
 <head>
     <title></title>
-    <link rel="stylesheet" type="text/css" href="../css/TFComponentCommon.css">
+    <link rel="stylesheet" type="text/css" href="../css/tflib.controls.css">
     <link rel="stylesheet" type="text/css" href="demostyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" />
 </head>
@@ -11,22 +11,28 @@
 <body>
     <div id="mydiv"></div>
     <script type="text/javascript" src="jquery-1.11.1.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.min.js"></script>
-    <script type="text/javascript" src="../dest/tflib.min.js"></script>   
+    <script type="text/javascript" src="../dest/tflib.controls.min.js"></script>   
     <script>
         (function(){
 
             /*sender name start*/
             var senderName = TFLib.TFTextField.call({
-                fieldLabel : 'Name',
+                fieldLabel : 'Name1',
                 fieldLayout : 'column',
                 buttons : [{
-                    btnClass : 'tf-btn-search'
+                    btnClass : 'tf-btn-language',
+
                 },{
                     btnClass : 'tf-btn-language'
                 }],
                 validations : {
                     'isRequired' : {value : true , errmsg : 'name is required'}
+                },
+                
+                listeners :{
+                    click : function(e){
+
+                    }
                 }
 
             });
@@ -40,6 +46,7 @@
                     'isRequired' : {value : true , errmsg : 'mobile is required'}
                 }
             });
+
             /*sender mobile end*/
 
             /*sender address start*/
@@ -68,6 +75,10 @@
                 },
                 buttons : [{
                     btnClass : 'tf-btn-language',                   
+                    compClass : 'bottom-align'
+                },
+                {
+                    btnClass : 'tf-btn-search',                   
                     compClass : 'bottom-align'
                 }]
 
@@ -130,9 +141,12 @@
             /*TFButton dempo start*/
             var btn = TFLib.TFButton.call({
                 btnText : 'Click me',
+                render : function(){
+                    
+                },
                 listeners : {
                     click : function(e){
-                        TFLib.TFToast({msg : 'hello'});
+                    
                     }
                 }
             });
@@ -200,11 +214,28 @@
                 senderAddress
 
                 ]
-                
-            }).insertBefore('#mydiv');
-            /* Iterator example second end*/
-        })();
+            });
+            //block.insertBefore('#mydiv');
 
+           var block1 = TFLib.Iterator({
+                type : 'container',
+                layout : 'column',
+                style : {
+                    width : '300px'
+                },
+                items : [{
+                    flex : 1,
+                    
+                    type : 'textfield',
+                    fieldLabel : 'First',
+                    fieldLayout : 'row'
+                },{
+                    flex : 1,
+                    type : 'textfield',
+                    fieldLabel : 'Second'
+                },senderName ]
+            });
+            block.insertBefore('#mydiv');
     </script>
 
     

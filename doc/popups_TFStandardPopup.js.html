@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: popups/TFStandardPopup.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: popups/TFStandardPopup.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @author Shivam Gupta 
+ * @constructor TFStandardPopup
+ * @property {string} popupId - popupId non existing value otherwise gives error
+ * @property {string} title - title will be displayed in header part
+ * @property {function} modalCloseCallback - provide handle called when popup closed via Escape or click over close button
+ * @property {function} modalOpenCallback - provide handle called when popup is inserted in DOM
+ * @property {function} popupOnOk - callback handle to run when ok button clicked
+ * @property {function} popupOnCancel - callback handle to run when cancel button clicked
+ */
+ 
+TFLib.ErrorPopup = function(config) {
+    
+    config.title = config.title || 'Error';
+    config.imgClassName = 'tf-error-icon';
+    StandardPopup.call(config);
+};
+TFLib.InfoPopup = function(config) {
+
+    config.title = config.title || 'Info';
+    config.imgClassName = 'tf-info-icon';
+    StandardPopup.call(config);
+};
+TFLib.ConfirmPopup = function(config) {
+    
+    config.title = config.title || 'Confirm';
+    config.imgClassName = 'tf-confirm-icon';
+    StandardPopup.call(config);
+};
+TFLib.SuccessPopup = function(config) {
+    
+    config.title = config.title || 'Success';
+    config.imgClassName = 'tf-success-icon';
+    StandardPopup.call(config);
+};
+
+StandardPopup = function(){
+    
+    var standardpopup = {
+        scope : this,
+        _init : function(){
+
+            this._initialize();
+            this._generateTemplate();
+            this._cacheDom();
+            this._applyProperty();
+            this._bindEvents();
+            this._attachProperties();
+            this._render();
+        },
+        _initialize : function(){
+            
+            var me = this.scope;
+            
+            this.popupId = me.popupId || 'popupId-'+getRandomInt(1, 10000);
+            this.msg = me.msg,
+            this.title = me.title;
+            this.imgClassName = me.imgClassName;
+            this.modalOnClose = me.modalOnClose || '';
+            this.modalOnOpen = me.modalOnOpen || '';
+            this.popupOnOk = me.popupOnOk || '';
+            this.popupOnCancel = me.popupOnCancel || '';
+            this.OK = ( me.OK == false ) ? false : true;
+            this.CANCEL = ( me.CANCEL == false ) ? false : true;
+            this.OKVal = null;
+            this.CANCELVal = null;
+        },
+        _generateTemplate : function(){
+            
+            var el = [
+                '&lt;div class="tf-std-popup">',
+                    '&lt;div class="tf-std-popup-icon">&lt;span class="' + this.imgClassName + '">&lt;/span>&lt;/div>',
+                    '&lt;div class="tf-std-popup-msg">&lt;span>' + this.msg + '&lt;/span>&lt;/div>',
+                '&lt;/div>'
+            ].join("\n");
+            
+            this.childTemplate = $(el)[0];
+        },
+        _cacheDom : function(){
+
+            this.innerComp = this.childTemplate;
+             
+        },
+        _applyProperty : function(){
+
+        },
+        _bindEvents : function(){
+
+        },
+        _attachProperties : function(){
+
+        },
+        _render : function(){
+            
+            TFLib.ModalPopup({
+                width: 600,
+                height: 178,
+                title: this.title,
+                popupId: this.popupId,
+                dataTemplate: this.innerComp,
+                modalOnClose: this.modalOnClose,
+                modalOnOpen: this.modalOnOpen,
+                onConfig: true,
+                resizable: false,
+                footerVisible : false
+            }).show();
+            debugger;
+        }
+    };
+    
+    standardpopup._init();
+
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+};
+/*function generatePopup(title, imgClassName, config) {
+
+    var popupId = config.popupId || "popupId-" + getRandomInt(1, 10000),
+        msg = config.msg,
+        modalOnClose = config.modalOnClose || '',
+        modalOnOpen = config.modalOnOpen || '',
+        popupOnOk = config.popupOnOk || '',
+        popupOnCancel = config.popupOnCancel || '',
+        OK = (config.OK == false) ? false : true,
+        CANCEL = (config.CANCEL == false) ? false : true,
+        OKVal = null,
+        CANCELVal = null,
+        dataTemplate, cacheVar = {};
+
+    var init = function() {
+        generateTemplate();
+        cacheDom();
+        bindEvents();
+        render();
+    };
+    var cacheDom = function() {
+
+        cacheVar.$footer = cacheVar.$dataTemplate.find('.popup-footer-btn');
+        if (OK) {
+            OKVal = config.OKVal || 'OK';
+            cacheVar.$btnOk = $('&lt;input type="button" value="' + OKVal + '" ModalPopupOKBtn="true" autofocus/>');
+        }
+        if (CANCEL) {
+            CANCELVal = config.CANCELVal || 'CANCEL';
+            cacheVar.$btnCancel = $('&lt;input type="button" value="' + CANCELVal + '" ModalPopupCancelBtn="true"/>');
+        }
+    };
+    var generateTemplate = function() {
+        cacheVar.$dataTemplate = $(' &lt;div class="modal-popup"> \
+                    &lt;div class="modal-popup-icon">&lt;span class="' + imgClassName + '">&lt;/span>&lt;/div> \
+                    &lt;div class="modal-popup-text">&lt;span>' + msg + '&lt;/span>&lt;/div> \
+                &lt;/div>');
+    };
+
+    var bindEvents = function() {
+        if (OK) {
+            cacheVar.$btnOk.on({
+                'click': handlePopupOnOk,
+                'blur': handleOkBlur
+            });
+        }
+        if (CANCEL) {
+            cacheVar.$btnCancel.on({
+                'click': handlePopupOnCancel,
+                'blur': handleCancelBlur
+            });
+        }
+    };
+
+    var render = function() {
+        if (OK) cacheVar.$footer.append(cacheVar.$btnOk);
+        if (CANCEL) cacheVar.$footer.append(cacheVar.$btnCancel);
+
+
+        var newPopup = ModalPopup({
+            width: 600,
+            height: 178,
+            title: title,
+            popupId: popupId,
+            dataTemplate: cacheVar.$dataTemplate,
+            modalOnClose: modalOnClose,
+            modalOnOpen: modalOnOpen,
+            onConfig: true,
+            resizable: false,
+            footerVisible : false
+        }).show();
+        cacheVar.$close = $('#' + popupId).find(".modal-close-btn");
+
+        if (imgClassName == 'confirmPopupIcon') cacheVar.$close.hide();
+        if (OK &amp;&amp; CANCEL) handleCancelBlur();
+    }
+
+    function handleOkBlur() {
+        if (OK &amp;&amp; CANCEL) {
+            // For IE
+            cacheVar.$btnCancel.focus();
+            //For Chrome &amp; Moz
+            cacheVar.$btnCancel.attr('tabindex', 10000);
+            cacheVar.$btnOk.attr('tabindex', 10001);
+        }
+    }
+
+    function handleCancelBlur() {
+        if (OK &amp;&amp; CANCEL) {
+            //For IE
+            cacheVar.$btnOk.focus();
+            //For Chrome &amp; Moz
+            cacheVar.$btnCancel.attr('tabindex', 10001);
+            cacheVar.$btnOk.attr('tabindex', 10000);
+        }
+    }
+
+    function handlePopupOnOk(e) {
+        if (popupOnOk != '')
+            popupOnOk();
+        destroy();
+        cacheVar.$close.trigger('click');
+    }
+
+    function handlePopupOnCancel(e) {
+        if (popupOnCancel != '')
+            popupOnCancel();
+        destroy();
+        cacheVar.$close.trigger('click');
+
+    }
+
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    function destroy() {
+        if (OK) cacheVar.$btnOk.off();
+        if (CANCEL) cacheVar.$btnCancel.off();
+    }
+    init();
+}*/
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Iterator.html">Iterator</a></li><li><a href="TFButton.html">TFButton</a></li><li><a href="TFCheckbox.html">TFCheckbox</a></li><li><a href="TFCheckboxField.html">TFCheckboxField</a></li><li><a href="TFComboboxField.html">TFComboboxField</a></li><li><a href="TFContainer.html">TFContainer</a></li><li><a href="TFForm.html">TFForm</a></li><li><a href="TFLoader.html">TFLoader</a></li><li><a href="TFModalPopup.html">TFModalPopup</a></li><li><a href="TFRadio.html">TFRadio</a></li><li><a href="TFRadioField.html">TFRadioField</a></li><li><a href="TFStandardPopup.html">TFStandardPopup</a></li><li><a href="TFTextAreaField.html">TFTextAreaField</a></li><li><a href="TFTextField.html">TFTextField</a></li><li><a href="TFToast.html">TFToast</a></li></ul><h3>Mixins</h3><ul><li><a href="TFLib.TFCheckboxFieldMethods.html">TFCheckboxFieldMethods</a></li><li><a href="TFLib.TFCheckboxMethods.html">TFCheckboxMethods</a></li><li><a href="TFLib.TFSharedMethods.html">TFSharedMethods</a></li><li><a href="TFLib.TFTextFieldMethods.html">TFTextFieldMethods</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addClass">addClass</a></li><li><a href="global.html#addControlClass">addControlClass</a></li><li><a href="global.html#addControlStyle">addControlStyle</a></li><li><a href="global.html#addInnerClass">addInnerClass</a></li><li><a href="global.html#addInnerStyle">addInnerStyle</a></li><li><a href="global.html#addLabelClass">addLabelClass</a></li><li><a href="global.html#addLabelStyle">addLabelStyle</a></li><li><a href="global.html#addStyle">addStyle</a></li><li><a href="global.html#append">append</a></li><li><a href="global.html#appendTo">appendTo</a></li><li><a href="global.html#changeLabel">changeLabel</a></li><li><a href="global.html#customError">customError</a></li><li><a href="global.html#displayControlHide">displayControlHide</a></li><li><a href="global.html#displayControlShow">displayControlShow</a></li><li><a href="global.html#displayInnerHide">displayInnerHide</a></li><li><a href="global.html#displayInnerShow">displayInnerShow</a></li><li><a href="global.html#displayLabelHide">displayLabelHide</a></li><li><a href="global.html#displayLabelShow">displayLabelShow</a></li><li><a href="global.html#hide">hide</a></li><li><a href="global.html#insertBefore">insertBefore</a></li><li><a href="global.html#insertDomAt">insertDomAt</a></li><li><a href="global.html#isRequired">isRequired</a></li><li><a href="global.html#onlyNumber">onlyNumber</a></li><li><a href="global.html#onlyText">onlyText</a></li><li><a href="global.html#prepend">prepend</a></li><li><a href="global.html#regex">regex</a></li><li><a href="global.html#removeAttribute">removeAttribute</a></li><li><a href="global.html#removeClass">removeClass</a></li><li><a href="global.html#removeControlClass">removeControlClass</a></li><li><a href="global.html#removeControlStyle">removeControlStyle</a></li><li><a href="global.html#removeInnerClass">removeInnerClass</a></li><li><a href="global.html#removeInnerStyle">removeInnerStyle</a></li><li><a href="global.html#removeLabelClass">removeLabelClass</a></li><li><a href="global.html#removeLabelStyle">removeLabelStyle</a></li><li><a href="global.html#removeStyle">removeStyle</a></li><li><a href="global.html#setAttribute">setAttribute</a></li><li><a href="global.html#show">show</a></li><li><a href="global.html#validate">validate</a></li><li><a href="global.html#visibleControlHide">visibleControlHide</a></li><li><a href="global.html#visibleControlShow">visibleControlShow</a></li><li><a href="global.html#visibleHide">visibleHide</a></li><li><a href="global.html#visibleInnerHide">visibleInnerHide</a></li><li><a href="global.html#visibleInnerShow">visibleInnerShow</a></li><li><a href="global.html#visibleLabelHide">visibleLabelHide</a></li><li><a href="global.html#visibleLabelShow">visibleLabelShow</a></li><li><a href="global.html#visibleShow">visibleShow</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Wed Dec 14 2016 17:40:05 GMT+0530 (India Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

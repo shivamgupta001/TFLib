@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<!-- created by shivam gupta 8/24/2016-->
+<html>
+<head>
+	<title>Popup Demo</title>
+	<link rel="stylesheet" type="text/css" href="../css/tflib.popups.css">
+	<style>
+		.a{
+			background-color : yellowgreen;
+			height : 100px;
+		}
+		.b{
+			background-color : greenyellow;
+			height : 100px;
+		}
+		.c{
+			background-color : aqua;
+			height : 100px;
+		}
+
+
+
+		
+
+	</style>
+</head>
+<body>
+
+
+	<!-- Single popup without appending template to body-->
+	<a  href="javascript:void(0)" onclick="runCodeSingle(event)">Single Popup</a>
+	
+	<!-- Hierarchical popup with provided template appended to body-->
+	<a  href="javascript:void(0)" onclick="runCode1(event)">Hierarchy Popup 1</a>
+
+	<!-- standard popup-->
+	<a href="javascript:void(0)" onclick="runAlertPopup(event)">standard Popup</a>
+	
+	<template data-template-id="invoiceModalPopup"> 
+		<div class="a"></div>
+		<div class="b"><a  href="javascript:void(0)" onclick="runCode2(event)">Hierarchy Popup 2</a></div>
+		<div class="c"></div>
+	</template> 
+	
+	<template data-template-id="invoiceModalPopupNew"> 
+		<div class="a"></div>
+		<div class="b"><a  href="javascript:void(0)" onclick="runCode3(event)">Hierarchy Popup 3</a></div>
+		<div class="c"></div>
+	</template>
+	
+	<template data-template-id="invoiceModalPopupNewNew"> 
+		<div class="a"></div>
+		<div class="b"></div>
+		<div class="c"></div>
+	</template> 
+	
+
+	<script type="text/javascript" src="jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="../dest/tflib.popups.min.js"></script>   
+
+	<script>
+		/*
+			Mandatory Fields : -
+				Give popupId in case of Modal Popup , not needed for Standard Popups
+				
+				For Content -
+					Either append a div template with 'data-template-id' as popupId in body . 
+					Remember only inner structure of div will be taken into account.
+					Or
+					Provide 'dataTemplate' with div structure to append in popup
+		*/
+		
+		function runCode1(){
+			// call  this method to generate popup
+			
+			var newPopup = TFLib.ModalPopup({
+				width : 400,
+				height : 400,
+				popupId : 'invoiceModalPopup',
+				title : 'Multi Color',
+				modalOnClose : helloClose,
+				modalOnOpen : helloOpen
+			});
+		}
+		function runCode2(){
+
+			var config = {
+				// provide width or nothing for default 800
+				width : 500,
+				// provide height or nothing for default 600
+				height : 500,
+				// Mandatory field Popup will be of same id
+				popupId : 'invoiceModalPopupNew',
+				// default blank to change that provide title
+				title : 'Normal',
+				// use this config to provide callback on close				
+				modalOnClose : helloClose,
+				// use this config to provide callback on open	
+				modalOnOpen : helloOpen
+			};
+			var newPopup = TFLib.ModalPopup(config);
+
+		}
+		function runCode3(){
+			
+			var newPopup = TFLib.ModalPopup({
+				width : 400,
+				height : 400,
+				popupId : 'invoiceModalPopupNewNew',
+				title : 'Normal New'
+			});
+		}
+		
+		function runCodeSingle(){
+			
+			var newPopup = TFLib.ModalPopup({
+				width : 400,
+				height : 400,
+				popupId : 'singlePopup',
+				title : 'Single Popup',
+				dataTemplate : $('<div>Inner data hghdghgdhjghdgjh</div>')[0],
+				modalOnClose : helloClose,
+				modalOnOpen : helloOpen,
+				onConfig : false      //This config allows to open manually popup . Need to call show method on popup object
+			});
+			newPopup.show();		// show method returns true on success else false
+			//setTimeout(newPopup.close, 1000);     // close method returns true on success else false
+		}
+		// callbacks on open . Here data will be Id of popup
+		function helloOpen(data){
+			console.log(data);
+		}
+		// callbacks on close . Here event value will be event fired.
+		function helloClose(event){
+			console.log(event);
+		}
+
+
+
+		//Standard Popups
+
+		// error popup on ok
+		function okPopup(){
+			alert("ok");
+		}
+		function cancelPopup(){
+			alert("cancel");
+		}
+
+		function runAlertPopup(){
+			
+			TFLib.InfoPopup({
+				title : 'Error',
+				msg : 'You must reload the page to completely remove the popup , You must reload the page to completely remove the popup',
+				modalOnClose : helloClose,
+				modalOnOpen : helloOpen,
+				popupOnOk : okPopup,
+				popupOnCancel : cancelPopup,
+				OK : true,
+				OK : 'Yes',
+				CANCEL : true,
+				CANCELVal : 'NO'
+			});
+		}
+
+	</script>
+</body>
+</html>
