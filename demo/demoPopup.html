@@ -121,18 +121,19 @@
 				dataTemplate : $('<div>Inner data hghdghgdhjghdgjh</div>')[0],
 				modalOnClose : helloClose,
 				modalOnOpen : helloOpen,
-				onConfig : false      //This config allows to open manually popup . Need to call show method on popup object
+				onConfig : true      //This config allows to open manually popup . Need to call show method on popup object
 			});
+			
 			newPopup.show();		// show method returns true on success else false
-			//setTimeout(newPopup.close, 1000);     // close method returns true on success else false
+			setTimeout(newPopup.close, 1000);     // close method returns true on success else false
 		}
 		// callbacks on open . Here data will be Id of popup
-		function helloOpen(data){
-			console.log(data);
+		function helloOpen(){
+			console.log("open");
 		}
 		// callbacks on close . Here event value will be event fired.
-		function helloClose(event){
-			console.log(event);
+		function helloClose(){
+			console.log("close");
 		}
 
 

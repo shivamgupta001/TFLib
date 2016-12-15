@@ -6,6 +6,7 @@ module.exports = function(grunt){
 		pkg : grunt.file.readJSON('package.json'),
 		uglify: {
 		    my_target: {
+<<<<<<< .mine
 			    options: {
 			        mangle : false,
 			        beautify : true
@@ -35,6 +36,32 @@ module.exports = function(grunt){
 			        	'popups/TFStandardPopup.js'	
 			        ]
 			    }
+=======
+		      options: {
+		        mangle : false,
+		        beautify : true
+		      },
+		      files: {
+		        'dest/tflib.controls.min.js': [	'initialize/initialize.js',
+		        						'methods/*.js',
+		        						'validations/TFValidations.js',
+		        						'components/TFButton.js',
+		        						'components/TFCheckbox.js',
+		        						'components/TFCheckboxField.js',
+		        						'components/TFContainer.js',
+		        						'components/TFIterator.js',
+		        						'components/TFRadio.js',
+		        						'components/TFRadioField.js',
+		        						'components/TFTextAreaField.js',
+		        						'components/TFTextfield.js',
+		        						'components/TFLoader.js',
+		        						'components/TFComboboxField.js'
+		        					],
+		        'dest/tflib.popups.min.js': [	'popups/popup.js',
+		        						'popups/standardPopup.js'
+		        					]
+		      }
+>>>>>>> .r2220
 		    }
 		},
 		jsdoc : {

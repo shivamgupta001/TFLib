@@ -138,7 +138,7 @@ TFLib.ModalPopup = function(config) {
         _bindEvents: function() {
 
             var me = this.scope;
-            document.addEventListener('keyup', this._handleModalKeyUp);
+            document.body.addEventListener('keyup', this._handleModalKeyUp);
             this._handleModalCloseBtnClick = this._handleModalCloseBtnClick.bind(this);
             this.modalCloseNode.addEventListener('click', this._handleModalCloseBtnClick);
         },
@@ -189,8 +189,9 @@ TFLib.ModalPopup = function(config) {
                         itemId = data[0][key];
                     }
                 }
-                if (e.keyCode == 27) {
+                if (e.key === "Escape") {
                     document.getElementById(itemId).querySelector('.tf-modal-close-btn').click();
+                    e.preventDefault();
                 }
             }
         },
@@ -228,9 +229,13 @@ TFLib.ModalPopup = function(config) {
             }
         },
         _destroy: function() {
+            
+            this.outerComp.removeEventListener('click', this._handleModalCloseBtnClick);
+            document.body.removeChild(this.outerComp);
 
-            var oldChild = document.body.removeChild(document.getElementById(this.dynamicId));
-            oldChild.removeEventListener('click', this._handleModalCloseBtnClick);
+            // when last popup removed , removing event from document.body
+            var currentPopupCount = document.getElementsByClassName('tf-modal-outer').length;
+            if(!currentPopupCount) document.body.removeEventListener('keyup', this._handleModalKeyUp);      
         }
     };
 

@@ -87,7 +87,7 @@ TFLib.TFTextField = function() {
                 '<div',
                     'id="' + this.dynamicId + '"',
                     'class="tf-field-container tf-flex ' + ((this.fieldLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
-                        '<div control-type="tf-tf-label" class="tf-flex tf-field-container--label' + (this.displayLabel ? 'tf-display--none' : '') + '">',
+                        '<div control-type="tf-tf-label" class="tf-flex tf-field-container--label ' + (this.displayLabel ? 'tf-display--none' : '') + '">',
                             '<label for="'+this.innerId+'" class="tf-field--label">' + (this.fieldLabel ? this.fieldLabel : '') + '</label>',
                             '<span id="'+this.requiredId+'" class="tf-required--red" style="display:none;">*</span>',
                         '</div>',

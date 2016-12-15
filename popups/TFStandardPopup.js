@@ -37,6 +37,7 @@ TFLib.SuccessPopup = function(config) {
 StandardPopup = function(){
     
     var standardpopup = {
+
         scope : this,
         _init : function(){
 
@@ -47,6 +48,7 @@ StandardPopup = function(){
             this._bindEvents();
             this._attachProperties();
             this._render();
+            
         },
         _initialize : function(){
             
@@ -79,8 +81,8 @@ StandardPopup = function(){
             
             var elFooter = [
                 '<div>',
-                    (this.OK ? '<input type="button" value="'+this.OKVal+'" ModalPopupOKBtn="true" autofocus>' : ''),
-                    (this.CANCEL ? '<input type="button" value="'+this.CANCELVal+'" ModalPopupCancelBtn="true">' : ""),
+                    (this.OK ? '<input type="button" class="tf-std-btn" value="'+this.OKVal+'" ModalPopupOKBtn="true" autofocus>' : ''),
+                    (this.CANCEL ? '<input type="button" class="tf-std-btn" value="'+this.CANCELVal+'" ModalPopupCancelBtn="true">' : ""),
                 '</div>'
             ].join("\n");
             
@@ -91,8 +93,8 @@ StandardPopup = function(){
 
             this.innerComp = this.childTemplateData;
             this.footerComp = this.childTemplateFooter;
-            this.okComp = this.footerComp.querySelector('[ModalPopupOKBtn="true"]');
-            this.cancelComp = this.footerComp.querySelector('[ModalPopupCancelBtn="true"]');
+            if(this.OK) this.okComp = this.footerComp.querySelector('[ModalPopupOKBtn="true"]');
+            if(this.CANCEL) this.cancelComp = this.footerComp.querySelector('[ModalPopupCancelBtn="true"]');
 
         },
         _applyProperty : function(){
@@ -101,19 +103,38 @@ StandardPopup = function(){
         _bindEvents : function(){
             
             if(this.okComp) {
-                this.okComp.addEventListener('click', handlePopupOnOk);
-                this.okComp.addEventListener('blur', handleOkBlur);
+                this.okComp.addEventListener('click', this.handlePopupOnOk);
+                this.okComp.addEventListener('blur', this.handleOkBlur);
             } 
              if(this.cancelComp) {
-                this.cancelComp.addEventListener('click', handlePopupOnCancel);
-                this.cancelComp.addEventListener('blur', handleCancelBlur);
+                this.cancelComp.addEventListener('click', this.handlePopupOnCancel);
+                this.cancelComp.addEventListener('blur', this.handleCancelBlur);
             }        
             
         },
         _attachProperties : function(){
 
+            var me = this.scope;
+
+            me.destroy = this.destroy;
+            me.closeComp = this.closeComp;
+            me.cancelComp = this.cancelComp;
+            me.okComp = this.okComp;
+
+            if(this.okComp){
+
+                me.popupOnOk = this.popupOnOk;  
+                this.okComp.shared = me;
+            } 
+            if(this.cancelComp){
+
+                me.popupOnCancel = this.popupOnCancel;  
+                this.cancelComp.shared = me;
+            } 
         },
         _render : function(){
+            
+            var me = this.scope;
             
             TFLib.ModalPopup({
                 styles: {
@@ -131,37 +152,59 @@ StandardPopup = function(){
                 resizable: false,
                 footerVisible : false
             }).show();
-            debugger;
+
+            // caching after render
+            this.closeComp = document.getElementById(this.popupId).querySelector('.tf-modal-close-btn');
+            this._attachProperties();
+                        
+            if (this.imgClassName == 'tf-confirm-icon') this.closeComp.style.display = 'none';
+            if (this.okComp && this.cancelComp) this.handleCancelBlur.call(me.cancelComp);
+            
         },
-        function handleOkBlur() {
-            if (OK && CANCEL) {
+        handleOkBlur : function(e) {
+
+            if (this.shared.okComp && this.shared.cancelComp) {
                 // For IE
-                cacheVar.$btnCancel.focus();
+                this.shared.cancelComp.focus();
                 //For Chrome & Moz
-                cacheVar.$btnCancel.attr('tabindex', 10000);
-                cacheVar.$btnOk.attr('tabindex', 10001);
+                this.shared.cancelComp.setAttribute('tabindex', 10000);
+                this.shared.okComp.setAttribute('tabindex', 10001);
             }
         },
-        function handleCancelBlur() {
-            if (OK && CANCEL) {
+        handleCancelBlur : function(e) {
+            
+            if (this.shared.okComp && this.shared.cancelComp) {
                 //For IE
-                cacheVar.$btnOk.focus();
+                this.shared.okComp.focus();
                 //For Chrome & Moz
-                cacheVar.$btnCancel.attr('tabindex', 10001);
-                cacheVar.$btnOk.attr('tabindex', 10000);
+                this.shared.cancelComp.setAttribute('tabindex', 10001);
+                this.shared.okComp.setAttribute('tabindex', 10000);
             }
         },
-        function handlePopupOnOk(e) {
-            if (popupOnOk != '')
-                popupOnOk();
-            destroy();
-            cacheVar.$close.trigger('click');
+        handlePopupOnOk : function(e) {
+
+            if (this.shared.popupOnOk != '')
+                this.shared.popupOnOk();
+            this.shared.destroy();
+            this.shared.closeComp.click();
         },
-        function handlePopupOnCancel(e) {
-            if (popupOnCancel != '')
-                popupOnCancel();
-            destroy();
-            cacheVar.$close.trigger('click');
+        handlePopupOnCancel : function(e) {
+            
+            if (this.shared.popupOnCancel != '')
+                this.shared.popupOnCancel();
+            this.shared.destroy();
+            this.shared.closeComp.click();
+        },
+        destroy : function(){
+
+            if(this.okComp) {
+                this.okComp.removeEventListener('click', this.handlePopupOnOk);
+                this.okComp.removeEventListener('blur', this.handleOkBlur);
+            } 
+             if(this.cancelComp) {
+                this.cancelComp.removeEventListener('click', this.handlePopupOnCancel);
+                this.cancelComp.removeEventListener('blur', this.handleCancelBlur);
+            }
         }
     };
     
@@ -173,127 +216,3 @@ StandardPopup = function(){
         return Math.floor(Math.random() * (max - min)) + min;
     }
 };
-/*function generatePopup(title, imgClassName, config) {
-
-    var popupId = config.popupId || "popupId-" + getRandomInt(1, 10000),
-        msg = config.msg,
-        modalOnClose = config.modalOnClose || '',
-        modalOnOpen = config.modalOnOpen || '',
-        popupOnOk = config.popupOnOk || '',
-        popupOnCancel = config.popupOnCancel || '',
-        OK = (config.OK == false) ? false : true,
-        CANCEL = (config.CANCEL == false) ? false : true,
-        OKVal = null,
-        CANCELVal = null,
-        dataTemplate, cacheVar = {};
-
-    var init = function() {
-        generateTemplate();
-        cacheDom();
-        bindEvents();
-        render();
-    };
-    var cacheDom = function() {
-
-        cacheVar.$footer = cacheVar.$dataTemplate.find('.popup-footer-btn');
-        if (OK) {
-            OKVal = config.OKVal || 'OK';
-            cacheVar.$btnOk = $('<input type="button" value="' + OKVal + '" ModalPopupOKBtn="true" autofocus/>');
-        }
-        if (CANCEL) {
-            CANCELVal = config.CANCELVal || 'CANCEL';
-            cacheVar.$btnCancel = $('<input type="button" value="' + CANCELVal + '" ModalPopupCancelBtn="true"/>');
-        }
-    };
-    var generateTemplate = function() {
-        cacheVar.$dataTemplate = $(' <div class="modal-popup"> \
-                    <div class="modal-popup-icon"><span class="' + imgClassName + '"></span></div> \
-                    <div class="modal-popup-text"><span>' + msg + '</span></div> \
-                </div>');
-    };
-
-    var bindEvents = function() {
-        if (OK) {
-            cacheVar.$btnOk.on({
-                'click': handlePopupOnOk,
-                'blur': handleOkBlur
-            });
-        }
-        if (CANCEL) {
-            cacheVar.$btnCancel.on({
-                'click': handlePopupOnCancel,
-                'blur': handleCancelBlur
-            });
-        }
-    };
-
-    var render = function() {
-        if (OK) cacheVar.$footer.append(cacheVar.$btnOk);
-        if (CANCEL) cacheVar.$footer.append(cacheVar.$btnCancel);
-
-
-        var newPopup = ModalPopup({
-            width: 600,
-            height: 178,
-            title: title,
-            popupId: popupId,
-            dataTemplate: cacheVar.$dataTemplate,
-            modalOnClose: modalOnClose,
-            modalOnOpen: modalOnOpen,
-            onConfig: true,
-            resizable: false,
-            footerVisible : false
-        }).show();
-        cacheVar.$close = $('#' + popupId).find(".modal-close-btn");
-
-        if (imgClassName == 'confirmPopupIcon') cacheVar.$close.hide();
-        if (OK && CANCEL) handleCancelBlur();
-    }
-
-    function handleOkBlur() {
-        if (OK && CANCEL) {
-            // For IE
-            cacheVar.$btnCancel.focus();
-            //For Chrome & Moz
-            cacheVar.$btnCancel.attr('tabindex', 10000);
-            cacheVar.$btnOk.attr('tabindex', 10001);
-        }
-    }
-
-    function handleCancelBlur() {
-        if (OK && CANCEL) {
-            //For IE
-            cacheVar.$btnOk.focus();
-            //For Chrome & Moz
-            cacheVar.$btnCancel.attr('tabindex', 10001);
-            cacheVar.$btnOk.attr('tabindex', 10000);
-        }
-    }
-
-    function handlePopupOnOk(e) {
-        if (popupOnOk != '')
-            popupOnOk();
-        destroy();
-        cacheVar.$close.trigger('click');
-    }
-
-    function handlePopupOnCancel(e) {
-        if (popupOnCancel != '')
-            popupOnCancel();
-        destroy();
-        cacheVar.$close.trigger('click');
-
-    }
-
-    function getRandomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min;
-    }
-
-    function destroy() {
-        if (OK) cacheVar.$btnOk.off();
-        if (CANCEL) cacheVar.$btnCancel.off();
-    }
-    init();
-}*/
