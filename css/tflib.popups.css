@@ -65,7 +65,10 @@
 .tf-modal-footer {
     background-color: green;
 }
-
+.tf-display--none{
+    
+    display : none !important;
+}
 /* Modal Popup css  end*/
 
 /*Standard Popup Start*/
@@ -111,11 +114,11 @@
     background-size: contain;
 }
 .tf-std-btn{
-    width : 50px;
+    width : 70px;
     height : 30px;
 }
 .tf-std-btn:focus{
-    width : 50px;
+    width : 70px;
     height : 30px;
     border : 2px solid blue;
 }

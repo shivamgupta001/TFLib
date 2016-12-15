@@ -104,8 +104,8 @@
 		function runCode3(){
 			
 			var newPopup = TFLib.ModalPopup({
-				width : 400,
-				height : 400,
+				width : 600,
+				height : 600,
 				popupId : 'invoiceModalPopupNewNew',
 				title : 'Normal New'
 			});
@@ -151,16 +151,12 @@
 		function runAlertPopup(){
 			
 			TFLib.InfoPopup({
-				title : 'Error',
 				msg : 'You must reload the page to completely remove the popup , You must reload the page to completely remove the popup',
 				modalOnClose : helloClose,
 				modalOnOpen : helloOpen,
 				popupOnOk : okPopup,
-				popupOnCancel : cancelPopup,
-				OK : true,
-				OKVal : 'Yes',
-				CANCEL : true,
-				CANCELVal : 'NO'
+				popupOnCancel : cancelPopup
+
 			});
 		}
 

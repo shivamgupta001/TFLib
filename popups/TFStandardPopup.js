@@ -150,7 +150,7 @@ StandardPopup = function(){
                 modalOnOpen: this.modalOnOpen,
                 onConfig: true,
                 resizable: false,
-                footerVisible : false
+                footerVisible : true
             }).show();
 
             // caching after render

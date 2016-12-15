@@ -30,7 +30,7 @@ TFLib.ModalPopup = function(config) {
                 this._bindEvents();
                 this._attachProperties();
                 this._render();
-                this._handleKeyUp();
+                
 
                 return Object.freeze(this.outerComp);
             } else {
@@ -45,7 +45,7 @@ TFLib.ModalPopup = function(config) {
                 this.dynamicId = me.popupId || "tf-modal-" + getRandomInt(1, 10000),
                 this.onConfig = (me.onConfig == null || me.onConfig == false) ? false : true,
                 this.resizable = (me.resizable == false) ? false : true,
-                this.footerVisible = (me.footerVisible == false) ? false : true,
+                this.footerVisible = (me.footerVisible == true) ? true : false,
 
                 // style
                 this.width = me.width || 800,
@@ -75,7 +75,7 @@ TFLib.ModalPopup = function(config) {
 
             var el = [
                 '<div id="'+this.dynamicId+'" class="tf-modal-outer">',
-                    '<section class="tf-modal-inner">',
+                    '<section class="tf-modal-inner" tabindex="1">',
                         // header    
                         '<header class="tf-modal-header">',
                             '<span class="tf-modal-title">' + this.title + '</span>',
@@ -127,8 +127,11 @@ TFLib.ModalPopup = function(config) {
                     var clone = document.importNode(tpl.content, true);
                     this.modalBody.appendChild(clone);    
                 }
-                
             }
+
+            // apply body and height
+            this.innerComp.style.width = this.width+'px';
+            this.innerComp.style.height = this.height+'px';
 
             // apply footerTemplate 
             if(this.footerTemplate){
@@ -190,9 +193,8 @@ TFLib.ModalPopup = function(config) {
                         itemId = data[0][key];
                     }
                 }
-                if (e.key === "Escape") {
+                if (e.key === "Escape" || e.key === "Esc") {
                     document.getElementById(itemId).querySelector('.tf-modal-close-btn').click();
-                    e.preventDefault();
                 }
             }
         },
@@ -208,10 +210,6 @@ TFLib.ModalPopup = function(config) {
 
             if (this.modalCloseCallback != '')  this.modalCloseCallback.call(me);
             this._destroy();
-        },
-        _handleKeyUp: function(e) {
-
-
         },
         show: function() {
             
@@ -235,8 +233,7 @@ TFLib.ModalPopup = function(config) {
             document.body.removeChild(this.outerComp);
 
             // when last popup removed , removing event from document.body
-            var currentPopupCount = document.getElementsByClassName('tf-modal-outer').length;
-            if(!currentPopupCount) document.body.removeEventListener('keyup', this._handleModalKeyUp);      
+            if(!this.currentPopupCount) document.body.removeEventListener('keyup', this._handleModalKeyUp);      
         }
     };
 
