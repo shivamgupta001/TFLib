@@ -102,13 +102,14 @@ TFLib.ModalPopup = function(config) {
             this.modalFooter = this.innerComp.querySelector('.tf-modal-footer');
             
             this.modalCloseNode = this.modalHeader.querySelector('.tf-modal-close-btn');
+
+            this.currentPopupCount = document.getElementsByClassName('tf-modal-outer').length;
         
         },
         _applyProperty : function(){
 
             // data-zindex makes sure hierarchical modal popup closes in order of opening
-            var currentPopupCount = document.getElementsByClassName('tf-modal-outer').length;
-            this.outerComp.setAttribute('data-zindex', (1000 + currentPopupCount));
+            this.outerComp.setAttribute('data-zindex', (1000 + this.currentPopupCount));
 
             //apply styles
             if (this.styles != '') {
@@ -138,7 +139,7 @@ TFLib.ModalPopup = function(config) {
         _bindEvents: function() {
 
             var me = this.scope;
-            document.body.addEventListener('keyup', this._handleModalKeyUp);
+            if(!this.currentPopupCount)  document.body.addEventListener('keyup', this._handleModalKeyUp);
             this._handleModalCloseBtnClick = this._handleModalCloseBtnClick.bind(this);
             this.modalCloseNode.addEventListener('click', this._handleModalCloseBtnClick);
         },
