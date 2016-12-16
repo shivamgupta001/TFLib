@@ -163,6 +163,7 @@ TFLib.ModalPopup = function(config) {
             if(!this.onConfig) {
                 
                 document.body.appendChild(this.outerComp);
+                this.innerComp.focus();
                 this._handleModalOpenCallback();
             }
         },

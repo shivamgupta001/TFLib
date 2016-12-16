@@ -140,8 +140,11 @@ StandardPopup = function(){
                 styles: {
                     minWidth : '400px',
                     maxWidth : '500px',
-                    minHeight : '180px' 
+                    minHeight : '180px'
+
                 },
+                width : '400px',    // this is invalid value will not work , just need to pass number without px
+                height : '180px',   // this is invalid value will not work , just need to pass number without px
                 footerTemplate : this.footerComp,
                 title: this.title,
                 popupId: this.popupId,

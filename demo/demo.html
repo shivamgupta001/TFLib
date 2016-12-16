@@ -11,6 +11,7 @@
 <body>
     <div id="mydiv"></div>
     <script type="text/javascript" src="jquery-1.11.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.min.js"></script>
     <script type="text/javascript" src="../dest/tflib.controls.min.js"></script>   
     <script>
         (function(){
@@ -215,7 +216,7 @@
 
                 ]
             });
-            //block.insertBefore('#mydiv');
+            block.insertBefore('#mydiv');
 
            var block1 = TFLib.Iterator({
                 type : 'container',
@@ -233,9 +234,10 @@
                     flex : 1,
                     type : 'textfield',
                     fieldLabel : 'Second'
-                },senderName ]
+                },senderName]
             });
-            block.insertBefore('#mydiv');
+            block1.insertBefore('#mydiv');
+        })();
     </script>
 
     
