@@ -5,6 +5,7 @@
  * @property {string} layout - can be 'row' or 'column' and is display flex , if not provided container will be display block.
  * @property {object} styles - styles will be applied to button tag.
  * @property {string} tagName - can pass tag name of which container can be formed.
+ * @property {Object} attributes - can pass attributes key value
  * @property {number} flex - will define what %age of width to take in comparison to others.
  * @property {(string|string[])} compClass -  will be applied to outermost div of component.
  * @property {string} innerHTML - can pass html directly.
@@ -40,12 +41,14 @@ TFLib.TFContainer = function(){
 				this.layout = me.layout || false;
 				this.styles = me.styles || '';
 				this.tagName = me.tagName || 'div';
+				this.attributes = me.attributes || '';
 								
 				//style
 				this.flex = me.flex || '';
 				
 				// classes
 				this.compClass = (me.compClass ? (me.compClass.constructor === Array ? me.compClass : [me.compClass]) : false);
+				
 
 				// inner HTML or Text
 				this.innerHTML = me.innerHTML || false;
@@ -59,6 +62,7 @@ TFLib.TFContainer = function(){
 			_generateTemplate : function(){
 				
 				var el = document.createElement(this.tagName);
+				el.classList.add('tf-field-container');
 				if(this.layout)
 					el.classList.add('tf-flex');
 				el.setAttribute('control-type','tf-container');
@@ -92,6 +96,13 @@ TFLib.TFContainer = function(){
 					this.outerComp.classList.add('tf-flex-direction--row');
 				else if(this.layout === "column")
 						this.outerComp.classList.add('tf-flex-direction--column');
+
+				//apply attributes
+				if(this.attributes != ''){
+					Object.keys(this.attributes).forEach(function(attr){
+						this.outerComp.setAttribute( attr , this.attributes[attr]);
+					}, this);
+				}
 
 				// inner text or html
 				if(this.innerText) this.outerComp.innerText = this.innerText;
