@@ -46,11 +46,11 @@ TFLib.TFTextField = function() {
             this.buttons = me.buttons || [];
             this.validations = me.validations || {};
             this.validations.__proto__ =  {
-                'isRequired' : {value : false , errmsg : 'This field is Required'},
+                'isRequired' : {value : false , errmsg : TFLib.TFConstants.COMMON.ISREQUIRED },
                 'onlyText' : {value : false},
                 'onlyNumber' : {value :false},
-                'regex' : {value : false, pattern:"abc", errmsg : 'Failed regular expression'},
-                'customError' : {value : false , errmsg : 'custom error'}
+                'regex' : {value : false, pattern:"abc", errmsg : TFLib.TFConstants.COMMON.REGEX },
+                'customError' : {value : false , errmsg : TFLib.TFConstants.COMMON.CUSTOMERROR }
             };
             this.styles = me.styles || '';
             this.attributes = me.attributes || '';
@@ -65,7 +65,8 @@ TFLib.TFTextField = function() {
             this.labelClass = (me.labelClass ? (me.labelClass.constructor === Array ? me.labelClass : [me.labelClass]) : false);
             this.compClass = (me.compClass ? (me.compClass.constructor === Array ? me.compClass : [me.compClass]) : false);
             this.controlClass = (me.controlClass ? (me.controlClass.constructor === Array ? me.controlClass : [me.controlClass]) : false);
-            this.classPrefix = me.classPrefix || 'libcomp'
+            
+
             //attributes
             this.name = me.name || '';
             this.placeholder = me.placeholder || '';

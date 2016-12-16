@@ -75,7 +75,7 @@ TFLib.TFContainer = function(){
 				// cache Dom
 				this.outerComp = this.childTemplate;
 				
-			},/** @access private *//** @access private */
+			},/** @access private */
 			_applyProperty : function(){
 
 				//apply styles

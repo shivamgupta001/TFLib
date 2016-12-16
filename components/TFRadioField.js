@@ -52,8 +52,8 @@ TFLib.TFRadioField = function() {
             this.name = me.name || '';
             this.validations = me.validations || {};
             this.validations.__proto__ = {
-                'isRequired': { value: false, errmsg: 'This field is Required' },
-                'customError': { value: false, errmsg: 'custom error' }
+                'isRequired': { value: false, errmsg: TFLib.TFConstants.COMMON.ISREQUIRED },
+                'customError': { value: false, errmsg: TFLib.TFConstants.COMMON.CUSTOMERROR }
             };
 
             //style

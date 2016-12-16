@@ -1,15 +1,30 @@
-TFLib.Constants = {
+/**
+ * @author Shivam Gupta 
+ * @constructor TFConstants
+ */
 
-		popup : {
+TFLib.TFConstants = {
+
+		POPUP : {
+			ERROR : 'Error',
+			INFO : 'Info',
+			CONFIRM : 'Confirm',
+			SUCCESS : 'Sucess',
 			OK : 'OK',
-			CANCEL : 'CANCEL',
-			ISREQUIRED : 'This field is mandatory',
+			CANCEL : 'CANCEL'
 		},
-		common :{
-			txtOK : "OK",
-			txtCncel : "C",
-			errMSG : '6231463521'
+		COMMON :{
+
+			ISREQUIRED : 'This field is Required',
+			REGEX : 'Failed regular expression',
+			CUSTOMERROR : 'Custom Error'
+
 		},
+		/**This method will remove class from inner comp
+	      * @memberof TFConstants
+	      * @param {string} key - can be one of 'COMMON' or 'POPUP'
+	      * @param {Object} valObj - {key : value} if present update otherwise add new constant
+	      */
 		config : function(parentKey , valObj ){
 
 			Object.keys(valObj).forEach(function(val){
@@ -17,6 +32,5 @@ TFLib.Constants = {
 				this[parentKey][val] = valObj[val];
 				
 			}.bind(this)); 
-			
 		}
 };

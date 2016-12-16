@@ -51,11 +51,11 @@ TFLib.TFTextAreaField = function(){
 			
 				this.validations = me.validations || {};
 	            this.validations.__proto__ =  {
-	                'isRequired' : {value : false , errmsg : 'This field is Required'},
-	                'onlyText' : {value : false},
-	                'onlyNumber' : {value :false},
-	                'regex' : {value : false, errmsg : 'Failed regular expression'},
-	                'customError' : {value : false , errmsg : 'custom error'}
+	                'isRequired' : {value : false , errmsg : TFLib.TFConstants.COMMON.ISREQUIRED },
+	                'onlyText' : {value : false },
+	                'onlyNumber' : {value :false },
+	                'regex' : {value : false, errmsg : TFLib.TFConstants.COMMON.REGEX },
+	                'customError' : {value : false , errmsg : TFLib.TFConstants.COMMON.CUSTOMERROR }
 	            };
 
 	            //style

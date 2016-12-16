@@ -11,25 +11,25 @@
  
 TFLib.ErrorPopup = function(config) {
     
-    config.title = config.title || 'Error';
+    config.title = config.title || TFLib.TFConstants.POPUP.ERROR;
     config.imgClassName = 'tf-error-icon';
     StandardPopup.call(config);
 };
 TFLib.InfoPopup = function(config) {
 
-    config.title = config.title || 'Info';
+    config.title = config.title || TFLib.TFConstants.POPUP.INFO;
     config.imgClassName = 'tf-info-icon';
     StandardPopup.call(config);
 };
 TFLib.ConfirmPopup = function(config) {
     
-    config.title = config.title || 'Confirm';
+    config.title = config.title || TFLib.TFConstants.POPUP.CONFIRM;
     config.imgClassName = 'tf-confirm-icon';
     StandardPopup.call(config);
 };
 TFLib.SuccessPopup = function(config) {
     
-    config.title = config.title || 'Success';
+    config.title = config.title || TFLib.TFConstants.POPUP.SUCCESS;
     config.imgClassName = 'tf-success-icon';
     StandardPopup.call(config);
 };
@@ -64,8 +64,8 @@ StandardPopup = function(){
             this.popupOnCancel = me.popupOnCancel || '';
             this.OK = ( me.OK == false ) ? false : true;
             this.CANCEL = ( me.CANCEL == false ) ? false : true;
-            this.OKVal = me.OKVal || 'OK';
-            this.CANCELVal = me.CANCELVal || 'CANCEL';
+            this.OKVal = me.OKVal || TFLib.TFConstants.POPUP.OK;
+            this.CANCELVal = me.CANCELVal || TFLib.TFConstants.POPUP.CANCEL;
             
         },
         _generateTemplate : function(){
@@ -143,8 +143,8 @@ StandardPopup = function(){
                     minHeight : '180px'
 
                 },
-                width : '400px',    // this is invalid value will not work , just need to pass number without px
-                height : '180px',   // this is invalid value will not work , just need to pass number without px
+                width : '400px',    // this is invalid value will not work , just need to pass number without px , done to prevent default case
+                height : '180px',   // this is invalid value will not work , just need to pass number without px , done to prevent default case
                 footerTemplate : this.footerComp,
                 title: this.title,
                 popupId: this.popupId,

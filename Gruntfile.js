@@ -32,6 +32,7 @@ module.exports = function(grunt){
 		        'dest/tflib.popups.min.js': [	
 
 		        				'initialize/initialize.js',
+		        				'constants/TFConstants.js',
 		        				'popups/TFModalPopup.js',
 		        				'popups/TFStandardPopup.js'
 		        			]
@@ -41,7 +42,7 @@ module.exports = function(grunt){
 		},
 		jsdoc : {
 			dist: {
-				src : ['components/*.js','methods/*.js','validations/*.js', 'popups/*.js'],
+				src : ['constants/*.js','components/*.js','methods/*.js','validations/*.js', 'popups/*.js'],
 				options : {
 					destination: 'doc'
 				}
