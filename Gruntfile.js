@@ -15,6 +15,7 @@ module.exports = function(grunt){
 		        'dest/tflib.controls.min.js': [	
 		        						'initialize/initialize.js',
 		        						'methods/*.js',
+		        						'constants/TFConstants.js',
 		        						'validations/TFValidations.js',
 		        						'components/TFButton.js',
 		        						'components/TFCheckbox.js',
