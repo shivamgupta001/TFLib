@@ -20,7 +20,7 @@ TFLib.TFConstants = {
 			CUSTOMERROR : 'Custom Error'
 
 		},
-		/**This method will remove class from inner comp
+		/**This method will be used to set / add new 
 	      * @memberof TFConstants
 	      * @param {string} key - can be one of 'COMMON' or 'POPUP'
 	      * @param {Object} valObj - {key : value} if present update otherwise add new constant
