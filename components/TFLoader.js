@@ -59,13 +59,13 @@ TFLib.TFLoader = function() {
 		_generateTemplate : function(){
 			
 			var el  =[
-				'<section class="tf--loader-main" id="'+this.dynamicId+'">',
-				    '<div class="tf--loader-outer">',
-				        '<div class="tf--loader" control-type="tf--loader">',
-				            '<div class="tf--loader-image">',
+				'<section class="tf-loader--main" id="'+this.dynamicId+'">',
+				    '<div class="tf-loader--outer">',
+				        '<div class="tf-loader" control-type="tf-loader">',
+				            '<div class="tf-loader--image">',
 				                this.LoaderImage,
 				            '</div>',
-				            '<div class="tf--loader-text">'+this.LoaderText+'</div>',
+				            '<div class="tf-loader--text">'+this.LoaderText+'</div>',
 				        '</div>',
 				    '</div>',
 				'</section>',
@@ -77,9 +77,9 @@ TFLib.TFLoader = function() {
 
 			//cache DOM
 			this.outerComp = this.childTemplate;
-			this.innerComp = this.childTemplate.querySelector('[control-type="tf--loader"]');
-			this.innerComp.loaderImage = this.innerComp.querySelector(".tf--loader-image");
-			this.innerComp.loaderText = this.innerComp.querySelector(".tf--loader-text");
+			this.innerComp = this.childTemplate.querySelector('[control-type="tf-loader"]');
+			this.innerComp.loaderImage = this.innerComp.querySelector(".tf-loader--image");
+			this.innerComp.loaderText = this.innerComp.querySelector(".tf-loader--text");
 			this.innerComp.initLoaderImage = this.innerComp.loaderImage.innerHTML;
 			this.innerComp.initLoaderText = this.innerComp.loaderText.innerText;
 			
@@ -101,7 +101,7 @@ TFLib.TFLoader = function() {
 			}
 
 			//apply inner text
-			if(this.LoaderText) this.innerComp.querySelector(".tf--loader-text").innerHTML = this.LoaderText;
+			if(this.LoaderText) this.innerComp.querySelector(".tf-loader--text").innerHTML = this.LoaderText;
 			
 			//apply class
 			if(this.loaderClass) this.innerComp.classList.add.apply(this.innerComp.classList , this.loaderClass);

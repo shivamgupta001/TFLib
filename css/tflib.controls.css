@@ -309,7 +309,7 @@
  * Loader Styles
  */
 /* Overlay */
- .tf--loader-main{
+ .tf-loader--main{
     display: none;
     height: 100%;
     width: 100%;
@@ -321,13 +321,13 @@
 }
 
 /* outer container*/
-.tf--loader-outer{
+.tf-loader--outer{
     display: table-cell;
     vertical-align: middle;
 }
 
 /* loader animation and text container*/
-.tf--loader{
+.tf-loader{
     position: relative;
     margin: 0px auto;
     width: 250px;
@@ -339,13 +339,14 @@
 }
 
 /* animation or gif container*/
-.tf--loader-image,.tf--loader-image img{
+.tf-loader--image,.tf-loader--image img{
     float: left;
     height: 70px;
     width: 70px;
 }
 /* loading text container */
-.tf--loader-text{
+.tf-loader--text{
+    user-select : none;
     float: left;
     font-size: 21px;
     text-align: center;

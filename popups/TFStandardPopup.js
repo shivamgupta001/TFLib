@@ -172,6 +172,9 @@ StandardPopup = function(){
                 //For Chrome & Moz
                 this.shared.cancelComp.setAttribute('tabindex', 10000);
                 this.shared.okComp.setAttribute('tabindex', 10001);
+            }else if(this.shared.okComp){
+
+                this.shared.okComp.focus();
             }
         },
         handleCancelBlur : function(e) {
@@ -182,6 +185,9 @@ StandardPopup = function(){
                 //For Chrome & Moz
                 this.shared.cancelComp.setAttribute('tabindex', 10001);
                 this.shared.okComp.setAttribute('tabindex', 10000);
+            }else if(this.shared.cancelComp){
+
+                this.shared.cancelComp.focus();
             }
         },
         handlePopupOnOk : function(e) {
