@@ -63,7 +63,7 @@
     background-position: 0 -18px;
 }
 .tf-modal-footer {
-    background-color: green;
+    background-color: #465a6e;
 }
 .tf-display--none{
     
@@ -80,7 +80,7 @@
 }
 .tf-std-popup-icon{
 
-    flex : 1;
+    width : 80px;
     display: flex;
     justify-content: center;
     padding-top: 10px;

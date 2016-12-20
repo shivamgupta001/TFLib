@@ -40,15 +40,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(to bottom, #3093C7, #1C5A85);
-    border-radius: 5px;
-    border: none;
-    color: whitesmoke;
     cursor: pointer;
 }
-.tf-button:hover,.tf-button:focus {
-    background-image: linear-gradient(to bottom, #61b7e4, #0f6bab);
-}
+
 .tf-field-with-btn {
     border: 1px solid grey;
     display: flex;
@@ -59,7 +53,7 @@
     padding: 2px;
 }
 
-.tf-field-with-btn input[type="text"] , .tf-field-with-btn textarea{
+.tf-field-with-btn input[type="text"] , .tf-field-with-btn textarea, .tf-field-with-btn input[type="password"]{
     outline: 0px;
     border: 0px;
     border-radius: 5px 0px 0px 5px;
