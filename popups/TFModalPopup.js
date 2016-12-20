@@ -47,6 +47,7 @@ TFLib.ModalPopup = function(config) {
                 this.resizable = (me.resizable == false) ? false : true,
                 this.footerVisible = (me.footerVisible == true) ? true : false,
 
+
                 // style
                 this.width = me.width || 800,
                 this.height = me.height || 600,
@@ -195,7 +196,9 @@ TFLib.ModalPopup = function(config) {
                     }
                 }
                 if (e.key === "Escape" || e.key === "Esc") {
-                    document.getElementById(itemId).querySelector('.tf-modal-close-btn').click();
+                    var closeBtn = document.getElementById(itemId).querySelector('.tf-modal-close-btn');
+                    if(closeBtn.style.display !== "none")
+                        closeBtn.click();
                 }
             }
         },

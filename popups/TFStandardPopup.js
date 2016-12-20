@@ -2,6 +2,7 @@
  * @author Shivam Gupta 
  * @constructor TFStandardPopup
  * @property {string} popupId - popupId non existing value otherwise gives error
+ * @property {string} msg - pass your msg here
  * @property {string} title - title will be displayed in header part
  * @property {function} modalCloseCallback - provide handle called when popup closed via Escape or click over close button
  * @property {function} modalOpenCallback - provide handle called when popup is inserted in DOM
@@ -162,6 +163,7 @@ StandardPopup = function(){
                         
             if (this.imgClassName == 'tf-confirm-icon') this.closeComp.style.display = 'none';
             if (this.okComp && this.cancelComp) this.handleCancelBlur.call(me.cancelComp);
+
             
         },
         handleOkBlur : function(e) {
@@ -173,7 +175,7 @@ StandardPopup = function(){
                 this.shared.cancelComp.setAttribute('tabindex', 10000);
                 this.shared.okComp.setAttribute('tabindex', 10001);
             }else if(this.shared.okComp){
-
+                
                 this.shared.okComp.focus();
             }
         },
