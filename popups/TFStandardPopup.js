@@ -107,10 +107,12 @@ StandardPopup = function(){
                 this.okComp.addEventListener('click', this.handlePopupOnOk);
                 this.okComp.addEventListener('blur', this.handleOkBlur);
             } 
-             if(this.cancelComp) {
+            if(this.cancelComp) {
                 this.cancelComp.addEventListener('click', this.handlePopupOnCancel);
                 this.cancelComp.addEventListener('blur', this.handleCancelBlur);
-            }        
+            }
+            if( Boolean(this.okComp) ^ Boolean(this.cancelComp))
+                document.addEventListener('keydown',this._handleKeyDown);        
             
         },
         _attachProperties : function(){
@@ -164,7 +166,13 @@ StandardPopup = function(){
             if (this.imgClassName == 'tf-confirm-icon') this.closeComp.style.display = 'none';
             if (this.okComp && this.cancelComp) this.handleCancelBlur.call(me.cancelComp);
 
+
             
+        },
+        _handleKeyDown : function(e){
+
+            if(e.key === 'Tab')
+                e.preventDefault();
         },
         handleOkBlur : function(e) {
 
@@ -174,9 +182,6 @@ StandardPopup = function(){
                 //For Chrome & Moz
                 this.shared.cancelComp.setAttribute('tabindex', 10000);
                 this.shared.okComp.setAttribute('tabindex', 10001);
-            }else if(this.shared.okComp){
-                
-                this.shared.okComp.focus();
             }
         },
         handleCancelBlur : function(e) {
@@ -187,9 +192,6 @@ StandardPopup = function(){
                 //For Chrome & Moz
                 this.shared.cancelComp.setAttribute('tabindex', 10001);
                 this.shared.okComp.setAttribute('tabindex', 10000);
-            }else if(this.shared.cancelComp){
-
-                this.shared.cancelComp.focus();
             }
         },
         handlePopupOnOk : function(e) {
@@ -216,6 +218,8 @@ StandardPopup = function(){
                 this.cancelComp.removeEventListener('click', this.handlePopupOnCancel);
                 this.cancelComp.removeEventListener('blur', this.handleCancelBlur);
             }
+            if(Boolean(this.okComp) ^ Boolean(this.cancelComp))
+                document.removeEventListener('keydown', this._handleKeyDown);
         }
     };
     
