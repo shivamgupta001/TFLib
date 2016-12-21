@@ -47,16 +47,17 @@
     border: 1px solid grey;
     display: flex;
     flex-direction: row;
-    border-radius: 5px 5px 5px 5px;
+    border-radius: 3px;
     justify-content: center;
     align-items: center;
     padding: 2px;
+    background-color: white;
 }
 
 .tf-field-with-btn input[type="text"] , .tf-field-with-btn textarea, .tf-field-with-btn input[type="password"]{
     outline: 0px;
     border: 0px;
-    border-radius: 5px 0px 0px 5px;
+    border-radius: 3px 0px 0px 3px;
 }
 
 .tf-field-with-btn button {

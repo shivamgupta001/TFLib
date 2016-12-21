@@ -1,7 +1,6 @@
 /* Modal Popup css start*/
 .tf-modal-outer {
     position: absolute;
-    font-family: Arial, Helvetica, sans-serif;
     top: 0px;
     left: 0px;
     right: 0px;
@@ -12,6 +11,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size : 14px;
 }
 .tf-modal-inner {
     min-width: 400px;
@@ -26,7 +26,7 @@
 .tf-modal-header {
     background: url("./images/on_behalf_of_popup_header_bg.jpg");
     white-space: nowrap;
-    height: 40px;
+    min-height: 40px;
     font-size: 16px;
     font-weight: bold;
     font-family: Arial;
@@ -90,35 +90,35 @@
     padding: 10px;
 }
 .tf-confirm-icon{
-    width: 60px;
-    height : 60px;
+    width: 45px;
+    height : 45px;
     background: url("./images/warning_icon.png") no-repeat;
     background-size: contain;
 }
 .tf-success-icon{
-    width: 50px;
-    height : 50px;
+    width: 45px;
+    height : 45px;
     background: url("./images/warning_icon.png") no-repeat;
     background-size: contain;
 }
 .tf-info-icon{
-    width: 50px;
-    height : 50px;
+    width: 45px;
+    height : 45px;
     background: url("./images/warning_icon.png") no-repeat;
     background-size: contain;
 }
 .tf-error-icon{
-    width: 50px;
-    height : 50px;
+    width: 45px;
+    height : 45px;
     background: url("./images/warning_icon.png") no-repeat;
     background-size: contain;
 }
 .tf-std-btn{
-    width : 70px;
+    min-width : 70px;
     height : 30px;
 }
 .tf-std-btn:focus{
-    width : 70px;
+    min-width : 70px;
     height : 30px;
     border : 2px solid blue;
 }
