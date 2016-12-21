@@ -150,16 +150,14 @@
 
 		function runAlertPopup(){
 			
-			TFLib.ConfirmPopup({
+			TFLib.InfoPopup({
 				msg : 'You must reload the page to completely remove the popup , You must reload the page to completely remove the popup',
 				modalOnClose : helloClose,
 				modalOnOpen : helloOpen,
 				popupOnOk : okPopup,
 				popupOnCancel : cancelPopup,
 
-				OK : true,
-				CANCEL : false
-
+				CANCEL : true
 			});
 		}
 

@@ -14,12 +14,14 @@ TFLib.ErrorPopup = function(config) {
     
     config.title = config.title || TFLib.TFConstants.POPUP.ERROR;
     config.imgClassName = 'tf-error-icon';
+    config.CANCEL = config.CANCEL || false;
     StandardPopup.call(config);
 };
 TFLib.InfoPopup = function(config) {
 
     config.title = config.title || TFLib.TFConstants.POPUP.INFO;
     config.imgClassName = 'tf-info-icon';
+    config.CANCEL = config.CANCEL || false;
     StandardPopup.call(config);
 };
 TFLib.ConfirmPopup = function(config) {
@@ -32,6 +34,7 @@ TFLib.SuccessPopup = function(config) {
     
     config.title = config.title || TFLib.TFConstants.POPUP.SUCCESS;
     config.imgClassName = 'tf-success-icon';
+    config.CANCEL = config.CANCEL || false;
     StandardPopup.call(config);
 };
 
