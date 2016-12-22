@@ -3,6 +3,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 
 	/**This method will hide label as display 'none'
       * @mixes TFCheckboxField
+      * @mixes TFComboboxField
       * @mixes TFRadioField
       */
 	this.displayLabelHide = function(){
@@ -10,6 +11,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 	};
 	/**This method will show label if display 'none'
       * @mixes TFCheckboxField
+      * @mixes TFComboboxField
       * @mixes TFRadioField
       */
 	this.displayLabelShow = function(){
@@ -17,6 +19,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 	};
 	/**This method will control comp as display 'none'
       * @mixes TFCheckboxField
+      * @mixes TFComboboxField
       * @mixes TFRadioField
       */
 	this.displayControlHide = function(){
@@ -24,6 +27,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 	};
 	/**This method will show control comp if display 'none'
       * @mixes TFCheckboxField
+      * @mixes TFComboboxField
       * @mixes TFRadioField
       */
 	this.displayControlShow = function(){
@@ -32,6 +36,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 
 	/**This method will hide label as visibility 'hidden'
       * @mixes TFCheckboxField
+      * @mixes TFComboboxField
       * @mixes TFRadioField
       */
 	this.visibleLabelHide = function(){
@@ -39,6 +44,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 	};
 	/**This method will show label as if visibility 'hidden'
       * @mixes TFCheckboxField
+      * @mixes TFComboboxField
       * @mixes TFRadioField
       */
 	this.visibleLabelShow = function(){
@@ -46,6 +52,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 	};
 	/**This method will hide control as visibility 'hidden'
       * @mixes TFCheckboxField
+      * @mixes TFComboboxField
       * @mixes TFRadioField
       */
 	this.visibleControlHide = function(){
@@ -53,6 +60,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 	};
 	/**This method will show control if visibility 'hidden'
       * @mixes TFCheckboxField
+      * @mixes TFComboboxField
       * @mixes TFRadioField
       */
 	this.visibleControlShow = function(){
@@ -61,6 +69,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 
 	/**This method will add style to label comp 
       * @mixes TFCheckboxField
+      * @mixes TFComboboxField
       * @mixes TFRadioField
       * @param {string} property - property name 
       * @param {string} val - property value 
@@ -70,6 +79,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 	};
 	/**This method will remove style to label comp 
       * @mixes TFCheckboxField
+      * @mixes TFComboboxField
       * @mixes TFRadioField
       * @param {string} property - property name 
       */
@@ -78,6 +88,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 	};
 	/**This method will add style to control comp 
       * @mixes TFCheckboxField
+      * @mixes TFComboboxField
       * @mixes TFRadioField
       * @param {string} property - property name 
       * @param {string} val - property value 
@@ -87,6 +98,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 	};
 	/**This method will remove style to control comp 
       * @mixes TFCheckboxField
+      * @mixes TFComboboxField
       * @mixes TFRadioField
       * @param {string} property - property name 
       */
@@ -96,6 +108,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 
 	/**This method will change label text 
       * @mixes TFCheckboxField
+      * @mixes TFComboboxField
       * @mixes TFRadioField
       * @param {string} newLabelText - label text or html
       */
@@ -107,6 +120,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 
 	/**This method will add class to label comp 
       * @mixes TFCheckboxField
+      * @mixes TFComboboxField
       * @mixes TFRadioField
       * @param {string} newClass - class name 
       */
@@ -116,6 +130,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 	};
 	/**This method will remove class to label comp 
       * @mixes TFCheckboxField
+      * @mixes TFComboboxField
       * @mixes TFRadioField
       * @param {string} oldClass - class name 
       */
@@ -125,6 +140,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 	};
 	/**This method will add class to control comp 
       * @mixes TFCheckboxField
+      * @mixes TFComboboxField
       * @mixes TFRadioField
       * @param {string} newClass - class name 
       */
@@ -134,6 +150,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 	};
 	/**This method will remove class to control comp 
       * @mixes TFCheckboxField
+      * @mixes TFComboboxField
       * @mixes TFRadioField
       * @param {string} oldClass - class name 
       */
@@ -144,6 +161,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 	
 	/**This method will apply validation to component 
       * @mixes TFCheckboxField
+      * @mixes TFComboboxField
       * @mixes TFRadioField
       * @param {object}
       * @property {boolean} value - true or false to apply or not apply validation
@@ -184,6 +202,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 	};
 	/**This method will apply custom validation  to component at any point
       * @mixes TFCheckboxField
+      * @mixes TFComboboxField
       * @mixes TFRadioField
       */
 	this.customError = function(status,errmsg){
@@ -238,32 +257,34 @@ TFLib.TFCheckboxFieldMethods = function(){
 	};
 	/**This method will validate if validations present to component 
       * @mixes TFCheckboxField
+      * @mixes TFComboboxField
       * @mixes TFRadioField
       */
 	this.validate = function(){
 
 		this.isValidated = true;
-		if(this.validations) Object.keys(this.validations).forEach(function(val){
-			if(val === 'isRequired'){
-				if(this.validations.isRequired.value){
-					this.controlComp.classList.add('tooltip', 'tf-err-border--red');
-					this.controlComp.setAttribute('data-tooltip', this.validations.isRequired.errmsg);	
-					this.isValidated = false;
-				}
-			}else if(val === 'regex'){
-				if(this.validations.regex.value){
-					var regex = new RegExp(this.validations.regex.pattern);
-					if(!regex.test(this.innerComp.value)){
+		if(this.validations) 
+			Object.keys(this.validations).forEach(function(val){
+				if(val === 'isRequired'){
+					if(this.validations.isRequired.value){
 						this.controlComp.classList.add('tooltip', 'tf-err-border--red');
-						this.controlComp.setAttribute('data-tooltip', this.validations.regex.errmsg);			
+						this.controlComp.setAttribute('data-tooltip', this.validations.isRequired.errmsg);	
 						this.isValidated = false;
-					}					
+					}
+				}else if(val === 'regex'){
+					if(this.validations.regex.value){
+						var regex = new RegExp(this.validations.regex.pattern);
+						if(!regex.test(this.innerComp.value)){
+							this.controlComp.classList.add('tooltip', 'tf-err-border--red');
+							this.controlComp.setAttribute('data-tooltip', this.validations.regex.errmsg);			
+							this.isValidated = false;
+						}					
+					}
+				}else if(val === 'customError'){
+					if(this.validations.customError.value)
+						this.isValidated = false;
 				}
-			}else if(val === 'customError'){
-				if(this.validations.customError.value)
-					this.isValidated = false;
-			}
-		}, this);
+			}, this);
 		
 		return this.isValidated;
 	};

@@ -2,7 +2,7 @@
 TFLib.TFComboboxFieldMethods = function(){
 
 
-	/**This method will hide component as display 'none'
+	/**This method will add data to combobox
       * @memberof TFComboboxField
       * @property {object[]} data - pass data as array of object where each object having value , display
       * @property {string} value - value property name in data 
