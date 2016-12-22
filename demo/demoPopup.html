@@ -133,7 +133,25 @@
 		}
 		// callbacks on close . Here event value will be event fired.
 		function helloClose(){
-			console.log("close");
+			console.log('close');
+		}
+		function helloClose1(e){
+			
+			var me = this;
+
+			TFLib.ConfirmPopup({
+				scope : me,
+				msg : 'Helllo',
+				popupOnOk : function(){
+					this.scope.outerComp.forceClose();
+				},
+				popupOnCancel : function(){
+					
+				}
+			})
+			return false;
+
+			
 		}
 
 

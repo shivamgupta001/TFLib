@@ -39,6 +39,7 @@
 .tf-modal-body {
     flex: 1;
     position: relative;
+    padding:  5px;
 }
 
 .tf-modal-footer {

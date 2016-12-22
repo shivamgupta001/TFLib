@@ -11,6 +11,9 @@
  * @property {object} dataTemplate - requires parent node reference    
  * @property {function} modalCloseCallback - callback handle called when popup closed via Escape or click over close button
  * @property {function} modalOpenCallback - callback handle called when popup is inserted in DOM
+ * @property {function} close - close will internally click close btn at top right
+ * @property {function} show - show will open popup if already in dom
+ * @property {function} forceClose - this method will directly call destroy which will remove popup from dom 
  */
 
 TFLib.ModalPopup = function(config) {
@@ -157,6 +160,7 @@ TFLib.ModalPopup = function(config) {
             // add Methods
             me.outerComp.show = this.show.bind(this);
             me.outerComp.close = this.close.bind(this);
+            me.outerComp.forceClose = this.forceClose.bind(this);
 
         },
         _render: function() {
@@ -205,15 +209,19 @@ TFLib.ModalPopup = function(config) {
         _handleModalOpenCallback: function() {
             
             var me = this.scope;
-
             if(this.modalOpenCallback != '') this.modalOpenCallback.call(me);
         },
         _handleModalCloseBtnClick: function(e) {
             
-            var me = this.scope;
+            var me = this.scope,
+                toDestroy = true;
 
-            if (this.modalCloseCallback != '')  this.modalCloseCallback.call(me);
-            this._destroy();
+            if (this.modalCloseCallback != '')  
+                toDestroy = this.modalCloseCallback.call(me, e);
+
+            toDestroy = toDestroy === false ? false : true;            
+            if(toDestroy)
+                this._destroy();
         },
         show: function() {
             
@@ -229,6 +237,12 @@ TFLib.ModalPopup = function(config) {
             
             if(document.getElementById(this.dynamicId)) {
                 this.modalCloseNode.click();
+            }
+        },
+        forceClose : function(){
+
+            if(document.getElementById(this.dynamicId)) {
+                this._destroy();
             }
         },
         _destroy: function() {

@@ -156,7 +156,7 @@
             
             /* TFComboboxField Demo start*/
             var data = [{
-                Id : 'none',
+                Id : '',
                 Name : ''
             },{
                 Id : 'a',
@@ -177,6 +177,9 @@
                 validations : {
                     'isRequired' : { value : true , errmsg : 'new combo'}
                 },
+                attributes : {
+                    'data-placeholder' : 'Select a state'
+                },
                 listeners : {
                     'select2:selecting' : function(e){
                         // this will not work see event handling on select2 below
@@ -187,7 +190,9 @@
 
 
 
-            var $combosel = $(combo.shared.innerComp).select2();
+            var $combosel = $(combo.shared.innerComp).select2({
+                allowClear : true
+            });
             $combosel.on('change', function(){
                 // insert code here for change event
 

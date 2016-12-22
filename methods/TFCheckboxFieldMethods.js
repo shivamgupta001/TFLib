@@ -267,9 +267,17 @@ TFLib.TFCheckboxFieldMethods = function(){
 			Object.keys(this.validations).forEach(function(val){
 				if(val === 'isRequired'){
 					if(this.validations.isRequired.value){
+
 						this.controlComp.classList.add('tooltip', 'tf-err-border--red');
 						this.controlComp.setAttribute('data-tooltip', this.validations.isRequired.errmsg);	
-						this.isValidated = false;
+						this.isValidated = false;	
+						
+						if(this.innerComp.tagName === "SELECT" && this.innerComp.selectedOptions[0].value != '') {
+							
+							this.controlComp.classList.remove('tooltip', 'tf-err-border--red');
+							this.controlComp.removeAttribute('data-tooltip', this.validations.isRequired.errmsg);	
+							this.isValidated = true;	
+						}
 					}
 				}else if(val === 'regex'){
 					if(this.validations.regex.value){
