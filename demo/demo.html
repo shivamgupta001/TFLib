@@ -18,10 +18,16 @@
 
             /*sender name start*/
             var senderName = TFLib.TFTextField.call({
-                fieldLabel : 'Name1',
+                displayLabel : 'none',
                 fieldLayout : 'column',
+                styles : {
+                    color : 'red',
+                    backgroundColor : 'yellow',
+                    'text-align' : 'f'
+                },
                 buttons : [{
                     btnClass : 'tf-btn-language',
+
 
                 },{
                     btnClass : 'tf-btn-language'
@@ -29,9 +35,14 @@
                 validations : {
                     'isRequired' : {value : true , errmsg : 'name is required'}
                 },
-                
+                render : function(){
+                    this
+                },
                 listeners :{
                     click : function(e){
+                        this
+                    },
+                    change : function(e){
 
                     }
                 }
@@ -133,7 +144,7 @@
             /*TFTextField start */
             var payoutFeeRate = TFLib.TFTextField.call({
                 fieldLabel : '<a href="#">Fee rate</a>',
-                fieldLayout : 'column'
+                fieldLayout : 'row'
 
 
             });
@@ -159,6 +170,9 @@
                 Id : '',
                 Name : ''
             },{
+                Id : '0',
+                Name : ''
+            },{
                 Id : 'a',
                 Name : 'a'
             },{
@@ -177,6 +191,7 @@
                 validations : {
                     'isRequired' : { value : true , errmsg : 'new combo'}
                 },
+                multiple : true,
                 attributes : {
                     'data-placeholder' : 'Select a state'
                 },
@@ -237,7 +252,8 @@
                     
                     type : 'textfield',
                     fieldLabel : 'First',
-                    fieldLayout : 'row'
+                    fieldLayout : 'row',
+                    items : [{},{},{}]
                 },{
                     flex : 1,
                     type : 'textfield',

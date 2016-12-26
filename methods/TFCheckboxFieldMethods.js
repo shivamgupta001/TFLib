@@ -272,7 +272,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 						this.controlComp.setAttribute('data-tooltip', this.validations.isRequired.errmsg);	
 						this.isValidated = false;	
 						
-						if(this.innerComp.tagName === "SELECT" && this.innerComp.selectedOptions[0].value != '') {
+						if(this.innerComp.tagName === "SELECT" && this.innerComp.selectedOptions.length > 0 && this.innerComp.selectedOptions[this.innerComp.selectedOptions.length-1].value != '') {
 							
 							this.controlComp.classList.remove('tooltip', 'tf-err-border--red');
 							this.controlComp.removeAttribute('data-tooltip', this.validations.isRequired.errmsg);	
