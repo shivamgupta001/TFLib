@@ -166,8 +166,17 @@ TFLib.TFCheckboxField = function() {
             me.validationMethods = {};
             TFLib.TFValidations.call(me.validationMethods);
 
-            if (Object.keys(this.validations).length > 0)
+            if (Object.keys(this.validations).length > 0){
+                this._handleValidationsFallback();
                 this.setValidations.call(me);
+            }
+        },
+        _handleValidationsFallback: function(){
+                
+            Object.keys(this.validations).forEach(function(val){
+                if(!this[val].errmsg)
+                    this[val].errmsg = this.__proto__[val].errmsg;
+            }.bind(this.validations));
         },
         /** @access private */
         _render: function() {

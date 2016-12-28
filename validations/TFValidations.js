@@ -34,7 +34,7 @@ TFLib.TFValidations = function(){
 		var control = this.controlComp;
 		var inputControl = this.innerComp;
 		if(e.type === 'blur'){
-			if(e.target.value === ''){
+			if(e.target.value === '' || e.target.value === '\n'){
 				control.classList.add('tooltip', 'tf-err-border--red');
 				control.setAttribute('data-tooltip', this.validations.isRequired.errmsg);	
 				inputControl.setAttribute('title',this.validations.isRequired.errmsg);	
@@ -55,7 +55,7 @@ TFLib.TFValidations = function(){
 					control.removeAttribute('data-tooltip');
 					inputControl.setAttribute('title',this.validations.isRequired.errmsg);	
 				}
-			}else if(e.target.value === ''){
+			}else if(e.target.value === '' || e.target.value === '\n'){
 					// handles after setting value if value deleted and goes blank
 					control.classList.add('tooltip', 'tf-err-border--red');
 					control.setAttribute('data-tooltip', this.validations.isRequired.errmsg);	

@@ -49,7 +49,7 @@ TFLib.TFTextField = function() {
                 'isRequired' : {value : false , errmsg : TFLib.TFConstants.COMMON.ISREQUIRED },
                 'onlyText' : {value : false},
                 'onlyNumber' : {value :false},
-                'regex' : {value : false, pattern:"abc", errmsg : TFLib.TFConstants.COMMON.REGEX },
+                'regex' : {value : false, pattern:"*", errmsg : TFLib.TFConstants.COMMON.REGEX },
                 'customError' : {value : false , errmsg : TFLib.TFConstants.COMMON.CUSTOMERROR }
             };
             this.styles = me.styles || '';
@@ -159,14 +159,6 @@ TFLib.TFTextField = function() {
                 }
             }
         },
-        _render: function() {
-
-            var me = this.scope;
-
-            if (this.render != '') {
-                this.render.call(me);
-            }
-        },
         _attachProperties: function() {
             
             var me = this.scope;
@@ -192,8 +184,25 @@ TFLib.TFTextField = function() {
             me.validationMethods = {};
             TFLib.TFValidations.call(me.validationMethods);
 
-            if(Object.keys(this.validations).length > 0)
+            if(Object.keys(this.validations).length > 0){
+                this._handleValidationsFallback();
                 this.setValidations.call(me);
+            }
+        },
+        _handleValidationsFallback: function(){
+            
+            Object.keys(this.validations).forEach(function(val){
+                if(!this[val].errmsg)
+                    this[val].errmsg = this.__proto__[val].errmsg;
+            }.bind(this.validations));
+        },
+        _render: function() {
+
+            var me = this.scope;
+
+            if (this.render != '') {
+                this.render.call(me);
+            }
         },
         setValidations: function() {
                 

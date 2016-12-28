@@ -5,13 +5,13 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="../css/tflib.controls.css">
     <link rel="stylesheet" type="text/css" href="demostyle.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css" />
 </head>
 
 <body>
     <div id="mydiv"></div>
     <script type="text/javascript" src="jquery-1.11.1.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.full.min.js"></script>
     <script type="text/javascript" src="../dest/tflib.controls.min.js"></script>   
     <script>
         (function(){
@@ -66,7 +66,7 @@
                 fieldLabel : 'Address',
                 fieldLayout : 'column',
                 validations : {
-                    'isRequired' : {value : true , errmsg : 'address is required'}
+                    'isRequired' : {value : true }
                 }
             });
             /*sender address end*/
@@ -74,7 +74,10 @@
             /*sender zip start*/
             var senderZip = TFLib.TFTextField.call({
                 fieldLabel : 'Zip',
-                fieldLayout : 'column'
+                fieldLayout : 'column',
+                validations : {
+                    'isRequired' : {value : true , errmsg : 'mobile is required'}
+                }
             });
             /*sender zip end*/
 
@@ -171,19 +174,10 @@
                 Name : ''
             },{
                 Id : '0',
-                Name : ''
+                Name: ''
             },{
                 Id : 'a',
                 Name : 'a'
-            },{
-                Id : 'b',
-                Name : 'b'
-            },{
-                Id : 'c',
-                Name : 'c'
-            },{
-                Id : 'd',
-                Name : 'd'
             }];
             var combo = TFLib.TFComboboxField.call({
                 fieldLabel : 'ID Type',
@@ -191,7 +185,7 @@
                 validations : {
                     'isRequired' : { value : true , errmsg : 'new combo'}
                 },
-                multiple : true,
+                   
                 attributes : {
                     'data-placeholder' : 'Select a state'
                 },
@@ -208,6 +202,7 @@
             var $combosel = $(combo.shared.innerComp).select2({
                 allowClear : true
             });
+
             $combosel.on('change', function(){
                 // insert code here for change event
 
@@ -221,6 +216,8 @@
                 
             });
 
+            combo.shared.addData(data , 'Id' , 'Name');
+            $combosel.empty();
             combo.shared.addData(data , 'Id' , 'Name');
             /* TFComboboxField Demo end*/
 
