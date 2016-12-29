@@ -76,12 +76,12 @@ TFLib.TFRadioField = function() {
 
             var el = [
                 '<div control-type="tf-radiofield-outer" id="' + this.dynamicId + '"',
-                'class="tf-flex ' + ((this.fieldLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
-                    '<div control-type="tf-radiof-label"' + ((this.displayLabel === "none") ? 'tf-display--none' : '') + '">',
+                'class="tf-field-container tf-flex ' + ((this.fieldLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
+                    '<div control-type="tf-radiof-label" class=tf-field-container--label "' + ((this.displayLabel === "none") ? 'tf-display--none' : '') + '">',
                         '<label id="' + this.labelId + '">' + (this.fieldLabel ? this.fieldLabel : '') + '</label>',
                         '<span id="' + this.requiredId + '" class="tf-required--red" style="display:none;">*</span>',
                     '</div>',
-                    '<div control-type="tf-radiofield" class="tf-flex ' + ((this.groupLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
+                    '<div control-type="tf-radiofield" class="tf-field-container--control tf-flex ' + ((this.groupLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
                         // radio list  
                     '</div>',
                 '</div>'
@@ -159,8 +159,17 @@ TFLib.TFRadioField = function() {
             me.validationMethods = {};
             TFLib.TFValidations.call(me.validationMethods);
 
-            if (Object.keys(this.validations).length > 0)
+            if (Object.keys(this.validations).length > 0){
+                this._handleValidationsFallback();
                 this.setValidations.call(me);
+            }
+        },
+        _handleValidationsFallback: function(){
+                
+            Object.keys(this.validations).forEach(function(val){
+                if(!this[val].errmsg)
+                    this[val].errmsg = this.__proto__[val].errmsg;
+            }.bind(this.validations));
         },
         _render: function() {
 

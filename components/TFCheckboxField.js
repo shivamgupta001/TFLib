@@ -78,13 +78,13 @@ TFLib.TFCheckboxField = function() {
         _generateTemplate: function() {
 
             var el = [
-                '<div control-type="tf-checkboxfield-outer" id="' + this.dynamicId + '"',
-                'class="tf-flex ' + ((this.fieldLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
-                    '<div control-type="tf-chkf-label" class="' + ((this.displayLabel === "none") ? 'tf-display--none' : '') + '">',
+                '<div control-type="tf-checkboxfield-outer"  id="' + this.dynamicId + '"',
+                'class="tf-flex tf-field-container ' + ((this.fieldLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
+                    '<div control-type="tf-chkf-label" class=tf-field-container--label "' + ((this.displayLabel === "none") ? 'tf-display--none' : '') + '">',
                         '<label id="' + this.labelId + '">' + (this.fieldLabel ? this.fieldLabel : '') + '</label>',
                         '<span id="' + this.requiredId + '" class="tf-required--red" style="display:none;">*</span>',
                     '</div>',
-                    '<div control-type="tf-checkboxfield" class="tf-flex ' + ((this.groupLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
+                    '<div control-type="tf-checkboxfield" class="tf-field-container--control tf-flex ' + ((this.groupLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
                     // checkbox list  
                     '</div>',
                 '</div>'
@@ -166,8 +166,17 @@ TFLib.TFCheckboxField = function() {
             me.validationMethods = {};
             TFLib.TFValidations.call(me.validationMethods);
 
-            if (Object.keys(this.validations).length > 0)
+            if (Object.keys(this.validations).length > 0){
+                this._handleValidationsFallback();
                 this.setValidations.call(me);
+            }
+        },
+        _handleValidationsFallback: function(){
+                
+            Object.keys(this.validations).forEach(function(val){
+                if(!this[val].errmsg)
+                    this[val].errmsg = this.__proto__[val].errmsg;
+            }.bind(this.validations));
         },
         /** @access private */
         _render: function() {

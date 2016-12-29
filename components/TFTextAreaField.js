@@ -87,12 +87,12 @@ TFLib.TFTextAreaField = function(){
 				var el =[
 					'<div control-type="tf-textareafield-outer"',
 						'id="'+this.dynamicId+'"',
-						'class="tf-flex '+((this.fieldLayout === 'row') ? 'tf-flex-direction--row ':'tf-flex-direction--column ')+'">',
-						'<div control-type="tf-taf-label" class="tf-flex" '+(this.displayLabel ? 'tf-display--none': '')+'>',
+						'class="tf-field-container tf-flex '+((this.fieldLayout === 'row') ? 'tf-flex-direction--row ':'tf-flex-direction--column ')+'">',
+						'<div control-type="tf-taf-label" class="tf-flex tf-field-container--label " '+(this.displayLabel ? 'tf-display--none': '')+'>',
 							'<label for="'+this.innerId+'">'+(this.fieldLabel ? this.fieldLabel : '')+'</label>',
 							'<span id="'+this.requiredId+'" class="tf-required--red" style="display:none;" >*</span>',
 						'</div>',
-						'<div control-type="tf-textareafield" class="tf-field-with-btn">',
+						'<div control-type="tf-textareafield" class="tf-field-container--control tf-field-with-btn">',
 							'<textarea class="tf-flex tf-flex--one"',
 								'id="'+this.innerId+'"',
 								''+(this.name ? 'name="'+this.name+'"' : '')+'',
@@ -186,9 +186,18 @@ TFLib.TFTextAreaField = function(){
 	            me.validationMethods = {};
 	            TFLib.TFValidations.call(me.validationMethods);
 
-	            if(Object.keys(this.validations).length > 0)
+	            if(Object.keys(this.validations).length > 0){
+	            	this._handleValidationsFallback()
 	                this.setValidations.call(me);
+	            }
 			},
+	        _handleValidationsFallback: function(){
+	            
+	            Object.keys(this.validations).forEach(function(val){
+	                if(!this[val].errmsg)
+	                    this[val].errmsg = this.__proto__[val].errmsg;
+	            }.bind(this.validations));
+	        },			
 			_render : function(){
 
 				var me = this;
