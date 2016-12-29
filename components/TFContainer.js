@@ -37,7 +37,7 @@ TFLib.TFContainer = function(){
 				var me = this.scope;
 
 				//  configs
-				this.dynamicId = me.id || "tf-container-"+getRandomInt(1, 10000);
+				this.dynamicId = me.id || "tf-container-"+(new Date().getTime()+""+getRandomInt(1,1000));
 				this.layout = me.layout || false;
 				this.styles = me.styles || '';
 				this.tagName = me.tagName || 'div';

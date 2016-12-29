@@ -36,11 +36,11 @@
                     'isRequired' : {value : true , errmsg : 'name is required'}
                 },
                 render : function(){
-                    this
+                    
                 },
                 listeners :{
                     click : function(e){
-                        this
+                    
                     },
                     change : function(e){
 
@@ -76,11 +76,10 @@
                 fieldLabel : 'Zip',
                 fieldLayout : 'column',
                 validations : {
-<<<<<<< HEAD
-                   'onlyNumber' : {value : true}
-=======
+
+                   'onlyNumber' : {value : true},
                     'isRequired' : {value : true , errmsg : 'mobile is required'}
->>>>>>> f2b0f124a3267b9d5dd2dbb746100612b42a25a0
+
                 }
             });
             /*sender zip end*/
@@ -241,7 +240,7 @@
 
                 ]
             });
-            block.tfInsertBefore('#mydiv');
+            block.TFinsertBefore('#mydiv');
 
            var block1 = TFLib.Iterator({
                 type : 'container',
@@ -262,7 +261,7 @@
                     fieldLabel : 'Second'
                 },senderName]
             });
-            block1.tfInsertBefore('#mydiv');
+            block1.TFinsertBefore('#mydiv');
         })();
     </script>
 

@@ -37,7 +37,7 @@ TFLib.TFRadio = function(){
 				var me = this.scope;
 
 				//  configs
-				this.dynamicId = me.id || "tf-radio-"+ ( me.attributes ? (me.attributes.name ? me.attributes.name : '') : '') + getRandomInt(1, 10000);
+				this.dynamicId = me.id || "tf-radio-"+ ( me.attributes ? (me.attributes.name ? me.attributes.name : '') : '') + (new Date().getTime()+""+getRandomInt(1,1000));
 				this.fieldLayout = me.fieldLayout || 'row';
 				this.styles = me.styles || '';
 				this.attributes = me.attributes || '';

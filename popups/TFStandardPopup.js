@@ -115,7 +115,7 @@ StandardPopup = function(){
                 this.cancelComp.addEventListener('blur', this.handleCancelBlur);
             }
             if( Boolean(this.okComp) ^ Boolean(this.cancelComp))
-                document.addEventListener('keydown',this._handleKeyDown);        
+                document.addEventListener('keydown',this.handleKeyDown);        
             
         },
         _attachProperties : function(){
@@ -126,6 +126,7 @@ StandardPopup = function(){
             me.closeComp = this.closeComp;
             me.cancelComp = this.cancelComp;
             me.okComp = this.okComp;
+            me.handleKeyDown = this.handleKeyDown;
 
             if(this.okComp){
 
@@ -172,7 +173,7 @@ StandardPopup = function(){
 
             
         },
-        _handleKeyDown : function(e){
+        handleKeyDown : function(e){
 
             if(e.key === 'Tab')
                 e.preventDefault();
@@ -222,7 +223,7 @@ StandardPopup = function(){
                 this.cancelComp.removeEventListener('blur', this.handleCancelBlur);
             }
             if(Boolean(this.okComp) ^ Boolean(this.cancelComp))
-                document.removeEventListener('keydown', this._handleKeyDown);
+                document.removeEventListener('keydown', this.handleKeyDown);
         }
     };
     

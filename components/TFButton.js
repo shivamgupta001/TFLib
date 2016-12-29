@@ -1,4 +1,4 @@
-/**
+	/**
  * @author Shivam Gupta 
  * @class TFButton
  * @property {string} id - id will be assigned to button tag.
@@ -40,7 +40,7 @@ TFLib.TFButton = function(){
 				var me = this.scope;
 				
 				//  config
-				this.dynamicId = me.id || "tf-btn-"+getRandomInt(1, 10000);
+				this.dynamicId = me.id || "tf-btn-"+(new Date().getTime()+""+getRandomInt(1,1000));
 				this.styles = me.styles || '';
 				this.attributes = me.attributes || '';
 				

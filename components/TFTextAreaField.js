@@ -39,9 +39,9 @@ TFLib.TFTextAreaField = function(){
 				var me = this.scope;
 				 
 				//config
-				this.dynamicId = me.id || "tf-ta-comp-"+getRandomInt(1, 10000);
-				this.innerId = me.innerId || "tf-ta-"+ getRandomInt(1 , 10000);
-				this.requiredId = "tf-ta-req-"+getRandomInt(1,1000);
+				this.dynamicId = me.id || "tf-ta-comp-"+(new Date().getTime()+""+getRandomInt(1,1000));
+				this.innerId = me.innerId || "tf-ta-"+ (new Date().getTime()+""+getRandomInt(1,1000));
+				this.requiredId = "tf-ta-req-"+(new Date().getTime()+""+getRandomInt(1,1000));
 
 				this.styles = me.styles || '';
 				this.buttons = me.buttons || [];

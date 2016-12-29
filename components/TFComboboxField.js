@@ -45,9 +45,9 @@ TFLib.TFComboboxField = function() {
             var me = this.scope;
 
             //config
-            this.dynamicId = me.id || "tf-combo-" + getRandomInt(1, 10000);
-            this.labelId = me.labelId || "tf-combo-label-" + getRandomInt(1, 10000);
-            this.requiredId = "tf-combo-req-" + getRandomInt(1, 10000);
+            this.dynamicId = me.id || "tf-combo-" + (new Date().getTime()+""+getRandomInt(1,1000));
+            this.labelId = me.labelId || "tf-combo-label-" + (new Date().getTime()+""+getRandomInt(1,1000));
+            this.requiredId = "tf-combo-req-" + (new Date().getTime()+""+getRandomInt(1,1000));
 
             this.buttons = me.buttons || [];
             this.validations = me.validations || {};

@@ -38,7 +38,7 @@ TFLib.TFCheckbox = function(){
 				var me = this.scope;
 
 				//  variables
-				this.dynamicId = me.id || "tf-chk-"+ (me.attributes ? (me.attributes.name ? me.attributes.name : '') : '')+ getRandomInt(1, 10000);
+				this.dynamicId = me.id || "tf-chk-"+ (me.attributes ? (me.attributes.name ? me.attributes.name : '') : '')+ (new Date().getTime()+""+getRandomInt(1,1000));
 				this.fieldLayout = me.fieldLayout || 'row';
 				this.styles = me.styles || '';
 				this.attributes = me.attributes || '';

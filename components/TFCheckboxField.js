@@ -43,9 +43,9 @@ TFLib.TFCheckboxField = function() {
             var me = this.scope;
 
             //  configs
-            this.dynamicId = me.id || "tf-chkf-" + getRandomInt(1, 10000);
-            this.labelId = me.labelId || "tf-chk-label-" + getRandomInt(1, 10000);
-            this.requiredId = "tf-chk-req-" + getRandomInt(1, 10000);
+            this.dynamicId = me.id || "tf-chkf-" + (new Date().getTime()+""+getRandomInt(1,1000));
+            this.labelId = me.labelId || "tf-chk-label-" + (new Date().getTime()+""+getRandomInt(1,1000));
+            this.requiredId = "tf-chk-req-" + (new Date().getTime()+""+getRandomInt(1,1000));
             
             this.fieldLayout = me.fieldLayout || 'row';
             this.styles = me.styles || '';

@@ -40,9 +40,9 @@ TFLib.TFRadioField = function() {
             var me = this.scope;
 
             //  configs
-            this.dynamicId = me.id || "tf-radiof-" + getRandomInt(1, 10000);
-            this.labelId = me.labelId || "tf-radio-label-" + getRandomInt(1, 10000);
-            this.requiredId = "tf-radio-req-" + getRandomInt(1, 10000);
+            this.dynamicId = me.id || "tf-radiof-" + (new Date().getTime()+""+getRandomInt(1,1000));
+            this.labelId = me.labelId || "tf-radio-label-" + (new Date().getTime()+""+getRandomInt(1,1000));
+            this.requiredId = "tf-radio-req-" + (new Date().getTime()+""+getRandomInt(1,1000));
 
 
             this.fieldLayout = me.fieldLayout || 'row';

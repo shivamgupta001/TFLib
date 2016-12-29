@@ -85,7 +85,7 @@ TFLib.Iterator = function(config){
       * @param {string} selector - pass selector
       * @param {object} el - dom object
       */	
-	el.appendTo = function(selector , el){
+	el.TFappendTo = function(selector , el){
             
             if(!el){
                   var ele = document.querySelector(selector);
@@ -101,7 +101,7 @@ TFLib.Iterator = function(config){
       * @param {string} selector - pass selector
       * @param {object} el - dom object
       */
-    el.tfInsertBefore = function(selector , el){
+    el.TFinsertBefore = function(selector , el){
 
             if(!el){
                   var ele = document.querySelector(selector);

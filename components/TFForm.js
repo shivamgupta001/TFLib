@@ -26,7 +26,7 @@ TFLib.TFForm = function(){
 				var me = this.scope;
 
 				//  variables
-				this.dynamicId = me.id || "tf-form-"+getRandomInt(1, 10000);
+				this.dynamicId = me.id || "tf-form-"+(new Date().getTime()+""+getRandomInt(1,1000));
 				this.layout = me.layout;
 
 				// classes

@@ -39,9 +39,9 @@ TFLib.TFTextField = function() {
             var me = this.scope;
 
             //config
-            this.dynamicId = me.id ||  "tf-textfield-" + getRandomInt(1, 10000);
-            this.innerId = me.innerId || me.name || "tf-input-text-"+ getRandomInt(1 , 10000);
-            this.requiredId = "tf-input-req-"+getRandomInt(1, 1000);
+            this.dynamicId = me.id ||  "tf-textfield-" + (new Date().getTime()+""+getRandomInt(1,1000));
+            this.innerId = me.innerId || me.name || "tf-input-text-"+ (new Date().getTime()+""+getRandomInt(1,1000));
+            this.requiredId = "tf-input-req-"+(new Date().getTime()+""+getRandomInt(1,1000));
             
             this.buttons = me.buttons || [];
             this.validations = me.validations || {};
