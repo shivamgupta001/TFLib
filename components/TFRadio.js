@@ -60,9 +60,9 @@ TFLib.TFRadio = function(){
 			_generateTemplate : function(){
 				
 				var el = [
-					'<div class="tf-field-container--control tf-flex '+((this.fieldLayout === "row") ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
-						'<input control-type="tf-radio" id="'+this.dynamicId+'" type="radio" '+(this.checked ? 'checked' :'')+'class="tf-field--control"/>',
-						'<label control-type="tf-radio-label" for="'+this.dynamicId+'" class="tf-field--control-lbl">'+this.fieldLabel+'</label>',
+					'<div control-type="tf-radio-outer" class="tf-flex '+((this.fieldLayout === "row") ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
+						'<input control-type="tf-radio" id="'+this.dynamicId+'" type="radio" '+(this.checked ? 'checked' :'')+'/>',
+						'<label control-type="tf-radio-label" for="'+this.dynamicId+'">'+this.fieldLabel+'</label>',
 					'</div>'
 				].join('\n');
 

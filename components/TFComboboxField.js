@@ -86,14 +86,14 @@ TFLib.TFComboboxField = function() {
         _generateTemplate: function() {
             
             var el = [
-                    '<div',
+                    '<div control-type="tf-combofield-outer"',
                     'id="' + this.dynamicId + '"',
-                    'class="tf-field-container tf-flex ' + ((this.fieldLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
-                        '<div control-type="tf-combo-label" class="tf-flex tf-field-container--label ' + (this.displayLabel ? 'tf-display--none' : '') + '">',
+                    'class="tf-flex ' + ((this.fieldLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
+                        '<div control-type="tf-combo-label" class="tf-flex ' + (this.displayLabel ? 'tf-display--none' : '') + '">',
                             '<label class="tf-field--label" id="' + this.labelId + '">' + (this.fieldLabel ? this.fieldLabel : '') + '</label>',
                             '<span id="' + this.requiredId + '" class="tf-required--red" style="display:none;">*</span>',
                         '</div>',
-                        '<div control-type="tf-combofield" class="tf-field-container--control tf-field-with-btn" >',
+                        '<div control-type="tf-combofield" class="tf-field-with-btn" >',
                             '<select class="tf-flex tf-flex--one"',
                                 'type="text"',
                                 '' + (this.name ? 'name="' + this.name + '"' : '') + '',

@@ -62,7 +62,6 @@ TFLib.TFContainer = function(){
 			_generateTemplate : function(){
 				
 				var el = document.createElement(this.tagName);
-				el.classList.add('tf-field-container');
 				if(this.layout)
 					el.classList.add('tf-flex');
 				el.setAttribute('control-type','tf-container');

@@ -61,7 +61,7 @@ TFLib.TFCheckbox = function(){
 			_generateTemplate : function(){
 				
 				var el = [
-					'<div class="tf-flex '+((this.fieldLayout === "row") ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
+					'<div control-type="tf-checkbox-outer" class="tf-flex '+((this.fieldLayout === "row") ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ')+'">',
 						'<input control-type="tf-checkbox" id="'+this.dynamicId+'" type="checkbox" '+(this.checked ? 'checked' :'')+'>',
 						'<label control-type="tf-chk-label" for="'+this.dynamicId+'">'+this.fieldLabel+'</label>',
 					'</div>'

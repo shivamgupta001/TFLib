@@ -75,13 +75,13 @@ TFLib.TFRadioField = function() {
         _generateTemplate: function() {
 
             var el = [
-                '<div id="' + this.dynamicId + '"',
-                'class="tf-field-container tf-flex ' + ((this.fieldLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
-                    '<div control-type="tf-radiof-label" class="tf-field-container--label"' + ((this.displayLabel === "none") ? 'tf-display--none' : '') + '">',
-                        '<label id="' + this.labelId + '" class="tf-field--label">' + (this.fieldLabel ? this.fieldLabel : '') + '</label>',
+                '<div control-type="tf-radiofield-outer" id="' + this.dynamicId + '"',
+                'class="tf-flex ' + ((this.fieldLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
+                    '<div control-type="tf-radiof-label"' + ((this.displayLabel === "none") ? 'tf-display--none' : '') + '">',
+                        '<label id="' + this.labelId + '">' + (this.fieldLabel ? this.fieldLabel : '') + '</label>',
                         '<span id="' + this.requiredId + '" class="tf-required--red" style="display:none;">*</span>',
                     '</div>',
-                    '<div control-type="tf-radiofield" class="tf-field-container--control tf-flex ' + ((this.groupLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
+                    '<div control-type="tf-radiofield" class="tf-flex ' + ((this.groupLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
                         // radio list  
                     '</div>',
                 '</div>'

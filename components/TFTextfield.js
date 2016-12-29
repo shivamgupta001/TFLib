@@ -85,15 +85,15 @@ TFLib.TFTextField = function() {
         _generateTemplate: function() {
             
             var el = [
-                '<div',
+                '<div control-type="tf-textfield-outer"',
                     'id="' + this.dynamicId + '"',
-                    'class="tf-field-container tf-flex ' + ((this.fieldLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
-                        '<div control-type="tf-tf-label" class="tf-flex tf-field-container--label ' + (this.displayLabel ? 'tf-display--none' : '') + '">',
-                            '<label for="'+this.innerId+'" class="tf-field--label">' + (this.fieldLabel ? this.fieldLabel : '') + '</label>',
+                    'class="tf-flex ' + ((this.fieldLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
+                        '<div control-type="tf-tf-label" class="tf-flex  ' + (this.displayLabel ? 'tf-display--none' : '') + '">',
+                            '<label for="'+this.innerId+'">' + (this.fieldLabel ? this.fieldLabel : '') + '</label>',
                             '<span id="'+this.requiredId+'" class="tf-required--red" style="display:none;">*</span>',
                         '</div>',
-                        '<div control-type="tf-textfield" class="tf-field-container--control tf-field-with-btn">',
-                            '<input class="tf-field--control tf-flex tf-flex--one"',
+                        '<div control-type="tf-textfield" class="tf-field-with-btn">',
+                            '<input class="tf-flex tf-flex--one"',
                                 'type="text"',
                                 'id="'+this.innerId+'"',
                                 '' + (this.name ? 'name="' + this.name + '"' : '') + '',

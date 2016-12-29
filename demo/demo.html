@@ -74,7 +74,10 @@
             /*sender zip start*/
             var senderZip = TFLib.TFTextField.call({
                 fieldLabel : 'Zip',
-                fieldLayout : 'column'
+                fieldLayout : 'column',
+                validations : {
+                   'onlyNumber' : {value : true}
+                }
             });
             /*sender zip end*/
 
@@ -190,6 +193,7 @@
                 fieldLayout : 'column',
                 validations : {
                     'isRequired' : { value : true , errmsg : 'new combo'}
+
                 },
                 multiple : true,
                 attributes : {
@@ -239,7 +243,7 @@
 
                 ]
             });
-            block.insertBefore('#mydiv');
+            block.tfInsertBefore('#mydiv');
 
            var block1 = TFLib.Iterator({
                 type : 'container',
@@ -260,7 +264,7 @@
                     fieldLabel : 'Second'
                 },senderName]
             });
-            block1.insertBefore('#mydiv');
+            block1.tfInsertBefore('#mydiv');
         })();
     </script>
 

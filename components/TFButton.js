@@ -60,7 +60,7 @@ TFLib.TFButton = function(){
 			_generateTemplate : function(){
 				
 				var el  =[
-					'<div class="tf-field-container">',
+					'<div control-type="tf-btn-outer">',
 						'<button control-type="tf-btn"',
 							'id="'+this.dynamicId+'"',
 							'class="tf-button"',

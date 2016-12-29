@@ -59,7 +59,7 @@ TFLib.TFLoader = function() {
 		_generateTemplate : function(){
 			
 			var el  =[
-				'<section class="tf-loader--main" id="'+this.dynamicId+'">',
+				'<section control-type="tf-loader-outer" class="tf-loader--main" id="'+this.dynamicId+'">',
 				    '<div class="tf-loader--outer">',
 				        '<div class="tf-loader" control-type="tf-loader">',
 				            '<div class="tf-loader--image">',

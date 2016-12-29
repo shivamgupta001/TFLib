@@ -77,7 +77,7 @@ TFLib.TFTextAreaField = function(){
 				this.value = me.value || '';
 				this.readOnly = (me.readOnly === true) ? 'readonly' : '';
 				this.maxlength = me.maxlength || '';
-				
+								
 				// methods
 				this.render = me.render || '';
 				this.listeners = me.listeners || '';
@@ -85,15 +85,15 @@ TFLib.TFTextAreaField = function(){
 			},
 			_generateTemplate : function(){
 				var el =[
-					'<div',
+					'<div control-type="tf-textareafield-outer"',
 						'id="'+this.dynamicId+'"',
-						'class="tf-field-container tf-flex '+((this.fieldLayout === 'row') ? 'tf-flex-direction--row ':'tf-flex-direction--column ')+'">',
-						'<div control-type="tf-taf-label" class="tf-flex tf-field-container--label " '+(this.displayLabel ? 'tf-display--none': '')+'>',
+						'class="tf-flex '+((this.fieldLayout === 'row') ? 'tf-flex-direction--row ':'tf-flex-direction--column ')+'">',
+						'<div control-type="tf-taf-label" class="tf-flex" '+(this.displayLabel ? 'tf-display--none': '')+'>',
 							'<label for="'+this.innerId+'">'+(this.fieldLabel ? this.fieldLabel : '')+'</label>',
 							'<span id="'+this.requiredId+'" class="tf-required--red" style="display:none;" >*</span>',
 						'</div>',
-						'<div control-type="tf-textareafield" class="tf-field-container--control tf-field-with-btn">',
-							'<textarea class="tf-field--control tf-flex tf-flex--one"',
+						'<div control-type="tf-textareafield" class="tf-field-with-btn">',
+							'<textarea class="tf-flex tf-flex--one"',
 								'id="'+this.innerId+'"',
 								''+(this.name ? 'name="'+this.name+'"' : '')+'',
 								''+(this.placeholder ? 'placeholder="'+this.placeholder+'"' : '')+'',
