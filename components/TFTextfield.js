@@ -39,9 +39,9 @@ TFLib.TFTextField = function() {
             var me = this.scope;
 
             //config
-            this.dynamicId = me.id ||  "tf-textfield-" + (new Date().getTime()+""+getRandomInt(1,1000));
-            this.innerId = me.innerId || me.name || "tf-input-text-"+ (new Date().getTime()+""+getRandomInt(1,1000));
-            this.requiredId = "tf-input-req-"+(new Date().getTime()+""+getRandomInt(1,1000));
+            this.dynamicId = me.id ||  "tf-textfield-" + (TFLib.TFTextField.count = ++TFLib.TFTextField.count || 1);
+            this.innerId = me.innerId || me.name || "tf-input-text-"+ (TFLib.TFTextField.count = ++TFLib.TFTextField.count || 1);
+            this.requiredId = "tf-input-req-"+(TFLib.TFTextField.count = ++TFLib.TFTextField.count || 1);
             
             this.buttons = me.buttons || [];
             this.validations = me.validations || {};
@@ -231,7 +231,7 @@ TFLib.TFTextField = function() {
                             break;
 
                         case 'onlyNumber':
-                        	if(this.validations.onlyNumber.value){
+                        	if(this.validations.onlyNumber){
                       		    
                                 if(!this.onlyNumberHandler){
                                     this.onlyNumberHandler = this.validationMethods.onlyNumber.bind(this);
@@ -262,7 +262,7 @@ TFLib.TFTextField = function() {
                             break;
 
                         case 'onlyText':
-                        	if(this.validations.onlyText.value){
+                        	if(this.validations.onlyText){
                         		
                                 if(!this.onlyTextHandler){
                                     this.onlyTextHandler = this.validationMethods.onlyText.bind(this);
@@ -285,12 +285,6 @@ TFLib.TFTextField = function() {
         }
     };
 
-
-    function getRandomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min) + min);
-    }
 
     return textfield._init();
 

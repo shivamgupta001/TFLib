@@ -36,9 +36,9 @@ TFLib.TFCheckbox = function(){
 			_initialize : function(){
 
 				var me = this.scope;
-
+				
 				//  variables
-				this.dynamicId = me.id || "tf-chk-"+ (me.attributes ? (me.attributes.name ? me.attributes.name : '') : '')+ (new Date().getTime()+""+getRandomInt(1,1000));
+				this.dynamicId = me.id || "tf-chk-"+ (me.attributes ? (me.attributes.name ? me.attributes.name : '') : '')+ (TFLib.TFCheckbox.count = ++TFLib.TFCheckbox.count || 1);
 				this.fieldLayout = me.fieldLayout || 'row';
 				this.styles = me.styles || '';
 				this.attributes = me.attributes || '';
@@ -138,12 +138,6 @@ TFLib.TFCheckbox = function(){
 
 		};
 		
-				
-		function getRandomInt(min, max){
-			min = Math.ceil(min);
-			max = Math.floor(max);
-			return Math.floor(Math.random()*(max - min)+min);
-		}
 		
 	return	checkbox._init();
 	

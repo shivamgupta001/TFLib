@@ -22,11 +22,10 @@
                 fieldLayout : 'column',
                 styles : {
                     color : 'red',
-                    backgroundColor : 'yellow',
-                    'text-align' : 'f'
+                    backgroundColor : 'yellow'
                 },
                 buttons : [{
-                    btnClass : 'tf-btn-language',
+                    btnClass : 'tf-btn-language'
 
 
                 },{
@@ -73,11 +72,11 @@
 
             /*sender zip start*/
             var senderZip = TFLib.TFTextField.call({
-                fieldLabel : 'Zip',
+                fieldLabel : '',
                 fieldLayout : 'column',
                 validations : {
 
-                   'onlyNumber' : {value : true},
+                   
                     'isRequired' : {value : true , errmsg : 'mobile is required'}
 
                 }
@@ -252,8 +251,11 @@
                     flex : 1,
                     
                     type : 'textfield',
-                    fieldLabel : 'First',
+                    fieldLabel : '',
                     fieldLayout : 'row',
+                    validations : {
+                        'isRequired' : {value : true}
+                    },
                     items : [{},{},{}]
                 },{
                     flex : 1,

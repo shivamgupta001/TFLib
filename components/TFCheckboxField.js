@@ -42,10 +42,11 @@ TFLib.TFCheckboxField = function() {
 
             var me = this.scope;
 
+
             //  configs
-            this.dynamicId = me.id || "tf-chkf-" + (new Date().getTime()+""+getRandomInt(1,1000));
-            this.labelId = me.labelId || "tf-chk-label-" + (new Date().getTime()+""+getRandomInt(1,1000));
-            this.requiredId = "tf-chk-req-" + (new Date().getTime()+""+getRandomInt(1,1000));
+            this.dynamicId = me.id || "tf-chkf-" + (TFLib.TFCheckboxField.count = ++TFLib.TFCheckboxField.count || 1);
+            this.labelId = me.labelId || "tf-chk-label-" + (TFLib.TFCheckboxField.count = ++TFLib.TFCheckboxField.count || 1);
+            this.requiredId = "tf-chk-req-" + (TFLib.TFCheckboxField.count = ++TFLib.TFCheckboxField.count || 1);
             
             this.fieldLayout = me.fieldLayout || 'row';
             this.styles = me.styles || '';
@@ -224,13 +225,5 @@ TFLib.TFCheckboxField = function() {
 
     };
 
-
-    function getRandomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min) + min);
-    }
-
     return checkboxfield._init();
-
 };

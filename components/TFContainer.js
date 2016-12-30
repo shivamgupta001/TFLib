@@ -37,7 +37,7 @@ TFLib.TFContainer = function(){
 				var me = this.scope;
 
 				//  configs
-				this.dynamicId = me.id || "tf-container-"+(new Date().getTime()+""+getRandomInt(1,1000));
+				this.dynamicId = me.id || "tf-container-"+(TFLib.TFContainer.count = ++TFLib.TFContainer.count || 1);
 				this.layout = me.layout || false;
 				this.styles = me.styles || '';
 				this.tagName = me.tagName || 'div';
@@ -140,13 +140,7 @@ TFLib.TFContainer = function(){
 				}
 			}
 		};
-		
-				
-		function getRandomInt(min, max){
-			min = Math.ceil(min);
-			max = Math.floor(max);
-			return Math.floor(Math.random()*(max - min)+min);
-		}
+
 		
 	return container._init();
 	
