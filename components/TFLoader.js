@@ -104,8 +104,8 @@ TFLib.TFLoader = function() {
 			if(this.LoaderText) this.innerComp.querySelector(".tf-loader--text").innerHTML = this.LoaderText;
 			
 			//apply class
-			if(this.loaderClass) this.innerComp.classList.add.apply(this.innerComp.classList , this.loaderClass);
-			if(this.compClass) this.outerComp.classList.add.apply(this.outerComp.classList , this.compClass);
+			if(this.loaderClass) this.innerComp.classList.addmany(this.loaderClass);
+			if(this.compClass) this.outerComp.classList.addmany(this.compClass);
 		},/** @access private */
 		_bindEvents : function(){
 			

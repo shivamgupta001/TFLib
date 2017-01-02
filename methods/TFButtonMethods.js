@@ -16,7 +16,7 @@ TFLib.TFButtonMethods = function(){
       */
 	this.addInnerClass = function(newClass){
 		newClass = newClass.constructor === Array ? newClass : [newClass];  
-		this.innerComp.classList.add.apply(this.innerComp.classList , newClass);
+		this.innerComp.classList.addmany(newClass);
 	};
 	/**This method will remove class from inner comp
       * @memberof TFButton
@@ -24,7 +24,7 @@ TFLib.TFButtonMethods = function(){
       */
 	this.removeInnerClass = function(oldClass){
 		oldClass = oldClass.constructor === Array ? oldClass : [oldClass];
-		this.innerComp.classList.remove.apply(this.innerComp.classList , oldClass);
+		this.innerComp.classList.removemany(oldClass);
 	};
 
 	/**This method will disable button

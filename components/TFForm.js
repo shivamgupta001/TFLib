@@ -73,7 +73,7 @@ TFLib.TFForm = function(){
 			_applyProperty : function(){
 				
 				// apply class
-				if(this.compClass) this.outerComp.classList.add.apply(this.outerComp.classList , this.compClass);	
+				if(this.compClass) this.outerComp.classList.addmany(this.compClass);	
 			},
 			_bindEvents : function(){
 				

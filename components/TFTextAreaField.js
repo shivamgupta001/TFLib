@@ -141,9 +141,9 @@ TFLib.TFTextAreaField = function(){
 				if(this.flex) this.outerComp.style.flex = this.flex;
 				
 				// apply class
-				if(this.controlClass) this.controlComp.classList.add.apply(this.controlComp.classList , this.controlClass);
-				if(this.labelClass) this.labelComp.classList.add.apply(this.labelComp.classList , this.labelClass);
-				if(this.compClass) this.outerComp.classList.add.apply(this.outerComp.classList, this.compClass);
+				if(this.controlClass) this.controlComp.classList.addmany(this.controlClass);
+				if(this.labelClass) this.labelComp.classList.addmany(this.labelClass);
+				if(this.compClass) this.outerComp.classList.addmany(this.compClass);
 
 				// handling buttons
 	            this.buttons.forEach(function(val) {

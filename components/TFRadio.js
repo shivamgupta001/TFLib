@@ -96,8 +96,8 @@ TFLib.TFRadio = function(){
 				}
 
 				//apply classes
-				if(this.compClass) this.outerComp.classList.add.apply(this.outerComp.classList , this.compClass);
-				if(this.labelClass) this.labelComp.classList.add.apply(this.labelComp.classList, this.labelClass);
+				if(this.compClass) this.outerComp.classList.addmany(this.compClass);
+				if(this.labelClass) this.labelComp.classList.addmany(this.labelClass);
 				
 			},
 			_bindEvents : function(){

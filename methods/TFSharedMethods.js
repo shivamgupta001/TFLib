@@ -73,7 +73,7 @@ TFLib.TFSharedMethods = function(){
       */
 	this.addClass = function(newClass){
 		newClass = newClass.constructor === Array ? newClass : [newClass];  
-		this.outerComp.classList.add.apply(this.outerComp.classList , newClass);
+		this.outerComp.classList.addmany(newClass);
 	};
 	/**This method will remove class to component 
       * @mixes TFTextField
@@ -89,7 +89,7 @@ TFLib.TFSharedMethods = function(){
       */
 	this.removeClass = function(oldClass){
 		oldClass = oldClass.constructor === Array ? oldClass : [oldClass];
-		this.outerComp.classList.remove.apply(this.outerComp.classList , oldClass);
+		this.outerComp.classList.removemany(oldClass);
 	};
 
 	/**This method will add style to component 

@@ -112,7 +112,7 @@ TFLib.TFTextFieldMethods = function(){
       */
 	this.addLabelClass = function(newClass){
 		newClass = newClass.constructor === Array ? newClass : [newClass];
-		this.labelComp.classList.add.apply(this.labelComp.classList , newClass);
+		this.labelComp.classList.addmany(newClass);
 	};
 	/**This method will remove class to label comp 
       * @mixes TFTextField
@@ -121,7 +121,7 @@ TFLib.TFTextFieldMethods = function(){
       */
 	this.removeLabelClass = function(oldClass){
 		oldClass = oldClass.constructor === Array ? oldClass : [oldClass];
-		this.labelComp.classList.remove.apply(this.labelComp.classList , oldClass);		
+		this.labelComp.classList.removemany(oldClass);		
 	};
 	/**This method will add class to control comp 
       * @mixes TFTextField
@@ -130,7 +130,7 @@ TFLib.TFTextFieldMethods = function(){
       */
 	this.addControlClass = function(newClass){
 		newClass = newClass.constructor === Array ? newClass : [newClass];
-		this.controlComp.classList.add.apply(this.controlComp.classList , newClass);
+		this.controlComp.classList.addmany(newClass);
 	};
 	/**This method will remove class to control comp 
       * @mixes TFTextField
@@ -139,7 +139,7 @@ TFLib.TFTextFieldMethods = function(){
       */
 	this.removeControlClass = function(oldClass){
 		oldClass = oldClass.constructor === Array ? oldClass : [oldClass];
-		this.controlComp.classList.remove.apply(this.controlComp.classList , oldClass);
+		this.controlComp.classList.removemany(oldClass);
 	};
 
 	/**This method will add validation of custom error to control comp 
