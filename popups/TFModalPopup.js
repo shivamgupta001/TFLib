@@ -45,7 +45,7 @@ TFLib.ModalPopup = function(config) {
             var me = this.scope;
 
                  //config
-                this.dynamicId = me.popupId || "tf-modal-" + getRandomInt(1, 10000),
+                this.dynamicId = me.popupId || "tf-modal-" + (TFLib.ModalPopup = ++TFLib.ModalPopup || 1),
                 this.onConfig = (me.onConfig == null || me.onConfig == false) ? false : true,
                 this.resizable = (me.resizable == false) ? false : true,
                 this.footerVisible = (me.footerVisible == true) ? true : false,
@@ -255,11 +255,6 @@ TFLib.ModalPopup = function(config) {
         }
     };
 
-    function getRandomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min) + min);
-    }
     return modalpopup._init();
 
 }
