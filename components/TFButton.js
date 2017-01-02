@@ -39,8 +39,9 @@ TFLib.TFButton = function(){
 				
 				var me = this.scope;
 				
+
 				//  config
-				this.dynamicId = me.id || "tf-btn-"+(new Date().getTime()+""+getRandomInt(1,1000));
+				this.dynamicId = me.id || "tf-btn-"+(TFLib.TFButton.count = ++TFLib.TFButton.count || 1);
 				this.styles = me.styles || '';
 				this.attributes = me.attributes || '';
 				
@@ -134,15 +135,6 @@ TFLib.TFButton = function(){
 				}
 			}
 		};
-		
-				
-		function getRandomInt(min, max){
-			
-			min = Math.ceil(min);
-			max = Math.floor(max);
-			
-			return Math.floor(Math.random()*(max - min)+min);
-		}
 		
 	return button._init();
 };

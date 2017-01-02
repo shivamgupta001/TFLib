@@ -33,8 +33,10 @@ TFLib.TFValidations = function(){
 		
 		var control = this.controlComp;
 		var inputControl = this.innerComp;
+		var controlVal = e.target.value.trim();
+
 		if(e.type === 'blur'){
-			if(e.target.value === '' || e.target.value === '\n'){
+			if(controlVal === ''){
 				control.classList.add('tooltip', 'tf-err-border--red');
 				control.setAttribute('data-tooltip', this.validations.isRequired.errmsg);	
 				inputControl.setAttribute('title',this.validations.isRequired.errmsg);	
@@ -49,13 +51,13 @@ TFLib.TFValidations = function(){
 		}else if(e.type === 'input'){
 
 			// second condition prevents regex tooltip is present
-			if(e.target.value.length > 0 && (control.getAttribute('data-tooltip') === this.validations.isRequired.errmsg)){
+			if(controlVal.length > 0 && (control.getAttribute('data-tooltip') === this.validations.isRequired.errmsg)){
 				if(control.classList.contains('tooltip')){
 					control.classList.remove('tooltip', 'tf-err-border--red');
 					control.removeAttribute('data-tooltip');
 					inputControl.setAttribute('title',this.validations.isRequired.errmsg);	
 				}
-			}else if(e.target.value === '' || e.target.value === '\n'){
+			}else if(controlVal === '' || controlVal === '\n'){
 					// handles after setting value if value deleted and goes blank
 					control.classList.add('tooltip', 'tf-err-border--red');
 					control.setAttribute('data-tooltip', this.validations.isRequired.errmsg);	
@@ -103,12 +105,14 @@ TFLib.TFValidations = function(){
 		// add same validation code in webagent project [ yet to be done] 
 		var control = this.controlComp;
 		var inputControl = this.innerComp;
+		var controlVal = e.target.value.trim();
+
 		if(this.validations.regex.value){
 
 			var regex = new RegExp(this.validations.regex.pattern);
 			if(e.type === 'blur' || e.type === 'input'){
-				if(e.target.value.length > 0){
-					if(!regex.test(e.target.value)){
+				if(controlVal.length > 0){
+					if(!regex.test(controlVal)){
 						control.classList.add('tooltip', 'tf-err-border--red');
 						control.setAttribute('data-tooltip', this.validations.regex.errmsg);	
 						inputControl.setAttribute('title',this.validations.regex.errmsg);	

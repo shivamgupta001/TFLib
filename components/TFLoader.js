@@ -39,7 +39,7 @@ TFLib.TFLoader = function() {
 			var me = this.scope;
 			
 			//  config
-			this.dynamicId = me.id || "tf-loader-" + new Date().getTime();
+			this.dynamicId = me.id || "tf-loader-" + (TFLib.TFLoader.count = ++TFLib.TFLoader.count || 1);
 			this.styles = me.styles || '';
 			this.attributes = me.attributes || '';
 			

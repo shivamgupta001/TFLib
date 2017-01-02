@@ -26,7 +26,7 @@ TFLib.TFForm = function(){
 				var me = this.scope;
 
 				//  variables
-				this.dynamicId = me.id || "tf-form-"+(new Date().getTime()+""+getRandomInt(1,1000));
+				this.dynamicId = me.id || "tf-form-"+(TFLib.TFForm.count = ++TFLib.TFForm.count || 1);
 				this.layout = me.layout;
 
 				// classes
@@ -106,13 +106,7 @@ TFLib.TFForm = function(){
 				}
 			}
 		};
-		
-				
-		function getRandomInt(min, max){
-			min = Math.ceil(min);
-			max = Math.floor(max);
-			return Math.floor(Math.random()*(max - min)+min);
-		}
+	
 		
 	return form._init();
 	

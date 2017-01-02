@@ -39,9 +39,9 @@ TFLib.TFTextAreaField = function(){
 				var me = this.scope;
 				 
 				//config
-				this.dynamicId = me.id || "tf-ta-comp-"+(new Date().getTime()+""+getRandomInt(1,1000));
-				this.innerId = me.innerId || "tf-ta-"+ (new Date().getTime()+""+getRandomInt(1,1000));
-				this.requiredId = "tf-ta-req-"+(new Date().getTime()+""+getRandomInt(1,1000));
+				this.dynamicId = me.id || "tf-ta-comp-"+(TFLib.TFTextAreaField.count = ++TFLib.TFTextAreaField.count || 1);
+				this.innerId = me.innerId || "tf-ta-"+ (TFLib.TFTextAreaField.count = ++TFLib.TFTextAreaField.count || 1);
+				this.requiredId = "tf-ta-req-"+(TFLib.TFTextAreaField.count = ++TFLib.TFTextAreaField.count || 1);
 
 				this.styles = me.styles || '';
 				this.buttons = me.buttons || [];
@@ -286,12 +286,7 @@ TFLib.TFTextAreaField = function(){
 	            
 	        }
 		};
-						
-		function getRandomInt(min, max){
-			min = Math.ceil(min);
-			max = Math.floor(max);
-			return Math.floor(Math.random()*(max - min)+min);
-		}
+		
 		
 	return	textareafield._init();
 	

@@ -37,7 +37,7 @@ TFLib.TFRadio = function(){
 				var me = this.scope;
 
 				//  configs
-				this.dynamicId = me.id || "tf-radio-"+ ( me.attributes ? (me.attributes.name ? me.attributes.name : '') : '') + (new Date().getTime()+""+getRandomInt(1,1000));
+				this.dynamicId = me.id || "tf-radio-"+ ( me.attributes ? (me.attributes.name ? me.attributes.name : '') : '') + (TFLib.TFRadio.count = ++TFLib.TFRadio.count || 1);
 				this.fieldLayout = me.fieldLayout || 'row';
 				this.styles = me.styles || '';
 				this.attributes = me.attributes || '';
@@ -134,12 +134,7 @@ TFLib.TFRadio = function(){
 				}
 			}
 		};
-				
-		function getRandomInt(min, max){
-			min = Math.ceil(min);
-			max = Math.floor(max);
-			return Math.floor(Math.random()*(max - min)+min);
-		}
+		
 		
 	return	radio._init();
 	

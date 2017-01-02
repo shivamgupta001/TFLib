@@ -4,8 +4,8 @@
  * @property {string} popupId - popupId non existing value otherwise gives error
  * @property {string} msg - pass your msg here
  * @property {string} title - title will be displayed in header part
- * @property {function} modalCloseCallback - provide handle called when popup closed via Escape or click over close button
- * @property {function} modalOpenCallback - provide handle called when popup is inserted in DOM
+ * @property {function} modalOnClose - provide handle called when popup closed via Escape or click over close button
+ * @property {function} modalOnOpen - provide handle called when popup is inserted in DOM
  * @property {function} popupOnOk - callback handle to run when ok button clicked
  * @property {function} popupOnCancel - callback handle to run when cancel button clicked
  */

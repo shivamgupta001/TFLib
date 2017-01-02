@@ -45,9 +45,9 @@ TFLib.TFComboboxField = function() {
             var me = this.scope;
 
             //config
-            this.dynamicId = me.id || "tf-combo-" + (new Date().getTime()+""+getRandomInt(1,1000));
-            this.labelId = me.labelId || "tf-combo-label-" + (new Date().getTime()+""+getRandomInt(1,1000));
-            this.requiredId = "tf-combo-req-" + (new Date().getTime()+""+getRandomInt(1,1000));
+            this.dynamicId = me.id || "tf-combo-" + (TFLib.TFComboboxField.count = ++TFLib.TFComboboxField.count || 1);
+            this.labelId = me.labelId || "tf-combo-label-" + (TFLib.TFComboboxField.count = ++TFLib.TFComboboxField.count || 1);
+            this.requiredId = "tf-combo-req-" + (TFLib.TFComboboxField.count = ++TFLib.TFComboboxField.count || 1);
 
             this.buttons = me.buttons || [];
             this.validations = me.validations || {};
@@ -254,13 +254,6 @@ TFLib.TFComboboxField = function() {
             }, this);
         }
     };
-
-
-    function getRandomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min) + min);
-    }
 
     return comboboxfield._init();
 

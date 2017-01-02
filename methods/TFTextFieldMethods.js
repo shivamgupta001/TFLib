@@ -245,7 +245,7 @@ TFLib.TFTextFieldMethods = function(){
 
 		
 		if(this.validations.hasOwnProperty("onlyText")){
-			this.validations.onlyText.value = status;
+			this.validations.onlyText = status;
 				
 		}else{
 			if(status){
@@ -256,7 +256,7 @@ TFLib.TFTextFieldMethods = function(){
 										enumerable : true
 									});
 			
-				this.validations.onlyText.value = status;	
+				this.validations.onlyText = status;	
 			}
 			
 		}
@@ -275,7 +275,7 @@ TFLib.TFTextFieldMethods = function(){
 		
 		if(this.validations.hasOwnProperty("onlyNumber")){
 			
-			this.validations.onlyNumber.value = status;
+			this.validations.onlyNumber = status;
 			
 		}else{
 
@@ -287,7 +287,7 @@ TFLib.TFTextFieldMethods = function(){
 										enumerable : true
 									});
 			
-				this.validations.onlyNumber.value = status;	
+				this.validations.onlyNumber = status;	
 			}
 			
 		}
