@@ -9,8 +9,8 @@
  * @property {number} height - integer value , by-default 600px
  * @property {string} title - title will be displayed in header part
  * @property {object} dataTemplate - requires parent node reference    
- * @property {function} modalCloseCallback - callback handle called when popup closed via Escape or click over close button
- * @property {function} modalOpenCallback - callback handle called when popup is inserted in DOM
+ * @property {function} modalOnClose - callback handle called when popup closed via Escape or click over close button
+ * @property {function} modalOnOpen - callback handle called when popup is inserted in DOM
  * @property {function} close - close will internally click close btn at top right
  * @property {function} show - show will open popup if already in dom
  * @property {function} forceClose - this method will directly call destroy which will remove popup from dom 
@@ -45,7 +45,7 @@ TFLib.ModalPopup = function(config) {
             var me = this.scope;
 
                  //config
-                this.dynamicId = me.popupId || "tf-modal-" + getRandomInt(1, 10000),
+                this.dynamicId = me.popupId || "tf-modal-" + (TFLib.ModalPopup = ++TFLib.ModalPopup || 1),
                 this.onConfig = (me.onConfig == null || me.onConfig == false) ? false : true,
                 this.resizable = (me.resizable == false) ? false : true,
                 this.footerVisible = (me.footerVisible == true) ? true : false,
@@ -259,11 +259,6 @@ TFLib.ModalPopup = function(config) {
         }
     };
 
-    function getRandomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min) + min);
-    }
     return modalpopup._init();
 
 }
