@@ -9,8 +9,8 @@
  * @property {number} height - integer value , by-default 600px
  * @property {string} title - title will be displayed in header part
  * @property {object} dataTemplate - requires parent node reference    
- * @property {function} modalCloseCallback - callback handle called when popup closed via Escape or click over close button
- * @property {function} modalOpenCallback - callback handle called when popup is inserted in DOM
+ * @property {function} modalOnClose - callback handle called when popup closed via Escape or click over close button
+ * @property {function} modalOnOpen - callback handle called when popup is inserted in DOM
  * @property {function} close - close will internally click close btn at top right
  * @property {function} show - show will open popup if already in dom
  * @property {function} forceClose - this method will directly call destroy which will remove popup from dom 
