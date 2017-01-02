@@ -79,7 +79,7 @@ TFLib.ModalPopup = function(config) {
 
             var el = [
                 '<div id="'+this.dynamicId+'" class="tf-modal-outer">',
-                    '<section class="tf-modal-inner" tabindex="1">',
+                    '<section draggabe="true" class="tf-modal-inner" tabindex="1">',
                         // header    
                         '<header class="tf-modal-header">',
                             '<span class="tf-modal-title">' + this.title + '</span>',
@@ -149,6 +149,7 @@ TFLib.ModalPopup = function(config) {
             if(!this.currentPopupCount)  document.body.addEventListener('keyup', this._handleModalKeyUp);
             this._handleModalCloseBtnClick = this._handleModalCloseBtnClick.bind(this);
             this.modalCloseNode.addEventListener('click', this._handleModalCloseBtnClick);
+            this.innerComp.addEventListener('dragstart', this._handleDragStart);
         },
         _attachProperties : function(){
 
@@ -222,6 +223,9 @@ TFLib.ModalPopup = function(config) {
             toDestroy = toDestroy === false ? false : true;            
             if(toDestroy)
                 this._destroy();
+        },
+        _handleDragStart : function(ev){
+            debugger;
         },
         show: function() {
             
