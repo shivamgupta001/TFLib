@@ -158,10 +158,10 @@ TFLib.TFTextFieldMethods = function(){
 				if(errmsg)
 					this.validations.customError.errmsg = errmsg
 				
-				this.controlComp.classList.add('tooltip', 'tf-err-border--red');
+				this.controlComp.classList.addmany(['tooltip', 'tf-err-border--red']);
 				this.controlComp.setAttribute('data-tooltip',this.validations.customError.errmsg);
 			}else{
-				this.controlComp.classList.remove('tooltip', 'tf-err-border--red');
+				this.controlComp.classList.removemany(['tooltip', 'tf-err-border--red']);
 				this.controlComp.removeAttribute('data-tooltip');
 			}
 		}else{
@@ -179,7 +179,7 @@ TFLib.TFTextFieldMethods = function(){
 				else
 					this.validations.customError.errmsg = this.validations.__proto__.customError.errmsg
 
-				this.controlComp.classList.add('tooltip', 'tf-err-border--red');
+				this.controlComp.classList.addmany(['tooltip', 'tf-err-border--red']);
 				this.controlComp.setAttribute('data-tooltip',this.validations.customError.errmsg);	
 			}
 			
@@ -206,7 +206,7 @@ TFLib.TFTextFieldMethods = function(){
 				
 
 			}else if(!this.validations.customError.value){
-				this.controlComp.classList.remove('tooltip','tf-err-border--red');
+				this.controlComp.classList.removemany(['tooltip','tf-err-border--red']);
 				this.controlComp.removeAttribute("data-tooltip");
 			}
 			
@@ -318,7 +318,7 @@ TFLib.TFTextFieldMethods = function(){
 					this.validations.regex.pattern = pattern;	
 				
 			}else if(!this.validations.customError.value){
-				this.controlComp.classList.remove('tooltip','tf-err-border--red');
+				this.controlComp.classList.removemany(['tooltip','tf-err-border--red']);
 				this.controlComp.removeAttribute("data-tooltip");
 			}
 			
@@ -359,7 +359,7 @@ TFLib.TFTextFieldMethods = function(){
 		if(this.validations) Object.keys(this.validations).forEach(function(val){
 			if(val === 'isRequired'){
 				if(this.innerComp.value.trim().length == 0){
-					this.controlComp.classList.add('tooltip', 'tf-err-border--red');
+					this.controlComp.classList.addmany(['tooltip', 'tf-err-border--red']);
 					this.controlComp.setAttribute('data-tooltip', this.validations.isRequired.errmsg);	
 					this.isValidated = false;
 				}
@@ -367,7 +367,7 @@ TFLib.TFTextFieldMethods = function(){
 				if(this.validations.regex.value){
 					var regex = new RegExp(this.validations.regex.pattern);
 					if(!regex.test(this.innerComp.value)){
-						this.controlComp.classList.add('tooltip', 'tf-err-border--red');
+						this.controlComp.classList.addmany(['tooltip', 'tf-err-border--red']);
 						this.controlComp.setAttribute('data-tooltip', this.validations.regex.errmsg);			
 						this.isValidated = false;
 					}					

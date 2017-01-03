@@ -55,6 +55,7 @@
 .tf-modal-title {
     display : inline-block; /* For IE 10*/
     padding-left: 10px;
+    font-size: 14px;
     
     /* For header text ellipsis*/
     width: 350px;

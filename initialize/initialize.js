@@ -3,7 +3,7 @@
  */
 var TFLib = TFLib || {};
 
-if(!'selectedOptions' in document.createElement('select')){
+if(!('selectedOptions' in document.createElement('select'))){
     
     Object.defineProperty(HTMLSelectElement.prototype, "selectedOptions", {
         get: (function() {

@@ -180,7 +180,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 					this.controlComp.setAttribute('data-tooltip',this.validations.isRequired.errmsg);
 			}else if(!this.validations.customError.value){
 
-				this.controlComp.classList.remove('tooltip','tf-err-border--red');
+				this.controlComp.classList.removemany(['tooltip','tf-err-border--red']);
 				this.controlComp.removeAttribute("data-tooltip");
 			}
 
@@ -226,10 +226,10 @@ TFLib.TFCheckboxFieldMethods = function(){
 					if(errmsg)
 						this.validations.customError.errmsg = errmsg
 
-					this.controlComp.classList.add('tooltip', 'tf-err-border--red');
+					this.controlComp.classList.addmany(['tooltip', 'tf-err-border--red']);
 					this.controlComp.setAttribute('data-tooltip',this.validations.customError.errmsg);
 				}else{
-					this.controlComp.classList.remove('tooltip', 'tf-err-border--red');
+					this.controlComp.classList.removemany(['tooltip', 'tf-err-border--red']);
 					this.controlComp.removeAttribute('data-tooltip');
 				}
 					
@@ -247,7 +247,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 				if(errmsg)
 					this.validations.customError.errmsg = errmsg;
 
-				this.controlComp.classList.add('tooltip', 'tf-err-border--red');
+				this.controlComp.classList.addmany(['tooltip', 'tf-err-border--red']);
 				this.controlComp.setAttribute('data-tooltip',this.validations.customError.errmsg);
 
 			}
@@ -268,13 +268,13 @@ TFLib.TFCheckboxFieldMethods = function(){
 				if(val === 'isRequired'){
 					if(this.validations.isRequired.value){
 
-						this.controlComp.classList.add('tooltip', 'tf-err-border--red');
+						this.controlComp.classList.addmany(['tooltip', 'tf-err-border--red']);
 						this.controlComp.setAttribute('data-tooltip', this.validations.isRequired.errmsg);	
 						this.isValidated = false;	
 						
 						if(this.innerComp.tagName === "SELECT" && this.innerComp.selectedOptions.length > 0 && this.innerComp.selectedOptions[this.innerComp.selectedOptions.length-1].value != '') {
 							
-							this.controlComp.classList.remove('tooltip', 'tf-err-border--red');
+							this.controlComp.classList.removemany(['tooltip', 'tf-err-border--red']);
 							this.controlComp.removeAttribute('data-tooltip', this.validations.isRequired.errmsg);	
 							this.isValidated = true;	
 						}
@@ -283,7 +283,7 @@ TFLib.TFCheckboxFieldMethods = function(){
 					if(this.validations.regex.value){
 						var regex = new RegExp(this.validations.regex.pattern);
 						if(!regex.test(this.innerComp.value)){
-							this.controlComp.classList.add('tooltip', 'tf-err-border--red');
+							this.controlComp.classList.addmany(['tooltip', 'tf-err-border--red']);
 							this.controlComp.setAttribute('data-tooltip', this.validations.regex.errmsg);			
 							this.isValidated = false;
 						}					

@@ -37,13 +37,13 @@ TFLib.TFValidations = function(){
 
 		if(e.type === 'blur'){
 			if(controlVal === ''){
-				control.classList.add('tooltip', 'tf-err-border--red');
+				control.classList.addmany(['tooltip', 'tf-err-border--red']);
 				control.setAttribute('data-tooltip', this.validations.isRequired.errmsg);	
 				inputControl.setAttribute('title',this.validations.isRequired.errmsg);	
 
 			}else{
 				if(control.classList.contains('tooltip')){
-					control.classList.remove('tooltip', 'tf-err-border--red');
+					control.classList.removemany(['tooltip', 'tf-err-border--red']);
 					control.removeAttribute('data-tooltip');
 					inputControl.setAttribute('title',this.validations.isRequired.errmsg);
 				}
@@ -53,13 +53,13 @@ TFLib.TFValidations = function(){
 			// second condition prevents regex tooltip is present
 			if(controlVal.length > 0 && (control.getAttribute('data-tooltip') === this.validations.isRequired.errmsg)){
 				if(control.classList.contains('tooltip')){
-					control.classList.remove('tooltip', 'tf-err-border--red');
+					control.classList.removemany(['tooltip', 'tf-err-border--red']);
 					control.removeAttribute('data-tooltip');
 					inputControl.setAttribute('title',this.validations.isRequired.errmsg);	
 				}
 			}else if(controlVal === '' || controlVal === '\n'){
 					// handles after setting value if value deleted and goes blank
-					control.classList.add('tooltip', 'tf-err-border--red');
+					control.classList.addmany(['tooltip', 'tf-err-border--red']);
 					control.setAttribute('data-tooltip', this.validations.isRequired.errmsg);	
 					inputControl.setAttribute('title',this.validations.isRequired.errmsg);	
 			}	
@@ -73,10 +73,10 @@ TFLib.TFValidations = function(){
 				}
 			}
 			if(!chkStatus){
-				control.classList.add('tooltip', 'tf-err-border--red');
+				control.classList.addmany(['tooltip', 'tf-err-border--red']);
 				control.setAttribute('data-tooltip', this.validations.isRequired.errmsg);	
 			}else{
-				control.classList.remove('tooltip', 'tf-err-border--red');
+				control.classList.removemany(['tooltip', 'tf-err-border--red']);
 				control.removeAttribute('data-tooltip');
 			}
 		}
@@ -113,13 +113,13 @@ TFLib.TFValidations = function(){
 			if(e.type === 'blur' || e.type === 'input'){
 				if(controlVal.length > 0){
 					if(!regex.test(controlVal)){
-						control.classList.add('tooltip', 'tf-err-border--red');
+						control.classList.addmany(['tooltip', 'tf-err-border--red']);
 						control.setAttribute('data-tooltip', this.validations.regex.errmsg);	
 						inputControl.setAttribute('title',this.validations.regex.errmsg);	
 
 					}else{
 						if(control.classList.contains('tooltip')){
-							control.classList.remove('tooltip', 'tf-err-border--red');
+							control.classList.removemany(['tooltip', 'tf-err-border--red']);
 							control.removeAttribute('data-tooltip');
 							inputControl.setAttribute('title',this.validations.regex.errmsg);
 						}

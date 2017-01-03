@@ -8,7 +8,7 @@
 }
 
 .tf-flex--one {
-    flex: 1;
+    flex: 1 0 auto;
 }
 
 .tf-flex-direction--row {
