@@ -195,7 +195,7 @@ TFLib.TFCheckboxField = function() {
         setValidations: function() {
 
             //adding validations
-
+            if(this.validations)
             Object.keys(this.validations).forEach(function(val) {
 
                 switch (val) {
