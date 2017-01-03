@@ -253,9 +253,6 @@ TFLib.ModalPopup = function(config) {
 
             // when last popup removed , removing event from document.body
             if(!this.currentPopupCount) document.body.removeEventListener('keyup', this._handleModalKeyUp);      
-
-            if(this.modalFooter.getElementsByTagName('input').length === 1)
-                
         }
     };
 
