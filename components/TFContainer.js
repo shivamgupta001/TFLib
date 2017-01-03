@@ -86,7 +86,10 @@ TFLib.TFContainer = function(){
 				}
 
 				// apply flex
-				if(this.flex) this.outerComp.style.flex = this.flex;
+				if(this.flex){
+					this.outerComp.style.flex = this.flex;
+					this.outerComp.style.msFlex = this.flex;	//For IE10
+				} 
 
 				//apply class
 				if(this.compClass) this.outerComp.classList.addmany(this.compClass);

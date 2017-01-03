@@ -1,3 +1,5 @@
+/* Do not copy images path and name!!!!!!!!!*/
+
 /* Modal Popup css start*/
 .tf-modal-outer {
     position: absolute;
@@ -37,9 +39,10 @@
 }
 
 .tf-modal-body {
-    flex: 1;
+    flex: 1 0 auto;
     position: relative;
     padding:  5px;
+    min-height: 90px;
 }
 
 .tf-modal-footer {
@@ -50,7 +53,10 @@
 }
 
 .tf-modal-title {
+    display : inline-block; /* For IE 10*/
     padding-left: 10px;
+    
+    /* For header text ellipsis*/
     width: 350px;
     white-space: nowrap;
     overflow: hidden;
@@ -58,6 +64,7 @@
 }
 
 .tf-modal-close-btn {
+    display : inline-block; /* For IE 10*/
     width: 18px;
     height: 18px;
     background: url("./images/invoicePopupClose.png") no-repeat;
@@ -71,7 +78,6 @@
     background-color: #465a6e;
 }
 .tf-display--none{
-    
     display : none !important;
 }
 /* Modal Popup css  end*/

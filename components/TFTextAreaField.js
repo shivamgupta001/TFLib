@@ -138,7 +138,10 @@ TFLib.TFTextAreaField = function(){
 					}, this);	
 				}
 
-				if(this.flex) this.outerComp.style.flex = this.flex;
+				if(this.flex){
+					this.outerComp.style.flex = this.flex;
+					this.outerComp.style.msFlex = this.flex;	//For IE10
+				} 
 				
 				// apply class
 				if(this.controlClass) this.controlComp.classList.addmany(this.controlClass);
@@ -194,7 +197,7 @@ TFLib.TFTextAreaField = function(){
 	        _handleValidationsFallback: function(){
 	            
 	            Object.keys(this.validations).forEach(function(val){
-	                if(!this[val].errmsg)
+	                if(val !== "__proto__" && !this[val].errmsg)
 	                    this[val].errmsg = this.__proto__[val].errmsg;
 	            }.bind(this.validations));
 	        },			

@@ -147,7 +147,10 @@ TFLib.TFComboboxField = function() {
             if (this.compClass) this.outerComp.classList.addmany(this.compClass);
             if (this.labelClass) this.labelComp.classList.addmany(this.labelClass);
 
-            if(this.flex) this.outerComp.style.flex = this.flex;
+            if(this.flex){
+                this.outerComp.style.flex = this.flex;
+                this.outerComp.style.msFlex = this.flex;  //For IE10
+            } 
 
             // handling buttons
             this.buttons.forEach(function(val) {
@@ -208,7 +211,7 @@ TFLib.TFComboboxField = function() {
         _handleValidationsFallback: function(){
                 
             Object.keys(this.validations).forEach(function(val){
-                if(!this[val].errmsg)
+                if(val !== "__proto__" && !this[val].errmsg)
                     this[val].errmsg = this.__proto__[val].errmsg;
             }.bind(this.validations));
         },

@@ -31,7 +31,7 @@ module.exports = function(grunt){
 		        					],
 		        'dest/tflib.popups.min.js': [	
 
-		        				'initialize/initialize.js',
+		        				'initialize/initializePopup.js',
 		        				'constants/TFConstants.js',
 		        				'popups/TFModalPopup.js',
 		        				'popups/TFStandardPopup.js'
