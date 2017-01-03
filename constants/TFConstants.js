@@ -9,7 +9,7 @@ TFLib.TFConstants = {
 			ERROR : 'Error',
 			INFO : 'Info',
 			CONFIRM : 'Confirm',
-			SUCCESS : 'Sucess',
+			SUCCESS : 'Success',
 			OK : 'OK',
 			CANCEL : 'CANCEL'
 		},
