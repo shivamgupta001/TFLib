@@ -41,7 +41,7 @@ TFLib.TFToast = function(config){
 				this.innerComp.classList.add("toast-component");
 
 				//apply property
-				if(this.compClass) 	this.innerComp.classList.add.apply(this.innerComp.classList , this.compClass);
+				if(this.compClass) 	this.innerComp.classList.addmany(this.compClass);
 				if(this.animType) 	this.innerComp.style.animationName = this.animType;
 				if(this.msg) 		this.innerComp.innerHTML = this.msg;
 			

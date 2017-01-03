@@ -111,7 +111,7 @@ TFLib.TFCheckboxMethods = function(){
       */
 	this.addLabelClass = function(newClass){
 		newClass = newClass.constructor === Array ? newClass : [newClass];
-		this.labelComp.classList.add.apply(this.labelComp.classList , newClass); 
+		this.labelComp.classList.addmany(newClass); 
 	};
 	/**This method will remove class to label comp 
       * @mixes TFCheckbox
@@ -120,7 +120,7 @@ TFLib.TFCheckboxMethods = function(){
       */
 	this.removeLabelClass = function(oldClass){
 		oldClass = oldClass.constructor === Array ? oldClass : [oldClass];
-		this.labelComp.classList.remove.apply(this.labelComp.classList , oldClass);
+		this.labelComp.classList.removemany(oldClass);
 	};
 	/**This method will add class to inner comp 
       * @mixes TFCheckbox
@@ -129,7 +129,7 @@ TFLib.TFCheckboxMethods = function(){
       */
 	this.addInnerClass = function(newClass){
 		newClass = newClass.constructor === Array ? newClass : [newClass];
-		this.innerComp.classList.add.apply(this.innerComp.classList , newClass); 	
+		this.innerComp.classList.addmany(newClass); 	
 	};
 	/**This method will remove class to inner comp 
       * @mixes TFCheckbox
@@ -138,7 +138,7 @@ TFLib.TFCheckboxMethods = function(){
       */
 	this.removeInnerClass = function(oldClass){
 		oldClass = oldClass.constructor === Array ? oldClass : [oldClass];
-		this.innerComp.classList.remove.apply(this.innerComp.classList , oldClass);
+		this.innerComp.classList.removemany(oldClass);
 	};
 
 	/**This method will set attribute to inner comp 

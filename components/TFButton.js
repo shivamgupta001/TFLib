@@ -98,8 +98,8 @@ TFLib.TFButton = function(){
 				if(this.btnText) this.innerComp.innerHTML = this.btnText;
 				
 				//apply class
-				if(this.btnClass) this.innerComp.classList.add.apply(this.innerComp.classList , this.btnClass);
-				if(this.compClass) this.outerComp.classList.add.apply(this.outerComp.classList , this.compClass);
+				if(this.btnClass) this.innerComp.classList.addmany(this.btnClass);
+				if(this.compClass) this.outerComp.classList.addmany(this.compClass);
 			},/** @access private */
 			_bindEvents : function(){
 				
