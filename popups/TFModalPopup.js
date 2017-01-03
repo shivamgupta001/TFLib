@@ -149,7 +149,7 @@ TFLib.ModalPopup = function(config) {
             if(!this.currentPopupCount)  document.body.addEventListener('keyup', this._handleModalKeyUp);
             this._handleModalCloseBtnClick = this._handleModalCloseBtnClick.bind(this);
             this.modalCloseNode.addEventListener('click', this._handleModalCloseBtnClick);
-            this.innerComp.addEventListener('dragstart', this._handleDragStart);
+            
         },
         _attachProperties : function(){
 
@@ -224,9 +224,6 @@ TFLib.ModalPopup = function(config) {
             if(toDestroy)
                 this._destroy();
         },
-        _handleDragStart : function(ev){
-            debugger;
-        },
         show: function() {
             
             if(!document.getElementById(this.dynamicId)){
@@ -256,6 +253,9 @@ TFLib.ModalPopup = function(config) {
 
             // when last popup removed , removing event from document.body
             if(!this.currentPopupCount) document.body.removeEventListener('keyup', this._handleModalKeyUp);      
+
+            if(this.modalFooter.getElementsByTagName('input').length === 1)
+                
         }
     };
 

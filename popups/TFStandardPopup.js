@@ -109,14 +109,14 @@ StandardPopup = function(){
             if(this.okComp) {
                 this.okComp.addEventListener('click', this.handlePopupOnOk);
                 this.okComp.addEventListener('blur', this.handleOkBlur);
+                
             } 
             if(this.cancelComp) {
                 this.cancelComp.addEventListener('click', this.handlePopupOnCancel);
                 this.cancelComp.addEventListener('blur', this.handleCancelBlur);
             }
             if( Boolean(this.okComp) ^ Boolean(this.cancelComp))
-                document.addEventListener('keydown',this.handleKeyDown);        
-            
+                document.addEventListener('keydown',this.handleKeyDown);
         },
         _attachProperties : function(){
 
@@ -127,7 +127,7 @@ StandardPopup = function(){
             me.cancelComp = this.cancelComp;
             me.okComp = this.okComp;
             me.handleKeyDown = this.handleKeyDown;
-
+            
             if(this.okComp){
 
                 me.popupOnOk = this.popupOnOk;  
@@ -167,19 +167,22 @@ StandardPopup = function(){
             this.closeComp = document.getElementById(this.popupId).querySelector('.tf-modal-close-btn');
             this._attachProperties();
                         
-            if (this.imgClassName == 'tf-confirm-icon') this.closeComp.style.display = 'none';
-            if (this.okComp && this.cancelComp) this.handleCancelBlur.call(me.cancelComp);
+            if (this.imgClassName == 'tf-confirm-icon') 
+                this.closeComp.style.display = 'none';
 
-
+            if (this.okComp && this.cancelComp) 
+                this.handleCancelBlur.call(me.cancelComp);
+            else if(this.okComp && !this.cancelComp) 
+                this.handleCancelBlur.call(me.okComp);
             
         },
         handleKeyDown : function(e){
-
+            
             if(e.key === 'Tab')
                 e.preventDefault();
         },
         handleOkBlur : function(e) {
-
+            
             if (this.shared.okComp && this.shared.cancelComp) {
                 // For IE
                 this.shared.cancelComp.focus();
@@ -196,7 +199,10 @@ StandardPopup = function(){
                 //For Chrome & Moz
                 this.shared.cancelComp.setAttribute('tabindex', 10001);
                 this.shared.okComp.setAttribute('tabindex', 10000);
+            }else if(this.shared.okComp && !this.shared.cancelComp){
+                this.shared.okComp.focus();   
             }
+                
         },
         handlePopupOnOk : function(e) {
 
