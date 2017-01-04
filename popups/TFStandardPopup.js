@@ -58,7 +58,7 @@ StandardPopup = function(){
             
             var me = this.scope;
             
-            this.popupId = me.popupId || 'popupId-'+getRandomInt(1, 10000);
+            this.popupId = me.popupId || 'popupId-'+(StandardPopup.count = ++StandardPopup.count || 1);
             this.msg = me.msg,
             this.title = me.title;
             this.imgClassName = me.imgClassName;
@@ -115,6 +115,8 @@ StandardPopup = function(){
                 this.cancelComp.addEventListener('click', this.handlePopupOnCancel);
                 this.cancelComp.addEventListener('blur', this.handleCancelBlur);
             }
+            if(Boolean(this.okComp)^Boolean(this.cancelComp))
+                document.addEventListener('keydown', this.handleKeyDown);
         },
         _attachProperties : function(){
 
@@ -155,6 +157,7 @@ StandardPopup = function(){
                 dataTemplate: this.innerComp,
                 modalOnClose: this.modalOnClose,
                 modalOnOpen: this.modalOnOpen,
+                destroy : this.destroy.bind(this),
                 onConfig: true,
                 resizable: false,
                 footerVisible : true
@@ -172,6 +175,11 @@ StandardPopup = function(){
             else if(this.okComp && !this.cancelComp) 
                 this.handleCancelBlur.call(me.okComp);
             
+        },
+        handleKeyDown : function(e){
+            
+            if(e.key === "Tab")
+                e.preventDefault();
         },
         handleOkBlur : function(e) {
             
@@ -216,18 +224,15 @@ StandardPopup = function(){
                 this.okComp.removeEventListener('click', this.handlePopupOnOk);
                 this.okComp.removeEventListener('blur', this.handleOkBlur);
             } 
-             if(this.cancelComp) {
+            if(this.cancelComp) {
                 this.cancelComp.removeEventListener('click', this.handlePopupOnCancel);
                 this.cancelComp.removeEventListener('blur', this.handleCancelBlur);
             }
+            if(Boolean(this.okComp) ^ Boolean(this.cancelComp))
+                document.removeEventListener('keydown', this.handleKeyDown);
         }
     };
     
     standardpopup._init();
 
-    function getRandomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min;
-    }
 };

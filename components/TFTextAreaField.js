@@ -93,7 +93,7 @@ TFLib.TFTextAreaField = function(){
 							'<span id="'+this.requiredId+'" class="tf-required--red" style="display:none;" >*</span>',
 						'</div>',
 						'<div control-type="tf-textareafield" class="tf-field-container--control tf-field-with-btn">',
-							'<textarea style="max-width:inherit;max-height:inherit;" class="tf-flex tf-flex--one"',
+							'<textarea class="tf-flex tf-flex--one"',
 								'id="'+this.innerId+'"',
 								''+(this.name ? 'name="'+this.name+'"' : '')+'',
 								''+(this.placeholder ? 'placeholder="'+this.placeholder+'"' : '')+'',

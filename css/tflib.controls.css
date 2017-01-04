@@ -47,20 +47,21 @@
     border: 1px solid grey;
     display: flex;
     flex-direction: row;
-    border-radius: 3px;
+    border-radius: 4px;
     justify-content: center;
     align-items: center;
-    padding: 2px;
+    padding : 2px;
     background-color: white;
 }
-
-
-.tf-field-with-btn input[type="text"] , .tf-field-with-btn textarea, .tf-field-with-btn input[type="password"]{
-    outline: 0px;
-    border: 0px;
-    border-radius: 3px 0px 0px 3px;
+.tf-field-with-btn input, .tf-field-with-btn select{
+    width : 100%;
 }
 
+.tf-field-with-btn input[type="text"] ,.tf-field-with-btn input[type="password"],.tf-field-with-btn textarea{
+    outline: 0px;
+    border: 0px;
+    border-radius: 4px;
+}
 .tf-field-with-btn button {
     width: 14px;
     height: 14px;

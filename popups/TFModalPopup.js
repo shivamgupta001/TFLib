@@ -62,6 +62,7 @@ TFLib.ModalPopup = function(config) {
                 // callback
                 this.modalCloseCallback = me.modalOnClose || '',
                 this.modalOpenCallback = me.modalOnOpen || '',
+                this.destroy = me.destroy || '',
 
                 // user Template
                 this.dataTemplate = me.dataTemplate || null;
@@ -252,7 +253,10 @@ TFLib.ModalPopup = function(config) {
             document.body.removeChild(this.outerComp);
 
             // when last popup removed , removing event from document.body
-            if(!this.currentPopupCount) document.body.removeEventListener('keyup', this._handleModalKeyUp);      
+            if(!this.currentPopupCount) document.body.removeEventListener('keyup', this._handleModalKeyUp);
+            
+            // For standard popup removing events
+            if(this.destroy != '')  this.destroy();      
         }
     };
 
