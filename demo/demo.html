@@ -187,8 +187,7 @@
                 validations : {
                     'isRequired' : { value : true , errmsg : 'new combo'}
 
-                },
-                   
+                },                   
                 attributes : {
                     'data-placeholder' : 'Select a state'
                 },
@@ -206,18 +205,24 @@
                 allowClear : true
             });
 
-            $combosel.on('change', function(){
+            $combosel.on('change', function(e){
                 // insert code here for change event
-
+                // For validation on chANGE
+                alert('called');
+                if($(this).val().length > 0)
+                    this.parentNode.parentNode.shared.validate();
             });
-            $combosel.on('select2:selecting', function(){
+            $combosel.on('select2:unselecting', function(){
                 // insert code here for before selecting but after click
-
-            });
-            $combosel.on('select2:select', function(){
-                // insert code here for after select
                 
             });
+            $combosel.on('select2:unselect', function(){
+                // insert code here for after select
+                // validate on allowClear clicked
+                this.parentNode.parentNode.shared.validate();
+            });
+
+
 
             combo.shared.addData(data , 'Id' , 'Name');
             $combosel.empty();

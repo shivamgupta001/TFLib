@@ -234,5 +234,4 @@ StandardPopup = function(){
     };
     
     standardpopup._init();
-
 };
