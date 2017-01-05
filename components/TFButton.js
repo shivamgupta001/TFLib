@@ -62,7 +62,7 @@ TFLib.TFButton = function(){
 				
 				var el  =[
 					'<div control-type="tf-btn-outer" class="tf-field-container">',
-						'<button control-type="tf-btn"',
+						'<button type="button" control-type="tf-btn"',
 							'id="'+this.dynamicId+'"',
 							'class="tf-button"',
 						'></button>',
@@ -125,6 +125,7 @@ TFLib.TFButton = function(){
 
 				// shared methods over el
 				me.outerComp.shared = me;
+				
 			},/** @access private */
 			_render : function(){
 				

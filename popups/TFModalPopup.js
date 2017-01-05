@@ -67,6 +67,7 @@ TFLib.ModalPopup = function(config) {
                 // user Template
                 this.dataTemplate = me.dataTemplate || null;
                 this.footerTemplate = me.footerTemplate || null;
+                this.activeElement = document.activeElement;
         },
         _validateInitialize: function() {
 
@@ -217,7 +218,9 @@ TFLib.ModalPopup = function(config) {
             
             var me = this.scope,
                 toDestroy = true;
-
+            setTimeout(function(){
+                this.focus();
+            }.bind(this.activeElement), 100);
             if (this.modalCloseCallback != '')  
                 toDestroy = this.modalCloseCallback.call(me, e);
 
