@@ -147,7 +147,6 @@ StandardPopup = function(){
                     minWidth : '400px',
                     maxWidth : '500px',
                     minHeight : '180px'
-
                 },
                 width : '400px',    // this is invalid value will not work , just need to pass number without px , done to prevent default case
                 height : '180px',   // this is invalid value will not work , just need to pass number without px , done to prevent default case
