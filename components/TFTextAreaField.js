@@ -77,6 +77,7 @@ TFLib.TFTextAreaField = function(){
 				this.value = me.value || '';
 				this.readOnly = (me.readOnly === true) ? 'readonly' : '';
 				this.maxlength = me.maxlength || '';
+				this.disabled = me.disabled || '';
 								
 				// methods
 				this.render = me.render || '';
@@ -103,9 +104,7 @@ TFLib.TFTextAreaField = function(){
 								''+this.readOnly+'',
 								''+this.required+'',
 								''+this.disabled+'',
-								'>',
-								''+(this.value ? 'value="'+this.value+'"' : '')+'',
-								'</textarea>',
+								'>'+(this.value ? 'value="'+this.value+'"' : '')+'</textarea>',
 						'</div>',
 					'</div>'
 				].join('\n');

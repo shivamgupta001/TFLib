@@ -42,17 +42,8 @@ TFLib.TFValidations = function(){
 				//inputControl.setAttribute('title',this.validations.isRequired.errmsg);	
 
 			}else{
-				if(control.classList.contains('tooltip') && !this.validations.customError.value){
-					control.classList.removemany(['tooltip', 'tf-err-border--red']);
-					control.removeAttribute('data-tooltip');
-					//inputControl.setAttribute('title',this.validations.isRequired.errmsg);	
-				}
-			}	
-		}else if(e.type === 'input'){
-
-			// second condition prevents regex tooltip is present
-			if(controlVal.length > 0 && (control.getAttribute('data-tooltip') === this.validations.isRequired.errmsg)){
 				if(control.classList.contains('tooltip')){
+					// check custom error before removing
 					if(this.validations.customError.value){
 						control.setAttribute('data-tooltip',this.validations.customError.errmsg);
 					}else{
@@ -61,7 +52,22 @@ TFLib.TFValidations = function(){
 					}
 					//inputControl.setAttribute('title',this.validations.isRequired.errmsg);	
 				}
-			}else if(controlVal === '' || controlVal === '\n'){
+			}	
+		}else if(e.type === 'input'){
+
+			// second condition prevents regex tooltip is present
+			if(controlVal.length > 0 && (control.getAttribute('data-tooltip') === this.validations.isRequired.errmsg)){
+				if(control.classList.contains('tooltip')){
+					// check custom error before removing
+					if(this.validations.customError.value){
+						control.setAttribute('data-tooltip',this.validations.customError.errmsg);
+					}else{
+						control.classList.removemany(['tooltip', 'tf-err-border--red']);
+						control.removeAttribute('data-tooltip');
+					}
+					//inputControl.setAttribute('title',this.validations.isRequired.errmsg);	
+				}
+			}else if(controlVal === ''){
 					// handles after setting value if value deleted and goes blank
 					control.classList.addmany(['tooltip', 'tf-err-border--red']);
 					control.setAttribute('data-tooltip', this.validations.isRequired.errmsg);	
@@ -123,8 +129,12 @@ TFLib.TFValidations = function(){
 
 					}else{
 						if(control.classList.contains('tooltip')){
-							control.classList.removemany(['tooltip', 'tf-err-border--red']);
-							control.removeAttribute('data-tooltip');
+							if(this.validations.customError.value){
+								control.setAttribute('data-tooltip',this.validations.customError.errmsg);
+							}else{
+								control.classList.removemany(['tooltip', 'tf-err-border--red']);
+								control.removeAttribute('data-tooltip');
+							}
 							//inputControl.setAttribute('title',this.validations.regex.errmsg);
 						}
 					}	
