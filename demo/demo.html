@@ -66,6 +66,11 @@
                 fieldLayout : 'column',
                 validations : {
                     'isRequired' : {value : true }
+                },
+                listeners : {
+                    blur : function(){
+                        this.customError(true, 'custom shivam');
+                    }
                 }
             });
             /*sender address end*/
