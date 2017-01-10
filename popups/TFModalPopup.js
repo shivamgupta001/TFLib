@@ -81,7 +81,7 @@ TFLib.ModalPopup = function(config) {
 
             var el = [
                 '<div id="'+this.dynamicId+'" class="tf-modal-outer">',
-                    '<section draggabe="true" class="tf-modal-inner" tabindex="1">',
+                    '<section class="tf-modal-inner" tabindex="1">',
                         // header    
                         '<header class="tf-modal-header">',
                             '<span class="tf-modal-title">' + this.title + '</span>',
@@ -171,9 +171,17 @@ TFLib.ModalPopup = function(config) {
             if(!this.onConfig) {
                 
                 document.body.appendChild(this.outerComp);
+                //this._handleDraggable();
                 this.innerComp.focus();
                 this._handleModalOpenCallback();
             }
+        },
+        _handleDraggable : function(){
+
+            TFLib.TFDraggable.call({
+                childSel : '#'+this.dynamicId+' .tf-modal-inner',
+                parentSel : '#'+this.dynamicId
+            });
         },
         _handleModalKeyUp : function(e){
 
@@ -235,6 +243,7 @@ TFLib.ModalPopup = function(config) {
                 var me = this.scope;
 
                 document.body.appendChild(this.outerComp);
+                //this._handleDraggable();
                 this._handleModalOpenCallback.call(this);
             }
         },

@@ -65,7 +65,13 @@
                 fieldLabel : 'Address',
                 fieldLayout : 'column',
                 validations : {
-                    'isRequired' : {value : true }
+                    'isRequired' : {value : true },
+                    'regex' : {value : true, pattern : 'abc'}
+                },
+                listeners : {
+                    blur : function(e){
+                        this.customError(true, 'custom shivam');
+                    }
                 }
             });
             /*sender address end*/
