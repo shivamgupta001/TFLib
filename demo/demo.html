@@ -118,10 +118,7 @@
                     checked : false
                 },{
                     fieldLabel : 'Company'
-                }],
-                validations : {
-                    'customError' : {value : true , errmsg : 'entity required'}
-                }
+                }]
             });
             /* TFCheckboxField Demo end*/
 
@@ -190,12 +187,11 @@
             var combo = TFLib.TFComboboxField.call({
                 fieldLabel : 'ID Type',
                 fieldLayout : 'column',
-                validations : {
-                    'isRequired' : { value : true , errmsg : 'new combo'}
-
-                },                   
+                name : 'shivam',
                 attributes : {
-                    'data-placeholder' : 'Select a state'
+                    'data-placeholder' : 'Select a state',
+                    id : 'shivam234'
+
                 },
                 listeners : {
                     'select2:selecting' : function(e){
