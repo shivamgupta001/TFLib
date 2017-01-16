@@ -137,7 +137,10 @@
                     flex : 3,
                     type : 'textfield',
                     fieldLabel : 'TotalRecieve Amoount',
-                    fieldLayout : 'column'
+                    fieldLayout : 'column',
+                    validations : {
+                        onlyText : true
+                    }
                 },{
                     flex : 1,
                     type : 'container',
@@ -178,11 +181,11 @@
                 Id : '',
                 Name : ''
             },{
-                Id : '0',
-                Name: ''
-            },{
                 Id : 'a',
                 Name : 'a'
+            },{
+               Id : 'b',
+                Name : 'b' 
             }];
             var combo = TFLib.TFComboboxField.call({
                 fieldLabel : 'ID Type',
@@ -192,6 +195,9 @@
                     'data-placeholder' : 'Select a state',
                     id : 'shivam234'
 
+                },
+                validations : {
+                    isRequired : {value : true, errmsg :'Hi Hiu Hi'}
                 },
                 listeners : {
                     'select2:selecting' : function(e){
@@ -205,22 +211,21 @@
 
             var $combosel = $(combo.shared.innerComp).select2({
                 allowClear : true
+
             });
 
             $combosel.on('change', function(e){
                 // insert code here for change event
                 // For validation on chANGE
-                alert('called');
+                
                 if($(this).val().length > 0)
                     this.parentNode.parentNode.shared.validate();
             });
-            $combosel.on('select2:unselecting', function(){
-                // insert code here for before selecting but after click
-                
-            });
-            $combosel.on('select2:unselect', function(){
+            
+            $combosel.on('select2:unselect', function(e){
                 // insert code here for after select
                 // validate on allowClear clicked
+                e.target.value='';
                 this.parentNode.parentNode.shared.validate();
             });
 
@@ -272,6 +277,18 @@
             });
             block1.TFinsertBefore('#mydiv');
         })();
+
+        $('span.select2-selection').each(function(){
+            $(this).on('focusout', function(){
+
+                var comboOuter = $(this).closest('[control-type="tf-combofield-outer"]')[0];
+                var ComboInner = comboOuter.querySelector('select');
+                $(ComboInner).on('select2:close select2:select select2:unselect', function(e){
+                        this.parentNode.parentNode.shared.validate();
+                });
+                
+            });
+        });
     </script>
 
     
