@@ -64,15 +64,7 @@
             var senderAddress = TFLib.TFTextField.call({
                 fieldLabel : 'Address',
                 fieldLayout : 'column',
-                validations : {
-                    'isRequired' : {value : true },
-                    'regex' : {value : true, pattern : 'abc'}
-                },
-                listeners : {
-                    blur : function(e){
-                        this.customError(true, 'custom shivam');
-                    }
-                }
+                readOnly : true
             });
             /*sender address end*/
 
