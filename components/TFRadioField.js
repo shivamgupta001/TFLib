@@ -150,6 +150,7 @@ TFLib.TFRadioField = function() {
             me.innerComp = this.innerComp;
             me.labelId = this.labelId;
             me.requiredComp = this.requiredComp;
+            me.validations = this.validations; 
             me.setValidations = this.setValidations;
 
             // add methods

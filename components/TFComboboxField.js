@@ -74,6 +74,7 @@ TFLib.TFComboboxField = function() {
 
             //attributes
             this.name = me.name || '';
+
             this.multiple = (me.multiple === true) ? 'multiple' : '';
             this.tabindex = me.tabindex || '';
             
@@ -135,8 +136,19 @@ TFLib.TFComboboxField = function() {
                 }, this);
             }
 
+            if(this.name != ''){
+                this.labelComp.querySelector('label').setAttribute('for', this.name);
+                this.innerComp.setAttribute('id',this.name);
+            }
+
             //apply attributes
             if (this.attributes != '') {
+                
+                if(this.attributes.name){
+                    this.labelComp.querySelector('label').setAttribute('for', this.attributes.name);
+                    this.innerComp.setAttribute('id',this.attributes.name);
+                }
+
                 Object.keys(this.attributes).forEach(function(attribute) {
                     this.innerComp.setAttribute(attribute, this.attributes[attribute]);
                 }, this);
@@ -188,6 +200,7 @@ TFLib.TFComboboxField = function() {
             me.controlComp = this.controlComp;
             me.labelComp = this.labelComp;
             me.setValidations = this.setValidations;
+            me.validations = this.validations;
             me.requiredComp = this.requiredComp; 
             me.addData = this.addData;
 

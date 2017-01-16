@@ -112,14 +112,25 @@ TFLib.TFValidations = function(){
 	// regEx validation
 	this.regex = function(e){
 
-		// add same validation code in webagent project [ yet to be done] 
+		 
 		var control = this.controlComp;
 		var inputControl = this.innerComp;
 		var controlVal = e.target.value.trim();
 
 		if(this.validations.regex.value){
 
-			var regex = new RegExp(this.validations.regex.pattern);
+			var regex = this.validations.regex.pattern;
+
+			// added same validation code as in webagent project 
+			regex = regex.replace('^', '^(?:');
+		    if (regex.indexOf('$') > 0) {
+		        regex = regex.replace('$', ')$');
+		    }
+		    else regex += ')$';
+		    regex = regex.replace(/\\d/g, '[0-9]');
+
+
+			regex = new RegExp(regex);
 			if(e.type === 'blur' || e.type === 'input'){
 				if(controlVal.length > 0){
 					if(!regex.test(controlVal)){

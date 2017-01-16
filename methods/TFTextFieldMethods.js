@@ -201,8 +201,8 @@ TFLib.TFTextFieldMethods = function(){
 			if(this.validations.isRequired.value){
 				if(errmsg)
 					this.validations.isRequired.errmsg = errmsg;
-				if(!this.validations.customError.value)
-					this.controlComp.setAttribute('data-tooltip',this.validations.isRequired.errmsg);
+				//if(!this.validations.customError.value)
+				//	this.controlComp.setAttribute('data-tooltip',this.validations.isRequired.errmsg);
 				
 
 			}else if(!this.validations.customError.value){
