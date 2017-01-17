@@ -37,7 +37,12 @@ TFLib.SuccessPopup = function(config) {
     config.CANCEL = config.CANCEL || false;
     StandardPopup.call(config);
 };
-
+TFLib.PromptPopup = function(config){
+    config.title = config.title || TFLib.TFConstants.POPUP.SUCCESS;
+    config.promptPopup = true;
+    config.imgClassName = null;
+    StandardPopup.call(config);
+}
 StandardPopup = function(){
     
     var standardpopup = {
@@ -61,11 +66,19 @@ StandardPopup = function(){
             this.popupId = me.popupId || 'popupId-'+(StandardPopup.count = ++StandardPopup.count || 1);
             this.msg = me.msg,
             this.title = me.title;
-            this.imgClassName = me.imgClassName;
+            this.imgClassName = me.imgClassName || '';
+            this.promptPopup = me.promptPopup || false;
+
+            if(this.promptPopup)
+                this.dataTemplate = me.dataTemplate || '';
+
+            // callbacks
             this.modalOnClose = me.modalOnClose || '';
             this.modalOnOpen = me.modalOnOpen || '';
             this.popupOnOk = me.popupOnOk || '';
             this.popupOnCancel = me.popupOnCancel || '';
+            
+            // buttons and there value
             this.OK = ( me.OK == false ) ? false : true;
             this.CANCEL = ( me.CANCEL == false ) ? false : true;
             this.OKVal = me.OKVal || TFLib.TFConstants.POPUP.OK;
@@ -74,14 +87,19 @@ StandardPopup = function(){
         },
         _generateTemplate : function(){
             
-            var elData = [
-                '<div class="tf-std-popup">',
-                    '<div class="tf-std-popup-icon"><span class="' + this.imgClassName + '"></span></div>',
-                    '<div class="tf-std-popup-msg"><span>' + this.msg + '</span></div>',
-                '</div>'
-            ].join("\n");
-                       
-            this.childTemplateData = $(elData)[0];
+            if(!this.promptPopup){
+
+                var elData = [
+                    '<div class="tf-std-popup">',
+                        '<div class="tf-std-popup-icon"><span class="' + this.imgClassName + '"></span></div>',
+                        '<div class="tf-std-popup-msg"><span>' + this.msg + '</span></div>',
+                    '</div>'
+                ].join("\n");
+                           
+                this.childTemplateData = $(elData)[0];   
+            }else{
+                this.childTemplateData = $(this.dataTemplate)[0];
+            }
             
             var elFooter = [
                 '<div>',
