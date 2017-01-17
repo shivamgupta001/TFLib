@@ -362,6 +362,9 @@ TFLib.TFTextFieldMethods = function(){
 					this.controlComp.classList.addmany(['tooltip', 'tf-err-border--red']);
 					this.controlComp.setAttribute('data-tooltip', this.validations.isRequired.errmsg);	
 					this.isValidated = false;
+				}else{
+					this.controlComp.classList.removemany(['tooltip', 'tf-err-border--red']);
+					this.controlComp.removeAttribute('data-tooltip', this.validations.isRequired.errmsg);	
 				}
 			}else if(val === 'regex'){
 				if(this.validations.regex.value){
@@ -370,6 +373,9 @@ TFLib.TFTextFieldMethods = function(){
 						this.controlComp.classList.addmany(['tooltip', 'tf-err-border--red']);
 						this.controlComp.setAttribute('data-tooltip', this.validations.regex.errmsg);			
 						this.isValidated = false;
+					}else{
+						this.controlComp.classList.removemany(['tooltip', 'tf-err-border--red']);
+						this.controlComp.removeAttribute('data-tooltip', this.validations.regex.errmsg);			
 					}					
 				}
 			}else if(val === 'customError'){

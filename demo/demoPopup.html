@@ -170,16 +170,34 @@
 
 		function runAlertPopup(){
 			
-			TFLib.InfoPopup({
-				msg : 'You must reload the page to completely remove the popup , You must reload the page to completely remove the popup',
+			TFLib.PromptPopup({
+				
+				dataTemplate : $('<div class="abcdef">I am checkbox click me if you can and buitton will disappear <input type="checkbox" id="chke"></div>'),
 				modalOnClose : helloClose,
 				modalOnOpen : helloOpen,
 				popupOnOk : okPopup,
 				popupOnCancel : cancelPopup				
 			});
+
+			$('#chke').on('change', function(e){
+				debugger;
+
+			});
 			
 		}
 
 	</script>
+	<style>
+		.abcdef{
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			right: 0px;
+			bottom: 0px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	</style>
 </body>
 </html>
