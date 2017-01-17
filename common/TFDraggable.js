@@ -19,7 +19,7 @@ TFLib.TFDraggable = function(){
             var me = this.scope;
                         
             this.childEl = document.querySelector(me.childSel);
-            this.parentEl =document.querySelector(me.parentSel);
+            this.parentEl = document.querySelector(me.parentSel);
             this.activeEl = document.activeElement;
         },
         _bindEvents : function(){
@@ -31,11 +31,15 @@ TFLib.TFDraggable = function(){
             // mouse up event binding with current scope
             this._handleMouseUp = this._handleMouseUp.bind(this);
             this.childEl.addEventListener('mouseup', this._handleMouseUp);
+
+            // mouse contextmenu event binding with current scope
+            this._handleContext = this._handleContext.bind(this);
+            this.childEl.addEventListener('contextmenu', this._handleContext);
                         
         },
         _handleMouseDown : function(e){
                         
-                        
+            console.log("mouse down");            
             var X = e.clientX,   // x-coordinate in window where clicked to start drag
                 Y = e.clientY,   // y-coordinate in window where clicked to start drag
                             
@@ -61,9 +65,11 @@ TFLib.TFDraggable = function(){
             
             // required when cursor goes outside containing area and then mouse up fires
             document.addEventListener('mouseup', this._handleMouseUp);
+
+            e.preventDefault();
         },
         _handleMouseMove : function(e){
-                        
+            
             var X = e.clientX, // new x-coordinate in window where moved
                 Y = e.clientY, // new y-coordinate in window where moved
                 curX = X - this.orgX, // new top left x - coordinate of child
@@ -81,7 +87,7 @@ TFLib.TFDraggable = function(){
             this._move(curX , curY);            
         },
         _handleMouseUp : function(e){
-
+            console.log("mouse up"); 
             // on mouse up remove mousemove event
             document.removeEventListener('mousemove', this._handleMouseMove);
             this.childEl.style.cursor='default';
@@ -92,7 +98,11 @@ TFLib.TFDraggable = function(){
             }.bind(this), 100);
 
             document.removeEventListener('mouseup', this._handleMouseUp);
-                          
+            e.preventDefault();                
+        },
+        _handleContext : function(e){
+
+            e.preventDefault();
         },
         _move : function(xpos,ypos){
 

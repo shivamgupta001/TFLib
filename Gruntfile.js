@@ -34,8 +34,8 @@ module.exports = function(grunt){
 		        				'initialize/initializePopup.js',
 		        				'constants/TFConstants.js',
 		        				'popups/TFModalPopup.js',
-		        				'popups/TFStandardPopup.js'/*,
-		        				'common/TFDraggable.js'*/
+		        				'popups/TFStandardPopup.js',
+		        				'common/TFDraggable.js'
 		        			]
 		      }
 
