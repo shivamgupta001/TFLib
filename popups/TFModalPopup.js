@@ -180,7 +180,8 @@ TFLib.ModalPopup = function(config) {
 
             TFLib.TFDraggable.call({
                 childSel : '#'+this.dynamicId+' .tf-modal-inner',
-                parentSel : '#'+this.dynamicId
+                parentSel : '#'+this.dynamicId,
+                elemSel : '#'+this.dynamicId+' .tf-modal-header'
             });
         },
         _handleModalKeyUp : function(e){

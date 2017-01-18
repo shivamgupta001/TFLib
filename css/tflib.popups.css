@@ -71,7 +71,7 @@
     width: 18px;
     height: 18px;
     background: url("./images/invoicePopupClose.png") no-repeat;
-    padding-right: 15px;
+    margin-right: 15px;
 }
 
 .tf-modal-close-btn:hover {
