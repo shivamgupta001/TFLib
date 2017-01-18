@@ -1,5 +1,5 @@
 /**
- * @author Shivam Gupta 8 Jan 2016
+ * @author Shivam Gupta 8 Jan 2017
  * @class TFDraggable
  * @property {string} childSel - element selector which will get dragged
  * @property {string} parentSel - element selector which will cover draggable area
