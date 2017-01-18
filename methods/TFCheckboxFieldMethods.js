@@ -279,21 +279,24 @@ TFLib.TFCheckboxFieldMethods = function(){
 							this.isValidated = true;	
 						}
 					}
-				}else if(val === 'regex'){
-					if(this.validations.regex.value){
-						var regex = new RegExp(this.validations.regex.pattern);
-						if(!regex.test(this.innerComp.value)){
-							this.controlComp.classList.addmany(['tooltip', 'tf-err-border--red']);
-							this.controlComp.setAttribute('data-tooltip', this.validations.regex.errmsg);			
-							this.isValidated = false;
-						}					
-					}
 				}else if(val === 'customError'){
-					if(this.validations.customError.value)
+					if(this.validations.customError.value){
+						this.controlComp.classList.addmany(['tooltip', 'tf-err-border--red']);
+						this.controlComp.setAttribute('data-tooltip', this.validations.regex.errmsg);
 						this.isValidated = false;
+					}
 				}
 			}, this);
 		
 		return this.isValidated;
 	};
+	/**This method will clear tooltip and border if validations present to component 
+      * @mixes TFCheckboxField
+      * @mixes TFComboboxField
+      * @mixes TFRadioField
+      */
+    this.clearError = function(){
+    	this.controlComp.removeAttribute('data-tooltip');
+    	this.controlComp.classList.removemany(['tooltip','tf-err-border--red']);
+    }
 };

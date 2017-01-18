@@ -10,6 +10,7 @@
  * @property {string} name - will be common to all checkboxes , no need to provide individually , but you can override.
  * @property {object} validations - Does apply validations to component only 'isRequired' and 'customError' present.
  * @property {string} fieldLabel - label to component field.
+ * @property {string} displayLabel - 'none' will hide display part of component.
  * @property {integer} flex - will assign flex. 
  * @property {(string|string[])} labelClass -  will be applied to TFCheckboxField label wrapper.
  * @property {(string|string[])} compClass -  will be applied to TFCheckboxField outermost div.
@@ -48,6 +49,7 @@ TFLib.TFCheckboxField = function() {
             this.labelId = me.labelId || "tf-chk-label-" + (TFLib.TFCheckboxField.count = ++TFLib.TFCheckboxField.count || 1);
             this.requiredId = "tf-chk-req-" + (TFLib.TFCheckboxField.count = ++TFLib.TFCheckboxField.count || 1);
             
+            this.displayLabel = me.displayLabel || '';
             this.fieldLayout = me.fieldLayout || 'row';
             this.styles = me.styles || '';
             this.fieldGroup = me.fieldGroup || [];
@@ -81,7 +83,7 @@ TFLib.TFCheckboxField = function() {
             var el = [
                 '<div control-type="tf-checkboxfield-outer"  id="' + this.dynamicId + '"',
                 'class="tf-flex tf-field-container ' + ((this.fieldLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
-                    '<div control-type="tf-chkf-label" class=tf-field-container--label "' + ((this.displayLabel === "none") ? 'tf-display--none' : '') + '">',
+                    '<div control-type="tf-chkf-label" class="tf-field-container--label ' + ((this.displayLabel === "none") ? 'tf-display--none' : '') + '">',
                         '<label id="' + this.labelId + '">' + (this.fieldLabel ? this.fieldLabel : '') + '</label>',
                         '<span id="' + this.requiredId + '" class="tf-required--red" style="display:none;">*</span>',
                     '</div>',

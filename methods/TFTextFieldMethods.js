@@ -379,11 +379,22 @@ TFLib.TFTextFieldMethods = function(){
 					}					
 				}
 			}else if(val === 'customError'){
-				if(this.validations.customError.value)
+				if(this.validations.customError.value){
+					this.controlComp.classList.addmany(['tooltip', 'tf-err-border--red']);
+					this.controlComp.setAttribute('data-tooltip', this.validations.regex.errmsg);			
 					this.isValidated = false;
+				}
 			}
 		}, this);
 		
 		return this.isValidated;
 	};
+	/**This method will clear tooltip and border if validations present to component 
+      * @mixes TFTextField
+      * @mixes TFTextAreaField
+      */
+    this.clearError = function(){
+    	this.controlComp.removeAttribute('data-tooltip');
+    	this.controlComp.classList.removemany(['tooltip','tf-err-border--red']);
+    }
 };

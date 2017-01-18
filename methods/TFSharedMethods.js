@@ -170,6 +170,7 @@ TFLib.TFSharedMethods = function(){
 	this.insertDomAt = function(selector , el){
 		this.outerComp.insertBefore(el , this.outerComp.querySelector(selector));
 	};
+
       /**This method will append  dom at  selector found in dom
       * else if el provided than it will append to current component querying using selector and append el
       * @mixes TFTextField

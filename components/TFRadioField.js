@@ -11,6 +11,7 @@
  * @property {string} name - will be common to all checkboxes , no need to provide individually , but you can override.
  * @property {object} validations - Does apply validations to component only 'isRequired' present.
  * @property {string} fieldLabel - label to component field.
+ * @property {string} displayLabel - 'none' will hide display part of component.
  * @property {(string|string[])} labelClass -  will be applied to TFCheckboxField label wrapper.
  * @property {(string|string[])} compClass -  will be applied to TFCheckboxField outermost div.
  * @property {(string|string[])} controlClass -  will be applied to div wraper of all checkboxes.
@@ -44,7 +45,7 @@ TFLib.TFRadioField = function() {
             this.labelId = me.labelId || "tf-radio-label-" + (TFLib.TFRadioField.count = ++TFLib.TFRadioField.count || 1);
             this.requiredId = "tf-radio-req-" + (TFLib.TFRadioField.count = ++TFLib.TFRadioField.count || 1);
 
-
+            this.displayLabel = me.displayLabel || '';
             this.fieldLayout = me.fieldLayout || 'row';
             this.styles = me.styles || '';
             this.fieldGroup = me.fieldGroup || [];
@@ -77,7 +78,7 @@ TFLib.TFRadioField = function() {
             var el = [
                 '<div control-type="tf-radiofield-outer" id="' + this.dynamicId + '"',
                 'class="tf-field-container tf-flex ' + ((this.fieldLayout === 'row') ? 'tf-flex-direction--row ' : 'tf-flex-direction--column ') + '">',
-                    '<div control-type="tf-radiof-label" class=tf-field-container--label "' + ((this.displayLabel === "none") ? 'tf-display--none' : '') + '">',
+                    '<div control-type="tf-radiof-label" class="tf-field-container--label ' + ((this.displayLabel === "none") ? 'tf-display--none' : '') + '">',
                         '<label id="' + this.labelId + '">' + (this.fieldLabel ? this.fieldLabel : '') + '</label>',
                         '<span id="' + this.requiredId + '" class="tf-required--red" style="display:none;">*</span>',
                     '</div>',
