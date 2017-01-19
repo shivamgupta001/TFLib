@@ -4,6 +4,9 @@
  /** This is a description of the Validation Module. */
 TFLib.TFValidations = function(){
 	
+	// static variable for regex to first handle first blur then work simultaneous with change
+	var blurRegexFirstRun = false;
+
 	//keyboard event event.key List ( Not event.code - will be used in case to differentiate 'ShiftLeft' & 'shiftRight')
 	//KeyboardEvent.keyCode [ Depreceated ] So not used
 	var alphaKeyList = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',' '];
@@ -111,11 +114,14 @@ TFLib.TFValidations = function(){
 
 	// regEx validation
 	this.regex = function(e){
-
-		 
+		
 		var control = this.controlComp;
 		var inputControl = this.innerComp;
 		var controlVal = e.target.value.trim();
+		
+
+		if(e.type == "blur")
+			blurRegexFirstRun = true;
 
 		if(this.validations.regex.value){
 
@@ -131,7 +137,7 @@ TFLib.TFValidations = function(){
 
 
 			regex = new RegExp(regex);
-			if(e.type === 'blur' || e.type === 'input'){
+			if(blurRegexFirstRun && (e.type === 'blur' || e.type === 'input')){
 				if(controlVal.length > 0){
 					if(!regex.test(controlVal)){
 						control.classList.addmany(['tooltip', 'tf-err-border--red']);
@@ -154,5 +160,4 @@ TFLib.TFValidations = function(){
 		}
 		
 	};
-
 }

@@ -1,8 +1,9 @@
 /**
- * @author Shivam Gupta 8 Jan 2016
+ * @author Shivam Gupta 8 Jan 2017
  * @class TFDraggable
- * @property {string} childSel - element selector which will get dragged
- * @property {string} parentSel - element selector which will cover draggable area
+ * @property {string} childSel - child selector which will get dragged [ popup visible ]
+ * @property {string} parentSel - parent selector which will cover draggable area [popup background]
+ * @property {string} elemSel - area of child which is draggable [ popup header draggable] 
  */
 TFLib.TFDraggable = function() {
 
