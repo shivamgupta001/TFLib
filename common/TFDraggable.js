@@ -41,11 +41,13 @@ TFLib.TFDraggable = function() {
         },
         _handleMouseDown: function(e) {
             
-            this.activeEl = document.activeElement;
+            
 
             if ($(this.elemEl).find(e.target).length === 1 || this.elemEl === e.target ) {
                 if(e.buttons !== 2){
-                    console.log("mouse down");
+
+                    this.activeEl = document.activeElement;
+                    
                     var X = e.clientX, // x-coordinate in window where clicked to start drag
                         Y = e.clientY, // y-coordinate in window where clicked to start drag
 
@@ -77,9 +79,7 @@ TFLib.TFDraggable = function() {
             }
         },
         _handleMouseMove: function(e) {
-
             
-            console.log("mouse move");
             var X = e.clientX, // new x-coordinate in window where moved
                 Y = e.clientY, // new y-coordinate in window where moved
                 curX = X - this.orgX, // new top left x - coordinate of child
@@ -97,14 +97,15 @@ TFLib.TFDraggable = function() {
             this._move(curX, curY);
         },
         _handleMouseUp: function(e) {
-            console.log("mouse up");
+            
             // on mouse up remove mousemove event
             document.removeEventListener('mousemove', this._handleMouseMove);
             this.childEl.style.cursor = 'default';
 
             //focus back to last active element
             setTimeout(function() {
-                this.activeEl.focus();
+                if(this.activeEl)
+                    this.activeEl.focus();
             }.bind(this), 100);
 
             document.removeEventListener('mouseup', this._handleMouseUp);

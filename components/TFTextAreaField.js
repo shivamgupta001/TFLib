@@ -54,7 +54,7 @@ TFLib.TFTextAreaField = function(){
 	                'isRequired' : {value : false , errmsg : TFLib.TFConstants.COMMON.ISREQUIRED },
 	                'onlyText' : {value : false },
 	                'onlyNumber' : {value :false },
-	                'regex' : {value : false, errmsg : TFLib.TFConstants.COMMON.REGEX },
+	                'regex' : {value : false, pattern:"*", errmsg : TFLib.TFConstants.COMMON.REGEX },
 	                'customError' : {value : false , errmsg : TFLib.TFConstants.COMMON.CUSTOMERROR }
 	            };
 
