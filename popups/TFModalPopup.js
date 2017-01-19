@@ -213,8 +213,9 @@ TFLib.ModalPopup = function(config) {
                 }
                 if (e.key === "Escape" || e.key === "Esc") {
                     var closeBtn = document.getElementById(itemId).querySelector('.tf-modal-close-btn');
-                    if(closeBtn.style.display !== "none")
+                    if(closeBtn.style.display !== "none"){
                         closeBtn.click();
+                    }
                 }
             }
         },

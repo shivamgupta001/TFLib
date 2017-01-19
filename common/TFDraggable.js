@@ -34,8 +34,8 @@ TFLib.TFDraggable = function() {
             this.childEl.addEventListener('mouseup', this._handleMouseUp);
 
             // mouse contextmenu event binding with current scope
-            this._handleContext = this._handleContext.bind(this);
-            this.childEl.addEventListener('contextmenu', this._handleContext);
+            /*this._handleContext = this._handleContext.bind(this);
+            this.childEl.addEventListener('contextmenu', this._handleContext);*/
 
         },
         _handleMouseDown: function(e) {
@@ -43,15 +43,16 @@ TFLib.TFDraggable = function() {
             this.activeEl = document.activeElement;
 
             if ($(this.elemEl).find(e.target).length === 1 || this.elemEl === e.target ) {
-
-                var X = e.clientX, // x-coordinate in window where clicked to start drag
-                    Y = e.clientY, // y-coordinate in window where clicked to start drag
+                if(e.buttons !== 2){
+                    console.log("mouse down");
+                    var X = e.clientX, // x-coordinate in window where clicked to start drag
+                        Y = e.clientY, // y-coordinate in window where clicked to start drag
 
                     childTop = +this.childEl.getBoundingClientRect().top, // child top wrt parent  
                     childLeft = +this.childEl.getBoundingClientRect().left; // child left wrt parent
 
-                // child width and height 
-                this.childWidth = +this.childEl.getBoundingClientRect().width,
+                    // child width and height 
+                    this.childWidth = +this.childEl.getBoundingClientRect().width,
                     this.childHeight = +this.childEl.getBoundingClientRect().height,
 
                     // parent width and height
@@ -60,23 +61,24 @@ TFLib.TFDraggable = function() {
 
 
 
-                this.orgX = X - childLeft, // top left x - coordinate of child
+                    this.orgX = X - childLeft, // top left x - coordinate of child
                     this.orgY = Y - childTop, // top left y - coordinate of child
 
                     // mouse move binded with current scope
                     this._handleMouseMove = this._handleMouseMove.bind(this),
                     document.addEventListener('mousemove', this._handleMouseMove);
 
-                // required when cursor goes outside containing area and then mouse up fires
-                document.addEventListener('mouseup', this._handleMouseUp);
+                    // required when cursor goes outside containing area and then mouse up fires
+                    document.addEventListener('mouseup', this._handleMouseUp);
 
-                e.preventDefault();
+                    e.preventDefault();   
+                }
             }
         },
         _handleMouseMove: function(e) {
 
-            this.childEl.style.cursor = 'move';
-
+            
+            console.log("mouse move");
             var X = e.clientX, // new x-coordinate in window where moved
                 Y = e.clientY, // new y-coordinate in window where moved
                 curX = X - this.orgX, // new top left x - coordinate of child
@@ -90,7 +92,7 @@ TFLib.TFDraggable = function() {
             if (curY + this.childHeight > this.parentHeight)
                 curY = this.parentHeight - this.childHeight;
 
-
+            this.childEl.style.cursor = 'move';
             this._move(curX, curY);
         },
         _handleMouseUp: function(e) {
@@ -105,11 +107,7 @@ TFLib.TFDraggable = function() {
             }.bind(this), 100);
 
             document.removeEventListener('mouseup', this._handleMouseUp);
-            e.preventDefault();
-        },
-        _handleContext: function(e) {
-
-            e.preventDefault();
+            
         },
         _move: function(xpos, ypos) {
 
