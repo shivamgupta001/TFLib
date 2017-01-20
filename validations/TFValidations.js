@@ -153,6 +153,9 @@ TFLib.TFValidations = function(){
 							//inputControl.setAttribute('title',this.validations.regex.errmsg);
 						}
 					}	
+				}else if(controlVal.length == 0){
+					control.classList.removemany(['tooltip', 'tf-err-border--red']);
+					control.removeAttribute('data-tooltip');
 				}			
 			}	
 		}

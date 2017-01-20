@@ -223,8 +223,6 @@ TFLib.TFTextField = function() {
                                     this.innerComp.addEventListener('input', this.isRequiredHandler);
                                 }
                                 
-
-
                         	}else {
                                 this.requiredComp.style.display = 'none';
                         		this.innerComp.removeEventListener('blur', this.isRequiredHandler);

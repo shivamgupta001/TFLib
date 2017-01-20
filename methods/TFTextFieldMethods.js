@@ -312,8 +312,8 @@ TFLib.TFTextFieldMethods = function(){
 			if(this.validations.regex.value){
 				if(errmsg)
 					this.validations.regex.errmsg = errmsg;
-				if(!this.validations.customError.value)
-					this.controlComp.setAttribute('data-tooltip', this.validations.regex.errmsg);	
+				/*if(!this.validations.customError.value)
+					this.controlComp.setAttribute('data-tooltip', this.validations.regex.errmsg);*/	
 				
 				if(pattern)
 					this.validations.regex.pattern = pattern;	
@@ -322,6 +322,13 @@ TFLib.TFTextFieldMethods = function(){
 			}else if(!this.validations.customError.value){
 				this.controlComp.classList.removemany(['tooltip','tf-err-border--red']);
 				this.controlComp.removeAttribute("data-tooltip");
+
+				if(this.regex.blurFirstRun == null){
+					this.regex.blurFirstRun = false;
+				}else{
+					if(this.regex.blurFirstRun)
+						this.regex.blurFirstRun = false;
+				}
 			}
 		}else{
 			if(status){
