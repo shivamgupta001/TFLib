@@ -130,6 +130,9 @@ TFLib.ModalPopup = function(config) {
             }else{
                 var tpl = document.querySelector('template[data-template-id="'+this.dynamicId+'"]')
                 if(tpl){
+
+                    this._handlePolyfill();
+
                     var clone = document.importNode(tpl.content, true);
                     this.modalBody.appendChild(clone);    
                 }
@@ -144,6 +147,33 @@ TFLib.ModalPopup = function(config) {
                 this.modalFooter.appendChild(this.footerTemplate);
             }
 
+        },
+        _handlePolyfill : function(){
+            (function templatePolyfill(d) {
+                if('content' in d.createElement('template')) {
+                    return false;
+                }
+
+                var qPlates = d.getElementsByTagName('template'),
+                    plateLen = qPlates.length,
+                    elPlate,
+                    qContent,
+                    contentLen,
+                    docContent;
+
+                for(var x=0; x<plateLen; ++x) {
+                    elPlate = qPlates[x];
+                    qContent = elPlate.childNodes;
+                    contentLen = qContent.length;
+                    docContent = d.createDocumentFragment();
+
+                    while(qContent[0]) {
+                        docContent.appendChild(qContent[0]);
+                    }
+
+                    elPlate.content = docContent;
+                }
+            })(document);
         },
         _bindEvents: function() {
 
