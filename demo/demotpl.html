@@ -3,96 +3,36 @@
 <head>
     <title></title>
     <style type="text/css">
-    body{
-        display: flex;
-        justify-content: center;
-        align-items : center;
-        position: absolute;
-        top : 0px;
-        left : 0px;
-        right : 0px;
-        bottom : 0px;
-        flex-direction : column;
-    }
-    .comp{
-             
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction : column;
-        background-color: red;
-        box-shadow: 5px 5px 5px #888888;
-        border-radius : 5px;
-        padding : 5px;
-        color: whitesmoke;
-        max-width: 200px;
-        display : none;
-    }
-    .arrow{
-        border-top : 10px solid transparent;
-        border-right : 10px solid transparent;
-        border-left : 10px solid transparent;
-        border-bottom : 10px solid transparent;
-        position: absolute;
-    }
-    .arrow-up{
-        border-bottom : 10px solid red;
-        top : -20px;
-    }
-    .arrow-down{
-        border-top : 10px solid red;
-        bottom : -20px;   
-    }
-    .arrow-left{
-        border-right : 10px solid red;
-        left : -20px;      
-    }
-    .arrow-right{
-        border-left : 10px solid red;
-        right : -20px;         
-    }
-   
+        body{
+            position: absolute;
+            top : 0px;
+            left : 0px;
+            right : 0px;
+            bottom : 0px;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-    
-    </style>
+        }
+        div{
+            font-size: 100px;
+            position: absolute;
+        }
+    </style> 
 </head>
 <body>
-   
-        First Name: <input type="text" name="test" id='senderId'>
-        Last Name: <input type="text" name="test" id='senderId'>
-        <div id="pop" class="comp">
-            <div class="arrow arrow-up"></div>
-            Valid Characters are 0-9 , a-z, A-Z 
-        </div>  
-        <div id="pop" class="comp">
-            <div class="arrow arrow-down"></div>
-            Valid Characters are 0-9 , a-z, A-Z  Valid Characters are 0-9 , a-z, A-Z  Valid Characters are 0-9 , a-z, A-Z  
-            Valid Characters are 0-9 , a-z, A-Z  Valid Characters are 0-9 , a-z, A-Z  Valid Characters are 0-9 , a-z, A-Z  
-        </div>
-        <!-- <div id="pop" class="comp">
-            <div class="arrow arrow-left"></div>
-            Valid Characters are 0-9 , a-z, A-Z 
-        </div>
-        <div id="pop" class="comp">
-            <div class="arrow arrow-right"></div>
-            Valid Characters are 0-9 , a-z, A-Z 
-        </div> -->
+   <div id="load">0%</div>
 
-        
-        <script>
-            var input = document.getElementById('senderId');
-            input.addEventListener('blur', function(e){
-                var pop = document.getElementById('pop');
-                pop.style.display = "flex";
-                pop.style.position = 'absolute';
-                pop.style.left = e.target.offsetLeft + 'px';
-                pop.style.top = e.target.offsetTop - e.target.clientHeight - pop.clientHeight + 'px';
-            });
-            input.addEventListener('focus', function(e){
-                var pop = document.getElementById('pop');
-                pop.style.display = "none";
-            });
-        </script>
+   <script type="text/javascript">
+       var a  = document.getElementById('load');
+       var i =0;
+       for(; i< 1000000 ; i++){
+            setTimeout(function(i){
+                this.innerText = i + '%';
+            }.bind(a, i), 100);
+         
+       }
+   </script>
 </body>
 </html>
