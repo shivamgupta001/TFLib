@@ -34,19 +34,11 @@ TFLib.TFDraggable = function() {
             this._handleMouseUp = this._handleMouseUp.bind(this);
             this.childEl.addEventListener('mouseup', this._handleMouseUp);
 
-            // mouse contextmenu event binding with current scope
-            /*this._handleContext = this._handleContext.bind(this);
-            this.childEl.addEventListener('contextmenu', this._handleContext);*/
-
         },
         _handleMouseDown: function(e) {
             
-            
-
             if ($(this.elemEl).find(e.target).length === 1 || this.elemEl === e.target ) {
                 if(e.buttons !== 2){
-                    console.log("mouse down");
-                    console.log(e);
 
                     this.activeEl = document.activeElement;
                     
@@ -76,6 +68,7 @@ TFLib.TFDraggable = function() {
                     // required when cursor goes outside containing area and then mouse up fires
                     document.addEventListener('mouseup', this._handleMouseUp);
 
+                    // solution for mouse getting attached to popup forever...
                     e.preventDefault();   
                 }
             }
@@ -100,22 +93,17 @@ TFLib.TFDraggable = function() {
         },
         _handleMouseUp: function(e) {
             
-            if ($(this.elemEl).find(e.target).length === 1 || this.elemEl === e.target ) {
-                if(e.buttons !== 2){
+            // on mouse up remove mousemove event
+            document.removeEventListener('mousemove', this._handleMouseMove);
+            this.childEl.style.cursor = 'default';
 
-                    // on mouse up remove mousemove event
-                    document.removeEventListener('mousemove', this._handleMouseMove);
-                    this.childEl.style.cursor = 'default';
+            //focus back to last active element
+            setTimeout(function() {
+                if(this.activeEl)
+                    this.activeEl.focus();
+            }.bind(this), 100);
 
-                    //focus back to last active element
-                    setTimeout(function() {
-                        if(this.activeEl)
-                            this.activeEl.focus();
-                    }.bind(this), 100);
-
-                    document.removeEventListener('mouseup', this._handleMouseUp);        
-                }           
-            }
+            document.removeEventListener('mouseup', this._handleMouseUp);        
         },
         _move: function(xpos, ypos) {
 
