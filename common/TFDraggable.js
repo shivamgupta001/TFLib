@@ -45,6 +45,8 @@ TFLib.TFDraggable = function() {
 
             if ($(this.elemEl).find(e.target).length === 1 || this.elemEl === e.target ) {
                 if(e.buttons !== 2){
+                    console.log("mouse down");
+                    console.log(e);
 
                     this.activeEl = document.activeElement;
                     
@@ -98,18 +100,22 @@ TFLib.TFDraggable = function() {
         },
         _handleMouseUp: function(e) {
             
-            // on mouse up remove mousemove event
-            document.removeEventListener('mousemove', this._handleMouseMove);
-            this.childEl.style.cursor = 'default';
+            if ($(this.elemEl).find(e.target).length === 1 || this.elemEl === e.target ) {
+                if(e.buttons !== 2){
 
-            //focus back to last active element
-            setTimeout(function() {
-                if(this.activeEl)
-                    this.activeEl.focus();
-            }.bind(this), 100);
+                    // on mouse up remove mousemove event
+                    document.removeEventListener('mousemove', this._handleMouseMove);
+                    this.childEl.style.cursor = 'default';
 
-            document.removeEventListener('mouseup', this._handleMouseUp);
-            
+                    //focus back to last active element
+                    setTimeout(function() {
+                        if(this.activeEl)
+                            this.activeEl.focus();
+                    }.bind(this), 100);
+
+                    document.removeEventListener('mouseup', this._handleMouseUp);        
+                }           
+            }
         },
         _move: function(xpos, ypos) {
 

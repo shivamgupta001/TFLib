@@ -146,6 +146,7 @@
     content: attr(data-tooltip);
     font-size: 14px;
     line-height: 1.2;
+    word-break : break-word;
 }
 
 
