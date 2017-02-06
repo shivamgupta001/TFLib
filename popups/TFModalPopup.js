@@ -128,9 +128,8 @@ TFLib.ModalPopup = function(config) {
             if(this.dataTemplate){
                 this.modalBody.appendChild(this.dataTemplate);  
             }else{
-                var tpl = document.querySelector('template[data-template-id="'+this.dynamicId+'"]')
+                var tpl = document.querySelector('[data-template-id="'+this.dynamicId+'"]')
                 if(tpl){
-
                     var clone = this._templateContent(tpl);
                     this.modalBody.appendChild(clone);    
                 }

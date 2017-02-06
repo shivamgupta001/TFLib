@@ -378,20 +378,22 @@ TFLib.TFTextFieldMethods = function(){
 			}else if(val === 'regex'){
 				if(this.validations.regex.value){
 					var regex = new RegExp(this.validations.regex.pattern);
-					if(!regex.test(this.innerComp.value) && this.innerComp.value.length > 1){
+					if(this.innerComp.value.length > 0 && !regex.test(this.innerComp.value)){
 						this.controlComp.classList.addmany(['tooltip', 'tf-err-border--red']);
 						this.controlComp.setAttribute('data-tooltip', this.validations.regex.errmsg);			
 						this.isValidated = false;
 					}else{
-						this.controlComp.classList.removemany(['tooltip', 'tf-err-border--red']);
-						this.controlComp.removeAttribute('data-tooltip', this.validations.regex.errmsg);			
+						if(this.innerComp.value.length > 0){
+							this.controlComp.classList.removemany(['tooltip', 'tf-err-border--red']);
+							this.controlComp.removeAttribute('data-tooltip', this.validations.regex.errmsg);				
+						}
 					}					
 				}
 				this.regex.blurFirstRun = true;
 			}else if(val === 'customError'){
 				if(this.validations.customError.value){
 					this.controlComp.classList.addmany(['tooltip', 'tf-err-border--red']);
-					this.controlComp.setAttribute('data-tooltip', this.validations.regex.errmsg);			
+					this.controlComp.setAttribute('data-tooltip', this.validations.customError.errmsg);			
 					this.isValidated = false;
 				}
 			}
