@@ -162,6 +162,10 @@ TFLib.TFTextAreaField = function(){
 						this.innerComp.addEventListener(listener , this.listeners[listener].bind(me));
 					}
 				}
+
+				 // focus and blur detection
+	            this.innerComp.addEventListener('focus',this.handleFocus);
+	            this.innerComp.addEventListener('blur',this.handleBlur);
 			},
 			_attachProperties : function(){
 				
@@ -286,6 +290,12 @@ TFLib.TFTextAreaField = function(){
 	                    }
 	                }, this);
 	            
+	        },
+	        handleFocus : function(e){
+	            this.parentNode.classList.add('tf-control-selected');
+	        },
+	        handleBlur : function(e){
+	            this.parentNode.classList.remove('tf-control-selected');
 	        }
 		};
 		

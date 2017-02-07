@@ -2,7 +2,9 @@
 
 
 /*Common to all modules start */
-
+.tf-control-selected {
+    border : 1px solid #0056a5 !important;
+} 
 .tf-flex {
     display: flex;
 }
