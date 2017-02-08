@@ -140,10 +140,10 @@ TFLib.TFButton = function(){
 				}
 			},
 			handleFocus : function(e){
-	            this.parentNode.classList.add('tf-control-selected');
+	            this.classList.add('tf-control-selected');
 	        },
 	        handleBlur : function(e){
-	            this.parentNode.classList.remove('tf-control-selected');
+	            this.classList.remove('tf-control-selected');
 	        }
 		};
 		

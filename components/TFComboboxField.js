@@ -96,7 +96,6 @@ TFLib.TFComboboxField = function() {
                         '</div>',
                         '<div control-type="tf-combofield" class="tf-field-container--control tf-field-with-btn" >',
                             '<select class="tf-flex tf-flex--one"',
-                                'type="text"',
                                 '' + (this.name ? 'name="' + this.name + '"' : '') + '',
                                 '' + (this.tabindex ? 'tabindex="' + this.tabindex + '"' : '') + '',
                                 '' + this.multiple + '',
