@@ -128,10 +128,12 @@
                 items : [{
                     flex : 3,
                     type : 'textfield',
-                    fieldLabel : 'TotalRecieve Amount',
+                    fieldLabel : 'TotalRecieve Amount I am',
                     fieldLayout : 'column',
                     validations : {
-                        regex : {value : true , pattern : '^/d[1-9]{1}' , errmsg : 'hello hi'}
+                        customError : {value: true , errmsg : 'hello dear fill it'},
+                        regex : {value : true , pattern : '^[A-Za-z0-9]{11}$' , errmsg : 'hello hi'},
+                        isRequired : {value:true , errmsg: 'custom re'}
                     }
                 },{
                     flex : 1,

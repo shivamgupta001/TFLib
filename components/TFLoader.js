@@ -54,7 +54,6 @@ TFLib.TFLoader = function() {
 			// LoaderImage 
 			//this.LoaderImage = me.loaderImage || '';
 
-			this.activeElement = document.activeElement;
 
 		},/** @access private */
 		_generateTemplate : function(){

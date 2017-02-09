@@ -48,6 +48,8 @@ TFLib.TFValidations = function(){
 					// check custom error before removing
 					if(this.validations.customError.value){
 						control.setAttribute('data-tooltip',this.validations.customError.errmsg);
+					}else if(this.validations.regex.value){
+						control.setAttribute('data-tooltip',this.validations.regex.errmsg);
 					}else{
 						control.classList.removemany(['tooltip', 'tf-err-border--red']);
 						control.removeAttribute('data-tooltip');
