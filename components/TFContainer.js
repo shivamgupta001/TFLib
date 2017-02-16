@@ -61,14 +61,12 @@ TFLib.TFContainer = function(){
 			},/** @access private */
 			_generateTemplate : function(){
 				
-				var el = document.createElement(this.tagName);
-				el.classList.add('tf-field-container');
-				if(this.layout)
-					el.classList.add('tf-flex');
-				el.setAttribute('control-type','tf-container');
-				el.setAttribute('id', this.dynamicId);
-				
-				this.childTemplate = el;
+				var el  =[
+					'<div control-type="tf-container" class="tf-field-container" id="'+this.dynamicId+'">',
+					'</div>'
+				].join('\n');
+
+				this.childTemplate = $(el)[0];
 			},/** @access private */
 			_cacheDom : function(){
 				
@@ -93,7 +91,11 @@ TFLib.TFContainer = function(){
 
 				//apply class
 				if(this.compClass) this.outerComp.classList.addmany(this.compClass);
-				
+
+				// apply flex
+				if(this.layout)
+					this.outerComp.classList.add('tf-flex');
+
 				//apply layout
 				if(this.layout === "row")
 					this.outerComp.classList.add('tf-flex-direction--row');
