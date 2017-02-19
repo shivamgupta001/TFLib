@@ -23,11 +23,11 @@ TFLib.TFLoaderMethods = function(){
       * @memberof TFLoaderMethods
       * @param {string} loader text 
       */
-	this.show = function(loaderText){
+	this.show = function(loaderText , activeElement){
 		this.loaderCount++;
 		if(loaderText) this.innerComp.loaderText.innerText = loaderText;
 		this.outerComp.style["display"] = "table";
-		this.activeElement = document.activeElement;
+		this.activeElement = activeElement || document.activeElement;
 		this.outerComp.focus();
 	}
 
@@ -41,8 +41,7 @@ TFLib.TFLoaderMethods = function(){
 			this.innerComp.loaderImage.innerHTML = this.innerComp.initLoaderImage;
 			this.innerComp.loaderText.innerText = this.innerComp.initLoaderText;
 			this.activeElement.focus();
-		}
-		
+		}		
 	}
 
 	/**This method will show loader 

@@ -174,6 +174,7 @@ StandardPopup = function(){
                 dataTemplate: this.innerComp,
                 modalOnClose: this.modalOnClose,
                 modalOnOpen: this.modalOnOpen,
+                activeElement : me.activeElement,
                 destroy : this.destroy.bind(this),
                 onConfig: true,
                 resizable: false,
