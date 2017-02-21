@@ -15,7 +15,8 @@ TFLib.ErrorPopup = function(config) {
     config.title = config.title || TFLib.TFConstants.POPUP.ERROR;
     config.imgClassName = 'tf-error-icon';
     config.CANCEL = config.CANCEL || false;
-    StandardPopup.call(config);
+    StandardPopup.call(config);    
+    
 };
 TFLib.InfoPopup = function(config) {
 
@@ -49,7 +50,7 @@ StandardPopup = function(){
 
         scope : this,
         _init : function(){
-
+            
             this._initialize();
             this._generateTemplate();
             this._cacheDom();
@@ -57,7 +58,7 @@ StandardPopup = function(){
             this._bindEvents();
             this._attachProperties();
             this._render();
-            
+                
         },
         _initialize : function(){
             
@@ -160,7 +161,7 @@ StandardPopup = function(){
             
             var me = this.scope;
             
-            TFLib.ModalPopup({
+            var stdPopup = TFLib.ModalPopup({
                 styles: {
                     minWidth : '400px',
                     maxWidth : '500px',
@@ -179,8 +180,9 @@ StandardPopup = function(){
                 onConfig: true,
                 resizable: false,
                 footerVisible : true
-            }).show();
-
+            });
+            if(stdPopup)
+                stdPopup.show();
             // caching after render
             this.closeComp = document.getElementById(this.popupId).querySelector('.tf-modal-close-btn');
             this._attachProperties();

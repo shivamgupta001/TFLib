@@ -96,6 +96,7 @@ TFLib.TFRadioField = function() {
             this.outerComp = this.childTemplate;
             this.controlComp = this.childTemplate.querySelector('[control-type="tf-radiofield"]');
             this.labelComp = this.childTemplate.querySelector('[control-type="tf-radiof-label"]');
+            this.innerComp = this.controlComp.getElementsByTagName('input');
             this.requiredComp = this.labelComp.querySelector('#' + this.requiredId);
 
         },
