@@ -6,7 +6,8 @@ TFLib.TFValidations = function(){
 	
 	//keyboard event event.key List ( Not event.code - will be used in case to differentiate 'ShiftLeft' & 'shiftRight')
 	//KeyboardEvent.keyCode [ Depreceated ] So not used
-	var alphaKeyList = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',' '];
+	var alphaKeyList = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',' ',
+	'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','Spacebar'];
 	var numberKeyList = ['0','1','2','3','4','5','6','7','8','9'];
 	var generalKeyList = ['Tab','CapsLock','Shift','Enter','Backspace','Alt','Control'];
 	var cursorControlKeyList = ['ScrollLock', 'Delete', 'Insert','Home','End','PageUp','PageDown','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'];
