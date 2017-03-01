@@ -47,9 +47,9 @@ TFLib.TFValidations = function(){
 			}else{
 				if(control.classList.contains('tooltip')){
 					// check custom error before removing
-					if(this.validations.customError.value){
+					if(this.validations.customError && this.validations.customError.value){
 						control.setAttribute('data-tooltip',this.validations.customError.errmsg);
-					}else if(this.validations.regex.value){
+					}else if(this.validations.regex && this.validations.regex.value){
 						control.setAttribute('data-tooltip',this.validations.regex.errmsg);
 					}else{
 						control.classList.removemany(['tooltip', 'tf-err-border--red']);
@@ -64,7 +64,7 @@ TFLib.TFValidations = function(){
 			if(controlVal.length > 0 && (control.getAttribute('data-tooltip') === this.validations.isRequired.errmsg)){
 				if(control.classList.contains('tooltip')){
 					// check custom error before removing
-					if(this.validations.customError.value){
+					if(this.validations.customError && this.validations.customError.value){
 						control.setAttribute('data-tooltip',this.validations.customError.errmsg);
 					}else{
 						control.classList.removemany(['tooltip', 'tf-err-border--red']);
@@ -147,7 +147,7 @@ TFLib.TFValidations = function(){
 
 					}else{
 						if(control.classList.contains('tooltip')){
-							if(this.validations.customError.value){
+							if(this.validations.customError && this.validations.customError.value){
 								control.setAttribute('data-tooltip',this.validations.customError.errmsg);
 							}else{
 								control.classList.removemany(['tooltip', 'tf-err-border--red']);

@@ -206,7 +206,7 @@ TFLib.ModalPopup = function(config) {
                 // retrieving id and data-zindex for all popups 
                 var data = [].map.call(popups, function(value, index) {
                     var id = value.id;
-                    var zindex = value.dataset.zindex;
+                    var zindex = value.getAttribute("data-zindex");
                     var obj = {};
                     obj[zindex] = id;
                     return obj;
