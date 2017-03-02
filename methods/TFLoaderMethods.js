@@ -23,10 +23,12 @@ TFLib.TFLoaderMethods = function(){
       * @memberof TFLoaderMethods
       * @param {string} loader text 
       */
-	this.show = function(loaderText){
+	this.show = function(loaderText , activeElement){
 		this.loaderCount++;
 		if(loaderText) this.innerComp.loaderText.innerText = loaderText;
 		this.outerComp.style["display"] = "table";
+		this.activeElement = activeElement || document.activeElement;
+		this.outerComp.focus();
 	}
 
 	/**This method will hide loader 
@@ -38,8 +40,8 @@ TFLib.TFLoaderMethods = function(){
 			this.outerComp.style["display"] = "none";
 			this.innerComp.loaderImage.innerHTML = this.innerComp.initLoaderImage;
 			this.innerComp.loaderText.innerText = this.innerComp.initLoaderText;
-		}
-		
+			this.activeElement.focus();
+		}		
 	}
 
 	/**This method will show loader 

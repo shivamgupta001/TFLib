@@ -2,7 +2,9 @@
 
 
 /*Common to all modules start */
-
+.tf-control-selected {
+    border : 1px solid #0056a5 !important;
+} 
 .tf-flex {
     display: flex;
 }
@@ -33,6 +35,7 @@
 
 .tf-required--red {
     color: red;
+    flex : 1;
 }
 
 
@@ -59,8 +62,8 @@
     border-radius: 4px;
 }
 .tf-field-with-btn button {
-    width: 14px;
-    height: 14px;
+    width: 17px;
+    height: 17px;
     border: none;
     background-color: transparent;
     background-repeat: no-repeat;
@@ -146,7 +149,7 @@
     content: attr(data-tooltip);
     font-size: 14px;
     line-height: 1.2;
-    word-break : break-word;
+    word-wrap : break-word;
 }
 
 
@@ -347,3 +350,200 @@
     vertical-align: middle;
     line-height: 70px;
 }
+/* css loader start */
+@-webkit-keyframes uil-ripple {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    margin: 0 0 0 0;
+  }
+  33% {
+    width: 44%;
+    height: 44%;
+    margin: -22% 0 0 -22%;
+    opacity: 1;
+  }
+  100% {
+    width: 88%;
+    height: 88%;
+    margin: -44% 0 0 -44%;
+    opacity: 0;
+  }
+}
+@-webkit-keyframes uil-ripple {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    margin: 0 0 0 0;
+  }
+  33% {
+    width: 44%;
+    height: 44%;
+    margin: -22% 0 0 -22%;
+    opacity: 1;
+  }
+  100% {
+    width: 88%;
+    height: 88%;
+    margin: -44% 0 0 -44%;
+    opacity: 0;
+  }
+}
+@-moz-keyframes uil-ripple {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    margin: 0 0 0 0;
+  }
+  33% {
+    width: 44%;
+    height: 44%;
+    margin: -22% 0 0 -22%;
+    opacity: 1;
+  }
+  100% {
+    width: 88%;
+    height: 88%;
+    margin: -44% 0 0 -44%;
+    opacity: 0;
+  }
+}
+@-ms-keyframes uil-ripple {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    margin: 0 0 0 0;
+  }
+  33% {
+    width: 44%;
+    height: 44%;
+    margin: -22% 0 0 -22%;
+    opacity: 1;
+  }
+  100% {
+    width: 88%;
+    height: 88%;
+    margin: -44% 0 0 -44%;
+    opacity: 0;
+  }
+}
+@-moz-keyframes uil-ripple {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    margin: 0 0 0 0;
+  }
+  33% {
+    width: 44%;
+    height: 44%;
+    margin: -22% 0 0 -22%;
+    opacity: 1;
+  }
+  100% {
+    width: 88%;
+    height: 88%;
+    margin: -44% 0 0 -44%;
+    opacity: 0;
+  }
+}
+@-webkit-keyframes uil-ripple {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    margin: 0 0 0 0;
+  }
+  33% {
+    width: 44%;
+    height: 44%;
+    margin: -22% 0 0 -22%;
+    opacity: 1;
+  }
+  100% {
+    width: 88%;
+    height: 88%;
+    margin: -44% 0 0 -44%;
+    opacity: 0;
+  }
+}
+@-o-keyframes uil-ripple {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    margin: 0 0 0 0;
+  }
+  33% {
+    width: 44%;
+    height: 44%;
+    margin: -22% 0 0 -22%;
+    opacity: 1;
+  }
+  100% {
+    width: 88%;
+    height: 88%;
+    margin: -44% 0 0 -44%;
+    opacity: 0;
+  }
+}
+@keyframes uil-ripple {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    margin: 0 0 0 0;
+  }
+  33% {
+    width: 44%;
+    height: 44%;
+    margin: -22% 0 0 -22%;
+    opacity: 1;
+  }
+  100% {
+    width: 88%;
+    height: 88%;
+    margin: -44% 0 0 -44%;
+    opacity: 0;
+  }
+}
+.uil-ripple-css {
+  background: none;
+  position: relative;
+  width: 67px;
+  height: 67px;
+}
+.uil-ripple-css div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  border-radius: 50%;
+  border-width: 4px;
+  border-style: solid;
+  -ms-animation: uil-ripple 2s ease-out infinite;
+  -moz-animation: uil-ripple 2s ease-out infinite;
+  -webkit-animation: uil-ripple 2s ease-out infinite;
+  -o-animation: uil-ripple 2s ease-out infinite;
+  animation: uil-ripple 2s ease-out infinite;
+}
+.uil-ripple-css div:nth-of-type(1) {
+  border-color: #5b5bf0;
+}
+.uil-ripple-css div:nth-of-type(2) {
+  border-color: #524a69;
+  -ms-animation-delay: 1s;
+  -moz-animation-delay: 1s;
+  -webkit-animation-delay: 1s;
+  -o-animation-delay: 1s;
+  animation-delay: 1s;
+}
+
+/* css loader end */

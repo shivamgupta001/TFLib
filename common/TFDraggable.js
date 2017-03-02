@@ -95,12 +95,16 @@ TFLib.TFDraggable = function() {
             document.removeEventListener('mousemove', this._handleMouseMove);
             this.childEl.style.cursor = 'default';
 
-            //focus back to last active element
-            setTimeout(function() {
-                if(this.activeEl)
-                    this.activeEl.focus();
-            }.bind(this), 100);
+            if ($(this.elemEl).find(e.target).length === 1 || this.elemEl === e.target ) {
+                if(e.buttons !== 2){
 
+                    //focus back to last active element
+                    setTimeout(function() {
+                        if(this.activeEl)
+                            this.activeEl.focus();
+                    }.bind(this), 100);
+                }
+            }
             document.removeEventListener('mouseup', this._handleMouseUp);        
         },
         _move: function(xpos, ypos) {

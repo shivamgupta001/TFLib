@@ -67,7 +67,7 @@ TFLib.ModalPopup = function(config) {
                 // user Template
                 this.dataTemplate = me.dataTemplate || null;
                 this.footerTemplate = me.footerTemplate || null;
-                this.activeElement = document.activeElement;
+                this.activeElement = me.activeElement || document.activeElement;
         },
         _validateInitialize: function() {
 
@@ -128,9 +128,8 @@ TFLib.ModalPopup = function(config) {
             if(this.dataTemplate){
                 this.modalBody.appendChild(this.dataTemplate);  
             }else{
-                var tpl = document.querySelector('template[data-template-id="'+this.dynamicId+'"]')
+                var tpl = document.querySelector('[data-template-id="'+this.dynamicId+'"]')
                 if(tpl){
-
                     var clone = this._templateContent(tpl);
                     this.modalBody.appendChild(clone);    
                 }
@@ -207,7 +206,7 @@ TFLib.ModalPopup = function(config) {
                 // retrieving id and data-zindex for all popups 
                 var data = [].map.call(popups, function(value, index) {
                     var id = value.id;
-                    var zindex = value.dataset.zindex;
+                    var zindex = value.getAttribute("data-zindex");
                     var obj = {};
                     obj[zindex] = id;
                     return obj;
@@ -245,6 +244,7 @@ TFLib.ModalPopup = function(config) {
             setTimeout(function(){
                 this.focus();
             }.bind(this.activeElement), 100);
+
             if (this.modalCloseCallback != '')  
                 toDestroy = this.modalCloseCallback.call(me, e);
 

@@ -127,7 +127,7 @@ TFLib.TFRadioField = function() {
                 this.controlComp.appendChild(TFLib.TFRadio.call(item));
             }, this);
 
-            // cache Dom
+            // cache Dom after adding radiofield
             this.innerComp = this.controlComp.getElementsByTagName('input');
         },
         _bindEvents: function() {

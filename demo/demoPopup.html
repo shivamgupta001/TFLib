@@ -169,8 +169,7 @@
 
 		function runAlertPopup(){
 			
-			TFLib.SuccessPopup({
-				
+			TFLib.ConfirmPopup({				
 				dataTemplate : $('<div class="abcdef">I am checkbox click me if you can and buitton will disappear <input type="checkbox" id="chke"></div>'),
 				modalOnClose : helloClose,
 				modalOnOpen : helloOpen,
@@ -181,8 +180,7 @@
 			$('#chke').on('change', function(e){
 				debugger;
 
-			});
-			
+			});			
 		}
 
 	</script>

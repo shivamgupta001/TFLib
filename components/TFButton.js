@@ -110,6 +110,10 @@ TFLib.TFButton = function(){
 						this.innerComp.addEventListener(listener , this.listeners[listener].bind(me));
 					}
 				}
+
+				// focus and blur detection
+	            this.innerComp.addEventListener('focus',this.handleFocus);
+	            this.innerComp.addEventListener('blur',this.handleBlur);
 			},/** @access private */
 			_attachProperties : function(){
 				
@@ -134,7 +138,13 @@ TFLib.TFButton = function(){
 				if(this.render != ''){
 					me.render.call(me);	// last method , everything done
 				}
-			}
+			},
+			handleFocus : function(e){
+	            this.classList.add('tf-control-selected');
+	        },
+	        handleBlur : function(e){
+	            this.classList.remove('tf-control-selected');
+	        }
 		};
 		
 	return button._init();
