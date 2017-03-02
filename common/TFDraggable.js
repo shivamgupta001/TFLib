@@ -56,8 +56,6 @@ TFLib.TFDraggable = function() {
                     this.parentWidth = +this.parentEl.getBoundingClientRect().width,
                     this.parentHeight = +this.parentEl.getBoundingClientRect().height;
 
-
-
                     this.orgX = X - childLeft, // top left x - coordinate of child
                     this.orgY = Y - childTop, // top left y - coordinate of child
 
