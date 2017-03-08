@@ -11,11 +11,16 @@
     pointer-events: auto;
     background-color: rgba(0, 0, 0, 0.2);
     z-index: 1000;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     font-size : 14px;
-
 }
 .tf-modal-inner {
     min-width: 400px;
@@ -23,8 +28,13 @@
     background-color: white;
     pointer-events: auto;
     border-radius: 5px 5px 0 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     position: absolute;
     -ms-transform: translate(-50%,-50%);
     -moz-transform:translate(-50%,-50%);
@@ -38,13 +48,21 @@
     font-weight: bold;
     font-family: Arial;
     border-radius: inherit;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .tf-modal-body {
-    flex: 1 0 auto;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 0 auto;
+            flex: 1 0 auto;
     position: relative;
     padding:  5px;
     min-height: 90px;
@@ -52,9 +70,15 @@
 
 .tf-modal-footer {
     height: 40px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .tf-modal-title {
@@ -92,18 +116,29 @@
 
 .tf-std-popup{
     
+    display: -webkit-box;
+    
+    display: -ms-flexbox;
+    
     display: flex;
-    flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+        flex-flow: row wrap;
 }
 .tf-std-popup-icon{
 
     width : 80px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     padding-top: 10px;
 }
 .tf-std-popup-msg{
-    flex : 2;
+    -webkit-box-flex : 2;
+        -ms-flex : 2;
+            flex : 2;
     padding: 10px;
 }
 .tf-confirm-icon{
