@@ -40,7 +40,7 @@ TFLib.TFLoaderMethods = function(){
 			this.outerComp.style["display"] = "none";
 			this.innerComp.loaderImage.innerHTML = this.innerComp.initLoaderImage;
 			this.innerComp.loaderText.innerText = this.innerComp.initLoaderText;
-			this.activeElement.focus();
+			if(this.activeElement) this.activeElement.focus();
 		}		
 	}
 

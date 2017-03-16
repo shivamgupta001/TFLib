@@ -319,7 +319,7 @@ TFLib.TFTextFieldMethods = function(){
 					this.validations.regex.pattern = pattern;	
 
 				
-			}else if(!this.validations.customError.value){
+			}else if(!(this.validations.customError && this.validations.customError.value)){
 				this.controlComp.classList.removemany(['tooltip','tf-err-border--red']);
 				this.controlComp.removeAttribute("data-tooltip");
 

@@ -59,6 +59,7 @@ TFLib.TFDraggable = function() {
                     this.orgX = X - childLeft, // top left x - coordinate of child
                     this.orgY = Y - childTop, // top left y - coordinate of child
 
+                    
                     // mouse move binded with current scope
                     this._handleMouseMove = this._handleMouseMove.bind(this),
                     document.addEventListener('mousemove', this._handleMouseMove);
@@ -86,6 +87,8 @@ TFLib.TFDraggable = function() {
             if (curY + this.childHeight > this.parentHeight)
                 curY = this.parentHeight - this.childHeight;
 
+            
+            this.childEl.style.transform = "translate(0%,0%)";
             this.childEl.style.cursor = 'move';
             this._move(curX, curY);
         },
