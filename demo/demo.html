@@ -102,14 +102,30 @@
 
             /* TFCheckboxField Demo start*/
             var receiverEntity = TFLib.TFRadioField.call({
-                fieldLabel  : 'Entity Type',
-                fieldLayout : 'column',
-                groupLayout : 'row',
+                fieldLabel  : 'Diversity',
+                fieldLayout : 'row',
+                validations : {
+                    'isRequired' : {value : true , errmsg : 'diversity required'}
+                },
+                groupLayout : 'column',
                 fieldGroup : [{
-                    fieldLabel : 'Individual',
-                    checked : false
+                    fieldLabel : 'Male',
+                    name : 'gender',
+                    attributes : {
+                        value : 'male'    
+                    }                    
                 },{
-                    fieldLabel : 'Company'
+                    fieldLabel : 'Female',
+                    name : 'gender',
+                    attributes : {
+                        value : 'female'    
+                    }                    
+                },{
+                    fieldLabel : 'Other',
+                    name : 'gender',
+                    attributes : {
+                        value : 'other'    
+                    }                    
                 }]
             });
             /* TFCheckboxField Demo end*/
