@@ -104,7 +104,7 @@ TFLib.TFTextAreaField = function(){
 								''+this.readOnly+'',
 								''+this.required+'',
 								''+this.disabled+'',
-								'>'+(this.value ? 'value="'+this.value+'"' : '')+'</textarea>',
+								'>'+(this.value ? this.value : '')+'</textarea>',
 						'</div>',
 					'</div>'
 				].join('\n');
